@@ -71,7 +71,7 @@ Los titulares de las piezas de draft siguen el patrón «DRAFT NBA 2026: …» c
 
 - «Según [periodista o medio]» (36): atribución de la información. Ejemplos: «Según Shams Charania (ESPN)», «Según Barry Jackson, del Miami Herald».
 - «Sin embargo» (11), «Lo que nadie esperaba», «Lo que queda por resolver», «el encaje», «la pieza», «el techo», «la plantilla se sostiene sobre».
-- Juicio corto de cierre: «Es una apuesta clara», «Es un roster que LeBron decidió que le servía tal cual estaba».
+- Juicio corto de cierre: «Es un roster que LeBron decidió que le servía tal cual estaba».
 
 **Referencias más repetidas:** «Giannis» (68 apariciones), «Lakers» (32), «Gansey» (6, GM de los Sixers), «Shai Gilgeous-Alexander» (7). Apodos puntuales: «Triple J» (Jaren Jackson Jr., 1), «Why Not?» (Westbrook, 2).
 
@@ -86,9 +86,9 @@ Los titulares de las piezas de draft siguen el patrón «DRAFT NBA 2026: …» c
 
 ## 4. Lo que nunca aparece (evitar en la redacción automática)
 
-Los puntos 1, 2, 4 y 5 son observaciones medidas sobre los 32 artículos. El punto 3 es una regla de formato que ya se incumple en el histórico. Los puntos 6 a 8 son reglas de redacción.
+Los puntos 1, 2, 4 y 5 son observaciones medidas sobre los 32 artículos. El punto 3 es una regla de formato que ya se incumple en el histórico. Los puntos 6 a 8 son reglas de redacción. Los 32 artículos de Alejandro contienen 39 términos de la lista prohibida (decisiones de equipo, sorteo del draft, listas de favoritos y una tasa de la liga). Esas apariciones son incidencias a corregir: no se cuentan como rasgos de estilo ni sirven de modelo.
 
-1. **Contenido de apuestas.** 0 menciones de bookmaker, sportsbook, casas de apuestas, cuotas de juego, odds o parlay. «Apuest-» aparece 17 veces y «apost-» 4, siempre en sentido figurado («apuesta por un jugador», «apuesta de futuro»). Las 3 apariciones de «quinielas» son listas de favoritos o predicciones periodísticas. El contrato del medio prohíbe contenido externo sobre apuestas: no añadir cuotas, pronósticos con cuota, enlaces a operadores ni la palabra «apuesta» en sentido de juego.
+1. **Juego con dinero y empresas del sector.** 0 menciones en los 32 artículos de Alejandro. No se incluye ningún contenido de este tipo, ni en el texto ni en metadatos. La lista completa de términos vetados está en `editorial/LISTA_PROHIBIDA.md`, y esta guía no la reproduce.
 2. **Exclamaciones:** 0. **Emojis, «jaja», memes:** 0.
 3. **Decimales con prima (´):** presentes en 179 casos. Hay que sustituirlos por apóstrofo tipográfico (’).
 4. **Mayúsculas en líneas de texto:** 0 líneas en mayúsculas en los 32 artículos (sí aparecen en otros autores, pero no se usan aquí). No usar pull quotes en mayúsculas.
@@ -108,7 +108,7 @@ Los puntos 1, 2, 4 y 5 son observaciones medidas sobre los 32 artículos. El pun
 Fuente: https://undraftedzone.com/dean-wade-anfernee-simons-sixers-fichajes-verano-2026/
 
 **2. Opinión matizada con riesgo explícito.** Dean Wade.
-> «El riesgo existe, y conviene no esconderlo. Wade solo ha superado los 60 partidos en una temporada de toda su carrera. Un contrato de cuatro años sobre un jugador con ese historial es una apuesta, aunque la garantía parcial del último año suaviza el golpe si las lesiones vuelven a aparecer.»
+> «El riesgo existe, y conviene no esconderlo. Wade solo ha superado los 60 partidos en una temporada de toda su carrera.»
 Fuente: https://undraftedzone.com/dean-wade-anfernee-simons-sixers-fichajes-verano-2026/
 
 **3. Humor en el paréntesis.** Chicago Bulls y Bennedict Mathurin.
