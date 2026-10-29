@@ -1,0 +1,590 @@
+<title>Panel Editorial UndraftedZone</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+<style>
+/* Lista y detalle lado a lado en escritorio; una columna en móvil */
+:root {
+  --bg: #f3f3ef;
+  --surface: #ffffff;
+  --chip: #e6e6df;
+  --line: #d6d6cd;
+  --fg: #1b1d19;
+  --muted: #5f6358;
+  --accent: #b1441a;
+  --on-accent: #ffffff;
+  --ok: #2c6638;
+  --warn: #7a5500;
+  --bad: #9e2a20;
+  color-scheme: light;
+  --serif: "Source Serif 4", Georgia, serif;
+  --sans: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121310;
+    --surface: #1b1d18;
+    --chip: #2a2d26;
+    --line: #353930;
+    --fg: #ebe8e0;
+    --muted: #9da192;
+    --accent: #f08a55;
+    --on-accent: #1a0e04;
+    --ok: #86c592;
+    --warn: #e2b660;
+    --bad: #ef8074;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121310;
+  --surface: #1b1d18;
+  --chip: #2a2d26;
+  --line: #353930;
+  --fg: #ebe8e0;
+  --muted: #9da192;
+  --accent: #f08a55;
+  --on-accent: #1a0e04;
+  --ok: #86c592;
+  --warn: #e2b660;
+  --bad: #ef8074;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 14px/1.5 var(--sans);
+  padding-block: 20px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.kicker {
+  margin: 0 0 4px;
+  font: 500 11px/1 var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+h1 {
+  margin: 0;
+  font: 600 28px/1.1 var(--serif);
+  text-wrap: balance;
+}
+.sync {
+  margin: 0;
+  font: 12px var(--mono);
+  color: var(--muted);
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin: 14px 0;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+.tab {
+  flex: none;
+  font: 500 13px var(--sans);
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--fg);
+  cursor: pointer;
+}
+.tab[aria-selected="true"] {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--bg);
+}
+.count {
+  margin-left: 6px;
+  font: 500 12px var(--mono);
+  color: var(--accent);
+}
+.tab[aria-selected="true"] .count { color: var(--bg); }
+
+.layout {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 900px) {
+  .layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); align-items: start; }
+  .list { position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow-y: auto; }
+}
+.list, .detail {
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+.item {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.item:last-child { border-bottom: 0; }
+.item[aria-current="true"] { background: var(--chip); }
+.item h2 {
+  margin: 0 0 6px;
+  font: 600 15px/1.3 var(--serif);
+  overflow-wrap: anywhere;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: center;
+  font: 12px var(--mono);
+  color: var(--muted);
+}
+.pill {
+  padding: 2px 6px;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  font: 500 11px/1.4 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.ok { color: var(--ok); }
+.warn { color: var(--warn); }
+.bad { color: var(--bad); }
+.quiet { color: var(--muted); }
+
+.detail { padding: 18px; }
+.dtitle {
+  margin: 0 0 8px;
+  font: 600 22px/1.2 var(--serif);
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+.field { margin: 0 0 16px; min-width: 0; }
+.flabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  font: 500 11px/1.2 var(--mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.field p, .field ul { margin: 0; overflow-wrap: anywhere; }
+.field ul { padding-left: 18px; }
+.field code {
+  font: 13px var(--mono);
+  overflow-wrap: anywhere;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips span {
+  padding: 2px 7px;
+  border-radius: 3px;
+  background: var(--chip);
+  font: 12px var(--mono);
+}
+.preview {
+  max-height: 260px;
+  overflow: auto;
+  margin: 6px 0 0;
+  padding: 10px;
+  border-radius: 4px;
+  background: var(--chip);
+  font: 12px/1.45 var(--mono);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+a { color: var(--accent); }
+
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.btn {
+  font: 500 13px var(--sans);
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--fg);
+  cursor: pointer;
+}
+.btn.small { padding: 3px 8px; font-size: 12px; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.btn:disabled { opacity: .5; cursor: wait; }
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.empty {
+  padding: 32px 18px;
+  text-align: center;
+  color: var(--muted);
+  font: 15px/1.5 var(--serif);
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  max-width: calc(100% - 32px);
+  padding: 8px 12px;
+  border-radius: 4px;
+  background: var(--fg);
+  color: var(--bg);
+  font: 13px var(--sans);
+}
+</style>
+
+<header class="top">
+  <div>
+    <p class="kicker">UndraftedZone</p>
+    <h1>Panel editorial</h1>
+  </div>
+  <p class="sync" id="sync">Conectando…</p>
+</header>
+
+<nav class="tabs" id="tabs" role="tablist" aria-label="Secciones"></nav>
+<main id="view"></main>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const nowIso = () => new Date().toISOString();
+
+const TABS = [
+  { key: 'borradores', label: 'Borradores', col: 'borradores', pending: x => x.estado === 'pendiente_revision' },
+  { key: 'noticias', label: 'Noticias', col: 'noticias', pending: x => x.estado === 'nueva' },
+  { key: 'fichas', label: 'Fichas', col: 'cambios_ficha', pending: x => x.estado === 'propuesto' },
+  { key: 'seo', label: 'SEO', col: 'incidencias_seo', pending: x => x.estado === 'abierta' },
+  { key: 'alertas', label: 'Alertas', col: 'alertas', pending: x => x.estado === 'abierta' },
+];
+
+const EMPTY = {
+  borradores: 'Aún no hay borradores. Cuando la redacción prepare uno, aparecerá aquí.',
+  noticias: 'Sin noticias detectadas todavía.',
+  fichas: 'No hay cambios de ficha pendientes.',
+  seo: 'Sin incidencias SEO abiertas.',
+  alertas: 'Sin alertas. Solo aparecen las que requieren tu criterio.',
+};
+
+const ESTADO_CLASS = {
+  pendiente_revision: 'warn', aprobado: 'ok', publicado_borrador: 'ok', devuelto: 'bad',
+  nueva: 'warn', para_redactar: 'ok', redactada: 'ok', descartada: 'quiet', sin_confirmar: 'bad',
+  propuesto: 'warn', aceptado: 'ok', rechazado: 'quiet',
+  abierta: 'warn', resuelta: 'ok', ignorada: 'quiet',
+};
+
+const ACTIONS = {
+  approve: { col: 'borradores', patch: { estado: 'aprobado' }, msg: 'Borrador aprobado' },
+  return: { col: 'borradores', patch: { estado: 'devuelto' }, msg: 'Devuelto para cambios' },
+  redact: { col: 'noticias', patch: { estado: 'para_redactar' }, msg: 'Marcada para redactar' },
+  discard: { col: 'noticias', patch: { estado: 'descartada' }, msg: 'Noticia descartada' },
+  accept_change: { col: 'cambios_ficha', run: acceptChange },
+  reject_change: { col: 'cambios_ficha', patch: { estado: 'rechazado' }, msg: 'Cambio rechazado' },
+  resolve_seo: { col: 'incidencias_seo', patch: { estado: 'resuelta' }, msg: 'Incidencia resuelta' },
+  ignore_seo: { col: 'incidencias_seo', patch: { estado: 'ignorada' }, msg: 'Incidencia ignorada' },
+  resolve_alert: { col: 'alertas', patch: { estado: 'resuelta' }, msg: 'Alerta cerrada' },
+};
+
+const state = { ready: false, db: null, tab: 'borradores', sel: null, data: {}, busy: new Set() };
+TABS.forEach(t => { state.data[t.key] = null; });
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.hidden = false;
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => { el.hidden = true; }, 2600);
+}
+
+function errMsg(e) {
+  if (e && (e.code === 'not_granted' || e.code === 'revoked')) return 'No tienes permiso para editar este panel.';
+  if (e && e.code === 'invalid_argument') return 'No se pudo guardar: el elemento ya no existe o no es válido.';
+  return 'Sin conexión con la base de datos. Inténtalo de nuevo.';
+}
+
+function fmtDate(s) {
+  if (!s) return '—';
+  const d = new Date(s);
+  return isNaN(d) ? String(s) : d.toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+}
+
+function safeLink(u) {
+  const s = String(u ?? '');
+  return /^https:\/\//.test(s)
+    ? `<a href="${esc(s)}" target="_blank" rel="noopener noreferrer">${esc(s)}</a>`
+    : esc(s || '—');
+}
+
+function pill(estado) {
+  const cls = ESTADO_CLASS[estado] || 'quiet';
+  return `<span class="pill ${cls}">${esc(String(estado || '—').replace(/_/g, ' '))}</span>`;
+}
+
+function btn(act, id, label, primary) {
+  const busy = state.busy.has(ACTIONS[act].col + '/' + id);
+  return `<button class="btn${primary ? ' primary' : ''}" data-act="${act}" data-id="${esc(id)}"${busy ? ' disabled' : ''}>${esc(label)}</button>`;
+}
+
+function field(label, html, copyText) {
+  const copy = copyText ? `<button class="btn small" data-act="copy" data-copy="${esc(copyText)}">Copiar</button>` : '';
+  return `<div class="field"><div class="flabel"><span>${esc(label)}</span>${copy}</div>${html}</div>`;
+}
+
+function title(key, x) {
+  if (key === 'fichas') return `${x.entidad || '—'} · ${x.campo || '—'}`;
+  if (key === 'seo') return x.problema || 'Incidencia SEO';
+  if (key === 'alertas') return x.mensaje || 'Alerta';
+  return x.titulo || 'Sin titular';
+}
+
+function subtitle(key, x) {
+  if (key === 'borradores') return x.slug || '';
+  if (key === 'noticias' || key === 'fichas') return x.fuente || '';
+  if (key === 'seo') return x.pagina || '';
+  return x.tipo || '';
+}
+
+function row(key, x) {
+  const cur = x.id === state.sel ? 'true' : 'false';
+  return `<button class="item" data-act="select" data-id="${esc(x.id)}" aria-current="${cur}">
+    <h2>${esc(title(key, x))}</h2>
+    <div class="meta">${pill(x.estado)}<span>${esc(subtitle(key, x))}</span><span>${esc(fmtDate(x.fecha))}</span></div>
+  </button>`;
+}
+
+function detail(key, x) {
+  if (key === 'borradores') {
+    const tags = (x.etiquetas || []).map(t => `<span>${esc(t)}</span>`).join('');
+    const fuentes = (x.fuentes || []).map(f => `<li>${safeLink(f)}</li>`).join('');
+    const canApprove = x.estado === 'pendiente_revision' || x.estado === 'devuelto';
+    const canReturn = x.estado === 'pendiente_revision';
+    return `
+      <h2 class="dtitle">${esc(x.titulo || 'Sin titular')}</h2>
+      <div class="meta">${pill(x.estado)}<span>${esc(fmtDate(x.fecha))}</span><span>Confianza ${esc(x.confianza || '—')}</span></div>
+      <div style="height:16px"></div>
+      ${field('Slug', `<code>${esc(x.slug || '—')}</code>`, x.slug)}
+      ${field('Extracto', `<p>${esc(x.extracto || '—')}</p>`, x.extracto)}
+      ${field('Etiquetas', `<div class="chips">${tags || '<span>—</span>'}</div>`, (x.etiquetas || []).join(', '))}
+      ${field('Pie de Instagram', `<p style="white-space:pre-wrap">${esc(x.pie_instagram || '—')}</p>`, x.pie_instagram)}
+      ${field('Fuentes', fuentes ? `<ul>${fuentes}</ul>` : '<p>—</p>')}
+      <details class="field"><summary class="flabel">Ver HTML del artículo</summary><pre class="preview">${esc(x.cuerpo_html || '')}</pre></details>
+      <div class="actions">
+        ${canApprove ? btn('approve', x.id, 'Aprobar', true) : ''}
+        ${canReturn ? btn('return', x.id, 'Devolver', false) : ''}
+      </div>`;
+  }
+  if (key === 'noticias') {
+    const actions = x.estado === 'nueva'
+      ? btn('redact', x.id, 'Redactar', true) + btn('discard', x.id, 'Descartar', false)
+      : '';
+    return `
+      <h2 class="dtitle">${esc(x.titulo || 'Sin titular')}</h2>
+      <div class="meta">${pill(x.estado)}<span>${esc(x.fuente || '—')}</span><span>${esc(x.tipo_fuente || '—')}</span><span>Confianza ${esc(x.confianza || '—')}</span></div>
+      <div style="height:16px"></div>
+      ${field('Resumen', `<p>${esc(x.resumen || '—')}</p>`)}
+      ${field('Fuente', `<p>${safeLink(x.url)}</p>`)}
+      ${field('Detectada', `<p>${esc(fmtDate(x.detectada_en))}</p>`)}
+      <div class="actions">${actions}</div>`;
+  }
+  if (key === 'fichas') {
+    const actions = x.estado === 'propuesto'
+      ? btn('accept_change', x.id, 'Aceptar cambio', true) + btn('reject_change', x.id, 'Rechazar', false)
+      : '';
+    return `
+      <h2 class="dtitle">${esc(x.entidad || '—')}</h2>
+      <div class="meta">${pill(x.estado)}<span>${esc(x.campo || '—')}</span></div>
+      <div style="height:16px"></div>
+      ${field('Cambio', `<p>${esc(x.valor_anterior || '—')} → <strong>${esc(x.valor_nuevo || '—')}</strong></p>`)}
+      ${field('Motivo', `<p>${esc(x.motivo || '—')}</p>`)}
+      ${field('Fuente', `<p>${safeLink(x.fuente)}</p>`)}
+      <div class="actions">${actions}</div>`;
+  }
+  if (key === 'seo') {
+    const actions = x.estado === 'abierta'
+      ? btn('resolve_seo', x.id, 'Resuelta', true) + btn('ignore_seo', x.id, 'Ignorar', false)
+      : '';
+    return `
+      <h2 class="dtitle">${esc(x.problema || 'Incidencia SEO')}</h2>
+      <div class="meta">${pill(x.estado)}<span>Prioridad ${esc(x.prioridad || '—')}</span></div>
+      <div style="height:16px"></div>
+      ${field('Página', `<p>${safeLink(x.pagina)}</p>`)}
+      ${field('Impacto', `<p>${esc(x.impacto || '—')}</p>`)}
+      ${field('Sugerencia', `<p>${esc(x.sugerencia || '—')}</p>`)}
+      <div class="actions">${actions}</div>`;
+  }
+  // alertas
+  const actions = x.estado === 'abierta' ? btn('resolve_alert', x.id, 'Cerrar alerta', true) : '';
+  return `
+    <h2 class="dtitle">${esc(x.mensaje || 'Alerta')}</h2>
+    <div class="meta">${pill(x.estado)}<span>${esc(x.tipo || '—')}</span><span>${esc(fmtDate(x.fecha))}</span></div>
+    <div style="height:16px"></div>
+    ${field('Contexto', `<p>${esc(x.contexto || '—')}</p>`)}
+    <div class="actions">${actions}</div>`;
+}
+
+function renderTabs() {
+  document.getElementById('tabs').innerHTML = TABS.map(t => {
+    const items = state.data[t.key];
+    const n = items ? items.filter(t.pending).length : '…';
+    const sel = t.key === state.tab ? 'true' : 'false';
+    return `<button class="tab" role="tab" data-tab="${t.key}" aria-selected="${sel}">${esc(t.label)}<span class="count">${n}</span></button>`;
+  }).join('');
+}
+
+function render() {
+  renderTabs();
+  const view = document.getElementById('view');
+  if (!state.ready) { view.innerHTML = '<div class="empty">Conectando con la base de datos…</div>'; return; }
+  if (!state.db) { view.innerHTML = '<div class="empty">Este panel necesita acceso a la base de datos del artifact. Pide acceso al propietario.</div>'; return; }
+
+  const t = TABS.find(x => x.key === state.tab);
+  const items = state.data[t.key];
+  if (items === null) { view.innerHTML = '<div class="empty">Cargando…</div>'; return; }
+  if (!items.length) { view.innerHTML = `<div class="empty">${esc(EMPTY[t.key])}</div>`; return; }
+
+  const sorted = [...items].sort((a, b) => String(b.fecha || '').localeCompare(String(a.fecha || '')));
+  if (!sorted.some(x => x.id === state.sel)) state.sel = sorted[0].id;
+  const sel = sorted.find(x => x.id === state.sel);
+  view.innerHTML = `<div class="layout">
+    <div class="list">${sorted.map(x => row(t.key, x)).join('')}</div>
+    <div class="detail">${detail(t.key, sel)}</div>
+  </div>`;
+}
+
+function copy(text) {
+  try {
+    navigator.clipboard.writeText(text).then(() => toast('Copiado'), () => toast('No se pudo copiar. Selecciona el texto.'));
+  } catch (e) {
+    toast('No se pudo copiar. Selecciona el texto.');
+  }
+}
+
+async function write(col, id, patch, msg) {
+  const key = col + '/' + id;
+  if (state.busy.has(key)) return;
+  state.busy.add(key);
+  render();
+  try {
+    await state.db.collection(col).doc(id).update({ ...patch, actualizado_en: nowIso() });
+    if (msg) toast(msg);
+  } catch (e) {
+    toast(errMsg(e));
+  } finally {
+    state.busy.delete(key);
+  }
+}
+
+async function acceptChange(id) {
+  const c = state.data.fichas && state.data.fichas.find(x => x.id === id);
+  if (!c) return;
+  const key = 'cambios_ficha/' + id;
+  if (state.busy.has(key)) return;
+  state.busy.add(key);
+  render();
+  try {
+    const now = nowIso();
+    const ficha = state.db.collection('fichas').doc(c.ficha_id);
+    const snap = await ficha.get();
+    const patch = { [c.campo]: c.valor_nuevo, verificado_en: now, fuente_ultima: c.fuente || '' };
+    if (snap.exists) await ficha.update(patch);
+    else await ficha.set({ nombre: c.entidad || '', ...patch });
+    await state.db.collection('cambios_ficha').doc(id).update({ estado: 'aceptado', actualizado_en: now });
+    toast('Cambio aceptado');
+  } catch (e) {
+    toast(errMsg(e));
+  } finally {
+    state.busy.delete(key);
+  }
+}
+
+function subscribe() {
+  TABS.forEach(t => {
+    state.db.collection(t.col).onSnapshot(
+      snap => {
+        state.data[t.key] = snap.docs.filter(d => d.exists).map(d => ({ id: d.id, ...d.data() }));
+        render();
+      },
+      e => {
+        if (!state.data[t.key]) state.data[t.key] = [];
+        toast(errMsg(e));
+        render();
+      }
+    );
+  });
+  document.getElementById('sync').textContent = 'En directo';
+}
+
+function wire() {
+  document.getElementById('tabs').addEventListener('click', e => {
+    const b = e.target.closest('[data-tab]');
+    if (!b) return;
+    state.tab = b.dataset.tab;
+    state.sel = null;
+    location.hash = state.tab;
+    render();
+  });
+
+  document.getElementById('view').addEventListener('click', e => {
+    const b = e.target.closest('[data-act]');
+    if (!b || b.disabled) return;
+    const act = b.dataset.act;
+    if (act === 'select') { state.sel = b.dataset.id; render(); return; }
+    if (act === 'copy') { copy(b.dataset.copy); return; }
+    const a = ACTIONS[act];
+    if (!a) return;
+    if (a.run) a.run(b.dataset.id);
+    else write(a.col, b.dataset.id, a.patch, a.msg);
+  });
+
+  window.addEventListener('hashchange', () => {
+    const k = location.hash.slice(1);
+    if (TABS.some(t => t.key === k) && k !== state.tab) {
+      state.tab = k;
+      state.sel = null;
+      render();
+    }
+  });
+}
+
+(async function init() {
+  const h = location.hash.slice(1);
+  if (TABS.some(t => t.key === h)) state.tab = h;
+  wire();
+  render();
+  try {
+    const api = window.claude;
+    state.db = api ? await api.use('db') : null;
+  } catch (e) {
+    state.db = null;
+  }
+  state.ready = true;
+  if (state.db) subscribe();
+  else document.getElementById('sync').textContent = 'Sin acceso a datos';
+  render();
+})();
+</script>
