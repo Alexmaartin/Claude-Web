@@ -32,6 +32,14 @@ Esta tarea se ejecuta cada 4–5 horas. Su trabajo es leer las fuentes activas, 
 
 8. **Alertar.** Crea una alerta `noticia_importante` solo si la noticia tiene `confianza: "alta"` y trata de una lesión grave, un traspaso, una renovación o una declaración de un jugador importante. Cuando haya un `sin_confirmar` con gran impacto, crea una alerta `incertidumbre` para que decidas tú. No crees alertas por noticias normales.
 
+## Paso final: pasar a redacción
+
+Cuando termines de escribir las noticias de esta ejecución:
+- Pasa a `estado: "para_redactar"` solo las noticias nuevas de `tipo_fuente` `oficial` o `periodista` con `confianza` `alta` o `media`, y sin rumor.
+- Las noticias `medio` sin confirmación y las `sin_confirmar` se quedan como están. No se redactan.
+- Después, ejecuta la tarea de `editorial/redaccion/PROMPT.md` sobre las noticias `para_redactar` de esta misma ejecución.
+- Los borradores que se generen quedan en `pendiente_revision`. Nada se publica.
+
 ## Filtro de apuestas (absoluto)
 
 Antes de escribir una noticia, revisa su título, su resumen y su URL contra `editorial/LISTA_PROHIBIDA.md`. Si trata de apuestas o juego de azar, o contiene cualquiera de sus términos, descártala sin crear entrada en `noticias` ni alerta. No hay excepciones, tampoco para noticias de investigaciones o sanciones relacionadas con apuestas.
