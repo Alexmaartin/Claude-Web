@@ -22,7 +22,7 @@ Las piezas de referencia (WikiUndrafted) usan titulares descriptivos con sufijo 
 **Cuerpo.** Bloques temáticos con subtítulos. Orden típico en análisis de mercado: contexto de la operación → números de temporadas anteriores → encaje táctico o de plantilla → riesgos → perspectiva.
 
 - Longitud media de párrafo: 46 palabras (mediana 41). El 18 % de los párrafos supera las 80 palabras; el 36 % tiene menos de 25. Son párrafos densos, pero hay bastante variación: un párrafo de una frase para cerrar una idea es habitual.
-- Subtítulos: el 86 % de los artículos (55 de 64) no usa H2 (`##`). Los subtítulos son mayoritariamente H3 (182 en total) y H4 (84). Hay una inconsistencia de jerarquía que conviene corregir en la plantilla: el sistema debería usar H2 para secciones y H3 para subsecciones.
+- Subtítulos: el 86 % de los artículos (55 de 64) no usa H2 (`##`). Los subtítulos son mayoritariamente H3 (182 en total) y H4 (84). Se replica tal cual: H3 para secciones y H4 para subsecciones.
 - Formato de subtítulo: frases nominales cortas o preguntas («Cómo llegó la dupla», «Lo que queda por resolver», «Cómo deberían jugar juntos»). En los artículos de equipo se repiten los títulos «Lo que dice esto del plan de…» o «Lo que queda…».
 - Listas: 112 viñetas en total, usadas sobre todo para jugadores de un roster, picks o puntos clave.
 
@@ -88,12 +88,12 @@ El humor **no** es de chiste ni de sarcasmo sobre personas. Aparece en el estilo
 
 - Medios: ESPN, The Athletic, NBC Sports, Shams Charania (periodista), Woj / Wojnarowski, Sam Amick, Hunter Patterson, Joel Lorenzi. Se citan con nombre propio y periodista; no se atribuye a «fuentes» sin concretar.
 - Competiciones: NBA, NCAA, G League, Euroliga, ACB. Los equipos NBA se escriben en español en el cuerpo («los Bulls», «los Spurs»), pero los nombres oficiales se mantienen en inglés en las etiquetas («Chicago Bulls»).
-- La marca se escribe «Undrafted Zone» en el nombre de la web y «NBAUNDRAFTED» dentro del texto. Esta inconsistencia debe resolverse en la plantilla.
+- La marca se escribe siempre «Undrafted Zone», tanto en el nombre de la web como en el texto.
 
 **Cifras.** Es el punto más inconsistente del corpus:
 
 - Decimales con apóstrofo o prima: 179 casos («5´8 puntos», «36´7% en triples»); con apóstrofo curvo: 28 («20’1 puntos»); con coma: 350 casos; con punto: 74 casos.
-- **Regla recomendada:** coma decimal (3,5 %) y punto de millares (71.000 minutos), sin prima ni apóstrofo en cifras. Las medidas físicas también aparecen mezcladas (pies y libras en un artículo, metros en otro): elegir una sola unidad por pieza.
+- **Regla vigente:** las cifras decimales de estadísticas y porcentajes llevan apóstrofo tipográfico (’), sin espacio antes del %: «20’1 puntos», «36’7%». Las medidas físicas también aparecen mezcladas (pies y libras en un artículo, metros en otro): elegir una sola unidad por pieza.
 
 ---
 

@@ -18,11 +18,12 @@ Esta tarea convierte una noticia de la colección `noticias` (estado `para_redac
 Antes de guardar cada borrador, comprueba:
 - **Titular:** con dos puntos o pregunta cuando encaje con la noticia, con el año de temporada si ayuda a situarla. Nunca clickbait.
 - **Entradilla:** de dos a cuatro frases, con pregunta, escena o tesis.
-- **Estructura:** contexto → números → encaje → riesgos → cierre. Secciones con H2 y subsecciones con H3, como en el corpus publicado.
+- **Estructura:** contexto → números → encaje → riesgos → cierre. Secciones con H3 y subsecciones con H4, igual que en el corpus publicado.
+- **Marca:** «Undrafted Zone», siempre igual, en el texto y en el nombre de la web.
 - **Atribución:** «según» + periodista o medio, con su nombre. Los rumores se nombran como rumores. Nada de «fuentes cercanas».
 - **Opinión:** primera persona del singular, matizada («creo», «en mi opinión») y con el riesgo explícito antes de la conclusión.
 - **Humor:** solo en el aparte o en el titular, nunca de chiste ni sarcasmo sobre personas.
-- **Cifras:** coma decimal, punto de millares, una sola unidad de medida por pieza, y siempre con temporada o muestra.
+- **Cifras:** decimales con apóstrofo tipográfico (’), como «20’1 puntos» o «36’7%», sin espacio antes del %. Una sola unidad de medida por pieza, y siempre con temporada o muestra.
 - **Tipografía:** comillas angulares « », nunca rectas. Cero exclamaciones, emojis, «jaja» o «usted».
 - **Jugadores y equipos:** apellido tras la primera mención completa, y equipo completo en la primera cita.
 - **Contenido prohibido:** nada sobre apuestas, casas de apuestas, cuotas ni pronósticos con cuota.
