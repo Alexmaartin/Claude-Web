@@ -13,6 +13,16 @@ Esta tarea convierte una noticia de la colección `noticias` (estado `para_redac
 - Antes de guardar, compara el borrador con la sección de estructura y con la lista de lo que nunca aparece en `ESTILO.md`. Si algo no encaja, corrígelo.
 - No inventes muletillas, apodos ni recursos de humor que no estén en el corpus.
 
+## Originalidad (obligatoria)
+
+- Cada borrador es texto **100% propio**, escrito desde la noticia y desde tu propio análisis. No copies, traduzcas ni parafrasees párrafos de otros medios.
+- Antes de guardar, comprueba que no hay ninguna secuencia de **más de 8 palabras consecutivas** iguales a un texto de la fuente o de otro medio. Si la hay, reescribe ese fragmento.
+- Las citas literales son excepcionales: como mucho una por artículo, entre comillas, de pocas palabras, con su autor y su fuente.
+- Los datos (marcadores, fechas, cifras) se citan con su fuente. Los hechos no tienen dueño, pero la forma de contarlos sí, y esa forma la escribes tú.
+- Los titulares son propios. No reproduzcas el titular de la fuente.
+- Si no puedes escribir un fragmento sin depender del texto de origen, no lo escribas: anótalo en una alerta `tecnica`.
+- Si el borrador no cumple estas reglas, no se guarda en `borradores`.
+
 ## Pasos
 
 1. **Elegir la noticia.** Busca en `noticias` documentos con `estado: "para_redactar"` y sin borrador asociado (`noticia_id` no usado en `borradores`). Trabaja de una en una, de la más antigua a la más reciente.
