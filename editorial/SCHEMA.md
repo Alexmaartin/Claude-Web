@@ -134,3 +134,4 @@ Los campos de la ficha son de primer nivel (sin anidar), para que el panel pueda
 - Antes de crear una noticia, buscar por `grupo_id` y por `url`; si existe, actualizar en lugar de duplicar.
 - Antes de crear un borrador, comprobar que el `slug` no existe.
 - El panel es la única superficie que cambia `estado` de borradores y fichas.
+- **Ningún documento contiene contenido sobre apuestas ni juego de azar.** Todo texto se contrasta con `editorial/LISTA_PROHIBIDA.md` antes de escribirse.
