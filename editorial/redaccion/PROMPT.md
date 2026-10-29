@@ -4,7 +4,11 @@ Esta tarea convierte una noticia de la colección `noticias` (estado `para_redac
 
 **Panel (ArtifactData):** `https://claude.ai/artifact/PiT4Y4BJhAFUPmKh63mian`
 **Esquema y reglas de metadatos:** `editorial/SCHEMA.md`
-**Estilo (obligatorio):** `editorial/ESTILO.md`. Léelo entero antes de escribir cada borrador.
+**Estilo (obligatorio):** `editorial/ESTILO.md`. Léelo entero antes de escribir cada borrador. Ese estilo es el de Alejandro Martín Millarengo: sus 32 artículos publicados, identificados en `editorial/corpus/AUTORES.tsv`. Los artículos de otros autores no son referencia de estilo.
+
+## Regla absoluta: cero apuestas
+
+Nada de apuestas deportivas ni de ningún otro tipo, ni en sentido literal ni en sentido figurado, ni con términos ambiguos. Antes de guardar, el texto completo (cuerpo, titular, extracto, slug, etiquetas y pie de Instagram) se compara con `editorial/LISTA_PROHIBIDA.md`. Si aparece un término de la lista, el borrador no se guarda: se reescribe el fragmento y se vuelve a comprobar. Si el tema de la noticia es precisamente apuestas, no se redacta.
 
 ## Regla principal: estilo idéntico
 
