@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "nota": "Solo las fuentes con estado 'activa' se consultan. Un RSS pendiente de verificar no se usa hasta confirmar que existe y que el dominio está permitido en la red del entorno.",
+  "fuentes": [
+    {
+      "id": "espn-nba-news",
+      "nombre": "ESPN NBA News",
+      "url": "https://www.espn.com/espn/rss/nba/news",
+      "tipo_fuente": "medio",
+      "estado": "pendiente_dominio",
+      "nota": "Dominio www.espn.com bloqueado por la política de red del entorno. Permitir en Network access > Allowed domains."
+    },
+    {
+      "id": "espn-reporteros",
+      "nombre": "Reporteros de ESPN (NBA)",
+      "url": null,
+      "tipo_fuente": "periodista",
+      "estado": "pendiente_verificar",
+      "nota": "Los reporteros de ESPN no tienen un RSS individual verificado. Su cobertura llega a través del feed de ESPN NBA. Lista de nombres a confirmar por Alejandro antes de añadir búsquedas o feeds propios."
+    },
+    {
+      "id": "nba-news",
+      "nombre": "NBA.com News",
+      "url": null,
+      "tipo_fuente": "oficial",
+      "estado": "pendiente_verificar",
+      "nota": "Dominio www.nba.com bloqueado. Falta confirmar la URL del RSS oficial antes de activarlo."
+    }
+  ]
+}
