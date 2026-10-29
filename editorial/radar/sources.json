@@ -7,8 +7,8 @@
       "nombre": "ESPN NBA News",
       "url": "https://www.espn.com/espn/rss/nba/news",
       "tipo_fuente": "medio",
-      "estado": "pendiente_dominio",
-      "nota": "Dominio www.espn.com bloqueado por la política de red del entorno. Permitir en Network access > Allowed domains."
+      "estado": "activa",
+      "nota": "Dominio www.espn.com permitido en el entorno con acceso a ESPN. Si la descarga falla, el radar lo registra como alerta tecnica."
     },
     {
       "id": "espn-reporteros",
@@ -24,7 +24,7 @@
       "url": null,
       "tipo_fuente": "oficial",
       "estado": "pendiente_verificar",
-      "nota": "Dominio www.nba.com bloqueado. Falta confirmar la URL del RSS oficial antes de activarlo."
+      "nota": "Dominio www.nba.com bloqueado en el entorno actual. Queda fuera hasta que se permita o se encuentre otra fuente oficial accesible."
     }
   ]
 }
