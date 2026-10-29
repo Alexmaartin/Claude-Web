@@ -101,7 +101,7 @@ El humor **no** es de chiste ni de sarcasmo sobre personas. Aparece en el estilo
 
 Los puntos 1 a 5 y el 11 son observaciones medidas en el corpus. Los puntos 6 a 10 son reglas de redacción derivadas del mismo corpus.
 
-1. **Contenido sobre apuestas o casas de apuestas.** 0 menciones de «bookmaker» o casas de apuestas en 64 artículos. «Apuesta» aparece 19 veces, siempre en sentido de decisión de equipo («Minnesota apuesta ahora por…»), nunca de juego. El contrato del medio prohíbe contenido externo sobre apuestas: no añadir cuotas, pronósticos con cuota ni enlaces a operadores.
+1. **Contenido sobre apuestas o casas de apuestas.** 0 menciones de «bookmaker» o casas de apuestas en 64 artículos. «Apuesta» aparece 35 veces en 19 artículos, siempre en sentido de decisión de equipo («Minnesota apuesta ahora por…»), nunca de juego. El contrato del medio prohíbe contenido externo sobre apuestas: no añadir cuotas, pronósticos con cuota ni enlaces a operadores.
 2. **Exclamaciones.** 0 en 64 artículos.
 3. **Emojis, memes y «jaja».** 0 apariciones.
 4. **Comillas rectas.** 0 apariciones; el texto usa comillas angulares « » (85) y, en un caso, comillas tipográficas.
