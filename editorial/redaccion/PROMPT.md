@@ -4,7 +4,7 @@ Esta tarea convierte una noticia de la colección `noticias` (estado `para_redac
 
 **Panel (ArtifactData):** `https://claude.ai/artifact/PiT4Y4BJhAFUPmKh63mian`
 **Esquema y reglas de metadatos:** `editorial/SCHEMA.md`
-**Estilo (obligatorio):** `editorial/ESTILO.md`. Léelo entero antes de escribir cada borrador.
+**Estilo (obligatorio):** `editorial/ESTILO.md`. Léelo entero antes de escribir cada borrador. Ese estilo es el de Alejandro Martín Millarengo: sus 32 artículos publicados, identificados en `editorial/corpus/AUTORES.tsv`. Los artículos de otros autores no son referencia de estilo.
 
 ## Regla principal: estilo idéntico
 
