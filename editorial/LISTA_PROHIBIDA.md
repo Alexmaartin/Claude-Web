@@ -17,6 +17,12 @@ No se usan, en ningún sentido, ni dentro de una cita, ni en una frase que hable
 - pronóstico con cuota, pronóstico de apuestas, tipo de apuesta
 - cualquier enlace, logotipo o mención a operadores de juego
 
+## Excepciones aprobadas por Alejandro
+
+Estos usos son deportivos y están permitidos:
+- «sorteo del draft» (el sorteo de la lotería del Draft de la NBA). La palabra «lotería» sola sigue prohibida en cualquier otro contexto.
+- «favorito» y «favoritos» en sentido deportivo, como «favorito para el MVP». Siguen prohibidos si aparecen junto a cuotas, pronósticos o cualquier término de la lista.
+
 ## Alternativas para lo que sí quieres decir
 
 | Si la intención es... | Escribe... |
