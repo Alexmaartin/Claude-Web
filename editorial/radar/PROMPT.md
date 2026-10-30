@@ -35,9 +35,8 @@ Esta tarea se ejecuta cada 4–5 horas. Su trabajo es leer las fuentes activas, 
 ## Paso final: pasar a redacción
 
 Cuando termines de escribir las noticias de esta ejecución:
-- Pasa a `estado: "para_redactar"` solo las noticias nuevas de `tipo_fuente` `oficial` o `periodista` con `confianza` `alta` o `media`, y sin rumor.
-- Las noticias `medio` sin confirmación y las `sin_confirmar` se quedan como están. No se redactan.
-- Después, ejecuta la tarea de `editorial/redaccion/PROMPT.md` sobre las noticias `para_redactar` de esta misma ejecución.
+- No cambies el `estado` de las noticias en este paso. La selección la hace la redacción según sus criterios.
+- Después, ejecuta la tarea de `editorial/redaccion/PROMPT.md` sobre las noticias que cumplan sus criterios, incluidas las de esta ejecución.
 - Los borradores que se generen quedan en `pendiente_revision`. Nada se publica.
 
 ## Filtro de apuestas (absoluto)

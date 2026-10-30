@@ -45,7 +45,13 @@ Antes de guardar cada borrador, comprueba:
 
 ## Pasos
 
-1. **Elegir la noticia.** Busca en `noticias` documentos con `estado: "para_redactar"` y sin borrador asociado (`noticia_id` no usado en `borradores`). Trabaja de una en una, de la más antigua a la más reciente.
+1. **Elegir la noticia.** Busca en `noticias` documentos con `estado` `nueva` o `para_redactar`, sin borrador asociado (`noticia_id` no usado en `borradores`). Redacta solo las que cumplan **a la vez**:
+   - `tipo_fuente` `oficial` o `periodista` con `confianza` `alta` o `media`, o `tipo_fuente` `medio` con `confianza` `media`.
+   - Un hecho concreto: lesión, traspaso, resultado, declaración, fichaje, decisión de liga o equipo.
+   - No es fantasy, ranking, opinión, «reacciones», análisis de tendencias, vida personal o entretenimiento sin relación deportiva.
+   - No es `sin_confirmar` ni rumor.
+
+   Como máximo **3 borradores por ciclo**, de la fecha más reciente a la más antigua. Las noticias que no cumplan se dejan como están.
 
 2. **Verificar antes de escribir.**
    - Si la noticia es `sin_confirmar`, no la redactes como hecho. Escribe el borrador en condicional y con la advertencia explícita, y pon `confianza: "baja"` y `estado: "pendiente_revision"`.
