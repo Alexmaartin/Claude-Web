@@ -514,6 +514,14 @@ async function saveEdit(id) {
   if (state.busy.has(key)) return;
   state.busy.add(key);
   try {
+    // Registro de ediciones humanas: el aprendizaje semanal lee esta colección.
+    const previo = (state.data.borradores || []).find(x => x.id === id) || {};
+    await state.db.collection('ediciones').add({
+      borrador_id: id,
+      fecha: nowIso(),
+      antes: { titulo: previo.titulo, slug: previo.slug, extracto: previo.extracto, etiquetas: previo.etiquetas, pie_instagram: previo.pie_instagram, cuerpo_html: previo.cuerpo_html },
+      despues: patch,
+    });
     await state.db.collection('borradores').doc(id).update({ ...patch, actualizado_en: nowIso() });
     state.editing = null;
     toast('Cambios guardados');

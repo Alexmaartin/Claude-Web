@@ -17,6 +17,10 @@ Nada de apuestas deportivas ni de ningún otro tipo, ni en sentido literal ni en
 - Antes de guardar, compara el borrador con la sección de estructura y con la lista de lo que nunca aparece en `ESTILO.md`. Si algo no encaja, corrígelo.
 - No inventes muletillas, apodos ni recursos de humor que no estén en el corpus.
 
+## Preferencias aprendidas
+
+Antes de escribir, lee `editorial/APRENDIZAJE.md`. Aplica sus patrones confirmados, respetando la jerarquía que define ese archivo: las reglas duras y las instrucciones explícitas de Alejandro siempre mandan. Si un patrón entra en conflicto con `ESTILO.md`, no lo apliques: crea una alerta `tecnica` con el conflicto.
+
 ## Fuente y veracidad (obligatoria)
 
 - **Antes de escribir, abre la URL de la noticia y lee el texto de la fuente.** Si no puedes abrirla, no redactes: crea una alerta `tecnica` con el motivo y pasa a la siguiente.
