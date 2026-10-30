@@ -17,6 +17,15 @@ Nada de apuestas deportivas ni de ningún otro tipo, ni en sentido literal ni en
 - Antes de guardar, compara el borrador con la sección de estructura y con la lista de lo que nunca aparece en `ESTILO.md`. Si algo no encaja, corrígelo.
 - No inventes muletillas, apodos ni recursos de humor que no estén en el corpus.
 
+## Fuente y veracidad (obligatoria)
+
+- **Antes de escribir, abre la URL de la noticia y lee el texto de la fuente.** Si no puedes abrirla, no redactes: crea una alerta `tecnica` con el motivo y pasa a la siguiente.
+- **Cada dato del borrador debe estar en la fuente abierta:** nombres, cifras, fechas, plazos, traspasos, roles, récords y declaraciones. Lo que no esté en la fuente no se escribe.
+- **Nada de memoria.** No añadas contexto de temporadas anteriores, marcas históricas, contratos ni rotaciones que la fuente no mencione. Si el contexto es necesario, escríbelo como pregunta o como falta de información («ESPN no detalla…»).
+- **Si la fuente es escasa,** el borrador es corto y lo dice. Nunca rellenes con suposiciones.
+- **Comprobación final:** revisa cada cifra y cada nombre del borrador contra la fuente abierta. Si algo no aparece, bórralo.
+- **Frases fijas:** no repitas la misma fórmula en varios borradores («El riesgo existe, y conviene no esconderlo» y similares). Varía la forma de expresar la cautela.
+
 ## Checklist de forma (de `ESTILO.md`)
 
 Antes de guardar cada borrador, comprueba:
