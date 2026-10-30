@@ -227,6 +227,8 @@ a { color: var(--accent); }
 .articulo p { margin: 0 0 1em; }
 .articulo ul { padding-left: 20px; margin: 0 0 1em; }
 .articulo a { color: var(--accent); }
+.ed { width: 100%; box-sizing: border-box; font: 14px/1.5 var(--sans); padding: 8px; border: 1px solid var(--line); border-radius: 4px; background: var(--bg); color: var(--fg); }
+.ed.mono { font: 13px/1.45 var(--mono); }
 .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
 .btn {
   font: 500 13px var(--sans);
@@ -408,6 +410,7 @@ function row(key, x) {
 
 function detail(key, x) {
   if (key === 'borradores') {
+    if (state.editing === x.id) return editor(x);
     const tags = (x.etiquetas || []).map(t => `<span>${esc(t)}</span>`).join('');
     const fuentes = (x.fuentes || []).map(f => `<li>${safeLink(f)}</li>`).join('');
     const canApprove = x.estado === 'pendiente_revision' || x.estado === 'devuelto';
@@ -426,6 +429,7 @@ function detail(key, x) {
       <div class="actions">
         ${canApprove ? btn('approve', x.id, 'Aprobar', true) : ''}
         ${canReturn ? btn('return', x.id, 'Devolver', false) : ''}
+        <button class="btn" data-act="edit" data-id="${esc(x.id)}">Editar</button>
       </div>`;
   }
   if (key === 'noticias') {
@@ -475,6 +479,50 @@ function detail(key, x) {
     <div style="height:16px"></div>
     ${field('Contexto', `<p>${esc(x.contexto || '—')}</p>`)}
     <div class="actions">${actions}</div>`;
+}
+
+function editor(x) {
+  const v = s => esc(s || '');
+  return `
+    <h2 class="dtitle">Editando borrador</h2>
+    <div class="field"><div class="flabel"><span>Titular</span></div><input class="ed" id="ed-titulo" value="${v(x.titulo)}"></div>
+    <div class="field"><div class="flabel"><span>Slug</span></div><input class="ed mono" id="ed-slug" value="${v(x.slug)}"></div>
+    <div class="field"><div class="flabel"><span>Extracto</span></div><textarea class="ed" id="ed-extracto" rows="3">${v(x.extracto)}</textarea></div>
+    <div class="field"><div class="flabel"><span>Etiquetas (separadas por comas)</span></div><input class="ed" id="ed-etiquetas" value="${v((x.etiquetas || []).join(', '))}"></div>
+    <div class="field"><div class="flabel"><span>Pie de Instagram</span></div><textarea class="ed" id="ed-pie" rows="4">${v(x.pie_instagram)}</textarea></div>
+    <div class="field"><div class="flabel"><span>Artículo (HTML)</span></div><textarea class="ed mono" id="ed-cuerpo" rows="18">${v(x.cuerpo_html)}</textarea></div>
+    <div class="actions">
+      <button class="btn primary" data-act="save_edit" data-id="${v(x.id)}">Guardar cambios</button>
+      <button class="btn" data-act="cancel_edit">Cancelar</button>
+    </div>`;
+}
+
+async function saveEdit(id) {
+  const g = s => document.getElementById(s).value;
+  const patch = {
+    titulo: g('ed-titulo').trim(),
+    slug: g('ed-slug').trim(),
+    extracto: g('ed-extracto').trim(),
+    etiquetas: g('ed-etiquetas').split(',').map(t => t.trim()).filter(Boolean),
+    pie_instagram: g('ed-pie').trim(),
+    cuerpo_html: g('ed-cuerpo'),
+    editado_por_humano: true,
+  };
+  if (!patch.titulo) { toast('El titular no puede estar vacío.'); return; }
+  if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(patch.slug)) { toast('El slug solo admite minúsculas, números y guiones.'); return; }
+  const key = 'borradores/' + id;
+  if (state.busy.has(key)) return;
+  state.busy.add(key);
+  try {
+    await state.db.collection('borradores').doc(id).update({ ...patch, actualizado_en: nowIso() });
+    state.editing = null;
+    toast('Cambios guardados');
+  } catch (e) {
+    toast(errMsg(e));
+  } finally {
+    state.busy.delete(key);
+    render();
+  }
 }
 
 function renderTabs() {
@@ -557,7 +605,8 @@ function subscribe() {
     state.db.collection(t.col).onSnapshot(
       snap => {
         state.data[t.key] = snap.docs.filter(d => d.exists).map(d => ({ id: d.id, ...d.data() }));
-        render();
+        // Mientras se edita un borrador no se redibuja, para no borrar lo escrito.
+        if (state.editing && t.key === 'borradores') renderTabs(); else render();
       },
       e => {
         if (!state.data[t.key]) state.data[t.key] = [];
@@ -585,6 +634,9 @@ function wire() {
     const act = b.dataset.act;
     if (act === 'select') { state.sel = b.dataset.id; render(); return; }
     if (act === 'copy') { copy(b.dataset.copy); return; }
+    if (act === 'edit') { state.editing = b.dataset.id; render(); return; }
+    if (act === 'cancel_edit') { state.editing = null; render(); return; }
+    if (act === 'save_edit') { saveEdit(b.dataset.id); return; }
     const a = ACTIONS[act];
     if (!a) return;
     if (a.run) a.run(b.dataset.id);
