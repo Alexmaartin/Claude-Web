@@ -33,7 +33,9 @@ Antes de guardar cada borrador, comprueba:
 - **Entradilla:** de dos a cuatro frases, con pregunta, escena o tesis.
 - **Estructura:** contexto → números → encaje → riesgos → cierre. Secciones con H3 y subsecciones con H4, igual que en el corpus publicado.
 - **Marca:** «Undrafted Zone», siempre igual, en el texto y en el nombre de la web.
-- **Atribución:** «según» + periodista o medio, con su nombre. Los rumores se nombran como rumores. Nada de «fuentes cercanas».
+- **Atribución:** solo cuando se cita algo: una declaración, un rumor, un informe o un dato que no sea del marcador. Los rumores se nombran como rumores. Nada de «fuentes cercanas».
+- **Sin fuente en estadísticas de partido:** puntos, rebotes, asistencias, marcadores y líneas de jugador se escriben sin «según» ni nombre de medio («Curry anotó 44 puntos en el 119-114»).
+- **Sin citas innecesarias:** prefiere contar el hecho con tus palabras, sin atribuirlo a un medio. Solo atribuyes cuando sin atribución el hecho perdería credibilidad.
 - **Opinión:** primera persona del singular, matizada («creo», «en mi opinión») y con el riesgo explícito antes de la conclusión.
 - **Humor:** solo en el aparte o en el titular, nunca de chiste ni sarcasmo sobre personas.
 - **Cifras:** decimales con apóstrofo tipográfico (’), como «20’1 puntos» o «36’7%», sin espacio antes del %. Una sola unidad de medida por pieza, y siempre con temporada o muestra.
