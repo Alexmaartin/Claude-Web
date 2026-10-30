@@ -4,7 +4,9 @@ Esta tarea sube a WordPress los borradores aprobados en el panel, **siempre como
 
 **Panel (ArtifactData):** `https://claude.ai/artifact/PiT4Y4BJhAFUPmKh63mian`
 **Esquema:** `editorial/SCHEMA.md` (colección `borradores`)
-**Credenciales:** variables de entorno `WP_SITE`, `WP_USER`, `WP_APP_PASSWORD`. Nunca se escriben en el repo, en el panel ni en los mensajes.
+**Credenciales:** variables de entorno `WP_SITE`, `WP_USER`, `WP_APP_PASSWORD` y `EDITORIAL_KEY`. Nunca se escriben en el repo, en el panel ni en los mensajes.
+
+**Cabecera obligatoria en cada petición a `/wp-json/`:** `x-editorial-key: $EDITORIAL_KEY`. Cloudflare solo deja pasar la API con esa cabecera. Ejemplo: `curl -H "x-editorial-key: $EDITORIAL_KEY" -u "$WP_USER:$WP_APP_PASSWORD" ...`. Si la variable no existe, no hagas ninguna petición: anótalo en una alerta `tecnica`.
 
 ## Alcance permitido (y solo esto)
 
