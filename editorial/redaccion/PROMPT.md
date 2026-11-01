@@ -66,7 +66,20 @@ Antes de guardar cada borrador, comprueba:
    - No es fantasy, ranking, opinión, «reacciones», análisis de tendencias, vida personal o entretenimiento sin relación deportiva.
    - No es `sin_confirmar` ni rumor.
 
-   Como máximo **3 borradores por ciclo**, de la fecha más reciente a la más antigua. Las noticias que no cumplan se dejan como están.
+   Como máximo **1 borrador por ciclo**. Las noticias que no cumplan se dejan como están.
+
+## Un artículo al día: actualidad y evergreen
+
+- Cada ciclo diario produce **exactamente un** borrador, nunca más. Alejandro quiere subir un artículo al día como máximo.
+- El mix es fijo: **de cada cinco artículos, dos son evergreen** y tres pueden ser de actualidad. Para decidir qué toca hoy, mira el tipo del último borrador creado en `borradores`:
+  - Si el último fue de actualidad, o no hay ningún borrador previo, elige **evergreen** si hay un tema pendiente en `editorial/redaccion/TEMAS_EVERGREEN.md`.
+  - Si el último fue evergreen, elige **actualidad** si hay una noticia que cumpla los criterios.
+  - Si no hay noticia que cumpla, elige **evergreen** sin excepciones.
+  - Si no hay evergreen pendiente ni noticia que cumpla, no crees nada y deja una alerta `tecnica`.
+- Cada borrador guarda su tipo en el campo `tipo`: `actualidad` o `evergreen`.
+- **Evergreen** significa un artículo explicativo que sigue siendo útil meses después: reglas, guías, glosarios, historia, comparativas. Usa el registro de `WikiUndrafted` de `ESTILO.md`. No lleva fecha de noticia en el titular.
+- Los datos de un evergreen (salario tope, reglas de draft, fechas de contratos) se comprueban en una fuente accesible. Si no puedes comprobar una cifra, no la escribes, o la escribes con su año y la fuente.
+- La regla de originalidad, la lista prohibida y la de fuente abierta se aplican igual a los evergreen.
 
 2. **Verificar antes de escribir.**
    - Si la noticia es `sin_confirmar`, no la redactes como hecho. Escribe el borrador en condicional y con la advertencia explícita, y pon `confianza: "baja"` y `estado: "pendiente_revision"`.
