@@ -385,6 +385,7 @@ function detailBorrador(x) {
   const actions = '<div class="actions">'
     + (canApprove ? btn('approve', x.id, 'Aprobar', true) : '')
     + (canReturn ? btn('return', x.id, 'Devolver', false) : '')
+    + (x.estado === 'aprobado' ? uploadBtn(x) : '')
     + '<button class="btn" data-act="edit" data-id="' + esc(x.id) + '">Editar</button></div>';
   return '<div class="detail-inner">'
     + detailHead(x.titulo || 'Sin titular', estado(x.estado) + '<span>' + esc(fmtDate(x.fecha)) + '</span><span>Confianza ' + esc(x.confianza || '—') + '</span>')
@@ -625,6 +626,28 @@ async function saveEdit(id) {
   }
 }
 
+/* Subida a WordPress: el comentario del visor despierta la sesión que sube */
+function uploadBtn(x) {
+  const label = x.subida_solicitada ? 'Subida solicitada' : 'Subir a WordPress';
+  return '<button class="btn primary" data-act="upload" data-id="' + esc(x.id) + '">' + label + '</button>';
+}
+
+async function requestUpload(b) {
+  const id = b.dataset.id;
+  // El gesto del visor abre el comentario sobre el botón; enviarlo lanza la subida.
+  try {
+    const comments = window.claude ? await window.claude.use('comments') : null;
+    if (comments) await comments.openComposer({ element: b });
+  } catch (e) { /* comentarios no disponibles en esta vista */ }
+  try {
+    await state.db.collection('borradores').doc(id).update({ subida_solicitada: true, subida_solicitada_en: nowIso(), actualizado_en: nowIso() });
+    toast('Subida solicitada. Envía el comentario para lanzarla.');
+  } catch (e) {
+    toast(errMsg(e));
+  }
+  render();
+}
+
 /* Datos en directo */
 function subscribe() {
   TABS.forEach(t => {
@@ -690,6 +713,7 @@ function wire() {
     if (act === 'ask_delete') { state.confirm = { key: b.dataset.key, id: b.dataset.id }; render(); return; }
     if (act === 'cancel_delete') { state.confirm = null; render(); return; }
     if (act === 'do_delete') { removeItem(b.dataset.key, b.dataset.id); return; }
+    if (act === 'upload') { requestUpload(b); return; }
     const a = ACTIONS[act];
     if (!a) return;
     if (a.run) a.run(b.dataset.id);
