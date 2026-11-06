@@ -14,13 +14,15 @@ La colección `temas_usados` del panel guarda una entrada por cada artículo que
 
 ## Cómo se mantiene
 
-1. **Cada día, antes de seleccionar**, la pasada lee las entradas de WordPress de los últimos 365 días (publicadas y borradores, con la API) y actualiza el registro. Así cuenta también lo que subes tú a mano.
+1. **Cada día, antes de seleccionar**, la pasada lee las entradas de WordPress (publicadas y borradores, con la API) y actualiza el registro. Así cuenta también lo que subes tú a mano. Se leen todas las del último año, pero la comprobación solo mira lo que sigue vigente, como se explica abajo.
 2. **Cada vez que el publicador sube un borrador**, añade su entrada al registro.
-3. Un tema se considera **ya usado** si coincide con un `tema_clave` existente, o si comparte slug raíz o jugador principal con un artículo de los últimos 30 días y el mismo tipo.
+3. **Guías y temas que se repiten por temporada.** Una guía de franquicia (por ejemplo, la plantilla de los Timberwolves) se escribe una vez por temporada. Si ya existe la guía de esa franquicia para la temporada en curso, no se crea otra: se **actualiza** la existente y se añade el aviso «Actualizado» con la fecha. Una guía de otra temporada sí es un artículo nuevo, y se enlaza a la anterior.
+4. **Evergreen que no es guía de franquicia** (reglas, glosarios, historia): si ya existe un artículo con el mismo `tema_clave`, no se repite. Se puede actualizar si hay cambios de reglas o cifras.
+5. Un tema se considera **ya usado** solo si coincide con un `tema_clave` vigente: el mismo suceso, o la misma guía de la misma temporada, o el mismo evergreen.
 
 ## Reglas de selección
 
-- **No repetir tema.** Un tema ya usado no vuelve a salir. Si una actualización es realmente nueva (por ejemplo, la baja termina y hay un regreso), se escribe como artículo nuevo que enlaza al anterior.
+- **No repetir tema vigente.** Un suceso o una guía de la misma temporada no se vuelve a escribir: se actualiza el existente. Si el suceso es nuevo (por ejemplo, la baja termina y hay un regreso), es un artículo nuevo que enlaza al anterior.
 - **No dos días seguidos con la misma franquicia.** Si ayer salió algo de una franquicia, hoy no sale nada de esa franquicia, aunque sea un evergreen o una noticia bomba. Se pasa a la siguiente franquicia del turno y la que tocaba se queda para el día siguiente.
 - **No dos días seguidos con el mismo jugador.** Si ayer era sobre un jugador, hoy no se escribe de él, aunque sea de otra franquicia.
 - **La noticia bomba tiene que cumplir las dos reglas.** Si una noticia bomba choca con ayer, no se redacta ese día: se deja la alerta `tecnica` y se propone la siguiente.
