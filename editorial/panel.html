@@ -368,7 +368,7 @@ function safeLink(u) {
   const s = String(u ?? '');
   return /^https:\/\//.test(s) ? '<a href="' + esc(s) + '" target="_blank" rel="noopener noreferrer">' + esc(s) + '</a>' : esc(s || '—');
 }
-const TAGS_OK = new Set(['P', 'H2', 'H3', 'H4', 'UL', 'OL', 'LI', 'STRONG', 'EM', 'A', 'BLOCKQUOTE', 'BR']);
+const TAGS_OK = new Set(['P', 'H2', 'H3', 'H4', 'UL', 'OL', 'LI', 'STRONG', 'EM', 'A', 'BLOCKQUOTE', 'BR', 'TABLE', 'THEAD', 'TBODY', 'TR', 'TH', 'TD']);
 // Deja solo marcado de artículo seguro: sin scripts, sin atributos salvo enlaces https.
 function sanitize(html) {
   const tpl = document.createElement('template');
