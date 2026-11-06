@@ -22,6 +22,17 @@ Antes de subir, comprueba en `editorial/redaccion/REGISTRO_TEMAS.md` que el borr
 - **Prohibido:** programar (`future`), publicar sin modo `publicar`, cambiar el estado de una entrada existente, editar o borrar entradas, tocar usuarios, ajustes, plugins, temas, medios o cualquier otra ruta de la API.
 - Si una llamada devuelve error de permisos, para y registra una alerta técnica. No intentes otra ruta.
 
+## Conciliación con el panel (en cada pasada, antes que nada)
+
+El panel es la fuente de verdad del estado. Cada pasada, antes de subir nada:
+1. Lee los borradores del panel con `estado` `aprobado` o `publicado_borrador`, y con `subida_solicitada` a `true`.
+2. Para cada uno, busca en WordPress la entrada por slug con `GET /wp-json/wp/v2/posts?slug=<slug>&status=any&context=edit`.
+3. Si existe, actualiza el borrador en el panel: `estado: "publicado_borrador"`, `wp_post_id`, `wp_url` y `actualizado_en`. Así el panel muestra que está subido. No lo vuelvas a subir.
+4. Si no existe y está `aprobado`, sigue con «Qué se sube». Si no existe y tiene `publicado_borrador`, deja una alerta `tecnica`: alguien lo ha borrado en WordPress.
+5. Nunca marques como subido un borrador sin haber visto la entrada en WordPress.
+
+Los borradores de WordPress que no están en el panel (por ejemplo, de otros autores) no se tocan. Se cuentan en el registro de temas, porque ocupan tema en la web.
+
 ## Qué se sube
 
 Para cada borrador con `estado: "aprobado"` y sin `wp_post_id`:

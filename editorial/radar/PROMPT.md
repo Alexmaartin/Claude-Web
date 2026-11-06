@@ -50,9 +50,15 @@ Estructura del documento `web` de la colección `metricas`, que el panel lee tal
 - `articulos_publicados`, `search_console` (lista de `{pagina, impresiones, ctr, posicion}`), `velocidad_movil` y `velocidad_desktop` (lista de `{pagina, puntuacion, lcp_ms, cambio}`), y `actualizado`.
 
 Cuando termines el radar y la redacción, actualiza el documento `web` de la colección `metricas` del panel, con ArtifactData:
-- Con el token `CLOUDFLARE_API_TOKEN` y la zona `CLOUDFLARE_ZONE_ID`, pide a GraphQL los últimos 7 días: `visitas` (sum visits), `peticiones` (count) y `serie` (visitas por día).
-- `top`: las diez rutas más vistas de la semana actual, con `visitas` y `cambio` frente a la semana anterior (la semana anterior se consulta con el mismo filtro, desplazado siete días). Así se ve qué páginas suben y cuáles caen.
-- `procedencia`: visitas de la semana agrupadas por origen (Google, Instagram, X, Facebook, otros, directo), a partir del host de referencia `clientRefererHost` de Cloudflare. Si Instagram trae muy poco, es señal de que los carruseles no llevan gente a la web.
+- Con el token `CLOUDFLARE_API_TOKEN` y la zona `CLOUDFLARE_ZONE_ID`, calcula **los tres periodos siempre**, en cada pasada, y escríbelos los tres en `periodos`, aunque uno de ellos esté vacío:
+  - `dia`: hoy, con `serie` por horas (dimensión `datetimeHour`).
+  - `semana`: los últimos 7 días, con `serie` por día.
+  - `mes`: los últimos 30 días, con `serie` por día.
+  - En cada periodo: `visitas` (sum visits), `visitas_previas` (el mismo periodo anterior, desplazado), `peticiones` (count) y `serie`.
+- Si un periodo no se puede calcular, deja `visitas: null` y `serie: []` en ese periodo y anótalo en una alerta `tecnica`. No omitas la clave: el panel necesita ver los tres.
+- `top` de cada periodo: las diez rutas más vistas del periodo, con `visitas` y `cambio` frente al periodo anterior. Así se ve qué páginas suben y cuáles caen.
+- `procedencia` de cada periodo: visitas agrupadas por origen (Google, Instagram, X, Facebook, otros, directo), a partir del host de referencia `clientRefererHost` de Cloudflare. Si Instagram trae muy poco, es señal de que los carruseles no llevan gente a la web.
+- Al escribir, el documento `web` debe tener `periodos` como clave principal. El formato plano antiguo (`visitas` y `serie` sueltos en la raíz) ya no se escribe.
 - `search_console`: para las páginas con más impresiones, impresiones, clics, CTR y posición media. Solo si hay credenciales de Search Console; si no, déjalo vacío y anótalo en una alerta `tecnica`.
 - `velocidad_movil`: para las diez páginas principales, la velocidad real en móvil (datos de campo de PageSpeed Insights, si hay clave). Si una página empeora frente a la semana anterior, lo marca, y la causa más frecuente es una imagen pesada. Sin clave, déjalo vacío.
 - `articulos`: los cinco artículos publicados con más vistas, si la API de WordPress devuelve `views`. Si no lo devuelve, déjalo vacío y anótalo en una alerta `tecnica`.
