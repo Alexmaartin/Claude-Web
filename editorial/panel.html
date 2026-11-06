@@ -216,9 +216,7 @@ const nowIso = () => new Date().toISOString();
 const TABS = [
   { key: 'borradores', label: 'Borradores', col: 'borradores', open: x => x.estado === 'pendiente_revision' },
   { key: 'ideas', label: 'Ideas evergreen', col: 'ideas_evergreen', open: x => x.estado === 'propuesta' },
-  { key: 'fichas', label: 'Fichas', col: 'cambios_ficha', open: x => x.estado === 'propuesto' },
   { key: 'seo', label: 'SEO', col: 'incidencias_seo', open: x => x.estado === 'abierta' },
-  { key: 'alertas', label: 'Alertas', col: 'alertas', open: x => x.estado === 'abierta' },
 ];
 const COL = Object.fromEntries(TABS.map(t => [t.key, t.col]));
 
@@ -471,9 +469,7 @@ function renderSummary() {
   const cells = [
     ['borradores', 'Propuestas pendientes'],
     ['ideas', 'Idea evergreen pendiente'],
-    ['fichas', 'Cambios de ficha'],
     ['seo', 'Incidencias SEO'],
-    ['alertas', 'Alertas abiertas'],
   ];
   document.getElementById('summary').innerHTML = cells.map(([key, label]) => {
     const n = state.data[key] ? count(key) : '…';
