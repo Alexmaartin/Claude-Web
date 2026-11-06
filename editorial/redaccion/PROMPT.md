@@ -92,12 +92,11 @@ Antes de guardar cada borrador, comprueba:
 
 ## Un artículo al día: actualidad y evergreen
 
-- Cada ciclo diario produce **exactamente un** borrador, nunca más. Alejandro quiere subir un artículo al día como máximo.
-- El mix es fijo: **de cada cinco artículos, dos son evergreen** y tres pueden ser de actualidad. Para decidir qué toca hoy, mira el tipo del último borrador creado en `borradores`:
-  - Si el último fue de actualidad, o no hay ningún borrador previo, elige **evergreen** si hay un tema pendiente en `editorial/redaccion/TEMAS_EVERGREEN.md`.
-  - Si el último fue evergreen, elige **actualidad** si hay una noticia que cumpla los criterios.
-  - Si no hay noticia que cumpla, elige **evergreen** sin excepciones.
-  - Si no hay evergreen pendiente ni noticia que cumpla, no crees nada y deja una alerta `tecnica`.
+- Cada ciclo diario produce **exactamente un** artículo, nunca más. Alejandro quiere un artículo al día como máximo.
+- El ritmo es fijo y alterna de tres en tres días: **franquicia, franquicia, evergreen**, y así siempre. Para saber qué toca hoy, cuenta los días desde el 6 de noviembre de 2026 (día 0, franquicia): si el resto de dividir ese número entre 3 es **2**, toca **evergreen**; si no, toca **franquicia** (la del turno de `ROTACION.md`).
+- En día de franquicia, la pieza sale de la rotación y puede ser de actualidad (si hay noticia que cumpla los criterios) o evergreen de esa franquicia si no la hay.
+- En día evergreen, se elige un tema pendiente de `editorial/redaccion/TEMAS_EVERGREEN.md`. Si no hay ninguno pendiente, no se crea nada y se deja una alerta `tecnica`.
+- Una noticia bomba de otra franquicia sustituye la pieza de un día de franquicia, nunca la de un día evergreen.
 - Cada borrador guarda su tipo en el campo `tipo`: `actualidad` o `evergreen`.
 - **Evergreen** significa un artículo explicativo que sigue siendo útil meses después: reglas, guías, glosarios, historia, comparativas. Usa el registro de `WikiUndrafted` de `ESTILO.md`. No lleva fecha de noticia en el titular.
 - Los datos de un evergreen (salario tope, reglas de draft, fechas de contratos) se comprueban en una fuente accesible. Si no puedes comprobar una cifra, no la escribes, o la escribes con su año y la fuente.

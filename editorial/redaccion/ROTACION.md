@@ -4,6 +4,10 @@ Cada día sale un artículo, y cada franquicia tiene su turno en orden. Este arc
 
 **Regla:** la pieza del día es de la franquicia del turno, salvo que haya una noticia bomba de otra de las diez, que tiene prioridad ese día. Una noticia bomba es una lesión grave, un traspaso confirmado, una renovación o una decisión que cambia la temporada de la franquicia. En ese caso, la franquicia del turno pasa al día siguiente y no se pierde.
 
+## Ritmo
+
+Franquicia, franquicia, evergreen, y así siempre. Los días evergreen no consumen turno. Se calcula contando los días desde el 6 de noviembre de 2026 (día 0): si el resto de dividir entre 3 es 2, toca evergreen.
+
 ## Orden
 
 | Turno | Franquicia | ID de categoría | Estado |
