@@ -95,7 +95,11 @@ Antes de guardar cada borrador, comprueba:
 - Cada ciclo diario produce **exactamente un** artículo, nunca más. Alejandro quiere un artículo al día como máximo.
 - El ritmo es fijo y alterna de tres en tres días: **franquicia, franquicia, evergreen**, y así siempre. Para saber qué toca hoy, cuenta los días desde el 6 de noviembre de 2026 (día 0, franquicia): si el resto de dividir ese número entre 3 es **2**, toca **evergreen**; si no, toca **franquicia** (la del turno de `ROTACION.md`).
 - En día de franquicia, la pieza sale de la rotación y puede ser de actualidad (si hay noticia que cumpla los criterios) o evergreen de esa franquicia si no la hay.
-- En día evergreen, se elige un tema pendiente de `editorial/redaccion/TEMAS_EVERGREEN.md`. Si no hay ninguno pendiente, no se crea nada y se deja una alerta `tecnica`.
+- En día evergreen se redacta la **idea aprobada más antigua** de la colección `ideas_evergreen` (estado `aprobada`). Al terminar, esa idea pasa a `usada`. Si no hay ninguna aprobada, no se crea nada ese día y se deja una alerta `tecnica`.
+- **Propuesta de idea (en cualquier día, al final del ciclo):** si no hay ninguna idea en estado `propuesta` ni `aprobada`, se propone UNA nueva. Se toma el siguiente tema pendiente de `editorial/redaccion/TEMAS_EVERGREEN.md`, se crea un documento en `ideas_evergreen` con id `idea-<tema_id>`, `titulo`, `angulo` (una sola frase, sin desarrollar el artículo), `tema` (el `tema_id`), `estado: "propuesta"` y `fecha`, y el tema se marca como `propuesto`.
+- No se propone una idea nueva mientras haya una `aprobada` sin usar, ni mientras haya una `propuesta` sin decidir.
+- Si Alejandro deniega una idea, pasa a `denegada`, y en el siguiente ciclo se propone otra.
+- Las noticias del radar siguen en la colección `noticias`, pero ya no se muestran en el panel. Son internas.
 - Una noticia bomba de otra franquicia sustituye la pieza de un día de franquicia, nunca la de un día evergreen.
 - Cada borrador guarda su tipo en el campo `tipo`: `actualidad` o `evergreen`.
 - **Evergreen** significa un artículo explicativo que sigue siendo útil meses después: reglas, guías, glosarios, historia, comparativas. Usa el registro de `WikiUndrafted` de `ESTILO.md`. No lleva fecha de noticia en el titular.
