@@ -6,6 +6,10 @@ Esta tarea convierte una noticia de la colección `noticias` (estado `para_redac
 **Esquema y reglas de metadatos:** `editorial/SCHEMA.md`
 **Estilo (obligatorio):** `editorial/ESTILO.md`. Léelo entero antes de escribir cada borrador. Ese estilo es el de Alejandro Martín Millarengo: sus 32 artículos publicados, identificados en `editorial/corpus/AUTORES.tsv`. Los artículos de otros autores no son referencia de estilo.
 
+## Guías, SEO y verificación (vinculante desde el 6 de noviembre de 2026)
+
+Antes de redactar, lee `editorial/redaccion/GUIAS_Y_SEO.md`. Sus reglas mandan sobre cualquier otra instrucción de redacción, salvo las preferencias expresas de Alejandro. En concreto: el artículo de franquicia es una **guía** y no una crónica; el titular, el título SEO, la estructura, los enlaces internos, la portada y la lista de comprobación de su punto 13 son obligatorios. Si una casilla de la lista no se cumple, el borrador no pasa a `pendiente_revision`.
+
 ## Preferencias expresas de Alejandro (2026-11-05)
 
 Prevalecen sobre `ESTILO.md` si chocan:
