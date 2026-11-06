@@ -27,7 +27,8 @@ Antes de subir, comprueba en `editorial/redaccion/REGISTRO_TEMAS.md` que el borr
 El panel es la fuente de verdad del estado. Cada pasada, antes de subir nada:
 1. Lee los borradores del panel con `estado` `aprobado` o `publicado_borrador`, y con `subida_solicitada` a `true`.
 2. Para cada uno, busca en WordPress la entrada por slug con `GET /wp-json/wp/v2/posts?slug=<slug>&status=any&context=edit`.
-3. Si existe, actualiza el borrador en el panel: `estado: "publicado_borrador"`, `wp_post_id`, `wp_url` y `actualizado_en`. Así el panel muestra que está subido. No lo vuelvas a subir.
+3. Si existe, actualiza el borrador en el panel con `wp_post_id`, `wp_url` y `actualizado_en`, y con el estado que corresponda según WordPress: `"publicado"` si la entrada tiene `status` `publish` (enlace público en `wp_url`), o `"publicado_borrador"` si es `draft`. No lo vuelvas a subir.
+   - Si Alejandro dice en el panel o en el chat que un borrador ya está publicado, ponlo como `"publicado"` aunque no puedas confirmarlo por API, y anótalo en la alerta.
 4. Si no existe y está `aprobado`, sigue con «Qué se sube». Si no existe y tiene `publicado_borrador`, deja una alerta `tecnica`: alguien lo ha borrado en WordPress.
 5. Nunca marques como subido un borrador sin haber visto la entrada en WordPress.
 
