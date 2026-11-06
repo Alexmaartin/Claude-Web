@@ -215,7 +215,7 @@ const nowIso = () => new Date().toISOString();
 
 const TABS = [
   { key: 'borradores', label: 'Borradores', col: 'borradores', open: x => x.estado === 'pendiente_revision' },
-  { key: 'noticias', label: 'Noticias', col: 'noticias', open: x => x.estado === 'nueva' },
+  { key: 'ideas', label: 'Ideas evergreen', col: 'ideas_evergreen', open: x => x.estado === 'propuesta' },
   { key: 'fichas', label: 'Fichas', col: 'cambios_ficha', open: x => x.estado === 'propuesto' },
   { key: 'seo', label: 'SEO', col: 'incidencias_seo', open: x => x.estado === 'abierta' },
   { key: 'alertas', label: 'Alertas', col: 'alertas', open: x => x.estado === 'abierta' },
@@ -224,7 +224,7 @@ const COL = Object.fromEntries(TABS.map(t => [t.key, t.col]));
 
 const EMPTY = {
   borradores: ['Sin propuestas pendientes', 'Cuando se genere el artículo de hoy, aparecerá aquí.'],
-  noticias: ['Sin noticias nuevas', 'El radar revisa las fuentes cada día.'],
+  ideas: ['Sin idea pendiente', 'Cuando haya hueco, aparecerá aquí una idea evergreen para aprobar o denegar.'],
   fichas: ['Sin cambios de ficha', 'Aquí aparecerán las propuestas para jugadores y equipos.'],
   seo: ['Sin incidencias SEO abiertas', 'El auditor SEO avisará cuando haya algo que revisar.'],
   alertas: ['Sin alertas', 'Solo aparecen las que requieren tu criterio.'],
@@ -241,6 +241,8 @@ const ESTADO = {
 const ACTIONS = {
   approve: { col: 'borradores', patch: { estado: 'aprobado' }, msg: 'Borrador aprobado' },
   return: { col: 'borradores', patch: { estado: 'devuelto' }, msg: 'Devuelto para cambios' },
+  approve_idea: { col: 'ideas_evergreen', patch: { estado: 'aprobada' }, msg: 'Idea aprobada: se redactará en el próximo día evergreen' },
+  deny_idea: { col: 'ideas_evergreen', patch: { estado: 'denegada' }, msg: 'Idea denegada' },
   redact: { col: 'noticias', patch: { estado: 'para_redactar' }, msg: 'Marcada para redactar' },
   discard: { col: 'noticias', patch: { estado: 'descartada' }, msg: 'Noticia descartada' },
   accept_change: { col: 'cambios_ficha', run: acceptChange },
@@ -389,6 +391,7 @@ function detailBorrador(x) {
     + '<button class="btn" data-act="edit" data-id="' + esc(x.id) + '">Editar</button></div>';
   return '<div class="detail-inner">'
     + detailHead(x.titulo || 'Sin titular', estado(x.estado) + '<span>' + esc(fmtDate(x.fecha)) + '</span><span>Confianza ' + esc(x.confianza || '—') + '</span>')
+    + (x.imagen_url ? block('Portada', '<img src="' + esc(x.imagen_url) + '" alt="" style="max-width:100%;border-radius:8px">') : '')
     + '<div class="article-box"><div class="articulo">' + sanitize(x.cuerpo_html) + '</div></div>'
     + block('Slug', '<code class="slug">' + esc(x.slug || '—') + '</code>', x.slug)
     + block('Extracto', '<p>' + esc(x.extracto || '—') + '</p>', x.extracto)
@@ -440,7 +443,17 @@ function detailAlerta(x) {
     + actions + deleteBlock('alertas', x.id) + '</div>';
 }
 
+function detailIdea(x) {
+  return '<div class="detail-inner">'
+    + detailHead(x.titulo || 'Idea evergreen', estado(x.estado) + '<span>Evergreen</span>')
+    + block('Ángulo', '<p>' + esc(x.angulo || '—') + '</p>')
+    + block('Tema de origen', '<p>' + esc(x.tema || '—') + '</p>')
+    + (x.estado === 'propuesta' ? '<div class="actions">' + btn('approve_idea', x.id, 'Aprobar', true) + btn('deny_idea', x.id, 'Denegar', false) + '</div>' : '')
+    + '</div>';
+}
+
 function detail(key, x) {
+  if (key === 'ideas') return detailIdea(x);
   if (key === 'borradores') return detailBorrador(x);
   if (key === 'noticias') return detailNoticia(x);
   if (key === 'fichas') return detailFicha(x);
@@ -457,7 +470,7 @@ function renderSummary() {
   };
   const cells = [
     ['borradores', 'Propuestas pendientes'],
-    ['noticias', 'Noticias nuevas'],
+    ['ideas', 'Idea evergreen pendiente'],
     ['fichas', 'Cambios de ficha'],
     ['seo', 'Incidencias SEO'],
     ['alertas', 'Alertas abiertas'],
