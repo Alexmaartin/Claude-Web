@@ -628,7 +628,7 @@ async function saveEdit(id) {
 
 /* Subida a WordPress: el comentario del visor despierta la sesión que sube */
 function uploadBtn(x) {
-  const label = x.subida_solicitada ? 'Subida solicitada' : 'Subir a WordPress';
+  const label = x.subida_solicitada ? 'Publicación solicitada' : 'Publicar en WordPress';
   return '<button class="btn primary" data-act="upload" data-id="' + esc(x.id) + '">' + label + '</button>';
 }
 
@@ -640,8 +640,8 @@ async function requestUpload(b) {
     if (comments) await comments.openComposer({ element: b });
   } catch (e) { /* comentarios no disponibles en esta vista */ }
   try {
-    await state.db.collection('borradores').doc(id).update({ subida_solicitada: true, subida_solicitada_en: nowIso(), actualizado_en: nowIso() });
-    toast('Subida solicitada. Envía el comentario para lanzarla.');
+    await state.db.collection('borradores').doc(id).update({ subida_solicitada: true, subida_solicitada_en: nowIso(), modo: 'publicar', actualizado_en: nowIso() });
+    toast('Publicación solicitada. Envía el comentario para lanzarla.');
   } catch (e) {
     toast(errMsg(e));
   }
