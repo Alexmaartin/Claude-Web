@@ -32,7 +32,8 @@ Para no gastar tokens en sesiones nuevas, la tarea recorre estos roles en orden.
 3. **Redacción:** escribe con `ESTILO.md` y las preferencias expresas.
 4. **SEO:** revisa todo el texto, no solo los metadatos: el slug, el extracto (140–160 caracteres), el titular (sin clickbait), las etiquetas y la jerarquía de encabezados. Busca que el tema principal aparezca de forma natural en el titular, el extracto y el primer párrafo, y que los subtítulos describan lo que viene. Mejora la legibilidad (frases más cortas donde estorban, párrafos sin repeticiones). Nunca añade hechos ni cifras para posicionar, y no cambia la voz del autor.
 5. **Control final:** lista prohibida, originalidad, cifras frente a la fuente y HTML semántico. En este paso se revisa además que el texto no mencione apuestas deportivas ni de ningún tipo, en ninguna forma, ni directa ni de pasada. Tampoco se mencionan el trabajo ni la empresa de Alejandro en el sector: el artículo no habla de ello.
-6. **Entrega:** borrador en `borradores` como `pendiente_revision`, HTML en `editorial/salida/` y resumen en el panel.
+6. **Portada:** antes de entregar, genera la portada con la plantilla `editorial/portadas/generar.py` (1600×900, WebP, menos de 300 KB, sin fotos ni logos). Usa un dato destacado del artículo (cifra o palabra corta, verificada en la fuente), la etiqueta que lo explica, el titular y el color de la franquicia (o el de la tabla `FRANQUICIAS` si el equipo no está en ella). Guarda el WebP en `editorial/salida/portadas/<id>.webp` y pon su contenido en el borrador como `imagen_url` con el formato `data:image/webp;base64,...`. Un borrador sin `imagen_url` no pasa a `pendiente_revision`.
+7. **Entrega:** borrador en `borradores` como `pendiente_revision`, HTML en `editorial/salida/` y resumen en el panel.
 
 Si cualquier paso no se puede cumplir (fuente inaccesible, duda sobre apuestas, dato sin respaldo, HTML ausente), no se guarda nada y se deja una alerta `tecnica`.
 

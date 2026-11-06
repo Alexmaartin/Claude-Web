@@ -76,7 +76,7 @@ Evergreen (banco en `TEMAS_EVERGREEN.md`): contratos two-way, draft (lotería y 
 
 - Formato **1600×900 px, WebP, menos de 300 KB**.
 - Sin fotos de agencias, sin fotos de jugadores reconocibles y sin logos ni escudos.
-- Portada generada con la plantilla (dato destacado, símbolo del tema y pista de cancha, con el color de la franquicia). Si es ilustrada con IA, lleva su leyenda.
+- Portada generada con la plantilla `editorial/portadas/generar.py` (dato destacado, etiqueta, pista de cancha, con el color de la franquicia). Se guarda en el borrador como `imagen_url` (data URI WebP). Si es ilustrada con IA, lleva su leyenda.
 
 ## 10. Categoría, etiquetas y slug
 

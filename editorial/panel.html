@@ -223,6 +223,18 @@ h1, h2, h3 { text-wrap: balance; }
 }
 .seg button[aria-pressed="true"] { background: var(--surface); color: var(--fg); box-shadow: var(--shadow-sm), 0 0 0 1px var(--line); font-weight: 600; }
 
+/* Resumen de visitas: día, semana y mes siempre visibles */
+.resumen { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 8px; }
+.res-cell {
+  display: grid; gap: 4px; text-align: left; padding: 12px; border: 1px solid var(--line); border-radius: 14px;
+  background: var(--surface-2); color: var(--fg); font: inherit; min-width: 0; transition: background .2s, box-shadow .2s;
+}
+.res-cell[aria-pressed="true"] { background: var(--surface); box-shadow: var(--shadow-sm), 0 0 0 1px var(--accent); }
+.res-l { font: 600 11px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.res-n { font: 600 22px var(--serif); font-variant-numeric: tabular-nums; }
+.res-d { font: 500 12px var(--sans); }
+@media (max-width: 380px) { .res-n { font-size: 18px; } }
+
 /* Listas */
 .list { display: grid; gap: 10px; align-content: start; min-width: 0; }
 .item {
@@ -683,8 +695,13 @@ function renderIdeas() {
 
 function renderMetricas() {
   const d = metricsDoc();
-  const seg = '<div class="seg" role="group" aria-label="Periodo">'
-    + PERIODOS.map(([k, l]) => '<button data-act="periodo" data-p="' + k + '" aria-pressed="' + (state.periodo === k) + '">' + l + '</button>').join('')
+  const seg = '<div class="card resumen" role="group" aria-label="Visitas por periodo">'
+    + PERIODOS.map(([k, l]) => {
+        const q = periodoDatos(k);
+        return '<button class="res-cell" data-act="periodo" data-p="' + k + '" aria-pressed="' + (state.periodo === k) + '">'
+          + '<span class="res-l">' + l + '</span><span class="res-n">' + fmt(q.visitas) + '</span>'
+          + '<span class="res-d">' + deltaHtml(q.visitas, q.visitas_previas) + '</span></button>';
+      }).join('')
     + '</div>';
   if (!d) return seg + emptyBox('Sin métricas todavía', 'Se rellenan en la pasada diaria con datos de Cloudflare y WordPress.');
   const p = periodoDatos(state.periodo);
@@ -723,7 +740,6 @@ function renderMetricas() {
   const etiquetaPeriodo = PERIODOS.find(x => x[0] === state.periodo)[1];
   return seg
     + '<div class="kpis">'
-    + '<div class="card kpi"><span class="kpi-n">' + fmt(p.visitas) + '</span><span class="kpi-l">Visitas ' + deltaHtml(p.visitas, p.visitas_previas) + spark(serie.map(s => s.visitas)) + '</span></div>'
     + '<div class="card kpi"><span class="kpi-n">' + fmt(p.peticiones) + '</span><span class="kpi-l">Peticiones</span></div>'
     + '<div class="card kpi"><span class="kpi-n">' + fmt(d.articulos_publicados) + '</span><span class="kpi-l">Artículos publicados</span></div>'
     + '</div>'
