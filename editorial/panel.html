@@ -429,7 +429,10 @@ function metricsDoc() {
 }
 function periodoDatos(p) {
   const d = metricsDoc();
-  return d && d.periodos ? (d.periodos[p] || {}) : {};
+  if (!d) return {};
+  // Formato por periodos (pasada actual). Si el documento aún trae el formato plano, se muestran sus datos como periodo semana.
+  if (d.periodos) return d.periodos[p] || {};
+  return p === 'semana' ? { visitas: d.visitas, peticiones: d.peticiones, serie: d.serie, top: d.top, articulos: d.articulos, procedencia: d.procedencia || [] } : {};
 }
 function deltaHtml(actual, previo) {
   if (typeof actual !== 'number' || typeof previo !== 'number' || previo === 0) return '<span class="delta flat">sin comparar</span>';

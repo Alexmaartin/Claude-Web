@@ -12,8 +12,8 @@ Franquicia, franquicia, evergreen, y así siempre. Los días evergreen no consum
 
 | Turno | Franquicia | ID de categoría | Estado |
 | --- | --- | --- | --- |
-| 1 | Minnesota Timberwolves | 29 | siguiente |
-| 2 | Brooklyn Nets | 16 | pendiente |
+| 1 | Minnesota Timberwolves | 29 | en pausa (a petición de Alejandro) |
+| 2 | Brooklyn Nets | 16 | siguiente |
 | 3 | Miami Heat | 33 | pendiente |
 | 4 | Los Angeles Clippers | 26 | pendiente |
 | 5 | Milwaukee Bucks | 13 | pendiente |
