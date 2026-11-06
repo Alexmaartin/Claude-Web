@@ -6,6 +6,10 @@ Esta tarea convierte una noticia de la colección `noticias` (estado `para_redac
 **Esquema y reglas de metadatos:** `editorial/SCHEMA.md`
 **Estilo (obligatorio):** `editorial/ESTILO.md`. Léelo entero antes de escribir cada borrador. Ese estilo es el de Alejandro Martín Millarengo: sus 32 artículos publicados, identificados en `editorial/corpus/AUTORES.tsv`. Los artículos de otros autores no son referencia de estilo.
 
+## Registro de temas (vinculante)
+
+Antes de seleccionar, lee `editorial/redaccion/REGISTRO_TEMAS.md`. Actualiza la colección `temas_usados` desde WordPress (últimos 365 días, publicados y borradores). Aplica sus reglas: no repetir tema, no dos días seguidos con la misma franquicia ni con el mismo jugador. Si el candidato las infringe, pasa al siguiente.
+
 ## Guías, SEO y verificación (vinculante desde el 6 de noviembre de 2026)
 
 Antes de redactar, lee `editorial/redaccion/GUIAS_Y_SEO.md`. Sus reglas mandan sobre cualquier otra instrucción de redacción, salvo las preferencias expresas de Alejandro. En concreto: el artículo de franquicia es una **guía** y no una crónica; el titular, el título SEO, la estructura, los enlaces internos, la portada y la lista de comprobación de su punto 13 son obligatorios. Si una casilla de la lista no se cumple, el borrador no pasa a `pendiente_revision`.

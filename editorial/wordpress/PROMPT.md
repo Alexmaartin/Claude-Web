@@ -8,6 +8,10 @@ Esta tarea sube a WordPress los borradores aprobados en el panel, **siempre como
 
 **Cabecera obligatoria en cada petición a `/wp-json/`:** `x-editorial-key: $EDITORIAL_KEY`. Cloudflare solo deja pasar la API con esa cabecera. Ejemplo: `curl -H "x-editorial-key: $EDITORIAL_KEY" -u "$WP_USER:$WP_APP_PASSWORD" ...`. Si la variable no existe, no hagas ninguna petición: anótalo en una alerta `tecnica`.
 
+## Registro de temas
+
+Antes de subir, comprueba en `editorial/redaccion/REGISTRO_TEMAS.md` que el borrador no repite un tema ya usado y que no coincide con la franquicia o el jugador de ayer. Si falla, no sube nada y deja una alerta `tecnica`. Después de subir con éxito, añade su entrada a la colección `temas_usados` del panel.
+
 ## Alcance permitido (y solo esto)
 
 - **Permitido:** crear entradas nuevas en WordPress con `POST /wp-json/wp/v2/posts`. El estado depende del modo del borrador:
