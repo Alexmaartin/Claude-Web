@@ -2,6 +2,15 @@
 
 Estas reglas salen de la analítica de undraftedzone.com y mandan sobre cualquier otra instrucción de redacción, salvo las preferencias expresas de Alejandro (ver `editorial/redaccion/PROMPT.md`) y la lista prohibida.
 
+## Modelo de contenido: que dure más de un día
+
+Ni solo guías ni solo actualidad. Los días de franquicia alternan entre tres formatos, y todos buscan que el artículo siga atrayendo visitas durante semanas o meses:
+- **Guía de franquicia:** plantilla, contratos, calendario y qué mirar. Dura toda la temporada.
+- **Análisis de tendencia:** una pregunta que la franquicia tendrá que responder en las próximas semanas (por ejemplo, si un plan de juego funciona, o qué pasa con un jugador que cambia de rol). Se escribe con datos comprobados y se actualiza cuando cambia la situación.
+- **Reportaje de contexto:** explicar un hecho reciente con su historia y sus consecuencias, de modo que siga teniendo sentido cuando ya no sea noticia.
+
+La noticia bomba sigue siendo la excepción: sustituye el formato del día solo si cambia de verdad la temporada de la franquicia, y aun así se escribe con contexto que dure.
+
 ## 1. Guías, no última hora
 
 - Las noticias del día rinden 9–11 visitas. Las guías rinden mucho más: la guía de la NCAA hizo 223 visitas en 18 días, y las de WikiUndrafted rinden el doble que la media.
@@ -77,9 +86,8 @@ Evergreen (banco en `TEMAS_EVERGREEN.md`): contratos two-way, draft (lotería y 
 
 ## 11. Autoría y transparencia
 
-- Todo artículo lo **aprueba un redactor humano** antes de publicarse. Hoy lo aprueba Alejandro desde el panel.
-- Cada artículo indica que el texto está generado con IA y que lo revisa un redactor. La redacción de ese aviso se añade al pie del artículo.
-- Referencia legal: el Reglamento de IA de la UE establece obligaciones de transparencia para el texto generado por IA que se publica para informar al público. Lo que sigue es una interpretación de trabajo, no un dictamen jurídico: conviene que lo confirme un abogado antes de publicar sin revisión humana.
+- Todo artículo lo **aprueba y revisa Alejandro** antes de publicarse, y puede editarlo a su gusto. Mientras esto sea así, no se añade ningún aviso de IA al artículo.
+- Si algún día se publicara un artículo sin revisión humana, habría que revisar antes las obligaciones de transparencia de la IA con un abogado. No aplica al flujo actual.
 
 ## 12. Actualización por temporada
 
@@ -103,7 +111,7 @@ El sistema la verifica antes de dejar el borrador como `pendiente_revision`. Tod
 - [ ] Ninguna mención a apuestas, cuotas, datos personales ni copia de otros medios.
 - [ ] Portada 1600×900 WebP, menos de 300 KB, sin fotos de agencias ni logos, con leyenda si es ilustrada con IA.
 - [ ] Categoría, etiquetas y slug según el punto 10.
-- [ ] Aviso de texto generado con IA y revisión humana.
+- [ ] Aprobación pendiente de Alejandro en el panel (el sistema no publica nada por sí mismo).
 - [ ] Si es actualización de temporada, aviso «Actualizado» con fecha.
 
 Si una casilla no se cumple, el borrador no pasa a `pendiente_revision`: se deja una alerta `tecnica` con la casilla que falla.

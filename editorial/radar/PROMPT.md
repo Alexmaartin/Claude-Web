@@ -47,7 +47,10 @@ Antes de escribir una noticia, revisa su título, su resumen y su URL contra `ed
 
 Cuando termines el radar y la redacción, actualiza el documento `web` de la colección `metricas` del panel, con ArtifactData:
 - Con el token `CLOUDFLARE_API_TOKEN` y la zona `CLOUDFLARE_ZONE_ID`, pide a GraphQL los últimos 7 días: `visitas` (sum visits), `peticiones` (count) y `serie` (visitas por día).
-- `top`: las cinco rutas más vistas de la misma zona y periodo.
+- `top`: las diez rutas más vistas de la semana actual, con `visitas` y `cambio` frente a la semana anterior (la semana anterior se consulta con el mismo filtro, desplazado siete días). Así se ve qué páginas suben y cuáles caen.
+- `procedencia`: visitas de la semana agrupadas por origen (Google, Instagram, X, Facebook, otros, directo), a partir del host de referencia `clientRefererHost` de Cloudflare. Si Instagram trae muy poco, es señal de que los carruseles no llevan gente a la web.
+- `search_console`: para las páginas con más impresiones, impresiones, clics, CTR y posición media. Solo si hay credenciales de Search Console; si no, déjalo vacío y anótalo en una alerta `tecnica`.
+- `velocidad_movil`: para las diez páginas principales, la velocidad real en móvil (datos de campo de PageSpeed Insights, si hay clave). Si una página empeora frente a la semana anterior, lo marca, y la causa más frecuente es una imagen pesada. Sin clave, déjalo vacío.
 - `articulos`: los cinco artículos publicados con más vistas, si la API de WordPress devuelve `views`. Si no lo devuelve, déjalo vacío y anótalo en una alerta `tecnica`.
 - `articulos_publicados`: cuántos artículos se han publicado desde el panel.
 - `actualizado`: la fecha y hora de esta ejecución.
