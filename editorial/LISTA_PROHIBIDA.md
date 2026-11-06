@@ -17,6 +17,10 @@ No se usan, en ningún sentido, ni dentro de una cita, ni en una frase que hable
 - pronóstico con cuota, pronóstico de apuestas, tipo de apuesta
 - cualquier enlace, logotipo o mención a operadores de juego
 
+## Términos de estilo que se sustituyen
+
+- «salary cap» y «cap space» → «espacio salarial».
+
 ## Excepciones aprobadas por Alejandro
 
 Estos usos son deportivos y están permitidos:

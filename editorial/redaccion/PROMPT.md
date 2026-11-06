@@ -6,6 +6,28 @@ Esta tarea convierte una noticia de la colección `noticias` (estado `para_redac
 **Esquema y reglas de metadatos:** `editorial/SCHEMA.md`
 **Estilo (obligatorio):** `editorial/ESTILO.md`. Léelo entero antes de escribir cada borrador. Ese estilo es el de Alejandro Martín Millarengo: sus 32 artículos publicados, identificados en `editorial/corpus/AUTORES.tsv`. Los artículos de otros autores no son referencia de estilo.
 
+## Preferencias expresas de Alejandro (2026-11-05)
+
+Prevalecen sobre `ESTILO.md` si chocan:
+1. HTML semántico sin CSS en línea. Bloque de metadatos al inicio (título, slug, extracto, etiquetas, fecha). Sin byline y sin índice. H2 para secciones y H3 para subsecciones.
+2. Cada artículo se entrega en el chat y como archivo `editorial/salida/AAAA-MM-DD-slug.html`.
+3. Se escribe «espacio salarial», nunca «salary cap».
+4. Decimales con apóstrofo tipográfico: `35’7%`.
+5. Tablas de plantilla completas cuando el artículo trate de plantilla.
+6. Sin hipervínculos externos en el cuerpo. Las fuentes van en el campo `fuentes`.
+
+## Roles dentro de la misma sesión
+
+Para no gastar tokens en sesiones nuevas, la tarea recorre estos roles en orden. Cada uno deja su resultado escrito antes del siguiente:
+1. **Selección:** elige la pieza del día entre las noticias del radar, según el mix de actualidad y evergreen.
+2. **Verificación de datos:** abre la fuente y comprueba cada cifra, nombre y cita. Lo que no aparezca se quita o se marca.
+3. **Redacción:** escribe con `ESTILO.md` y las preferencias expresas.
+4. **SEO:** revisa el slug, el extracto (140–160 caracteres), el titular (sin clickbait) y las etiquetas. No añade hechos para posicionar.
+5. **Control final:** lista prohibida, originalidad, cifras frente a la fuente y HTML semántico.
+6. **Entrega:** borrador en `borradores` como `pendiente_revision`, HTML en `editorial/salida/` y resumen en el panel.
+
+Si cualquier paso no se puede cumplir (fuente inaccesible, duda sobre apuestas, dato sin respaldo, HTML ausente), no se guarda nada y se deja una alerta `tecnica`.
+
 ## Regla absoluta: cero apuestas
 
 Nada de apuestas deportivas ni de ningún otro tipo, ni en sentido literal ni en sentido figurado, ni con términos ambiguos. Antes de guardar, el texto completo (cuerpo, titular, extracto, slug, etiquetas y pie de Instagram) se compara con `editorial/LISTA_PROHIBIDA.md`. Si aparece un término de la lista, el borrador no se guarda: se reescribe el fragmento y se vuelve a comprobar. Si el tema de la noticia es precisamente apuestas, no se redacta.

@@ -14,6 +14,17 @@ Este archivo recoge las preferencias que el sistema aprende de tus ediciones y d
 - Un patrón que contradice `ESTILO.md` no se aplica por sí solo: se propone a Alejandro como alerta para que lo apruebe.
 - Cada entrada indica la fecha y el número de ediciones o artículos que la respaldan.
 
+## Preferencias expresas (2026-11-05)
+
+Son instrucciones directas de Alejandro. Mandan sobre cualquier patrón observado y sobre `ESTILO.md`. Están recogidas también en `editorial/redaccion/PROMPT.md`.
+
+1. HTML semántico sin CSS en línea. Bloque de metadatos. Sin byline ni índice. H2 y H3.
+2. Entrega en chat y en `editorial/salida/` como HTML descargable.
+3. «espacio salarial», nunca «salary cap».
+4. Decimales con apóstrofo tipográfico.
+5. Tablas de plantilla completas cuando el artículo trate de plantilla.
+6. Sin hipervínculos externos en el cuerpo.
+
 ## Patrones confirmados
 
 _Todavía no hay patrones confirmados. Se irán añadiendo a medida que se repitan tus ediciones._
