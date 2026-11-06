@@ -192,6 +192,24 @@ pre.preview { max-height: 260px; overflow: auto; margin: 8px 0 0; padding: 10px;
 .empty-state { display: grid; justify-items: center; gap: 6px; text-align: center; padding: 36px 18px; color: var(--muted); border: 1px dashed var(--line); border-radius: 12px; background: var(--surface); margin: 0; }
 .empty-state strong { color: var(--fg); font: 600 18px/1.3 var(--serif); }
 
+.kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; box-shadow: var(--shadow); display: grid; gap: 4px; min-width: 0; }
+.kpi-n { font: 600 26px/1 var(--serif); }
+.kpi-l { font: 500 12px var(--sans); color: var(--muted); }
+.metrics { display: grid; gap: 12px; min-width: 0; }
+.panel-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; box-shadow: var(--shadow); min-width: 0; }
+.panel-card h3 { margin: 0 0 12px; font: 600 16px/1.3 var(--serif); }
+.bars { display: flex; align-items: flex-end; gap: 6px; height: 140px; }
+.bar { flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 4px; min-width: 0; }
+.bar span { width: 100%; background: var(--accent); border-radius: 4px 4px 0 0; min-height: 2px; }
+.bar em { font: 11px var(--mono); font-style: normal; color: var(--muted); }
+.rank { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+.rank li { display: flex; justify-content: space-between; gap: 12px; }
+.rank li span, .rank li a { overflow-wrap: anywhere; min-width: 0; }
+.rank li b { font: 600 14px var(--mono); white-space: nowrap; }
+.quiet { color: var(--muted); }
+.small { font-size: 12px; }
+@media (max-width: 560px) { .kpis { grid-template-columns: 1fr; } }
 .toast { position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); max-width: calc(100% - 32px); padding: 10px 14px; border-radius: 10px; background: var(--fg); color: var(--bg); font: 14px var(--sans); box-shadow: var(--shadow); }
 </style>
 
@@ -216,6 +234,7 @@ const nowIso = () => new Date().toISOString();
 const TABS = [
   { key: 'borradores', label: 'Borradores', col: 'borradores', open: x => x.estado === 'pendiente_revision' },
   { key: 'ideas', label: 'Ideas evergreen', col: 'ideas_evergreen', open: x => x.estado === 'propuesta' },
+  { key: 'metricas', label: 'Métricas', col: 'metricas', open: () => false },
   { key: 'seo', label: 'SEO', col: 'incidencias_seo', open: x => x.estado === 'abierta' },
 ];
 const COL = Object.fromEntries(TABS.map(t => [t.key, t.col]));
@@ -512,6 +531,7 @@ function render() {
   renderToday();
   renderTabs();
   const view = document.getElementById('view');
+  if (state.tab === 'metricas') { renderMetrics(); return; }
   if (!state.ready) { view.innerHTML = '<div class="empty-state"><strong>Conectando</strong><span>Un momento…</span></div>'; return; }
   if (!state.db) { view.innerHTML = '<div class="empty-state"><strong>Sin acceso a los datos</strong><span>Pide acceso al propietario de este artifact.</span></div>'; return; }
 
@@ -531,6 +551,32 @@ function render() {
   view.dataset.mode = sel ? 'detail' : 'list';
   view.innerHTML = '<div class="list">' + sorted.map(x => card(t.key, x)).join('') + '</div>'
     + '<div class="detail">' + (sel ? detail(t.key, sel) : '<div class="detail-inner"><p class="empty-state"><span>Elige un elemento de la lista para verlo aquí.</span></p></div>') + '</div>';
+}
+
+/* Métricas: los datos los escribe la pasada diaria en la colección metricas, documento web */
+function kpi(label, value) {
+  return '<div class="kpi"><span class="kpi-n">' + esc(value ?? '—') + '</span><span class="kpi-l">' + esc(label) + '</span></div>';
+}
+
+function renderMetrics() {
+  const view = document.getElementById('view');
+  view.dataset.mode = 'list';
+  const d = (state.data.metricas || []).find(x => x.id === 'web');
+  if (!d) {
+    view.innerHTML = '<div class="empty-state"><strong>Sin métricas todavía</strong><span>Se rellenan en la pasada diaria con datos de Cloudflare y WordPress.</span></div>';
+    return;
+  }
+  const serie = d.serie || [];
+  const max = Math.max(1, ...serie.map(p => p.visitas || 0));
+  const bars = serie.map(p => '<div class="bar" title="' + esc(p.dia) + ': ' + esc(p.visitas) + '"><span style="height:' + Math.round((p.visitas || 0) / max * 100) + '%"></span><em>' + esc(String(p.dia || '').slice(5)) + '</em></div>').join('');
+  const top = (d.top || []).map(p => '<li><span>' + esc(p.ruta) + '</span><b>' + esc(p.visitas) + '</b></li>').join('');
+  const arts = (d.articulos || []).map(a => '<li><a href="' + esc(a.url) + '" target="_blank" rel="noopener noreferrer">' + esc(a.titulo) + '</a><b>' + esc(a.vistas) + '</b></li>').join('');
+  view.innerHTML = '<div class="metrics">'
+    + '<div class="kpis">' + kpi('Visitas (7 días)', d.visitas) + kpi('Peticiones (7 días)', d.peticiones) + kpi('Artículos publicados', d.articulos_publicados) + '</div>'
+    + '<section class="panel-card"><h3>Visitas por día</h3><div class="bars">' + bars + '</div></section>'
+    + '<section class="panel-card"><h3>Artículos con más impacto</h3><ol class="rank">' + (arts || '<li><span>Sin datos todavía</span></li>') + '</ol></section>'
+    + '<section class="panel-card"><h3>Páginas más vistas</h3><ol class="rank">' + (top || '<li><span>Sin datos todavía</span></li>') + '</ol></section>'
+    + '<p class="quiet small">Actualizado: ' + esc(fmtDate(d.actualizado)) + '</p></div>';
 }
 
 /* Escrituras */
