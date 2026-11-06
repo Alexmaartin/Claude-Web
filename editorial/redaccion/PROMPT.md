@@ -19,7 +19,7 @@ Prevalecen sobre `ESTILO.md` si chocan:
 ## Roles dentro de la misma sesión
 
 Para no gastar tokens en sesiones nuevas, la tarea recorre estos roles en orden. Cada uno deja su resultado escrito antes del siguiente:
-1. **Selección:** elige la pieza del día entre las noticias del radar, según el mix de actualidad y evergreen.
+1. **Selección:** la pieza del día sale de la franquicia del turno en `editorial/redaccion/ROTACION.md`. Si hay una noticia bomba de otra de las diez franquicias, esa tiene prioridad ese día. El tipo (actualidad o evergreen) sigue el mix de la sección «Un artículo al día».
 2. **Verificación de datos:** abre la fuente y comprueba cada cifra, nombre y cita. Lo que no aparezca se quita o se marca.
 3. **Redacción:** escribe con `ESTILO.md` y las preferencias expresas.
 4. **SEO:** revisa el slug, el extracto (140–160 caracteres), el titular (sin clickbait) y las etiquetas. No añade hechos para posicionar.
