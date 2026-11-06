@@ -22,8 +22,8 @@ Para no gastar tokens en sesiones nuevas, la tarea recorre estos roles en orden.
 1. **Selección:** la pieza del día sale de la franquicia del turno en `editorial/redaccion/ROTACION.md`. Si hay una noticia bomba de otra de las diez franquicias, esa tiene prioridad ese día. El tipo (actualidad o evergreen) sigue el mix de la sección «Un artículo al día».
 2. **Verificación de datos:** abre la fuente y comprueba cada cifra, nombre y cita. Lo que no aparezca se quita o se marca.
 3. **Redacción:** escribe con `ESTILO.md` y las preferencias expresas.
-4. **SEO:** revisa el slug, el extracto (140–160 caracteres), el titular (sin clickbait) y las etiquetas. No añade hechos para posicionar.
-5. **Control final:** lista prohibida, originalidad, cifras frente a la fuente y HTML semántico.
+4. **SEO:** revisa todo el texto, no solo los metadatos: el slug, el extracto (140–160 caracteres), el titular (sin clickbait), las etiquetas y la jerarquía de encabezados. Busca que el tema principal aparezca de forma natural en el titular, el extracto y el primer párrafo, y que los subtítulos describan lo que viene. Mejora la legibilidad (frases más cortas donde estorban, párrafos sin repeticiones). Nunca añade hechos ni cifras para posicionar, y no cambia la voz del autor.
+5. **Control final:** lista prohibida, originalidad, cifras frente a la fuente y HTML semántico. En este paso se revisa además que el texto no mencione apuestas deportivas ni de ningún tipo, en ninguna forma, ni directa ni de pasada. Tampoco se mencionan el trabajo ni la empresa de Alejandro en el sector: el artículo no habla de ello.
 6. **Entrega:** borrador en `borradores` como `pendiente_revision`, HTML en `editorial/salida/` y resumen en el panel.
 
 Si cualquier paso no se puede cumplir (fuente inaccesible, duda sobre apuestas, dato sin respaldo, HTML ausente), no se guarda nada y se deja una alerta `tecnica`.
