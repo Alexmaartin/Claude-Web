@@ -45,6 +45,10 @@ Antes de escribir una noticia, revisa su título, su resumen y su URL contra `ed
 
 ## Métricas web (una vez al día, al final)
 
+Estructura del documento `web` de la colección `metricas`, que el panel lee tal cual:
+- `periodos`: un objeto con las claves `dia`, `semana` y `mes`. Cada una contiene `visitas`, `visitas_previas` (el mismo periodo anterior), `peticiones`, `serie` (lista de `{dia, visitas}`: por horas para `dia`, por día para `semana` y `mes`), `top` (diez rutas con `ruta`, `visitas` y `cambio` en %), `procedencia` (lista de `{origen, visitas}` con Google, Instagram, X, Facebook, otros y directo), y `articulos` (cinco con `titulo`, `url` y `vistas`).
+- `articulos_publicados`, `search_console` (lista de `{pagina, impresiones, ctr, posicion}`), `velocidad_movil` y `velocidad_desktop` (lista de `{pagina, puntuacion, lcp_ms, cambio}`), y `actualizado`.
+
 Cuando termines el radar y la redacción, actualiza el documento `web` de la colección `metricas` del panel, con ArtifactData:
 - Con el token `CLOUDFLARE_API_TOKEN` y la zona `CLOUDFLARE_ZONE_ID`, pide a GraphQL los últimos 7 días: `visitas` (sum visits), `peticiones` (count) y `serie` (visitas por día).
 - `top`: las diez rutas más vistas de la semana actual, con `visitas` y `cambio` frente a la semana anterior (la semana anterior se consulta con el mismo filtro, desplazado siete días). Así se ve qué páginas suben y cuáles caen.
