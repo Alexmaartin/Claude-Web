@@ -10,9 +10,12 @@ Esta tarea sube a WordPress los borradores aprobados en el panel, **siempre como
 
 ## Alcance permitido (y solo esto)
 
-- **Permitido:** crear entradas nuevas en WordPress con `POST /wp-json/wp/v2/posts`, siempre con `"status": "draft"`.
+- **Permitido:** crear entradas nuevas en WordPress con `POST /wp-json/wp/v2/posts`. El estado depende del modo del borrador:
+  - Modo `borrador` (por defecto): `"status": "draft"`.
+  - Modo `publicar`: `"status": "publish"`. Solo se usa cuando el borrador tiene `"modo": "publicar"`, lo que ocurre únicamente tras el clic de Alejandro en el panel. Nunca se publica por iniciativa propia.
+  - En ambos casos, la entrada se crea a nombre del usuario de la API, que es el de Alejandro.
 - **Permitido:** consultar etiquetas existentes (`GET /wp-json/wp/v2/tags`) y crearlas si el usuario lo permite.
-- **Prohibido:** publicar, programar (`future`), cambiar el estado de una entrada existente, editar o borrar entradas, tocar usuarios, ajustes, plugins, temas, medios o cualquier otra ruta de la API.
+- **Prohibido:** programar (`future`), publicar sin modo `publicar`, cambiar el estado de una entrada existente, editar o borrar entradas, tocar usuarios, ajustes, plugins, temas, medios o cualquier otra ruta de la API.
 - Si una llamada devuelve error de permisos, para y registra una alerta técnica. No intentes otra ruta.
 
 ## Qué se sube
