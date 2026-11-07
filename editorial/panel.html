@@ -434,7 +434,7 @@ pre.preview { max-height: 260px; overflow: auto; margin: 10px 0 0; padding: 12px
 @media (min-width: 900px) { .toast { bottom: 28px; } }
 @media (max-width: 560px) {
   .kpis { grid-template-columns: 1fr 1fr; }
-  .kpis .kpi:last-child { grid-column: 1 / -1; }
+  .kpis .kpi:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .detail-in { padding: 18px; }
   .article { padding: 18px; }
 }
@@ -870,7 +870,7 @@ function graficoArea(serie) {
   const area = linea + ' L' + x(pts.length - 1).toFixed(1) + ' ' + (H - B) + ' L' + x(0).toFixed(1) + ' ' + (H - B) + ' Z';
   const paso = Math.ceil(pts.length / 6);
   const etiquetas = pts.map((p, i) => (i % paso === 0 || i === pts.length - 1)
-    ? '<text x="' + x(i).toFixed(1) + '" y="' + (H - 8) + '" class="ct" text-anchor="middle">' + esc(p.l.slice(-5)) + '</text>' : '').join('');
+    ? '<text x="' + x(i).toFixed(1) + '" y="' + (H - 8) + '" class="ct" text-anchor="' + (i === 0 ? 'start' : i === pts.length - 1 ? 'end' : 'middle') + '">' + esc(p.l.slice(-5)) + '</text>' : '').join('');
   const puntos = pts.map((p, i) => '<circle cx="' + x(i).toFixed(1) + '" cy="' + y(p.v).toFixed(1) + '" r="' + (i === pts.length - 1 ? 5 : 3)
     + '" class="cdot' + (i === pts.length - 1 ? ' last' : '') + '"><title>' + esc(p.l) + ': ' + fmt(p.v) + ' visitas</title></circle>').join('');
   return '<svg class="achart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Visitas del periodo">'
