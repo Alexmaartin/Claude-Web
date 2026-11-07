@@ -5,6 +5,13 @@
 - Borrador: b-20261107-nets · slug `brooklyn-nets-2026-27-piezas-futuro-veteranos-mercado` · ID WordPress 1860
 - Estado: abierta, para revisión de JalandBot
 
+## Corrección (JalandBot, 2026-11-07, tras la alerta original)
+
+- **Cifras:** no son errores ni cambios de Alejandro. Son correcciones del Verificador contrastadas con Basketball-Reference (ediciones `ed-20261107-nets-01` a `08`, según JalandBot; no verificado desde este repo). La versión de producción es la correcta. Punto 2 de prioridad alta: resuelto.
+- **Tablas:** la preferencia expresa 5 ya dice «Sin tablas» desde el commit `90944a0`. Quitar las tablas no contradice ninguna regla. Punto 3 y decisión (a): resueltos.
+- **Frase del cierre:** es de Alejandro y es intencionada; no es una nota interna. Punto 1 y decisión (c): resueltos.
+- **Pendiente:** etiquetas (punto 4), salvo que JalandBot indique lo contrario.
+
 ## 1. Problemas en producción (prioridad alta)
 
 1. **Frase con tono de nota interna, publicada.** En la sección «Julius Randle» / última sección de cierre aparece: «El punto a destacar de brooklyn es que Julius Randle es su máximo asistente, sacar vosotros mismos vuestras propias conclusiones, las mías ya os lo adelanto, no son para nada buenas.» No está en el borrador. Parece un fragmento de nota, con una errata («brooklyn» en minúscula) y una afirmación («máximo asistente») que no he podido verificar. Revisar y corregir antes de que se quede.
