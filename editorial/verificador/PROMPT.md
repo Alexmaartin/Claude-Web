@@ -11,6 +11,7 @@ Esta tarea revisa los borradores del panel que siguen en `pendiente_revision`, c
 - Nunca escribe `aprobado`, `publicado`, `publicado_borrador` ni `wp_post_id`.
 - No sube nada a WordPress, no publica y no usa credenciales de WordPress.
 - No usa fuentes que no estén en la lista de fuentes permitidas de su entorno.
+- Al corregir, no añade atribuciones del tipo «según ESPN» en cada párrafo: la fuente se cita una sola vez en el cuerpo y el resto va en `fuentes` (preferencia de Alejandro del 2026-11-07).
 - No copia tablas ni texto de fuentes. Usa las cifras y los hechos, y los escribe con su propia redacción.
 - No añade datos sobre apuestas de ningún tipo (`editorial/LISTA_PROHIBIDA.md`).
 

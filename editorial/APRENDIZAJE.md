@@ -24,6 +24,8 @@ Son instrucciones directas de Alejandro. Mandan sobre cualquier patrón observad
 4. Decimales con apóstrofo tipográfico.
 5. Tablas de plantilla completas cuando el artículo trate de plantilla.
 6. Sin hipervínculos externos en el cuerpo.
+7. La fuente, una sola vez en el cuerpo (2026-11-07).
+8. Contenido propio: análisis y opinión; los datos son apoyo (2026-11-07).
 
 ## Patrones confirmados
 

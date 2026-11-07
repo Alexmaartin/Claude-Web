@@ -23,6 +23,8 @@ Prevalecen sobre `ESTILO.md` si chocan:
 4. Decimales con apóstrofo tipográfico: `35’7%`.
 5. Tablas de plantilla completas cuando el artículo trate de plantilla.
 6. Sin hipervínculos externos en el cuerpo. Las fuentes van en el campo `fuentes`.
+7. (2026-11-07) La fuente se menciona **una sola vez** en el cuerpo (por ejemplo, «con datos de ESPN» la primera vez que salen cifras). Nunca «según ESPN» en cada párrafo. El resto de fuentes van en el campo `fuentes`.
+8. (2026-11-07) **Contenido propio.** Los datos son apoyo, no el cuerpo del artículo. Cada sección aporta análisis, opinión y contexto con la voz del autor: qué significa el dato, qué cambia, qué se espera. Un párrafo que solo repite cifras de la fuente se reescribe o se elimina.
 
 ## Roles dentro de la misma sesión
 
