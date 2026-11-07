@@ -190,7 +190,10 @@ h1, h2, h3 { text-wrap: balance; }
   background: linear-gradient(180deg, transparent 20%, rgba(12, 12, 10, .82) 100%);
 }
 .hero-body { position: relative; z-index: 1; align-self: end; padding: 20px; display: grid; gap: 10px; color: #f6f3ec; }
-.hero-body .eyebrow { color: #f7b68d; }
+.hero-body .eyebrow {
+  justify-self: start; padding: 6px 10px; border-radius: 999px;
+  color: #ffd7bd; background: rgba(12, 12, 10, .6);
+}
 .hero-body h2 { margin: 0; font: 600 24px/1.2 var(--serif); letter-spacing: -.01em; }
 .hero-body p { margin: 0; color: rgba(246, 243, 236, .82); font-size: 14px; }
 .hero.empty { min-height: 0; background: var(--surface); }
