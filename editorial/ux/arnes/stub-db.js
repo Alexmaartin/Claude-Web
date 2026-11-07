@@ -54,5 +54,12 @@
   }
   const db = { collection: coleccion };
   window.claude = { use: async (nombre) => (nombre === 'db' ? db : null) };
+  // El artifact publicado añade esta etiqueta viewport; en local hace falta para que 400 px sea de verdad 400 px.
+  document.addEventListener('DOMContentLoaded', () => {
+    const m = document.createElement('meta');
+    m.name = 'viewport';
+    m.content = 'width=device-width,initial-scale=1,viewport-fit=cover';
+    document.head.appendChild(m);
+  });
   window.__ejemplo = ejemplo;
 })();

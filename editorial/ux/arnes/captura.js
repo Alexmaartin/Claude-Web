@@ -1,4 +1,4 @@
-/* Uso: node captura.js <salida-dir> [vista]
+/* Uso: [SEL=1] node captura.js <salida-dir> [vista]  (SEL=1 abre el primer borrador)
    Renderiza editorial/panel.html con el arnés (datos de ejemplo) en móvil 400 px y escritorio. */
 const path = require('path');
 const fs = require('fs');
@@ -21,6 +21,7 @@ const stub = fs.readFileSync(path.join(__dirname, 'stub-db.js'), 'utf8');
       page.on('pageerror', (e) => errores.push(String(e)));
       await page.goto(panel + '#' + v);
       await page.waitForTimeout(700);
+      if (process.env.SEL && await page.$('[data-act="select"]')) { await page.click('[data-act="select"]'); await page.waitForTimeout(300); }
       const desbordes = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       await page.screenshot({ path: path.join(out, `${nombre}-${v}.png`), fullPage: true });
       console.log(`${nombre} ${v}: desborde horizontal ${desbordes}px, errores ${errores.length ? errores.join(' | ') : 'ninguno'}`);

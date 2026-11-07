@@ -490,7 +490,7 @@ const ACTIONS = {
 };
 
 const state = { ready: false, db: null, view: 'hoy', sel: null, editing: null, confirm: null, periodo: 'semana', data: {}, busy: new Set() };
-['borradores', 'ideas', 'metricas', 'seo', 'noticias', 'alertas'].forEach(k => { state.data[k] = null; });
+['borradores', 'ideas', 'metricas', 'seo', 'noticias', 'alertas', 'ediciones'].forEach(k => { state.data[k] = null; });
 
 /* Utilidades */
 function toast(msg) {
@@ -745,6 +745,27 @@ function checklist(x) {
   return '<ul class="checks">' + items.map(([ok, a, b]) => '<li class="' + (ok ? 'ok' : 'off') + '"><span class="dot"></span><span>' + esc(ok ? a : b) + '</span></li>').join('') + '</ul>';
 }
 
+/* Verificación del verificador y historial de ediciones humanas */
+function verificacionBlock(x) {
+  const v = x.verificacion;
+  if (!v) return block('Verificación', '<p class="hint">El verificador aún no ha revisado este borrador.</p>');
+  const pend = (v.pendientes_humano || []).map(t => '<li>' + esc(t) + '</li>').join('');
+  return block('Verificación', '<div class="chips"><span>' + fmt(v.confirmadas) + ' confirmadas</span><span>' + fmt(v.corregidas) + ' corregidas</span><span>' + fmt(v.sin_comprobar) + ' sin comprobar</span></div>'
+    + (pend ? '<p class="hint">Pendientes de tu criterio:</p><ul>' + pend + '</ul>' : '<p class="hint">Nada pendiente de tu criterio.</p>'));
+}
+const ETIQUETA_CAMPO = { titulo: 'titular', slug: 'slug', extracto: 'extracto', etiquetas: 'etiquetas', pie_instagram: 'pie', cuerpo_html: 'cuerpo' };
+function camposCambiados(e) {
+  const antes = e.antes || {}, despues = e.despues || {};
+  return Object.keys(despues)
+    .filter(k => JSON.stringify(antes[k]) !== JSON.stringify(despues[k]))
+    .map(k => ETIQUETA_CAMPO[k] || k);
+}
+function historialBlock(x) {
+  const hist = sortDesc((state.data.ediciones || []).filter(e => e.borrador_id === x.id)).slice(0, 10);
+  if (!hist.length) return block('Historial de cambios', '<p class="hint">Sin ediciones manuales todavía.</p>');
+  return block('Historial de cambios', '<ul>' + hist.map(e => '<li>' + esc(fmtDate(e.fecha)) + ' · ' + esc(camposCambiados(e).join(', ') || 'sin cambios visibles') + '</li>').join('') + '</ul>');
+}
+
 function detailBorrador(x) {
   if (state.editing === x.id) return editor(x);
   const tags = (x.etiquetas || []).map(t => '<span>' + esc(t) + '</span>').join('');
@@ -762,6 +783,7 @@ function detailBorrador(x) {
     + '<div class="dmeta">' + estado(x.estado) + '<span>' + esc(fmtDate(x.fecha)) + '</span><span>Confianza ' + esc(x.confianza || '—') + '</span></div>'
     + acciones
     + '<h3 class="sub">Comprobaciones antes de aprobar</h3>' + checklist(x)
+    + verificacionBlock(x)
     + (imgSegura(x.imagen_url) ? block('Portada', '<img src="' + esc(imgSegura(x.imagen_url)) + '" alt="" style="border-radius:12px">') : '')
     + '<div class="article"><div class="articulo">' + sanitize(x.cuerpo_html) + '</div></div>'
     + block('Slug', '<code class="slug">' + esc(x.slug || '—') + '</code>', x.slug)
@@ -770,6 +792,7 @@ function detailBorrador(x) {
     + block('Pie de Instagram', '<p style="white-space:pre-wrap">' + esc(x.pie_instagram || '—') + '</p>', x.pie_instagram)
     + block('Fuentes', fuentes ? '<ul>' + fuentes + '</ul>' : '<p>—</p>')
     + '<details class="raw"><summary>Ver HTML para copiar</summary><pre class="preview">' + esc(x.cuerpo_html || '') + '</pre></details>'
+    + historialBlock(x)
     + deleteBlock('borradores', x.id) + '</div>';
 }
 
@@ -1100,6 +1123,7 @@ function subscribe() {
   sub('seo', 'incidencias_seo', render);
   sub('noticias', 'noticias', () => {});
   sub('alertas', 'alertas', render);
+  sub('ediciones', 'ediciones', render);
   const s = document.getElementById('sync');
   s.textContent = 'En directo';
   s.classList.add('on');
