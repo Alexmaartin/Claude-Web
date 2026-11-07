@@ -235,6 +235,33 @@ h1, h2, h3 { text-wrap: balance; }
 .res-d { font: 500 12px var(--sans); }
 @media (max-width: 380px) { .res-n { font-size: 18px; } }
 
+/* Dashboard de métricas */
+.chart-wrap { overflow-x: auto; }
+.achart { width: 100%; height: auto; display: block; min-width: 320px; }
+.achart .cg { stroke: var(--line); stroke-width: 1; }
+.achart .ct { fill: var(--muted); font: 500 11px var(--sans); font-variant-numeric: tabular-nums; }
+.achart .carea { fill: var(--accent); opacity: .12; }
+.achart .cline { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.achart .cdot { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+.achart .cdot.last { fill: var(--accent); }
+.insights { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.insights li { position: relative; padding-left: 16px; font-size: 14px; line-height: 1.5; }
+.insights li::before { content: ""; position: absolute; left: 0; top: .55em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.pg { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: start; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.pg:last-child { border-bottom: 0; }
+.pg-main { min-width: 0; display: grid; gap: 6px; }
+.pg-row { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; min-width: 0; }
+.pg-ruta { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 13px var(--mono); min-width: 0; }
+.pg-row b { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.ruido { border-style: dashed; }
+.salud { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.salud li { display: grid; grid-template-columns: 10px 1fr auto; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.salud li:last-child { border-bottom: 0; }
+.salud .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+.salud li.ok .dot { background: var(--good, #3d7a3a); }
+.salud li.off .dot { background: var(--warn); }
+.salud em { font-style: normal; font-size: 12px; color: var(--muted); text-align: right; }
+
 /* Listas */
 .list { display: grid; gap: 10px; align-content: start; min-width: 0; }
 .item {
@@ -693,24 +720,96 @@ function renderIdeas() {
   }).join('') || emptyBox('Sin ideas pendientes', 'Todo lo propuesto ya está decidido.');
 }
 
+/* Métricas: dashboard. Separa lectores reales de escáneres. */
+const SCAN_RE = /\.env|\.s3cfg|\.git|\.aws|\.sql|\.bak|\.ya?ml|\.php\d?\b|admin\.php|wp-login|xmlrpc|phpmyadmin|cgi-bin|\/config|\/vendor\//i;
+const esEscaner = ruta => SCAN_RE.test(String(ruta || ''));
+function techo(m) {
+  const p = Math.pow(10, Math.floor(Math.log10(Math.max(1, m))));
+  const n = m / p;
+  return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10) * p;
+}
+function graficoArea(serie) {
+  const pts = (serie || []).map(s => ({ l: String(s.dia || ''), v: Number(s.visitas) || 0 }));
+  if (!pts.length) return '';
+  const W = 640, H = 240, L = 44, R = 12, T = 16, B = 30;
+  const top = techo(Math.max(...pts.map(p => p.v)));
+  const x = i => pts.length === 1 ? (L + W - R) / 2 : L + i * (W - L - R) / (pts.length - 1);
+  const y = v => T + (H - T - B) * (1 - v / top);
+  const grid = [0, 0.25, 0.5, 0.75, 1].map(f => {
+    const yy = y(top * f).toFixed(1);
+    return '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + yy + '" y2="' + yy + '" class="cg"/>'
+      + '<text x="' + (L - 8) + '" y="' + (+yy + 4) + '" class="ct" text-anchor="end">' + fmt(Math.round(top * f)) + '</text>';
+  }).join('');
+  const linea = pts.map((p, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(p.v).toFixed(1)).join(' ');
+  const area = linea + ' L' + x(pts.length - 1).toFixed(1) + ' ' + (H - B) + ' L' + x(0).toFixed(1) + ' ' + (H - B) + ' Z';
+  const paso = Math.ceil(pts.length / 6);
+  const etiquetas = pts.map((p, i) => (i % paso === 0 || i === pts.length - 1)
+    ? '<text x="' + x(i).toFixed(1) + '" y="' + (H - 8) + '" class="ct" text-anchor="middle">' + esc(p.l.slice(-5)) + '</text>' : '').join('');
+  const puntos = pts.map((p, i) => '<circle cx="' + x(i).toFixed(1) + '" cy="' + y(p.v).toFixed(1) + '" r="' + (i === pts.length - 1 ? 5 : 3)
+    + '" class="cdot' + (i === pts.length - 1 ? ' last' : '') + '"><title>' + esc(p.l) + ': ' + fmt(p.v) + ' visitas</title></circle>').join('');
+  return '<svg class="achart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Visitas del periodo">'
+    + grid + '<path d="' + area + '" class="carea"/><path d="' + linea + '" class="cline"/>' + puntos + etiquetas + '</svg>';
+}
+function lecturas(p) {
+  const out = [];
+  const serie = p.serie || [];
+  if (typeof p.visitas === 'number' && typeof p.visitas_previas === 'number' && p.visitas_previas) {
+    const pct = Math.round((p.visitas - p.visitas_previas) / p.visitas_previas * 100);
+    out.push((pct >= 0 ? 'Sube ' : 'Baja ') + Math.abs(pct) + ' % frente al periodo anterior: ' + fmt(p.visitas) + ' visitas frente a ' + fmt(p.visitas_previas) + '.');
+  }
+  if (serie.length) {
+    const mx = serie.reduce((a, b) => (b.visitas || 0) > (a.visitas || 0) ? b : a);
+    out.push('Pico en ' + mx.dia + ' con ' + fmt(mx.visitas) + ' visitas.');
+  }
+  const top = p.top || [];
+  const tot = top.reduce((a, r) => a + (r.visitas || 0), 0);
+  const esc2 = top.filter(r => esEscaner(r.ruta)).reduce((a, r) => a + (r.visitas || 0), 0);
+  if (tot && esc2) out.push(Math.round(esc2 / tot * 100) + ' % de las visitas del top son escáneres buscando archivos sensibles (.env, .s3cfg, admin.php). No son lectores.');
+  if (!out.length) out.push('Todavía no hay datos suficientes en este periodo.');
+  return out;
+}
+function paginasReales(top) {
+  const reales = (top || []).filter(r => !esEscaner(r.ruta));
+  const max = Math.max(1, ...reales.map(r => r.visitas || 0));
+  return reales.slice(0, 10).map((r, i) => '<li class="pg"><span class="n">' + (i + 1) + '</span><div class="pg-main">'
+    + '<div class="pg-row"><span class="pg-ruta">' + esc(r.ruta) + '</span><b>' + fmt(r.visitas) + ' ' + cambioHtml(r.cambio) + '</b></div>'
+    + '<div class="track"><i style="width:' + Math.round((r.visitas || 0) / max * 100) + '%"></i></div></div></li>').join('');
+}
+function escaneres(top) {
+  const e = (top || []).filter(r => esEscaner(r.ruta));
+  if (!e.length) return '';
+  const suma = e.reduce((a, r) => a + (r.visitas || 0), 0);
+  return '<section class="card panel ruido"><div class="sec-head"><h2>Ruido de escáneres</h2><span>' + fmt(suma) + ' peticiones</span></div>'
+    + '<p class="hint">Bots que buscan credenciales y archivos de configuración. No son lectores y no cuentan como audiencia.</p>'
+    + '<div class="chips">' + e.slice(0, 6).map(r => '<span>' + esc(r.ruta) + ' · ' + fmt(r.visitas) + '</span>').join('') + '</div></section>';
+}
+function saludDatos(d, p) {
+  const comprobar = (nombre, ok, pendiente) => '<li class="' + (ok ? 'ok' : 'off') + '"><span class="dot"></span><span>' + esc(nombre) + '</span><em>' + (ok ? 'Con datos' : esc(pendiente)) + '</em></li>';
+  return '<section class="card panel"><div class="sec-head"><h2>Estado de los datos</h2><span>qué llega y qué falta</span></div><ul class="salud">'
+    + comprobar('Visitas del periodo', typeof p.visitas === 'number', 'Sin datos de Cloudflare')
+    + comprobar('Serie temporal', (p.serie || []).length > 0, 'Sin serie')
+    + comprobar('Páginas', (p.top || []).length > 0, 'Sin top de páginas')
+    + comprobar('Procedencia', (p.procedencia || []).length > 0, 'Pendiente en la pasada')
+    + comprobar('Artículos con impacto', (p.articulos || []).length > 0, 'Pendiente: WordPress sin vistas')
+    + comprobar('Search Console', (d.search_console || []).length > 0, 'Falta la cuenta de servicio')
+    + comprobar('Velocidad móvil y escritorio', (d.velocidad_movil || []).length > 0, 'Falta la clave de PageSpeed')
+    + '</ul></section>';
+}
 function renderMetricas() {
   const d = metricsDoc();
-  const seg = '<div class="card resumen" role="group" aria-label="Visitas por periodo">'
+  const resumen = '<div class="card resumen" role="group" aria-label="Visitas por periodo">'
     + PERIODOS.map(([k, l]) => {
         const q = periodoDatos(k);
         return '<button class="res-cell" data-act="periodo" data-p="' + k + '" aria-pressed="' + (state.periodo === k) + '">'
-          + '<span class="res-l">' + l + '</span><span class="res-n">' + fmt(q.visitas) + '</span>'
-          + '<span class="res-d">' + deltaHtml(q.visitas, q.visitas_previas) + '</span></button>';
+          + '<span class="res-l">' + l + '</span><span class="res-n">' + (typeof q.visitas === 'number' ? fmt(q.visitas) : '—') + '</span>'
+          + '<span class="res-d">' + (typeof q.visitas === 'number' ? deltaHtml(q.visitas, q.visitas_previas) : '<span class="flat">sin datos</span>') + '</span></button>';
       }).join('')
     + '</div>';
-  if (!d) return seg + emptyBox('Sin métricas todavía', 'Se rellenan en la pasada diaria con datos de Cloudflare y WordPress.');
+  if (!d) return resumen + emptyBox('Sin métricas todavía', 'Se rellenan en la pasada diaria con datos de Cloudflare y WordPress.');
   const p = periodoDatos(state.periodo);
+  const etiqueta = PERIODOS.find(x => x[0] === state.periodo)[1];
   const serie = p.serie || [];
-  const max = Math.max(1, ...serie.map(s => s.visitas || 0));
-  const grid = '<div class="chart-grid">' + [0, 1, 2, 3].map(() => '<i></i>').join('') + '</div>';
-  const bars = serie.length
-    ? '<div class="chart">' + grid + '<div class="bars">' + serie.map(s => '<div class="bar"><b>' + fmt(s.visitas) + '</b><i style="height:' + Math.max(3, Math.round((s.visitas || 0) / max * 100)) + '%"></i><em>' + esc(String(s.dia || '').slice(-5)) + '</em></div>').join('') + '</div></div>'
-    : '<p class="hint">Sin serie para este periodo todavía.</p>';
+  const media = serie.length ? Math.round(serie.reduce((a, s) => a + (s.visitas || 0), 0) / serie.length) : null;
   const proc = p.procedencia || [];
   const totalProc = proc.reduce((a, o) => a + (o.visitas || 0), 0);
   const procHtml = proc.length
@@ -719,34 +818,35 @@ function renderMetricas() {
         return '<div class="proc ' + ORIGEN_CLASE(o.origen) + '"><div class="proc-row"><span>' + esc(o.origen) + '<span class="pct">' + pct + ' %</span></span><b>' + fmt(o.visitas) + '</b></div><div class="track"><i style="width:' + pct + '%"></i></div></div>';
       }).join('') + '</div>'
     : '<p class="hint">Sin datos de procedencia todavía.</p>';
-  const top = (p.top || []).slice(0, 10).map((r, i) => '<li><span class="n">' + (i + 1) + '</span><span>' + esc(r.ruta) + '</span><b>' + fmt(r.visitas) + ' ' + cambioHtml(r.cambio) + '</b></li>').join('');
   const arts = (p.articulos || []).slice(0, 5).map((a, i) => '<li><span class="n">' + (i + 1) + '</span><a href="' + esc(a.url) + '" target="_blank" rel="noopener noreferrer">' + esc(a.titulo) + '</a><b>' + fmt(a.vistas) + '</b></li>').join('');
   const sc = (d.search_console || []).slice(0, 15);
   const scHtml = sc.length
     ? '<div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Página</th><th>Impr.</th><th>CTR</th><th>Pos.</th></tr></thead><tbody>'
-      + sc.map(r => {
-        const flag = (r.impresiones >= 500 && r.ctr < 2) ? '<span class="flag">título</span>' : '';
-        return '<tr><td>' + esc(r.pagina) + flag + '</td><td>' + fmt(r.impresiones) + '</td><td>' + esc(r.ctr) + ' %</td><td>' + esc(r.posicion) + '</td></tr>';
-      }).join('') + '</tbody></table></div>'
+      + sc.map(r => '<tr><td>' + esc(r.pagina) + ((r.impresiones >= 500 && r.ctr < 2) ? ' <span class="flag">título</span>' : '') + '</td><td>' + fmt(r.impresiones) + '</td><td>' + esc(r.ctr) + ' %</td><td>' + esc(r.posicion) + '</td></tr>').join('')
+      + '</tbody></table></div>'
     : '<div class="pending"><strong>Search Console pendiente</strong><span>Faltan las credenciales de la cuenta de servicio de Google para mostrar impresiones, CTR y posición.</span></div>';
   const sp = (d.velocidad_movil || []).slice(0, 10);
   const spHtml = sp.length
     ? '<div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Página</th><th>Puntuación</th><th>LCP</th><th>Cambio</th></tr></thead><tbody>'
-      + sp.map(r => {
-        const flag = (typeof r.cambio === 'number' && r.cambio < -5) ? '<span class="flag">empeora</span>' : '';
-        return '<tr><td>' + esc(r.pagina) + flag + '</td><td>' + fmt(r.puntuacion) + '</td><td>' + fmt(r.lcp_ms) + ' ms</td><td>' + cambioHtml(r.cambio) + '</td></tr>';
-      }).join('') + '</tbody></table></div>'
+      + sp.map(r => '<tr><td>' + esc(r.pagina) + ((typeof r.cambio === 'number' && r.cambio < -5) ? ' <span class="flag">empeora</span>' : '') + '</td><td>' + fmt(r.puntuacion) + '</td><td>' + fmt(r.lcp_ms) + ' ms</td><td>' + cambioHtml(r.cambio) + '</td></tr>').join('')
+      + '</tbody></table></div>'
     : '<div class="pending"><strong>Velocidad en móvil pendiente</strong><span>Falta la clave de PageSpeed Insights para medir la velocidad real en móvil y escritorio.</span></div>';
-  const etiquetaPeriodo = PERIODOS.find(x => x[0] === state.periodo)[1];
-  return seg
+  return resumen
     + '<div class="kpis">'
+    + '<div class="card kpi"><span class="kpi-n">' + (typeof p.visitas === 'number' ? fmt(p.visitas) : '—') + '</span><span class="kpi-l">Visitas ' + etiqueta.toLowerCase() + '</span></div>'
     + '<div class="card kpi"><span class="kpi-n">' + fmt(p.peticiones) + '</span><span class="kpi-l">Peticiones</span></div>'
+    + '<div class="card kpi"><span class="kpi-n">' + (media === null ? '—' : fmt(media)) + '</span><span class="kpi-l">Media por día</span></div>'
     + '<div class="card kpi"><span class="kpi-n">' + fmt(d.articulos_publicados) + '</span><span class="kpi-l">Artículos publicados</span></div>'
     + '</div>'
-    + '<section class="card panel"><div class="sec-head"><h2>Visitas</h2><span>' + esc(etiquetaPeriodo) + '</span></div>' + bars + '</section>'
+    + '<section class="card panel"><div class="sec-head"><h2>Visitas</h2><span>' + etiqueta + '</span></div>'
+    + (serie.length ? '<div class="chart-wrap">' + graficoArea(serie) + '</div>' : '<p class="hint">Sin serie para este periodo todavía.</p>') + '</section>'
+    + '<section class="card panel"><div class="sec-head"><h2>Lectura rápida</h2><span>calculada del periodo</span></div><ul class="insights">'
+    + lecturas(p).map(t => '<li>' + esc(t) + '</li>').join('') + '</ul></section>'
+    + '<section class="card panel"><div class="sec-head"><h2>Páginas reales</h2><span>sin escáneres</span></div><ol class="rank pglist">' + (paginasReales(p.top) || '<li><span>Sin datos todavía</span></li>') + '</ol></section>'
+    + escaneres(p.top)
     + '<section class="card panel"><div class="sec-head"><h2>De dónde llegan</h2><span>' + fmt(totalProc) + ' visitas</span></div>' + procHtml + '</section>'
-    + '<section class="card panel"><div class="sec-head"><h2>Qué sube y qué cae</h2><span>vs. periodo anterior</span></div><ol class="rank">' + (top || '<li><span>Sin datos todavía</span></li>') + '</ol></section>'
     + '<section class="card panel"><div class="sec-head"><h2>Artículos con más impacto</h2><span>vistas</span></div><ol class="rank">' + (arts || '<li><span>Sin datos todavía</span></li>') + '</ol></section>'
+    + saludDatos(d, p)
     + '<section class="card panel"><div class="sec-head"><h2>Search Console</h2><span>últimos 28 días</span></div>' + scHtml + '</section>'
     + '<section class="card panel"><div class="sec-head"><h2>Velocidad</h2><span>datos reales</span></div>' + spHtml + '</section>'
     + '<p class="foot">Actualizado ' + esc(fmtDate(d.actualizado)) + '</p>';
