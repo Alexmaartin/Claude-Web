@@ -34,9 +34,6 @@ Alejandro ha autorizado que mejores el panel de forma autónoma, sin pedir permi
 - No aprueba ni publica borradores ni artículos. Publicar el panel en su URL sí está permitido, según lo anterior.
 - No toca borradores, colecciones de datos ni WordPress.
 - No añade secretos ni credenciales a ningún archivo.
-- No toca borradores, artículos, colecciones de datos ni WordPress.
-- No aprueba ni publica nada.
-- No añade secretos ni credenciales a ningún archivo.
 
 ## Al terminar
 
