@@ -53,7 +53,8 @@ Cuando termines el radar y la redacción, actualiza el documento `web` de la col
 - Con el token `CLOUDFLARE_API_TOKEN` y la zona `CLOUDFLARE_ZONE_ID`, calcula **los tres periodos siempre**, en cada pasada, y escríbelos los tres en `periodos`, aunque uno de ellos esté vacío:
   - `dia`: hoy, con `serie` por horas (dimensión `datetimeHour`).
   - `semana`: los últimos 7 días, con `serie` por día.
-  - `mes`: los últimos 30 días, con `serie` por día.
+  - `mes`: los últimos 30 días, con `serie` por día. Cloudflare solo conserva unos 14 días, así que el mes se calcula con el histórico propio (ver abajo). Mientras el histórico tenga menos de 30 días, `mes` usa los días disponibles y lleva `nota: "parcial: N días"`.
+  - Histórico: cada pasada guarda en la colección `metricas_historico` un documento por día (id `YYYY-MM-DD`, con `visitas` y `peticiones` del día completo) para los días que aún no existan. Al hacer `mes`, suma los documentos de los últimos 30 días del histórico y los 14 días que devuelve Cloudflare cuando el histórico no llega.
   - En cada periodo: `visitas` (sum visits), `visitas_previas` (el mismo periodo anterior, desplazado), `peticiones` (count) y `serie`.
 - Si un periodo no se puede calcular, deja `visitas: null` y `serie: []` en ese periodo y anótalo en una alerta `tecnica`. No omitas la clave: el panel necesita ver los tres.
 - `top` de cada periodo: las diez rutas más vistas del periodo, con `visitas` y `cambio` frente al periodo anterior. Así se ve qué páginas suben y cuáles caen.

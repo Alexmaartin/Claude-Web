@@ -827,6 +827,7 @@ function renderMetricas() {
     + '<div class="card kpi"><span class="kpi-n">' + fmt(d.articulos_publicados) + '</span><span class="kpi-l">Artículos publicados</span></div>'
     + '</div>'
     + '<section class="card panel"><div class="sec-head"><h2>Visitas</h2><span>' + etiqueta + '</span></div>'
+    + (p.nota ? '<p class="hint">' + esc(p.nota) + '</p>' : '')
     + (serie.length ? '<div class="chart-wrap">' + graficoArea(serie) + '</div>' : '<p class="hint">Sin serie para este periodo todavía.</p>') + '</section>'
     + '<section class="card panel"><div class="sec-head"><h2>Lectura rápida</h2><span>calculada del periodo</span></div><ul class="insights">'
     + lecturas(p).map(t => '<li>' + esc(t) + '</li>').join('') + '</ul></section>'
