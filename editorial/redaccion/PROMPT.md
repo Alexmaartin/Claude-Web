@@ -21,7 +21,7 @@ Prevalecen sobre `ESTILO.md` si chocan:
 2. Cada artículo se entrega en el chat y como archivo `editorial/salida/AAAA-MM-DD-slug.html`.
 3. Se escribe «espacio salarial», nunca «salary cap».
 4. Decimales con apóstrofo tipográfico: `35’7%`.
-5. Tablas de plantilla completas cuando el artículo trate de plantilla.
+5. (2026-11-07) **Sin tablas.** En WordPress no se ven bien y Alejandro las borra. La información de plantilla va en listas o en texto.
 6. Sin hipervínculos externos en el cuerpo. Las fuentes van en el campo `fuentes`.
 7. (2026-11-07) La fuente se menciona **una sola vez** en el cuerpo (por ejemplo, «con datos de ESPN» la primera vez que salen cifras). Nunca «según ESPN» en cada párrafo. El resto de fuentes van en el campo `fuentes`.
 8. (2026-11-07) **Contenido propio.** Los datos son apoyo, no el cuerpo del artículo. Cada sección aporta análisis, opinión y contexto con la voz del autor: qué significa el dato, qué cambia, qué se espera. Un párrafo que solo repite cifras de la fuente se reescribe o se elimina.

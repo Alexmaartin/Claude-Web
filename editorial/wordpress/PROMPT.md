@@ -19,7 +19,10 @@ Antes de subir, comprueba en `editorial/redaccion/REGISTRO_TEMAS.md` que el borr
   - Modo `publicar`: `"status": "publish"`. Solo se usa cuando el borrador tiene `"modo": "publicar"`, lo que ocurre únicamente tras el clic de Alejandro en el panel. Nunca se publica por iniciativa propia.
   - En ambos casos, la entrada se crea a nombre del usuario de la API, que es el de Alejandro.
 - **Permitido:** consultar etiquetas existentes (`GET /wp-json/wp/v2/tags`) y crearlas si el usuario lo permite.
-- **Prohibido:** programar (`future`), publicar sin modo `publicar`, cambiar el estado de una entrada existente, editar o borrar entradas, tocar usuarios, ajustes, plugins, temas, medios o cualquier otra ruta de la API.
+- **Permitido (2026-11-07, autorizado por Alejandro): portada.** Antes de crear la entrada, sube la portada del borrador (`imagen_url`, WebP) a la biblioteca de medios con `POST /wp-json/wp/v2/media` (cabeceras `Content-Type: image/webp` y `Content-Disposition: attachment; filename="<slug>.webp"`), con texto alternativo descriptivo (`alt_text`, sin nombres de marcas ni logos). Usa el id devuelto como `featured_media` de la entrada. Así la portada sale como imagen destacada.
+- **Permitido (2026-11-07): arreglar la portada de una entrada ya creada por el sistema** cuando le falte: sube la imagen y envía solo `featured_media` en `POST /wp-json/wp/v2/posts/<id>`. Ningún otro campo: ni título, ni contenido, ni etiquetas, ni categorías, ni estado.
+- No insertes la portada dentro del cuerpo: el tema la muestra como imagen destacada.
+- **Prohibido:** programar (`future`), publicar sin modo `publicar`, cambiar el estado de una entrada existente, editar o borrar entradas (salvo la portada, según lo anterior), tocar usuarios, ajustes, plugins, temas, otros medios o cualquier otra ruta de la API.
 - Si una llamada devuelve error de permisos, para y registra una alerta técnica. No intentes otra ruta.
 
 ## Conciliación con el panel (en cada pasada, antes que nada)

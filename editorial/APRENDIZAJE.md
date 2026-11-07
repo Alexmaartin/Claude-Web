@@ -22,7 +22,7 @@ Son instrucciones directas de Alejandro. Mandan sobre cualquier patrón observad
 2. Entrega en chat y en `editorial/salida/` como HTML descargable.
 3. «espacio salarial», nunca «salary cap».
 4. Decimales con apóstrofo tipográfico.
-5. Tablas de plantilla completas cuando el artículo trate de plantilla.
+5. Sin tablas: en WordPress no se ven bien (2026-11-07). Plantilla en listas o texto.
 6. Sin hipervínculos externos en el cuerpo.
 7. La fuente, una sola vez en el cuerpo (2026-11-07).
 8. Contenido propio: análisis y opinión; los datos son apoyo (2026-11-07).

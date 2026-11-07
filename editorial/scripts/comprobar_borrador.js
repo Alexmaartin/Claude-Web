@@ -60,6 +60,7 @@ const todo = [t, ex, texto, String(d.pie_instagram || '')].join(' ').toLowerCase
 const prohibidos = ['apuest', 'cuota', 'odds', 'bookmaker', 'casino', 'parlay', 'hándicap', 'handicap'];
 const hallados = prohibidos.filter(p => todo.includes(p));
 check(hallados.length === 0, hallados.length ? `Términos de apuestas encontrados: ${hallados.join(', ')}` : 'Sin términos de apuestas');
+check(!/<table/i.test(html), 'Sin tablas en el cuerpo (no se ven bien en WordPress)');
 const menciones = (texto.match(/\bESPN\b/g) || []).length;
 check(menciones <= 2, `ESPN mencionada ${menciones} veces en el cuerpo (máximo 2)`);
 check(!/salary cap|cap space/i.test(todo), 'Sin «salary cap» ni «cap space» (usar espacio salarial)', 'aviso');

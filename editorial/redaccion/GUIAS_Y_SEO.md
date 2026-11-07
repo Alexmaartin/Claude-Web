@@ -20,9 +20,9 @@ La noticia bomba sigue siendo la excepción: sustituye el formato del día solo 
 ### Lista de ideas de guías
 
 Franquicia (una por equipo, en el turno de `ROTACION.md`):
-- Timberwolves: plantilla y roles 2026-27, con tabla completa.
+- Timberwolves: plantilla y roles 2026-27, en listas.
 - Nets: plantilla, contratos y margen salarial.
-- Heat: plantilla y rotación, con tabla completa.
+- Heat: plantilla y rotación, en listas.
 - Clippers: plantilla y margen salarial.
 - Bucks: plantilla, contratos y qué espera la temporada.
 - Thunder: plantilla, bajas y calendario.
@@ -48,7 +48,7 @@ Evergreen (banco en `TEMAS_EVERGREEN.md`): contratos two-way, draft (lotería y 
 
 - **Entradilla** que responde a la pregunta del artículo en 2–4 frases.
 - **Un H2 cada 250–400 palabras.** H3 dentro de cada H2 si hace falta.
-- **Tablas** cuando haya datos: plantilla, contratos, calendario, glosario.
+- **Sin tablas** (2026-11-07): no se ven bien en la web. Para plantilla, contratos, calendario o glosario, usa listas (`<ul>`) o párrafos cortos.
 - **Sección «Preguntas frecuentes»** al final, con preguntas reales y respuestas cortas.
 - **Longitud:** guías de 1.500–3.000 palabras. Las noticias bomba pueden ser más cortas, pero nunca menos de 600.
 
@@ -102,7 +102,7 @@ El sistema la verifica antes de dejar el borrador como `pendiente_revision`. Tod
 - [ ] Título SEO y meta descripción presentes, distintos del titular, con la palabra clave.
 - [ ] Entradilla de 2–4 frases que responde a la pregunta.
 - [ ] Un H2 cada 250–400 palabras (medido por el texto).
-- [ ] Al menos una tabla si el artículo trata de plantilla, contratos, calendario o glosario.
+- [ ] Sin tablas: plantilla, contratos, calendario o glosario en listas o párrafos cortos.
 - [ ] Sección «Preguntas frecuentes» al final.
 - [ ] Longitud dentro del rango (guía 1.500–3.000 palabras; noticia bomba mínimo 600).
 - [ ] 3–5 enlaces internos a artículos publicados, sin enlaces externos en el cuerpo.
