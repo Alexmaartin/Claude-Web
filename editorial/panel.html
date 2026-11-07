@@ -361,6 +361,8 @@ details.raw summary { cursor: pointer; color: var(--muted); font: 500 13px var(-
 pre.preview { max-height: 260px; overflow: auto; margin: 10px 0 0; padding: 12px; border-radius: 10px; background: var(--surface-2); font: 12px/1.5 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; }
 .confirm { display: grid; gap: 10px; padding: 16px; border-radius: var(--r-sm); background: var(--bad-soft); }
 .confirm p { margin: 0; }
+.confirm.ok { background: var(--ok-soft); }
+.confirm.neutral { background: var(--surface-2); }
 
 /* Edición */
 .ed { width: 100%; font: 15px/1.5 var(--sans); padding: 11px 13px; border: 1px solid var(--line-2); border-radius: var(--r-sm); background: var(--bg); color: var(--fg); }
@@ -775,11 +777,30 @@ function detailBorrador(x) {
   const fuentes = (x.fuentes || []).map(f => '<li>' + safeLink(f) + '</li>').join('');
   const canApprove = x.estado === 'pendiente_revision' || x.estado === 'devuelto';
   const canReturn = x.estado === 'pendiente_revision';
+  const canUpload = x.estado === 'aprobado';
+  // Confirmación dentro del panel: el primer toque pide confirmar; el segundo ejecuta la misma acción de siempre.
+  const CONFIRMA = {
+    approve: { pregunta: '¿Aprobar este borrador?', ok: 'Sí, aprobar', cls: 'ok' },
+    return: { pregunta: '¿Devolver el borrador para cambios?', ok: 'Sí, devolver', cls: 'neutral' },
+    upload: { pregunta: '¿Solicitar la publicación en WordPress? Se lanza al enviar el comentario del visor.', ok: 'Sí, solicitar', cls: 'neutral' },
+  };
+  const confirmando = state.confirm && state.confirm.id === x.id && CONFIRMA[state.confirm.key] ? state.confirm.key : null;
+  const boton = (act, label, primary) => {
+    if (confirmando === act) return '';
+    const busy = state.busy.has(ACTIONS[act === 'upload' ? 'approve' : act].col + '/' + x.id);
+    return '<button class="btn' + (primary ? ' primary' : '') + '" data-act="ask_' + act + '" data-id="' + esc(x.id) + '"' + (busy ? ' disabled' : '') + '>' + esc(label) + '</button>';
+  };
+  const botonSubida = x.subida_solicitada ? 'Publicación solicitada' : 'Publicar en WordPress';
   const acciones = '<div class="actions">'
-    + (canApprove ? btn('approve', x.id, 'Aprobar', true) : '')
-    + (canReturn ? btn('return', x.id, 'Devolver', false) : '')
-    + (x.estado === 'aprobado' ? uploadBtn(x) : '')
-    + '<button class="btn" data-act="edit" data-id="' + esc(x.id) + '">Editar</button></div>';
+    + (canApprove ? boton('approve', 'Aprobar', true) : '')
+    + (canReturn ? boton('return', 'Devolver', false) : '')
+    + (canUpload ? boton('upload', botonSubida, true) : '')
+    + '<button class="btn" data-act="edit" data-id="' + esc(x.id) + '">Editar</button></div>'
+    + (confirmando
+      ? '<div class="confirm ' + CONFIRMA[confirmando].cls + '"><p><strong>' + esc(CONFIRMA[confirmando].pregunta) + '</strong></p><div class="actions">'
+        + '<button class="btn primary" data-act="' + confirmando + '" data-id="' + esc(x.id) + '">' + esc(CONFIRMA[confirmando].ok) + '</button>'
+        + '<button class="btn" data-act="cancel_delete">Cancelar</button></div></div>'
+      : '');
   return '<div class="detail-in">'
     + '<button class="back" data-act="close">← Volver a la lista</button>'
     + '<h2 class="dtitle">' + esc(x.titulo || 'Sin titular') + '</h2>'
@@ -1165,6 +1186,7 @@ function wire() {
     if (act === 'cancel_delete') { state.confirm = null; render(); return; }
     if (act === 'do_delete') { removeItem(b.dataset.key, b.dataset.id); return; }
     if (act === 'upload') { requestUpload(b); return; }
+    if (act === 'ask_approve' || act === 'ask_return' || act === 'ask_upload') { state.confirm = { key: act.slice(4), id: b.dataset.id }; render(); return; }
     const a = ACTIONS[act];
     if (!a) return;
     if (act === 'approve') {
