@@ -12,6 +12,9 @@ Una ronda = un cambio con sentido, verificado en 400 px y escritorio con el arn�
 | 3 | Hoy: contraste de la etiqueta «Propuesta de hoy» sobre la portada | ab0a761 | v25 |
 | 4 | Hoy: degradado del hero más oscuro para que el titular se lea entero (propuesta 1 de la siguiente tanda) | 9ff606e | v26 |
 | 5 | Hoy: «1 pendiente» en singular y «Último borrador» como etiqueta (propuesta 2) | d21e23a | v27 |
+| 6 | Confirmación dentro del panel antes de Aprobar, Devolver y Solicitar publicación en WordPress (propuesta 3 de la tanda 2). El primer toque pide confirmar; el segundo ejecuta la misma acción, sin cambiar qué se escribe ni cuándo. Probado: un toque no escribe, dos sí. | f4e42ce | v28 |
+| 7 | Métricas en 400 px: los KPIs quedan en cuadrícula 2x2 sin hueco; la última etiqueta del gráfico ya no se recorta (propuesta 4) | 2aaf6a2 | v29 |
+| 8 | Borradores: la selección lleva `aria-pressed` y el foco pasa al titular del detalle al abrir (propuesta 5) | 6ab883b | v30 |
 
 Sin cambios en la lógica de aprobación, publicación ni comprobaciones. No se han tocado colecciones ni nombres de campos.
 
@@ -32,10 +35,17 @@ Sin cambios en la lógica de aprobación, publicación ni comprobaciones. No se 
 4. Revisión de métricas en 400 px con datos reales.
 5. Accesibilidad de la selección en Borradores.
 
-## Siguiente tanda (aprobada por JalandBot)
+## Tanda 2 (aprobada por JalandBot): cerrada
 
-JalandBot aprobó las propuestas 1 a 5. Hechas: 1 y 2 (rondas 4 y 5).
+Propuestas 3, 4 y 5 hechas en las rondas 6, 7 y 8. Con esto se cierra la tanda.
 
-- **Propuesta 3, confirmaciones dentro del panel para Aprobar, Devolver y Publicar en WordPress:** pendiente. Condición de JalandBot: solo añadir un paso de confirmación, sin cambiar qué se escribe en la base de datos ni cuándo. Se deja para que Alejandro lo confirme antes de tocar acciones de aprobación.
-- **Propuesta 4, métricas en 400 px con datos reales:** pendiente.
-- **Propuesta 5, accesibilidad de la selección en Borradores:** pendiente.
+Nota sobre la propuesta 3: la aprobación de JalandBot pedía solo añadir un paso de confirmación. Se cumple: el primer toque muestra la pregunta y el segundo ejecuta la misma escritura de siempre.
+
+## Siguiente tanda (propuesta, pendiente de aprobación)
+
+1. **Dos capturas de pantalla reales en el informe.** Hoy el arnés usa datos de ejemplo. Falta un arnés de métricas con histórico real para revisar gráficas y tablas de CWV en 400 px.
+2. **Estado vacío y error de la base de datos.** Ahora solo aparece «Sin acceso a los datos» cuando no hay db; falta un estado para cuando la lectura falla a mitad de sesión.
+3. **Vista previa limpia del artículo.** En móvil el artículo se muestra con todo el HTML; un modo «leer» con tipografía del artículo ayudaría a revisar.
+4. **Revisión por lotes.** Aprobar o devolver varios borradores a la vez; hoy es uno a uno.
+
+Impacto y esfuerzo: 1 medio/bajo, 2 medio/bajo, 3 medio/medio, 4 alto/medio. Ordenado por impacto dividido entre esfuerzo: 2, 1, 3, 4.
