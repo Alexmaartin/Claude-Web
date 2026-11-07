@@ -47,7 +47,7 @@ Antes de escribir una noticia, revisa su título, su resumen y su URL contra `ed
 
 Estructura del documento `web` de la colección `metricas`, que el panel lee tal cual:
 - `periodos`: un objeto con las claves `dia`, `semana` y `mes`. Cada una contiene `visitas`, `visitas_previas` (el mismo periodo anterior), `peticiones`, `serie` (lista de `{dia, visitas}`: por horas para `dia`, por día para `semana` y `mes`), `top` (diez rutas con `ruta`, `visitas` y `cambio` en %), `procedencia` (lista de `{origen, visitas}` con Google, Instagram, X, Facebook, otros y directo), y `articulos` (cinco con `titulo`, `url` y `vistas`).
-- `articulos_publicados`, `search_console` (lista de `{pagina, impresiones, ctr, posicion}`), `velocidad_movil` y `velocidad_desktop` (lista de `{pagina, puntuacion, lcp_ms, cambio}`), y `actualizado`.
+- `articulos_publicados` y `actualizado`. Search Console y PageSpeed no se usan: no aplican, no los consultes ni generes alertas por ellos.
 
 Cuando termines el radar y la redacción, actualiza el documento `web` de la colección `metricas` del panel, con ArtifactData:
 - Con el token `CLOUDFLARE_API_TOKEN` y la zona `CLOUDFLARE_ZONE_ID`, calcula **los tres periodos siempre**, en cada pasada, y escríbelos los tres en `periodos`, aunque uno de ellos esté vacío:
@@ -59,8 +59,6 @@ Cuando termines el radar y la redacción, actualiza el documento `web` de la col
 - `top` de cada periodo: las diez rutas más vistas del periodo, con `visitas` y `cambio` frente al periodo anterior. Así se ve qué páginas suben y cuáles caen.
 - `procedencia` de cada periodo: visitas agrupadas por origen (Google, Instagram, X, Facebook, otros, directo), a partir del host de referencia `clientRefererHost` de Cloudflare. Si Instagram trae muy poco, es señal de que los carruseles no llevan gente a la web.
 - Al escribir, el documento `web` debe tener `periodos` como clave principal. El formato plano antiguo (`visitas` y `serie` sueltos en la raíz) ya no se escribe.
-- `search_console`: para las páginas con más impresiones, impresiones, clics, CTR y posición media. Solo si hay credenciales de Search Console; si no, déjalo vacío y anótalo en una alerta `tecnica`.
-- `velocidad_movil`: para las diez páginas principales, la velocidad real en móvil (datos de campo de PageSpeed Insights, si hay clave). Si una página empeora frente a la semana anterior, lo marca, y la causa más frecuente es una imagen pesada. Sin clave, déjalo vacío.
 - `articulos`: los cinco artículos publicados con más vistas, si la API de WordPress devuelve `views`. Si no lo devuelve, déjalo vacío y anótalo en una alerta `tecnica`.
 - `articulos_publicados`: cuántos artículos se han publicado desde el panel.
 - `actualizado`: la fecha y hora de esta ejecución.

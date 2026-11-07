@@ -793,8 +793,6 @@ function saludDatos(d, p) {
     + comprobar('Páginas', (p.top || []).length > 0, 'Sin top de páginas')
     + comprobar('Procedencia', (p.procedencia || []).length > 0, 'Pendiente en la pasada')
     + comprobar('Artículos con impacto', (p.articulos || []).length > 0, 'Pendiente: WordPress sin vistas')
-    + comprobar('Search Console', (d.search_console || []).length > 0, 'Falta la cuenta de servicio')
-    + comprobar('Velocidad móvil y escritorio', (d.velocidad_movil || []).length > 0, 'Falta la clave de PageSpeed')
     + '</ul></section>';
 }
 function renderMetricas() {
@@ -821,18 +819,6 @@ function renderMetricas() {
       }).join('') + '</div>'
     : '<p class="hint">Sin datos de procedencia todavía.</p>';
   const arts = (p.articulos || []).slice(0, 5).map((a, i) => '<li><span class="n">' + (i + 1) + '</span><a href="' + esc(a.url) + '" target="_blank" rel="noopener noreferrer">' + esc(a.titulo) + '</a><b>' + fmt(a.vistas) + '</b></li>').join('');
-  const sc = (d.search_console || []).slice(0, 15);
-  const scHtml = sc.length
-    ? '<div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Página</th><th>Impr.</th><th>CTR</th><th>Pos.</th></tr></thead><tbody>'
-      + sc.map(r => '<tr><td>' + esc(r.pagina) + ((r.impresiones >= 500 && r.ctr < 2) ? ' <span class="flag">título</span>' : '') + '</td><td>' + fmt(r.impresiones) + '</td><td>' + esc(r.ctr) + ' %</td><td>' + esc(r.posicion) + '</td></tr>').join('')
-      + '</tbody></table></div>'
-    : '<div class="pending"><strong>Search Console pendiente</strong><span>Faltan las credenciales de la cuenta de servicio de Google para mostrar impresiones, CTR y posición.</span></div>';
-  const sp = (d.velocidad_movil || []).slice(0, 10);
-  const spHtml = sp.length
-    ? '<div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Página</th><th>Puntuación</th><th>LCP</th><th>Cambio</th></tr></thead><tbody>'
-      + sp.map(r => '<tr><td>' + esc(r.pagina) + ((typeof r.cambio === 'number' && r.cambio < -5) ? ' <span class="flag">empeora</span>' : '') + '</td><td>' + fmt(r.puntuacion) + '</td><td>' + fmt(r.lcp_ms) + ' ms</td><td>' + cambioHtml(r.cambio) + '</td></tr>').join('')
-      + '</tbody></table></div>'
-    : '<div class="pending"><strong>Velocidad en móvil pendiente</strong><span>Falta la clave de PageSpeed Insights para medir la velocidad real en móvil y escritorio.</span></div>';
   return resumen
     + '<div class="kpis">'
     + '<div class="card kpi"><span class="kpi-n">' + (typeof p.visitas === 'number' ? fmt(p.visitas) : '—') + '</span><span class="kpi-l">Visitas ' + etiqueta.toLowerCase() + '</span></div>'
@@ -849,8 +835,6 @@ function renderMetricas() {
     + '<section class="card panel"><div class="sec-head"><h2>De dónde llegan</h2><span>' + fmt(totalProc) + ' visitas</span></div>' + procHtml + '</section>'
     + '<section class="card panel"><div class="sec-head"><h2>Artículos con más impacto</h2><span>vistas</span></div><ol class="rank">' + (arts || '<li><span>Sin datos todavía</span></li>') + '</ol></section>'
     + saludDatos(d, p)
-    + '<section class="card panel"><div class="sec-head"><h2>Search Console</h2><span>últimos 28 días</span></div>' + scHtml + '</section>'
-    + '<section class="card panel"><div class="sec-head"><h2>Velocidad</h2><span>datos reales</span></div>' + spHtml + '</section>'
     + '<p class="foot">Actualizado ' + esc(fmtDate(d.actualizado)) + '</p>';
 }
 
