@@ -66,6 +66,7 @@ Cuando termines el radar y la redacción, actualiza el documento `web` de la col
 - Si un periodo no se puede calcular, deja `visitas: null` y `serie: []` en ese periodo y anótalo en una alerta `tecnica`. No omitas la clave: el panel necesita ver los tres.
 - `top` de cada periodo: las diez rutas más vistas del periodo, con `visitas` y `cambio` frente al periodo anterior. Así se ve qué páginas suben y cuáles caen.
 - `procedencia` de cada periodo: visitas agrupadas por origen (Google, Instagram, X, Facebook, otros, directo), a partir del host de referencia `clientRefererHost` de Cloudflare. Si Instagram trae muy poco, es señal de que los carruseles no llevan gente a la web.
+- **Consultas a Cloudflare:** no ordenes por `datetimeHour` ni por ninguna dimensión temporal en la misma consulta que agregas. Pide los datos sin `orderBy` y ordena en la pasada. Un error de consulta en un periodo no invalida los demás: escribe los periodos que sí se calcularon y anota el que falló.
 - Al escribir, el documento `web` debe tener `periodos` como clave principal. El formato plano antiguo (`visitas` y `serie` sueltos en la raíz) ya no se escribe.
 - `articulos`: los cinco artículos publicados con más vistas, si la API de WordPress devuelve `views`. Si no lo devuelve, déjalo vacío y anótalo en una alerta `tecnica`.
 - `articulos_publicados`: cuántos artículos se han publicado desde el panel.

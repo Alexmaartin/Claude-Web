@@ -38,7 +38,7 @@ Los borradores de WordPress que no están en el panel (por ejemplo, de otros aut
 
 Para cada borrador con `estado: "aprobado"` y sin `wp_post_id`:
 
-1. **Comprobación final.** Aplica `editorial/LISTA_PROHIBIDA.md` al texto completo, el titular, el extracto, las etiquetas y el pie. Si hay un término prohibido, no subas el borrador: cambia su estado a `devuelto`, con una alerta `tecnica` que diga qué término aparece.
+1. **Comprobación final con script.** Ejecuta `node editorial/scripts/comprobar_borrador.js <borrador.json> --slugs <lista>` con los slugs publicados. Si sale «NO LISTO», no subas nada y deja una alerta `tecnica` con los fallos. Después, aplica `editorial/LISTA_PROHIBIDA.md` al texto completo. Aplica `editorial/LISTA_PROHIBIDA.md` al texto completo, el titular, el extracto, las etiquetas y el pie. Si hay un término prohibido, no subas el borrador: cambia su estado a `devuelto`, con una alerta `tecnica` que diga qué término aparece.
 2. **Entrada.** `POST /wp-json/wp/v2/posts` con:
    - `title`: el titular del borrador.
    - `content`: el `cuerpo_html` tal cual.

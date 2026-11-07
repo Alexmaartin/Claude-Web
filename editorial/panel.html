@@ -266,6 +266,14 @@ h1, h2, h3 { text-wrap: balance; }
 .tipo { display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 999px; font: 600 10px var(--sans); letter-spacing: .05em; text-transform: uppercase; background: var(--surface-2); color: var(--muted); border: 1px solid var(--line); vertical-align: middle; }
 .achart + .sub { margin-top: 0; }
 
+.checks { list-style: none; margin: 0 0 16px; padding: 0; display: grid; gap: 4px; }
+.checks li { display: grid; grid-template-columns: 10px 1fr; gap: 10px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.checks li:last-child { border-bottom: 0; }
+.checks .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+.checks li.ok .dot { background: var(--good, #3d7a3a); }
+.checks li.off .dot { background: var(--bad); }
+.checks li.off span:last-child { color: var(--bad); }
+
 /* Listas */
 .list { display: grid; gap: 10px; align-content: start; min-width: 0; }
 .item {
@@ -461,7 +469,7 @@ const VIEWS = [
   { key: 'metricas', label: 'Métricas', col: 'metricas', icon: ICON.metricas },
 ];
 const VIEW_TITLE = Object.fromEntries(VIEWS.map(v => [v.key, v.label]));
-const COL = { borradores: 'borradores', ideas: 'ideas_evergreen', metricas: 'metricas', seo: 'incidencias_seo', noticias: 'noticias' };
+const COL = { borradores: 'borradores', ideas: 'ideas_evergreen', metricas: 'metricas', seo: 'incidencias_seo', noticias: 'noticias', alertas: 'alertas' };
 
 const ESTADO = {
   pendiente_revision: ['warn', 'Pendiente'], aprobado: ['ok', 'Aprobado'], publicado_borrador: ['ok', 'En WordPress'],
@@ -478,10 +486,11 @@ const ACTIONS = {
   deny_idea: { col: 'ideas_evergreen', patch: { estado: 'denegada' }, msg: 'Idea denegada' },
   resolve_seo: { col: 'incidencias_seo', patch: { estado: 'resuelta' }, msg: 'Incidencia resuelta' },
   ignore_seo: { col: 'incidencias_seo', patch: { estado: 'ignorada' }, msg: 'Incidencia ignorada' },
+  resolve_alert: { col: 'alertas', patch: { estado: 'cerrada' }, msg: 'Alerta cerrada' },
 };
 
 const state = { ready: false, db: null, view: 'hoy', sel: null, editing: null, confirm: null, periodo: 'semana', data: {}, busy: new Set() };
-['borradores', 'ideas', 'metricas', 'seo', 'noticias'].forEach(k => { state.data[k] = null; });
+['borradores', 'ideas', 'metricas', 'seo', 'noticias', 'alertas'].forEach(k => { state.data[k] = null; });
 
 /* Utilidades */
 function toast(msg) {
@@ -645,7 +654,16 @@ function renderHoy() {
         + '<div class="item-act">' + btn('resolve_seo', x.id, 'Resuelta', true) + btn('ignore_seo', x.id, 'Ignorar', false) + '</div></article>').join('')
       + '</section>'
     : '';
-  return hero + kpis + ideaSec + seoSec;
+  const alertasAbiertas = sortDesc((state.data.alertas || []).filter(x => x.estado === 'abierta')).slice(0, 6);
+  const alertaSec = alertasAbiertas.length
+    ? '<section class="sec"><div class="sec-head"><h2>Alertas abiertas</h2><span>' + alertasAbiertas.length + '</span></div>'
+      + alertasAbiertas.map(x => '<article class="card item"><div class="item-top">' + estado(x.estado) + '<span class="item-date">' + esc(x.tipo || '') + ' · ' + esc(fmtDate(x.fecha)) + '</span></div>'
+        + '<h3 class="item-title">' + esc(x.mensaje || 'Alerta') + '</h3>'
+        + (x.contexto ? '<p class="item-sub">' + esc(String(x.contexto).slice(0, 280)) + '</p>' : '')
+        + '<div class="item-act">' + btn('resolve_alert', x.id, 'Cerrar alerta', true) + '</div></article>').join('')
+      + '</section>'
+    : '';
+  return hero + kpis + alertaSec + ideaSec + seoSec;
 }
 
 function cardBorrador(x) {
@@ -673,6 +691,28 @@ function editor(x) {
     + '<button class="btn" data-act="cancel_edit">Cancelar</button></div></div>';
 }
 
+function checklist(x) {
+  const html = String(x.cuerpo_html || '');
+  const texto = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const pal = texto ? texto.split(' ').length : 0;
+  const hrefs = [...html.matchAll(/href="([^"]+)"/g)].map(m => m[1]);
+  const int = hrefs.filter(u => /^https:\/\/undraftedzone\.com\//.test(u)).length;
+  const ext = hrefs.length - int;
+  const ex = String(x.extracto || '').length;
+  const ti = String(x.titulo || '').length;
+  const todo = [x.titulo, x.extracto, texto, x.pie_instagram].join(' ').toLowerCase();
+  const items = [
+    [!!imgSegura(x.imagen_url), 'Portada WebP', 'Falta la portada'],
+    [pal >= 600, pal + ' palabras en el cuerpo', 'Cuerpo de menos de 600 palabras'],
+    [int >= 3 && int <= 5, int + ' enlaces internos', int + ' enlaces internos (se piden 3–5)'],
+    [ext === 0, 'Sin enlaces externos', ext + ' enlaces externos en el cuerpo'],
+    [ex >= 140 && ex <= 160, 'Extracto de ' + ex + ' caracteres', 'Extracto de ' + ex + ' caracteres (140–160)'],
+    [ti >= 50 && ti <= 65, 'Titular de ' + ti + ' caracteres', 'Titular de ' + ti + ' caracteres (50–65)'],
+    [!/apuest|cuota|odds|bookmaker|casino|parlay/.test(todo), 'Sin términos de apuestas', 'Término de apuestas detectado'],
+  ];
+  return '<ul class="checks">' + items.map(([ok, a, b]) => '<li class="' + (ok ? 'ok' : 'off') + '"><span class="dot"></span><span>' + esc(ok ? a : b) + '</span></li>').join('') + '</ul>';
+}
+
 function detailBorrador(x) {
   if (state.editing === x.id) return editor(x);
   const tags = (x.etiquetas || []).map(t => '<span>' + esc(t) + '</span>').join('');
@@ -689,6 +729,7 @@ function detailBorrador(x) {
     + '<h2 class="dtitle">' + esc(x.titulo || 'Sin titular') + '</h2>'
     + '<div class="dmeta">' + estado(x.estado) + '<span>' + esc(fmtDate(x.fecha)) + '</span><span>Confianza ' + esc(x.confianza || '—') + '</span></div>'
     + acciones
+    + '<h3 class="sub">Comprobaciones antes de aprobar</h3>' + checklist(x)
     + (imgSegura(x.imagen_url) ? block('Portada', '<img src="' + esc(imgSegura(x.imagen_url)) + '" alt="" style="border-radius:12px">') : '')
     + '<div class="article"><div class="articulo">' + sanitize(x.cuerpo_html) + '</div></div>'
     + block('Slug', '<code class="slug">' + esc(x.slug || '—') + '</code>', x.slug)
@@ -1026,6 +1067,7 @@ function subscribe() {
   sub('metricas', 'metricas', render);
   sub('seo', 'incidencias_seo', render);
   sub('noticias', 'noticias', () => {});
+  sub('alertas', 'alertas', render);
   const s = document.getElementById('sync');
   s.textContent = 'En directo';
   s.classList.add('on');
