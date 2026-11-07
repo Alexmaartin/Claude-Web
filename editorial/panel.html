@@ -706,7 +706,7 @@ function renderHoy() {
 function cardBorrador(x) {
   const sel = x.id === state.sel ? ' is-sel' : '';
   const tags = (x.etiquetas || []).slice(0, 4).map(t => '<span>' + esc(t) + '</span>').join('');
-  return '<button class="item' + sel + '" data-act="select" data-id="' + esc(x.id) + '">'
+  return '<button class="item' + sel + '" data-act="select" data-id="' + esc(x.id) + '" aria-pressed="' + (x.id === state.sel) + '">'
     + '<div class="item-top">' + estado(x.estado) + '<span class="item-date">' + esc(fmtDate(x.fecha)) + '</span></div>'
     + '<h3 class="item-title">' + esc(x.titulo || 'Sin titular') + '</h3>'
     + '<p class="item-sub">' + esc(x.extracto || '') + '</p>'
@@ -803,7 +803,7 @@ function detailBorrador(x) {
       : '');
   return '<div class="detail-in">'
     + '<button class="back" data-act="close">← Volver a la lista</button>'
-    + '<h2 class="dtitle">' + esc(x.titulo || 'Sin titular') + '</h2>'
+    + '<h2 class="dtitle" id="detalle-titulo" tabindex="-1">' + esc(x.titulo || 'Sin titular') + '</h2>'
     + '<div class="dmeta">' + estado(x.estado) + '<span>' + esc(fmtDate(x.fecha)) + '</span><span>Confianza ' + esc(x.confianza || '—') + '</span></div>'
     + acciones
     + '<h3 class="sub">Comprobaciones antes de aprobar</h3>' + checklist(x)
@@ -1175,7 +1175,13 @@ function wire() {
     if (!b || b.disabled) return;
     const act = b.dataset.act;
     if (act === 'open') { go(b.dataset.screen, b.dataset.id); return; }
-    if (act === 'select') { state.sel = b.dataset.id; state.confirm = null; render(); return; }
+    if (act === 'select') {
+      state.sel = b.dataset.id; state.confirm = null; render();
+      // Al abrir un borrador, el foco va a su titular: lectores de pantalla y teclado anuncian el detalle.
+      const t = document.getElementById('detalle-titulo');
+      if (t) t.focus({ preventScroll: false });
+      return;
+    }
     if (act === 'close') { state.sel = null; state.confirm = null; render(); return; }
     if (act === 'periodo') { state.periodo = b.dataset.p; render(); return; }
     if (act === 'copy') { copy(b.dataset.copy); return; }
