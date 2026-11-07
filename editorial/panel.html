@@ -262,6 +262,10 @@ h1, h2, h3 { text-wrap: balance; }
 .salud li.off .dot { background: var(--warn); }
 .salud em { font-style: normal; font-size: 12px; color: var(--muted); text-align: right; }
 
+.sub { font: 600 13px var(--sans); color: var(--muted); letter-spacing: .04em; text-transform: uppercase; margin: 14px 0 6px; }
+.tipo { display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 999px; font: 600 10px var(--sans); letter-spacing: .05em; text-transform: uppercase; background: var(--surface-2); color: var(--muted); border: 1px solid var(--line); vertical-align: middle; }
+.achart + .sub { margin-top: 0; }
+
 /* Listas */
 .list { display: grid; gap: 10px; align-content: start; min-width: 0; }
 .item {
@@ -593,7 +597,7 @@ const PERIODOS = [['dia', 'Día'], ['semana', 'Semana'], ['mes', 'Mes']];
 const ORIGEN_CLASE = o => {
   const s = String(o || '').toLowerCase();
   if (s.includes('google')) return 'o-google';
-  if (s.includes('instagram') || s.includes('x') || s.includes('facebook') || s.includes('twitter')) return 'o-social';
+  if (s.includes('instagram') || s.includes('x') || s.includes('facebook') || s.includes('twitter') || s.includes('reddit') || s.includes('whatsapp')) return 'o-social';
   if (s.includes('directo')) return 'o-directo';
   return 'o-otros';
 };
@@ -774,7 +778,7 @@ function paginasReales(top) {
   const reales = (top || []).filter(r => !esEscaner(r.ruta));
   const max = Math.max(1, ...reales.map(r => r.visitas || 0));
   return reales.slice(0, 10).map((r, i) => '<li class="pg"><span class="n">' + (i + 1) + '</span><div class="pg-main">'
-    + '<div class="pg-row"><span class="pg-ruta">' + esc(r.ruta) + '</span><b>' + fmt(r.visitas) + ' ' + cambioHtml(r.cambio) + '</b></div>'
+    + '<div class="pg-row"><span class="pg-ruta">' + esc(r.ruta) + (r.tipo ? ' <span class="tipo">' + esc(r.tipo) + '</span>' : '') + '</span><b>' + fmt(r.visitas) + ' ' + cambioHtml(r.cambio) + '</b></div>'
     + '<div class="track"><i style="width:' + Math.round((r.visitas || 0) / max * 100) + '%"></i></div></div></li>').join('');
 }
 function escaneres(top) {
@@ -791,10 +795,50 @@ function saludDatos(d, p) {
     + comprobar('Visitas del periodo', typeof p.visitas === 'number', 'Sin datos de Cloudflare')
     + comprobar('Serie temporal', (p.serie || []).length > 0, 'Sin serie')
     + comprobar('Páginas', (p.top || []).length > 0, 'Sin top de páginas')
+    + comprobar('Países y dispositivos', (p.paises || []).length > 0 || (p.dispositivos || []).length > 0, 'Pendiente en la pasada')
+    + comprobar('Core Web Vitals', (d.cwv || []).length > 0, 'Falta Web Analytics en el sitio')
     + comprobar('Procedencia', (p.procedencia || []).length > 0, 'Pendiente en la pasada')
     + comprobar('Artículos con impacto', (p.articulos || []).length > 0, 'Pendiente: WordPress sin vistas')
     + '</ul></section>';
 }
+function barrasLista(items, etiqueta, valor) {
+  const total = items.reduce((a, o) => a + (valor(o) || 0), 0);
+  return '<div class="procs">' + items.map(o => {
+    const v = valor(o) || 0;
+    const pct = total ? Math.round(v / total * 100) : 0;
+    return '<div class="proc o-otros"><div class="proc-row"><span>' + esc(etiqueta(o)) + '<span class="pct">' + pct + ' %</span></span><b>' + fmt(v) + '</b></div><div class="track"><i style="width:' + pct + '%"></i></div></div>';
+  }).join('') + '</div>';
+}
+const DISPOSITIVO = { desktop: 'Escritorio', mobile: 'Móvil', tablet: 'Tableta' };
+function seccionTendencia(d) {
+  const s = d.tendencia_semanal || [];
+  return '<section class="card panel"><div class="sec-head"><h2>Tendencia semanal</h2><span>semanas completas</span></div>'
+    + (s.length ? '<div class="chart-wrap">' + graficoArea(s.map(x => ({ dia: x.semana, visitas: x.visitas }))) + '</div>'
+      : '<p class="hint">Sin semanas completas todavía. Se llena con el histórico diario.</p>') + '</section>';
+}
+function seccionAudiencia(p) {
+  const dis = p.dispositivos || [];
+  const tot = dis.reduce((a, o) => a + (o.visitas || 0), 0);
+  const movil = dis.filter(o => o.tipo === 'mobile').reduce((a, o) => a + (o.visitas || 0), 0);
+  const pctMovil = tot ? Math.round(movil / tot * 100) : null;
+  const pa = p.paises || [], nav = p.navegadores || [], so = p.sistemas || [];
+  return '<section class="card panel"><div class="sec-head"><h2>Audiencia</h2><span>' + (pctMovil === null ? 'sin datos' : pctMovil + ' % móvil') + '</span></div>'
+    + (pa.length ? '<h3 class="sub">Países</h3>' + barrasLista(pa, o => o.pais, o => o.visitas) : '<p class="hint">Sin datos de países todavía.</p>')
+    + (dis.length ? '<h3 class="sub">Dispositivos</h3>' + barrasLista(dis, o => DISPOSITIVO[o.tipo] || o.tipo, o => o.visitas) : '<p class="hint">Sin datos de dispositivos todavía.</p>')
+    + (nav.length ? '<h3 class="sub">Navegadores</h3>' + barrasLista(nav, o => o.nombre, o => o.visitas) : '')
+    + (so.length ? '<h3 class="sub">Sistemas operativos</h3>' + barrasLista(so, o => o.nombre, o => o.visitas) : '')
+    + '</section>';
+}
+function seccionCWV(d) {
+  const c = d.cwv || [];
+  const clase = (v, b) => v == null ? '' : (v <= b[0] ? 'ok' : v <= b[1] ? 'warn' : 'bad');
+  if (!c.length) return '<section class="card panel"><div class="sec-head"><h2>Core Web Vitals</h2><span>usuarios reales</span></div><div class="pending"><strong>Pendiente de activar la medición</strong><span>Hace falta el script de Cloudflare Web Analytics en el sitio. Con él, el panel muestra LCP, INP y CLS por página con datos de usuarios reales.</span></div></section>';
+  return '<section class="card panel"><div class="sec-head"><h2>Core Web Vitals</h2><span>p75, usuarios reales</span></div>'
+    + '<div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Página</th><th>LCP</th><th>INP</th><th>CLS</th></tr></thead><tbody>'
+    + c.slice(0, 15).map(r => '<tr><td>' + esc(r.ruta) + '</td><td class="' + clase(r.lcp_ms, [2500, 4000]) + '">' + fmt(r.lcp_ms) + ' ms</td><td class="' + clase(r.inp_ms, [200, 500]) + '">' + fmt(r.inp_ms) + ' ms</td><td class="' + clase(r.cls, [0.1, 0.25]) + '">' + (r.cls == null ? '—' : esc(r.cls)) + '</td></tr>').join('')
+    + '</tbody></table></div></section>';
+}
+
 function renderMetricas() {
   const d = metricsDoc();
   const resumen = '<div class="card resumen" role="group" aria-label="Visitas por periodo">'
@@ -835,6 +879,9 @@ function renderMetricas() {
     + escaneres(p.top)
     + '<section class="card panel"><div class="sec-head"><h2>De dónde llegan</h2><span>' + fmt(totalProc) + ' visitas</span></div>' + procHtml + '</section>'
     + '<section class="card panel"><div class="sec-head"><h2>Artículos con más impacto</h2><span>vistas</span></div><ol class="rank">' + (arts || '<li><span>Sin datos todavía</span></li>') + '</ol></section>'
+    + seccionTendencia(d)
+    + seccionAudiencia(p)
+    + seccionCWV(d)
     + saludDatos(d, p)
     + '<p class="foot">Actualizado ' + esc(fmtDate(d.actualizado)) + '</p>';
 }

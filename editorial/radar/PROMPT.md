@@ -47,6 +47,13 @@ Antes de escribir una noticia, revisa su título, su resumen y su URL contra `ed
 
 Estructura del documento `web` de la colección `metricas`, que el panel lee tal cual:
 - `periodos`: un objeto con las claves `dia`, `semana` y `mes`. Cada una contiene `visitas`, `visitas_previas` (el mismo periodo anterior), `peticiones`, `serie` (lista de `{dia, visitas}`: por horas para `dia`, por día para `semana` y `mes`), `top` (diez rutas con `ruta`, `visitas` y `cambio` en %), `procedencia` (lista de `{origen, visitas}` con Google, Instagram, X, Facebook, otros y directo), y `articulos` (cinco con `titulo`, `url` y `vistas`).
+- `tendencia_semanal`: lista de `{semana, visitas, peticiones}` por semana ISO completa (`2026-W45`), a partir del histórico `metricas_historico`. Es la vista que manda: los picos diarios dependen de la jornada y engañan.
+- En cada `top`, cada ruta lleva `tipo` (`actualidad`, `analisis`, `guia`, `reportaje`, `evergreen`, o `humor`) tomado de `temas_usados` por slug. Sin registro, `tipo` vacío.
+- `paises`: `{pais, visitas}` de cada periodo (clientCountryName). `dispositivos`: `{tipo, visitas}` con `desktop`, `mobile` o `tablet` (clientDeviceType).
+- `navegadores` y `sistemas`: `{nombre, visitas}`, solo si la API de Cloudflare los entrega; si no, déjalos vacíos y anótalo en una alerta `tecnica` una sola vez.
+- `cwv`: `{ruta, lcp_ms, inp_ms, cls}` por página, p75 de usuarios reales. Solo si Web Analytics (RUM) está activo en el sitio; si no, déjalo vacío sin alerta.
+- `paginas vistas`: visitas de páginas HTML. Excluye assets (imágenes, css, js). Si Cloudflare no permite distinguirlos, usa `peticiones` y dilo en `nota`.
+- Escáneres (`.env`, `.s3cfg`, `admin.php`, `.git`) se cuentan aparte y nunca en `top` ni en `visitas` de lectura.
 - `articulos_publicados` y `actualizado`. Search Console y PageSpeed no se usan: no aplican, no los consultes ni generes alertas por ellos.
 
 Cuando termines el radar y la redacción, actualiza el documento `web` de la colección `metricas` del panel, con ArtifactData:
