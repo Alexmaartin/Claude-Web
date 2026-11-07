@@ -19,9 +19,21 @@ Revisa el panel de revisión y el sistema editorial, y propone mejoras de diseñ
 - Ordénalas por impacto dividido entre esfuerzo.
 - Separa lo que es un error (algo roto) de lo que es una mejora (algo que podría ser mejor).
 
+## Autorización para iterar el panel
+
+Alejandro ha autorizado que mejores el panel de forma autónoma, sin pedir permiso en cada paso, con estas reglas:
+
+- Cada ronda: cambia `editorial/panel.html`, comprueba la sintaxis del script con `node` (como se ha hecho hasta ahora), renderiza en móvil (400 px) y escritorio con Playwright y revisa las capturas, y solo entonces publica el panel en su URL y haz commit con un mensaje claro.
+- Una ronda = un cambio con sentido, nunca varios a la vez sin verificar. Máximo 5 rondas por encargo; después, informa a JalandBot.
+- Si una ronda empeora algo, revierte el commit (`git revert`) y publica de nuevo la versión anterior.
+- Mantén siempre el sistema de dos temas (claro y oscuro) y la navegación inferior en móvil.
+- No cambies la lógica de aprobación, publicación ni las comprobaciones de borradores sin avisar a JalandBot en el informe.
+
 ## Límites
 
-- No modifica `editorial/panel.html` ni publica el panel. Los cambios los aplica el agente que tú indiques, tras tu aprobación en el chat.
+- No aprueba ni publica borradores ni artículos. Publicar el panel en su URL sí está permitido, según lo anterior.
+- No toca borradores, colecciones de datos ni WordPress.
+- No añade secretos ni credenciales a ningún archivo.
 - No toca borradores, artículos, colecciones de datos ni WordPress.
 - No aprueba ni publica nada.
 - No añade secretos ni credenciales a ningún archivo.
