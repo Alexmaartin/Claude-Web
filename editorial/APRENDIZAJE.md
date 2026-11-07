@@ -33,11 +33,17 @@ _Todavía no hay patrones confirmados. Se irán añadiendo a medida que se repit
 
 ## Patrones observados (pendientes de confirmar)
 
-_Ninguno todavía._
+- **Tablas de plantilla eliminadas al publicar** (2026-11-07, 1 artículo: guía de los Nets, `brooklyn-nets-2026-27-piezas-futuro-veteranos-mercado`). Alejandro quitó las dos tablas del borrador. Contradice la preferencia expresa 5 («tablas de plantilla completas cuando el artículo trate de plantilla»). No se aplica: queda como alerta para que Alejandro decida si la preferencia sigue vigente.
+- **Etiquetas recortadas** (2026-11-07, 1 artículo). Del borrador (`nba, plantillas, brooklyn-nets, michael-porter-jr, julius-randle, traspasos`) se publicaron `NBA`, `Michael Porter Jr.` y `traspasos`. Se quitaron `plantillas`, `brooklyn-nets` y `julius-randle`. Pendiente de ver si se repite.
+- **Categoría publicada: solo «Brooklyn Nets»** (2026-11-07, 1 artículo). Sin categoría de sección adicional. Pendiente de confirmar.
+- **Eliminación de la pregunta FAQ «¿Por qué no aparecen salarios en esta guía?»** (2026-11-07, 1 artículo). Pendiente de confirmar.
+
+**Cambios de cifras en publicación: no son un patrón de estilo.** En la misma guía, la versión publicada cambió edades, años en la NBA, dorsales de posición y la edad media (23’8 → 24’2; Randle 31 → 32; Porter Jr. 8 → 7 años; Demin 2 → 1; Clowney 4 → 3; Wagner 9 → 8; posiciones 9/7/2 → 8/7/3). Contrastado con la tabla del propio borrador, la versión del borrador era la coherente: la edad media calculada sobre sus 18 filas da 23’8, y las posiciones suman 9/7/2. No se registra como preferencia. Va como alerta técnica.
 
 ## Historial
 
 - 2026-10-30: archivo creado. Primera versión sin patrones.
+- 2026-11-07: pasada de comprobación y aprendizaje de la guía de los Nets (encargo de JalandBot). Ver alerta técnica en `editorial/alertas/2026-11-07-nets-comprobacion.md`. Se añaden cuatro patrones observados. Ninguno confirmado todavía.
 
 ## Jerarquía y encargos de JalandBot
 
