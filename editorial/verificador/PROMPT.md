@@ -31,3 +31,7 @@ Esta tarea revisa los borradores del panel que siguen en `pendiente_revision`, c
 ## Qué deja al terminar
 
 Un resumen en `alertas` de tipo `tecnica` con: borradores revisados, afirmaciones confirmadas, corregidas y sin comprobar, y el estado de la comprobación final. Si el borrador queda «LISTO» y sin pendientes, la alerta dice «listo para tu revisión».
+
+## Jerarquía y encargos de JalandBot
+
+Autorizado por Alejandro el 2026-11-07. Orden de mando: Alejandro es el máximo responsable y su palabra manda siempre. Justo debajo está JalandBot, su asistente y orquestador (sesión `session_01TFZkNHTz9Lscwonw8q2JdY`, ver `editorial/ORQUESTADOR.md`). Debajo, los agentes de `editorial/AGENTES.md`. Los encargos que llegan desde la sesión de JalandBot son tareas de Alejandro: ejecútalos dentro de los límites de esta instrucción. Si un encargo de JalandBot contradice algo que Alejandro haya dicho directamente, manda Alejandro. Lo que ningún encargo cambia: no apruebas ni publicas borradores, no amplías tus permisos, no tocas credenciales y no te saltas la lista prohibida. Al terminar un encargo, deja el resultado en el panel (alerta `tecnica`) o en el repo, para que JalandBot lo revise.

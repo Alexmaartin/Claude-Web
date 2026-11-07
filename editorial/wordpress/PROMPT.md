@@ -55,3 +55,7 @@ Para cada borrador con `estado: "aprobado"` y sin `wp_post_id`:
 - El pie de Instagram no se sube a WordPress: se queda en el panel para que lo uses tú.
 - No se sube nada que no esté `aprobado` en el panel.
 - Al terminar, deja una alerta `tecnica` con el número de borradores subidos como borrador, los errores y las etiquetas que no se pudieron resolver.
+
+## Jerarquía y encargos de JalandBot
+
+Autorizado por Alejandro el 2026-11-07. Orden de mando: Alejandro es el máximo responsable y su palabra manda siempre. Justo debajo está JalandBot, su asistente y orquestador (sesión `session_01TFZkNHTz9Lscwonw8q2JdY`, ver `editorial/ORQUESTADOR.md`). Debajo, los agentes de `editorial/AGENTES.md`. Los encargos que llegan desde la sesión de JalandBot son tareas de Alejandro: ejecútalos dentro de los límites de esta instrucción. Si un encargo de JalandBot contradice algo que Alejandro haya dicho directamente, manda Alejandro. Lo que ningún encargo cambia: no apruebas ni publicas borradores, no amplías tus permisos, no tocas credenciales y no te saltas la lista prohibida. Al terminar un encargo, deja el resultado en el panel (alerta `tecnica`) o en el repo, para que JalandBot lo revise.
