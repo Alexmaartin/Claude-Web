@@ -623,6 +623,38 @@ function heroPropuesta(x) {
     + '<button class="btn primary big" data-act="open" data-screen="borradores" data-id="' + esc(x.id) + '">Revisar propuesta</button></div></article>';
 }
 
+/* Estado del ciclo: qué ha pasado hoy y qué falta, de un vistazo */
+function horasDesde(s) {
+  const t = new Date(s);
+  return isNaN(t) ? null : (Date.now() - t.getTime()) / 3600e3;
+}
+function hace(s) {
+  const h = horasDesde(s);
+  if (h === null) return '—';
+  if (h < 1) return 'hace menos de 1 h';
+  if (h < 48) return 'hace ' + Math.round(h) + ' h';
+  return 'hace ' + Math.round(h / 24) + ' días';
+}
+function estadoCicloSec() {
+  const d = metricsDoc();
+  const h = d ? horasDesde(d.actualizado) : null;
+  const pasadaOk = h !== null && h <= 36;
+  const ultimo = sortDesc(state.data.borradores || [])[0] || null;
+  const v = ultimo && ultimo.verificacion;
+  const pendientes = v ? (v.pendientes_humano || []).length : 0;
+  const verifOk = !!v && v.sin_comprobar === 0 && pendientes === 0;
+  const alertas = (state.data.alertas || []).filter(x => x.estado === 'abierta').length;
+  const filas = [
+    ['Pasada diaria', d ? hace(d.actualizado) : 'Sin pasadas todavía', pasadaOk],
+    ['Borrador más reciente', ultimo ? esc(ultimo.titulo || 'Sin titular') : 'Ninguno', !!ultimo],
+    ['Verificación', v ? fmt(v.confirmadas + (v.corregidas || 0)) + ' confirmadas · ' + fmt(v.sin_comprobar) + ' sin comprobar' + (pendientes ? ' · ' + pendientes + ' para ti' : '') : 'Sin verificar', verifOk],
+    ['Alertas abiertas', alertas ? fmt(alertas) + ' pendientes' : 'Ninguna', alertas === 0],
+  ];
+  return '<section class="card panel"><div class="sec-head"><h2>Estado del ciclo</h2><span>hoy</span></div><ul class="salud">'
+    + filas.map(([nombre, valor, ok]) => '<li class="' + (ok ? 'ok' : 'off') + '"><span class="dot"></span><span>' + esc(nombre) + '</span><em>' + valor + '</em></li>').join('')
+    + '</ul></section>';
+}
+
 function renderHoy() {
   const borr = sortDesc(state.data.borradores || []);
   const pend = borr.filter(x => x.estado === 'pendiente_revision');
@@ -663,7 +695,7 @@ function renderHoy() {
         + '<div class="item-act">' + btn('resolve_alert', x.id, 'Cerrar alerta', true) + '</div></article>').join('')
       + '</section>'
     : '';
-  return hero + kpis + alertaSec + ideaSec + seoSec;
+  return estadoCicloSec() + hero + kpis + alertaSec + ideaSec + seoSec;
 }
 
 function cardBorrador(x) {
