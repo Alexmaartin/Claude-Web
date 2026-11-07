@@ -439,6 +439,8 @@ pre.preview { max-height: 260px; overflow: auto; margin: 10px 0 0; padding: 12px
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const nowIso = () => new Date().toISOString();
 const nf = new Intl.NumberFormat('es-ES');
+// Solo portadas embebidas (WebP) o enlaces https; cualquier otra cosa no se pinta.
+const imgSegura = u => /^data:image\/webp;base64,[A-Za-z0-9+\/=]+$|^https:\/\/[^\s"'<>]+$/.test(String(u || '')) ? String(u) : '';
 const fmt = v => (v === undefined || v === null || v === '') ? '—' : (typeof v === 'number' ? nf.format(v) : esc(v));
 const ICON = {
   hoy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>',
@@ -598,8 +600,8 @@ const ORIGEN_CLASE = o => {
 
 /* Vistas */
 function heroPropuesta(x) {
-  const img = x.imagen_url
-    ? '<img class="hero-img" src="' + esc(x.imagen_url) + '" alt="">'
+  const img = imgSegura(x.imagen_url)
+    ? '<img class="hero-img" src="' + esc(imgSegura(x.imagen_url)) + '" alt="">'
     : '<div class="hero-ph"></div>';
   return '<article class="card hero">' + img
     + '<div class="hero-body"><span class="eyebrow">Propuesta de hoy</span>'
@@ -683,7 +685,7 @@ function detailBorrador(x) {
     + '<h2 class="dtitle">' + esc(x.titulo || 'Sin titular') + '</h2>'
     + '<div class="dmeta">' + estado(x.estado) + '<span>' + esc(fmtDate(x.fecha)) + '</span><span>Confianza ' + esc(x.confianza || '—') + '</span></div>'
     + acciones
-    + (x.imagen_url ? block('Portada', '<img src="' + esc(x.imagen_url) + '" alt="" style="border-radius:12px">') : '')
+    + (imgSegura(x.imagen_url) ? block('Portada', '<img src="' + esc(imgSegura(x.imagen_url)) + '" alt="" style="border-radius:12px">') : '')
     + '<div class="article"><div class="articulo">' + sanitize(x.cuerpo_html) + '</div></div>'
     + block('Slug', '<code class="slug">' + esc(x.slug || '—') + '</code>', x.slug)
     + block('Extracto', '<p>' + esc(x.extracto || '—') + '</p>', x.extracto)
