@@ -10,6 +10,8 @@ Una ronda = un cambio con sentido, verificado en 400 px y escritorio con el arn�
 | 1 | Hoy: bloque «Estado del ciclo» (pasada diaria, borrador más reciente, verificación, alertas abiertas) | d771ae1 | v23 |
 | 2 | Borradores: bloque «Verificación» (confirmadas, corregidas, sin comprobar, pendientes para el humano) e «Historial de cambios» (colección `ediciones`) | cfabe53 | v24 |
 | 3 | Hoy: contraste de la etiqueta «Propuesta de hoy» sobre la portada | ab0a761 | v25 |
+| 4 | Hoy: degradado del hero más oscuro para que el titular se lea entero (propuesta 1 de la siguiente tanda) | 9ff606e | v26 |
+| 5 | Hoy: «1 pendiente» en singular y «Último borrador» como etiqueta (propuesta 2) | d21e23a | v27 |
 
 Sin cambios en la lógica de aprobación, publicación ni comprobaciones. No se han tocado colecciones ni nombres de campos.
 
@@ -29,3 +31,11 @@ Sin cambios en la lógica de aprobación, publicación ni comprobaciones. No se 
 3. Confirmaciones dentro del panel para Aprobar, Devolver y Publicar (mejora, esfuerzo medio, impacto alto). Pendiente de aprobación de JalandBot porque toca la lógica de aprobación.
 4. Revisión de métricas en 400 px con datos reales.
 5. Accesibilidad de la selección en Borradores.
+
+## Siguiente tanda (aprobada por JalandBot)
+
+JalandBot aprobó las propuestas 1 a 5. Hechas: 1 y 2 (rondas 4 y 5).
+
+- **Propuesta 3, confirmaciones dentro del panel para Aprobar, Devolver y Publicar en WordPress:** pendiente. Condición de JalandBot: solo añadir un paso de confirmación, sin cambiar qué se escribe en la base de datos ni cuándo. Se deja para que Alejandro lo confirme antes de tocar acciones de aprobación.
+- **Propuesta 4, métricas en 400 px con datos reales:** pendiente.
+- **Propuesta 5, accesibilidad de la selección en Borradores:** pendiente.
