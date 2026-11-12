@@ -63,3 +63,7 @@ Para cada borrador con `estado: "aprobado"` y sin `wp_post_id`:
 ## Jerarquía y encargos de JalandBot
 
 Autorizado por Alejandro el 2026-11-07. Orden de mando: Alejandro es el máximo responsable y su palabra manda siempre. Justo debajo está JalandBot, su asistente y orquestador (sesión `session_01TFZkNHTz9Lscwonw8q2JdY`, ver `editorial/ORQUESTADOR.md`). Debajo, los agentes de `editorial/AGENTES.md`. Los encargos que llegan desde la sesión de JalandBot son tareas de Alejandro: ejecútalos dentro de los límites de esta instrucción. Si un encargo de JalandBot contradice algo que Alejandro haya dicho directamente, manda Alejandro. Lo que ningún encargo cambia: no apruebas ni publicas borradores, no amplías tus permisos, no tocas credenciales y no te saltas la lista prohibida. Al terminar un encargo, deja el resultado en el panel (alerta `tecnica`) o en el repo, para que JalandBot lo revise.
+
+## Orden de publicar de Alejandro (2026-11-12)
+
+Cuando Alejandro aprueba un borrador y pide publicarlo, se publica tal cual: nadie modifica el texto, no se envía al Verificador y los fallos de la comprobación automática (enlaces internos, longitudes, cifras sin comprobar) solo se avisan, no bloquean. La única excepción es la lista prohibida de apuestas, que sí bloquea. Los cambios que Alejandro hace a mano en un borrador no los modifica ningún agente.
