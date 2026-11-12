@@ -6,7 +6,7 @@ Un artículo vivo se publica una vez y después se actualiza de forma periódica
 
 | Artículo | Borrador | Frecuencia | Qué se actualiza solo |
 |---|---|---|---|
-| Top 10 rookies de la temporada 2026-27 | `b-vivo-rookies-2026-27` | Semanal (lunes) | Las cifras de cada jugador y la fecha de «Actualizado» |
+| Top 10 rookies de la temporada 2026-27 (entrada 1885, https://undraftedzone.com/top-10-rookies-temporada-2026-27/) | `b-vivo-rookies-2026-27` | Semanal (lunes) | Las cifras de cada jugador y la fecha de «Actualizado» |
 
 ## Estructura obligatoria
 
