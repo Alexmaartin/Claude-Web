@@ -6,6 +6,17 @@ Esta tarea convierte una noticia de la colección `noticias` (estado `para_redac
 **Esquema y reglas de metadatos:** `editorial/SCHEMA.md`
 **Estilo (obligatorio):** `editorial/ESTILO.md`. Léelo entero antes de escribir cada borrador. Ese estilo es el de Alejandro Martín Millarengo: sus 32 artículos publicados, identificados en `editorial/corpus/AUTORES.tsv`. Los artículos de otros autores no son referencia de estilo.
 
+## Siempre hay borrador (orden de Alejandro, 2026-11-13)
+
+La pasada diaria termina siempre con un borrador nuevo en el panel. No hay día sin borrador por falta de noticia, de fuente o de datos. Si el plan del día no sale, se baja por esta lista hasta que uno salga:
+1. **Día de franquicia sin noticia que cumpla los criterios:** pieza evergreen o de análisis de la franquicia del turno (estado de la plantilla, piezas clave, calendario próximo, lo que se juega en el próximo mes), con cifras de ESPN comprobadas en Basketball-Reference.
+2. **Día evergreen bloqueado** (no hay idea aprobada, o la idea necesita una fuente a la que no se llega, como NBA.com): se deja la idea como está, se anota en la alerta y se redacta la pieza de la franquicia del turno.
+3. **La franquicia del turno choca con las reglas del registro** (ayer salió esa franquicia o ese jugador): la siguiente franquicia del orden.
+4. **WordPress no responde:** se usa el registro del panel (`temas_usados` y `borradores`) y se anota en la alerta. La falta de WordPress nunca bloquea el borrador; el Publicador vuelve a comprobar antes de subir.
+5. **Una tabla o archivo del repo está atrasado** (por ejemplo `ROTACION.md`): se calcula con los datos del panel, según `ROTACION.md`, «Cómo se calcula el turno».
+
+Solo se acaba sin borrador si el repo o el panel no se pueden leer. En ese caso, la alerta `tecnica` dice exactamente qué falló.
+
 ## Registro de temas (vinculante)
 
 Antes de seleccionar, lee `editorial/redaccion/REGISTRO_TEMAS.md`. Actualiza la colección `temas_usados` desde WordPress (últimos 365 días, publicados y borradores). Aplica sus reglas: no repetir tema, no dos días seguidos con la misma franquicia ni con el mismo jugador. Si el candidato las infringe, pasa al siguiente.
