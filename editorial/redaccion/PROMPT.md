@@ -17,6 +17,10 @@ La pasada diaria termina siempre con un borrador nuevo en el panel. No hay día 
 
 Solo se acaba sin borrador si el repo o el panel no se pueden leer. En ese caso, la alerta `tecnica` dice exactamente qué falló.
 
+## Lectura de WordPress (2026-11-16)
+
+Tienes acceso de lectura a WordPress con las variables del entorno, sin pedir nada en el chat: `curl -s -H "x-editorial-key: $EDITORIAL_KEY" -u "$WP_USER:$WP_APP_PASSWORD" "$WP_SITE/wp-json/wp/v2/posts?status=any&context=edit&per_page=100"`. Nunca imprimas los valores. Solo lees (GET); crear o editar entradas es cosa del Publicador. Si una variable falta o la API da error, anótalo en la alerta y sigue con el panel.
+
 ## Registro de temas (vinculante)
 
 Antes de seleccionar, lee `editorial/redaccion/REGISTRO_TEMAS.md`. Actualiza la colección `temas_usados` desde WordPress (últimos 365 días, publicados y borradores). Aplica sus reglas: no repetir tema, no dos días seguidos con la misma franquicia ni con el mismo jugador. Si el candidato las infringe, pasa al siguiente.
