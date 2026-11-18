@@ -18,7 +18,7 @@ Reglas comunes: ningún agente publica en WordPress por su cuenta ni aprueba bor
 
 ## Rutinas diarias (desde 2026-11-13)
 
-Cada rutina se ejecuta en la sesión fija de su agente, que tiene el repo, las variables del entorno Radar y acceso a WordPress. La antigua rutina única `trig_01CxRZXQNqd1SmveoaaWjN9v` está desactivada: creaba una sesión nueva cada día, sin repo adjunto (403 de GitHub los días 10 y 12), sin métricas, y paraba si no había noticia o si `ROTACION.md` estaba atrasado.
+Cada rutina se ejecuta en la sesión fija de su agente, que tiene el repo, las variables del entorno Radar y acceso a WordPress. La antigua rutina única `trig_01CxRZXQNqd1SmveoaaWjN9v` y la antigua de Aprendizaje `trig_01CarPruoryCdXY3Q8tBk9Cn` se borraron el 2026-11-18, junto con sus sesiones sueltas (orden de Alejandro: chat limpio). Ninguna rutina puede crear sesiones nuevas: todas van a la sesión fija de su agente. La rutina diaria antigua creaba una sesión nueva cada día, sin repo adjunto (403 de GitHub los días 10 y 12), sin métricas, y paraba si no había noticia o si `ROTACION.md` estaba atrasado.
 
 | Hora (Madrid) | Agente | Rutina |
 | --- | --- | --- |
@@ -26,4 +26,5 @@ Cada rutina se ejecuta en la sesión fija de su agente, que tiene el repo, las v
 | 08:13 | Radar | `trig_01N7vwGC76DDMz3fznGAGus1` |
 | 08:43 | Redacción | `trig_015qnpJ8Gn2u1VVNnVkoA2pE` |
 | 09:37 | Verificador | `trig_019y1at8AQhsZtjLaL9qeKnP` |
+| Lunes 07:17 | Aprendizaje | `trig_01LoixGYNKf7GjfUGFeB4v2C` |
 | Lunes 10:17 | JalandBot (artículo vivo) | `trig_01U3oeUsHHXNxXCe3Sy8dxSB` |
