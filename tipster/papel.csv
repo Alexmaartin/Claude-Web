@@ -1,0 +1,9 @@
+fecha,evento,deporte,mercado,seleccion,casa,cuota,stake_u,tipo,estado,beneficio_u,cuota_cierre
+2026-11-18,Detroit Pistons @ San Antonio Spurs,baloncesto,rebotes jugador (más/menos 12.5),Victor Wembanyama menos de 12.5 rebotes,BetMGM (ref. US; Bet365/Winamax no verificadas),1.87,1,simple,perdida,-1,
+2026-11-18,Utah Jazz @ LA Clippers,baloncesto,vencedor del partido,LA Clippers,DraftKings / SportyTrader (Bet365/Winamax no verificadas),1.42,1,simple,perdida,-1,
+2026-11-18,Chile vs Colombia,futbol,ambos marcan,No,"Bet365 (noticia, ~4 h)",1.73,1,simple,ganada,0.73,
+2026-11-18,Argentina vs Costa Rica,futbol,gana y goles,Argentina gana y menos de 3.5 goles,"Bet365 (noticia, ~4 h)",2.00,1,simple,perdida,-1,
+2026-11-19,Philadelphia 76ers @ Orlando Magic,baloncesto,puntos jugador (más/menos 24.5),Franz Wagner más de 24.5 puntos,Winamax,1.78,1,simple,pendiente,,
+2026-11-19,Memphis Grizzlies @ Cleveland Cavaliers,baloncesto,rebotes jugador (más/menos 9.5),Jarrett Allen más de 9.5 rebotes,Winamax,1.78,1,simple,pendiente,,
+2026-11-18,CD Alcoyano vs RCD Mallorca (Copa del Rey),futbol,total goles 90' (más/menos 2.5),Menos de 2.5 goles,Winamax,1.76,1,simple,pendiente,,
+2026-11-18,Besiktas vs Real Madrid (Euroliga),baloncesto,hándicap puntos,Besiktas +7.5,Winamax,1.76,1,simple,pendiente,,
