@@ -30,6 +30,7 @@ Este documento define las colecciones de la base de datos del panel (`ArtifactDa
 | `tipo_fuente` | `oficial` \| `periodista` \| `medio` \| `rumor` | Naturaleza de la fuente |
 | `confianza` | `alta` \| `media` \| `baja` | Según tipo de fuente y número de fuentes independientes |
 | `resumen` | texto | Dos o tres frases, sin copiar texto de medios |
+| `tuit` | texto | Tuit de cosecha propia, con gancho y humor, máximo 280 caracteres, listo para publicar en X. Sin términos de la lista prohibida |
 | `grupo_id` | texto | Identificador de la historia agrupada |
 | `fecha` | ISO 8601 | Fecha de publicación de la fuente |
 | `detectada_en` | ISO 8601 | Momento en que el radar la capturó |

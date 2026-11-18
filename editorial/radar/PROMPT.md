@@ -29,6 +29,7 @@ Esta tarea se ejecuta cada 4–5 horas. Su trabajo es leer las fuentes activas, 
    - `titulo`: titular provisional en español. Traducción fiel, sin adjetivos nuevos.
    - `url`, `fuente`, `tipo_fuente`, `confianza`, `grupo_id`, `estado`, `fecha` (fecha de publicación), `detectada_en` (ahora, ISO 8601).
    - `resumen`: dos o tres frases **escritas por ti**, en español. No copies párrafos de la fuente.
+   - `tuit`: un tuit **escrito por ti**, en español, de cosecha propia, con gancho y humor, máximo 280 caracteres. Nada de copiar titulares ni de frases del medio. Revisa el texto contra `editorial/LISTA_PROHIBIDA.md` como el resto.
 
 8. **Alertar.** Crea una alerta `noticia_importante` solo si la noticia tiene `confianza: "alta"` y trata de una lesión grave, un traspaso, una renovación o una declaración de un jugador importante. Cuando haya un `sin_confirmar` con gran impacto, crea una alerta `incertidumbre` para que decidas tú. No crees alertas por noticias normales.
 
