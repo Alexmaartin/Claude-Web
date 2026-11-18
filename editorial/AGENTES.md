@@ -18,6 +18,8 @@ Reglas comunes: ningún agente publica en WordPress por su cuenta ni aprueba bor
 
 ## Rutinas diarias (desde 2026-11-13)
 
+**Sustituido el 2026-11-18:** los agentes están archivados y las rutinas pasan por JalandBot. La tabla vigente está en `editorial/ORQUESTADOR.md`, «Agentes archivados». Lo que sigue es histórico.
+
 Cada rutina se ejecuta en la sesión fija de su agente, que tiene el repo, las variables del entorno Radar y acceso a WordPress. La antigua rutina única `trig_01CxRZXQNqd1SmveoaaWjN9v` y la antigua de Aprendizaje `trig_01CarPruoryCdXY3Q8tBk9Cn` se borraron el 2026-11-18, junto con sus sesiones sueltas (orden de Alejandro: chat limpio). Ninguna rutina puede crear sesiones nuevas: todas van a la sesión fija de su agente. La rutina diaria antigua creaba una sesión nueva cada día, sin repo adjunto (403 de GitHub los días 10 y 12), sin métricas, y paraba si no había noticia o si `ROTACION.md` estaba atrasado.
 
 | Hora (Madrid) | Agente | Rutina |

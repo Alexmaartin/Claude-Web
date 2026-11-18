@@ -35,3 +35,25 @@ Si una tarea encaja con dos agentes, JalandBot lo reparte en pasos: primero el q
 ## Registro de tareas
 
 Cada tarea delegada queda anotada en una alerta `tecnica` del panel, con: agente, fecha, resultado y estado (`abierta` hasta que JalandBot la cierra).
+
+## Agentes archivados (orden de Alejandro, 2026-11-18)
+
+Alejandro solo habla con JalandBot. Para que la barra lateral quede limpia, los ocho agentes están **archivados** y JalandBot los activa solo para trabajar. Un agente archivado no recibe mensajes ni rutinas, así que:
+
+1. **Antes de cada encargo:** `unarchive_session` del agente y después `send_message` con el encargo. El encargo siempre termina con «responde a JalandBot (session_01TFZkNHTz9Lscwonw8q2JdY) con send_message en una línea».
+2. **Al recibir su respuesta:** `archive_session` del agente. Si el encargo sigue con otro agente (Redacción → Verificador → Publicador), se activa el siguiente.
+3. **Red de seguridad:** con cada encargo, un `send_later` de 30 a 50 minutos. Si el agente no ha respondido, se revisa su sesión, se archiva y se avisa a Alejandro si algo falló.
+4. **Si Alejandro quiere hablar con un agente:** se lo activa JalandBot, o él lo abre desde Archivados.
+
+Todas las rutinas disparan en esta sesión (JalandBot), nunca en la de un agente ni en sesiones nuevas:
+
+| Hora (Madrid) | Agente | Rutina |
+| --- | --- | --- |
+| 06:13 | Métricas | `trig_01UmRyUJMZNNimEECAFG66LL` |
+| 08:13 | Radar | `trig_01SgmDP4pmee2uVno2WrFGSQ` |
+| 08:43 | Redacción | `trig_0159153PK5359C5B5tcChvCw` |
+| 09:37 | Verificador (y aviso a Alejandro) | `trig_01AvyK2BWG4bM9KBW7LZJe4g` |
+| Lunes 07:17 | Aprendizaje | `trig_01K5Du1q3VMdd7dKnxE7Kv8y` |
+| Lunes 10:17 | Artículo vivo (Redacción → Verificador → Publicador) | `trig_01U3oeUsHHXNxXCe3Sy8dxSB` |
+
+Las rutinas anteriores que apuntaban a la sesión de cada agente están desactivadas (no borradas).
