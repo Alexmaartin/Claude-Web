@@ -49,3 +49,16 @@ Nota sobre la propuesta 3: la aprobación de JalandBot pedía solo añadir un pa
 4. **Revisión por lotes.** Aprobar o devolver varios borradores a la vez; hoy es uno a uno.
 
 Impacto y esfuerzo: 1 medio/bajo, 2 medio/bajo, 3 medio/medio, 4 alto/medio. Ordenado por impacto dividido entre esfuerzo: 2, 1, 3, 4.
+
+## Rediseño completo (2026-11-19, hecho por JalandBot por orden directa de Alejandro)
+
+Versión 31 del panel. Alejandro pidió quitar las métricas, cambiar el icono y una pasada entera de diseño y UX para que fuera más amigable.
+
+- **Métricas fuera:** pestaña, gráficas, resumen de visitas y KPI de «Hoy». El panel ya no lee `metricas` ni `metricas_historico` (las colecciones se conservan).
+- **Icono nuevo:** `newspaper`.
+- **Identidad nueva:** cobalto como color principal y naranja de cancha como acento, fondos azulados suaves, tipografías Bricolage Grotesque (títulos), Figtree (interfaz) y Source Serif 4 (texto del artículo). Se abandona el crema con terracota.
+- **Hoy:** saludo con fecha y resumen en una frase; cuatro tarjetas de lo que te espera, que llevan a cada sección; propuesta destacada con portada grande y chips de comprobaciones y verificación; «Pulso del ciclo» con iconos de estado.
+- **Borradores:** miniatura de portada en la lista, filtros «Por revisar / Listos / Todos» con contador, portada grande en el detalle, comprobaciones con barra de progreso e iconos (no solo color).
+- **Estados vacíos** con ilustración y mensaje con humor; textos más claros.
+- **Accesibilidad:** foco visible reforzado, etiquetas reales en el editor, respeto de `prefers-reduced-motion`, contraste AA en claro y oscuro.
+- **No se tocó:** lógica de aprobar, devolver, publicar y eliminar (con sus confirmaciones), registro de ediciones, comentarios y permisos.
