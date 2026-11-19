@@ -49,7 +49,6 @@ Todas las rutinas disparan en esta sesión (JalandBot), nunca en la de un agente
 
 | Hora (Madrid) | Agente | Rutina |
 | --- | --- | --- |
-| 07:13 | Analítica (informe diario a Alejandro ~07:30) | `trig_01UmRyUJMZNNimEECAFG66LL` |
 | 08:13 | Radar | `trig_01SgmDP4pmee2uVno2WrFGSQ` |
 | 08:43 | Redacción | `trig_0159153PK5359C5B5tcChvCw` |
 | 09:37 | Verificador (y aviso a Alejandro) | `trig_01AvyK2BWG4bM9KBW7LZJe4g` |
@@ -57,3 +56,7 @@ Todas las rutinas disparan en esta sesión (JalandBot), nunca en la de un agente
 | Lunes 10:17 | Artículo vivo (Redacción → Verificador → Publicador) | `trig_01U3oeUsHHXNxXCe3Sy8dxSB` |
 
 Las rutinas anteriores que apuntaban a la sesión de cada agente están desactivadas (no borradas).
+
+## Agente de Analítica eliminado (2026-11-19)
+
+Alejandro decidió el 2026-11-19 que ya no necesita el agente de Analítica (antes Métricas). Se borraron sus rutinas (`trig_01UmRyUJMZNNimEECAFG66LL` y `trig_019HenoJ2nggVmG1LBH7mD1F`) y no se vuelve a activar su sesión. El informe diario de tráfico, `problemas.md` y la actualización diaria de `metricas/web` del panel dejan de ejecutarse. Los documentos de `editorial/analitica/` se conservan por si se retoma.

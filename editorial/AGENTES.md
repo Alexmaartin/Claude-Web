@@ -7,7 +7,6 @@ Cada agente tiene una sesión fija, y el trabajo rutinario se pide escribiendo e
 | Radar | `session_01TFZkNFvbzXxyeGsDGD1aTd` | Detecta noticias en las fuentes permitidas cada día a las 08:13 (Madrid), rutina `trig_01N7vwGC76DDMz3fznGAGus1` | `editorial/radar/PROMPT.md` |
 | Redacción | `session_01TFZkNGRXnT659fv9DSdz95` | Escribe el borrador del día a las 08:43 (Madrid), rutina `trig_015qnpJ8Gn2u1VVNnVkoA2pE`; siempre deja borrador | `editorial/redaccion/PROMPT.md` |
 | Verificador | `session_01TFZkNER2DME5VBXnEYTMiF` | Contrasta y corrige los borradores pendientes, sin aprobar ni publicar | `editorial/verificador/PROMPT.md` |
-| Analítica (antes Métricas) | `session_01TFZkNFALx5r5zgtaUH3Hbr` | Informe diario de tráfico, problemas abiertos y métricas del panel según `editorial/analitica/CONTEXTO.md`; Cloudflare solo lectura cada día a las 06:13 (Madrid), rutina `trig_019HenoJ2nggVmG1LBH7mD1F` | `editorial/radar/PROMPT.md`, sección «Métricas web» |
 | Publicador | `session_01TFZkNEWHUaXbVQ3HittCWD` | Sube a WordPress los borradores aprobados, siempre como borrador, y concilia el estado con el panel | `editorial/wordpress/PROMPT.md` |
 | Auditor SEO | `session_01TFZkNFPrZMqC4wzx7KDy7W` | Revisa el SEO de la web y deja incidencias priorizadas | `editorial/seo/PROMPT.md` |
 | Aprendizaje | `session_01TFZkNHYQJtyo4n4uf4Eptq` | Aprende de lo que se aprueba y se corrige, sin cambiar reglas duras | `editorial/APRENDIZAJE.md` |
@@ -24,7 +23,6 @@ Cada rutina se ejecuta en la sesión fija de su agente, que tiene el repo, las v
 
 | Hora (Madrid) | Agente | Rutina |
 | --- | --- | --- |
-| 06:13 | Métricas | `trig_019HenoJ2nggVmG1LBH7mD1F` |
 | 08:13 | Radar | `trig_01N7vwGC76DDMz3fznGAGus1` |
 | 08:43 | Redacción | `trig_015qnpJ8Gn2u1VVNnVkoA2pE` |
 | 09:37 | Verificador | `trig_019y1at8AQhsZtjLaL9qeKnP` |
