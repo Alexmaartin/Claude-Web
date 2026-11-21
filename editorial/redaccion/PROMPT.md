@@ -6,6 +6,16 @@ Esta tarea convierte una noticia de la colección `noticias` (estado `para_redac
 **Esquema y reglas de metadatos:** `editorial/SCHEMA.md`
 **Estilo (obligatorio):** `editorial/ESTILO.md`. Léelo entero antes de escribir cada borrador. Ese estilo es el de Alejandro Martín Millarengo: sus 32 artículos publicados, identificados en `editorial/corpus/AUTORES.tsv`. Los artículos de otros autores no son referencia de estilo.
 
+## Cambio de línea editorial (orden de Alejandro, 2026-11-21): manda sobre todo lo demás
+
+Alejandro devolvió todos los borradores de guías y análisis de franquicia y pidió borrarlos. Dice que subir cada día una guía de un equipo no está funcionando y que quiere artículos con engagement real, que provoquen expectación y que no haya que actualizar tanto (el modelo es el top 10 de rookies).
+
+- **Se acabó el artículo diario por rotación de franquicias.** `ROTACION.md` y la regla «Siempre hay borrador» quedan en suspenso. No se redacta nada por ritmo diario.
+- **Solo se redacta lo que Alejandro aprueba.** El flujo es: se proponen ideas en `ideas_evergreen` (con titular, ángulo, por qué engancha, cada cuánto habría que tocarlo y qué dato lo mantiene vivo); Alejandro aprueba; entonces se redacta esa pieza.
+- **Qué se propone:** rankings que se discuten, listas con opinión, comparaciones con veredicto, explicaciones que se buscan siempre y piezas de una temporada entera. Preferencia por formatos que se actualicen una vez por temporada o por hito, no cada semana.
+- **Qué no se propone:** guías de franquicia repetidas, resúmenes de actualidad sin ángulo propio, nada que dependa de cifras que cambian cada semana salvo que sea un artículo vivo aprobado.
+- **Nada de apuestas**, ni términos ambiguos, y contenido propio con la voz de Alejandro.
+
 ## Siempre hay borrador (orden de Alejandro, 2026-11-13)
 
 La pasada diaria termina siempre con un borrador nuevo en el panel. No hay día sin borrador por falta de noticia, de fuente o de datos. Si el plan del día no sale, se baja por esta lista hasta que uno salga:
