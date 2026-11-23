@@ -1,0 +1,95 @@
+# Cómo funciona el sorteo del draft de la NBA y el cambio de 2027
+
+Cada año, el draft de la NBA empieza con un sorteo que decide los cuatro primeros picks, y es la parte del proceso que más ruido genera. Esta guía explica quién entra, cómo se extraen las bolas, cómo se revela el orden en la televisión y qué cambia a partir del draft de 2027, con datos de ESPN.
+
+Quién entra en el sorteo del draft
+
+Participan los equipos que no se clasifican para los playoffs. Son catorce, y eso cambia el sentido del sistema: el sorteo no premia a los mejores de la temporada, sino a los que quedan fuera de la postemporada. Es la primera capa del sistema, y la que menos se discute, porque el criterio es fácil de entender.
+
+La historia es distinta. De 1966 a 1984, el número uno se decidía a cara o cruz entre los peores equipos. Desde 1985, la NBA usa un proceso de tipo sorteo para decidir los primeros picks, con bolas en lugar de moneda. Mi lectura es que el cambio no solo sustituyó el azar entre dos equipos por el azar entre catorce, sino que hizo que el draft dependiera de unas probabilidades que todos los equipos pueden conocer de antemano.
+
+Las dos capas: el sorteo y el orden inverso
+
+El sistema tiene dos capas que conviene no mezclar. La primera es el sorteo: los equipos participantes se reparten los cuatro primeros puestos en función de las combinaciones que les toquen. La segunda es el orden inverso: del quinto al decimocuarto, los equipos que no han salido premiados en el sorteo eligen en orden inverso a su récord al final de la temporada regular.
+
+La consecuencia práctica es que el sorteo decide quién sube a la cima, y el récord decide el resto de la franja. Un equipo puede acabar en el quinto puesto sin haber ganado nada en el sorteo, y otro con el peor récord de la liga puede acabar en el quinto puesto incluso después de un mal sorteo. Son dos mecanismos distintos, y mezclarlos es la forma más habitual de confundir el resultado de un draft.
+
+Cómo se extraen los cuatro primeros picks
+
+Catorce bolas numeradas del uno al catorce entran en la máquina. Se extraen cuatro bolas, una tras otra. Son cuatro extracciones, no catorce, y el orden en que salen las bolas no importa.
+
+Lo que decide el resultado es la combinación de cuatro cifras que forman. Hay 1.001 combinaciones posibles al sacar cuatro bolas de catorce sin tener en cuenta el orden. Antes del sorteo, la liga asigna 1.000 de ellas a los catorce equipos, y la combinación que queda sin asignar no cuenta. Si la combinación que sale pertenece a un equipo, ese equipo recibe el número uno. El proceso se repite para los picks del dos al cuatro.
+
+Un detalle que cambia la lectura: como las combinaciones se asignan antes del sorteo, cada equipo conoce su probabilidad de salir premiado antes de que empiece. La regla es pública y no hay sorpresas en el procedimiento. La sorpresa está en el resultado.
+
+El programa de televisión: cómo se revela el orden
+
+Aquí está la capa que más gente ve y que menos se entiende. Los equipos que entran en el sorteo tienen representantes en la sala, y la liga no emite el proceso de extracción durante el programa de media hora.
+
+El programa es otra cosa. En pantalla, el orden se revela en orden inverso, del catorce al uno: el espectador ve primero a los equipos de las posiciones más bajas y deja el número uno para el final. Es la diferencia más importante entre el sorteo real y su versión televisada. En la sala, el número uno queda establecido primero; en el programa, el suspense se construye al revés.
+
+Para un aficionado, eso significa que la emoción de cada equipo llega en el último momento. Un equipo que aparece en las posiciones intermedias no sabe si ha ganado algo hasta que se revela el uno. Y la retransmisión muestra el anuncio del orden, no la extracción de las bolas.
+
+En 2026, el sorteo se celebró el 10 de mayo y el draft empezó el 23 de junio. Hay, por tanto, unas seis semanas entre ambos.
+
+Las probabilidades desde la reforma de 2019
+
+Desde el draft de 2019, los tres equipos con peores récords comparten un 14% de probabilidad de ganar el número uno. Antes, las probabilidades para esos tres puestos eran del 25%, 19’9% y 15’6%, en orden descendente. Con el cambio, los tres peores equipos tienen exactamente la misma probabilidad.
+
+La reforma también hace que se sorteen los cuatro primeros picks. Es una red de seguridad para el peor equipo, y a la vez limita lo que gana por perder: terminar último ya no garantiza el número uno.
+
+Los ejemplos recientes lo muestran. Los Atlanta Hawks ganaron el sorteo con un 3% de probabilidad y eligieron a Zaccharie Risacher como número uno. Un año después, los Dallas Mavericks ganaron el sorteo con un 1’8% de probabilidad, y con él la opción de elegir a Cooper Flagg. Son dos recordatorios de que la probabilidad no es certeza. Creo que también muestran que la suerte pesa más que el mérito de haber perdido, que es precisamente lo que la liga intenta corregir.
+
+El cambio para el draft de 2027: el sistema 3-2-1
+
+La novedad es la reforma que el Consejo de Gobernadores aprobó en mayo de 2026, por 29 votos a favor y uno en contra. Se aplicará desde el draft de 2027 y se llama «3-2-1» por el número de bolas que reciben los equipos según su posición en la clasificación.
+
+Las cifras del nuevo formato son estas. El sorteo pasa de 14 a 16 equipos: entran en él los que no se clasifican para los playoffs ni para el play-in. Los tres peores equipos reciben dos bolas cada uno, y los siete que no están en el play-in ni entre los tres peores, tres bolas. Los equipos del play-in que quedan noveno y décimo en cada conferencia reciben dos bolas, y los que pierden los partidos 7 y 8 reciben una cada uno. Los tres peores tienen además un suelo: no pueden elegir por debajo del duodécimo pick. Con ese formato, los tres peores tienen un 5’4% de opciones de número uno, frente al 14% anterior.
+
+La liga también puede reducir las probabilidades de sorteo de un equipo y modificar su posición en el draft. Hay además dos reglas de cortafuegos: ningún equipo puede tener el número uno dos años seguidos, y ningún equipo puede tener un pick entre los cinco primeros tres años consecutivos.
+
+El formato tiene vigencia limitada: se aplicará a los drafts de 2027, 2028 y 2029. Después, la liga decidirá si lo prolonga o lo sustituye, y eso da al cambio una fecha de revisión.
+
+En mi opinión el cambio que han propuesto está bien pensado, para acabar con el tanqueo era necesario penalizar de alguna forma a los equipos que perdían a conciencia para tener mejores posibilidades en el draft. Pero pensandolo un poco más allá, si tienes un equipo verdaderamente malo y eres incapaz de no quedar entre los tres peores equipos ni dandolo todo, puedes estancarte en reconstrucción durante aúm más años… esto para mercados pequeños puede ser destructivo, además la otra cara de la moneda, son los equipos que ya tienen un proyecto joven y se les ve futuro, pero no tienen la experiencia para entrar a playoffs, esos equipos recibirán ahora más posibilidades del primer pick que los tres peores, lo cual puede generar aún más abismo para estos equipos que sean verdaderamente malos.
+
+En líneas generales está bien planteado, pero tiene algunas posibilidades de salir más mal que bien, lo bueno es que tenemos tres años para testearlo, y ver si es una buena medida, o si por el contrario se debe buscar otra alternativa.
+
+Las dos rondas y los 60 picks
+
+El draft tiene dos rondas. La primera va del pick 1 al 30, y la segunda, del 31 al 60. Los picks de la primera ronda son los que concentran la atención, y en la práctica son los que más pesan en el proyecto de cada equipo, porque se espera de ellos más que de cualquier otro pick.
+
+Para entender qué implica un pick de primera ronda en términos de contrato, nuestra explicación de la escala de novatos es el punto de partida.
+
+La segunda ronda ofrece menos certezas, pero no es irrelevante. Un pick tardío puede convertirse en jugador de rotación si el equipo lo desarrolla bien, y esa es una de las lecturas más interesantes del draft. Si quieres ver cómo se concretan estos picks en el draft de 2026, tenemos el análisis por tramos de picks del 1 al 10 y el de picks del 11 al 20.
+
+Un pick puede cambiar de manos antes del sorteo o del draft. Por eso el equipo que aparece con un pick no siempre es el que elegirá al jugador.
+
+Cómo leer un draft a partir de sus reglas
+
+Creo que la clave para seguir un draft es separar el azar de la decisión. El sorteo decide los cuatro primeros picks, el récord decide del quinto al decimocuarto y, dentro de cada pick, la decisión es del equipo. Cuando veas un draft, pregúntate en qué capa se juega cada resultado.
+
+Con el formato de 2027 hay que releer el mapa de probabilidades cuando se publiquen las cifras de cada año. Con 16 equipos y las bolas repartidas por posición, la tabla cambia, aunque el principio no: el sorteo nunca garantiza el número uno.
+
+Un consejo práctico: antes de valorar un pick, mira cuántos equipos entran en el sorteo, cuántas bolas tiene cada uno y si hay un pick traspasado en medio. Esas tres cosas explican la mayor parte de las sorpresas.
+
+Preguntas frecuentes
+
+¿Cuántos equipos participan en el sorteo del draft?
+
+Catorce hasta el draft de 2026, y dieciséis a partir del draft de 2027.
+
+¿Cuántas bolas tiene el sorteo?
+
+Catorce, numeradas del uno al catorce. Se extraen cuatro para formar la combinación del primer pick.
+
+¿Cuál es la probabilidad del peor equipo de ganar el número uno?
+
+Desde 2019, la misma que la de los otros dos peores equipos: un 14%. Con el formato de 2027, los tres peores reciben dos bolas cada uno.
+
+¿Cuántos picks tiene el draft?
+
+Sesenta, repartidos en dos rondas de treinta picks cada una.
+
+¿Desde cuándo se aplica el nuevo formato?
+
+Desde el draft de 2027, y está previsto para los drafts de 2027, 2028 y 2029.
