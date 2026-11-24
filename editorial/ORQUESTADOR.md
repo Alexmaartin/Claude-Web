@@ -49,7 +49,7 @@ Todas las rutinas disparan en esta sesión (JalandBot), nunca en la de un agente
 
 | Hora (Madrid) | Agente | Rutina |
 | --- | --- | --- |
-| 07:13 | Analítica (informe diario a Alejandro hacia las 07:30; panel de métricas) | `ANALITICA_TRIGGER` |
+| 07:13 | Analítica (informe diario a Alejandro hacia las 07:30; panel de métricas) | `trig_01JvUiqvPbgpDVzwCzikczmJ` |
 | 08:13 | Radar | `trig_01SgmDP4pmee2uVno2WrFGSQ` |
 | 08:43 | Redacción (PAUSADA desde 2026-11-21: ya no hay artículo diario; solo se redacta lo que Alejandro aprueba) | `trig_0159153PK5359C5B5tcChvCw` |
 | 09:37 | Verificador (y aviso a Alejandro) | `trig_01AvyK2BWG4bM9KBW7LZJe4g` |
