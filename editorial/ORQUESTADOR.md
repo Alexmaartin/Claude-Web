@@ -49,6 +49,7 @@ Todas las rutinas disparan en esta sesión (JalandBot), nunca en la de un agente
 
 | Hora (Madrid) | Agente | Rutina |
 | --- | --- | --- |
+| 07:13 | Analítica (informe diario a Alejandro hacia las 07:30; panel de métricas) | `ANALITICA_TRIGGER` |
 | 08:13 | Radar | `trig_01SgmDP4pmee2uVno2WrFGSQ` |
 | 08:43 | Redacción (PAUSADA desde 2026-11-21: ya no hay artículo diario; solo se redacta lo que Alejandro aprueba) | `trig_0159153PK5359C5B5tcChvCw` |
 | 09:37 | Verificador (y aviso a Alejandro) | `trig_01AvyK2BWG4bM9KBW7LZJe4g` |
@@ -57,10 +58,12 @@ Todas las rutinas disparan en esta sesión (JalandBot), nunca en la de un agente
 
 Las rutinas anteriores que apuntaban a la sesión de cada agente están desactivadas (no borradas).
 
-## Agente de Analítica eliminado (2026-11-19)
+## Agente de Analítica: eliminado el 2026-11-19 y reactivado el 2026-11-24
 
 Alejandro decidió el 2026-11-19 que ya no necesita el agente de Analítica (antes Métricas). Se borraron sus rutinas (`trig_01UmRyUJMZNNimEECAFG66LL` y `trig_019HenoJ2nggVmG1LBH7mD1F`) y no se vuelve a activar su sesión. El informe diario de tráfico, `problemas.md` y la actualización diaria de `metricas/web` del panel dejan de ejecutarse. Los documentos de `editorial/analitica/` se conservan por si se retoma.
 
 ## Cambio de línea editorial (2026-11-21)
 
 Alejandro pidió borrar los borradores devueltos (se borraron los nueve: Clippers, Bucks, Thunder, 76ers, Jazz, Bulls, Nets calendario, Heat-Magic y Clippers jóvenes) y dejar de subir una guía de equipo al día. La rutina de Redacción está desactivada. Línea nueva y detalle en `editorial/redaccion/PROMPT.md`, «Cambio de línea editorial».
+
+Reactivado por Alejandro el 2026-11-24 con un prompt de sistema nuevo en `editorial/analitica/PROMPT.md`. Vuelve la rutina diaria (07:13 Madrid) y la actualización del panel de métricas del artefacto.
