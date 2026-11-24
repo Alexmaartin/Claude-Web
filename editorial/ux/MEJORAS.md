@@ -62,3 +62,7 @@ Versión 31 del panel. Alejandro pidió quitar las métricas, cambiar el icono y
 - **Estados vacíos** con ilustración y mensaje con humor; textos más claros.
 - **Accesibilidad:** foco visible reforzado, etiquetas reales en el editor, respeto de `prefers-reduced-motion`, contraste AA en claro y oscuro.
 - **No se tocó:** lógica de aprobar, devolver, publicar y eliminar (con sus confirmaciones), registro de ediciones, comentarios y permisos.
+
+## Panel v32 (2026-11-24): vuelve la pestaña Métricas
+
+Alejandro reactivó al agente de Analítica y pidió que siga actualizándose el panel de métricas del artefacto. Se ha recuperado la vista Métricas (día, semana y mes, visitas, páginas reales, escáneres, procedencia, audiencia, Core Web Vitals y estado de los datos) con el diseño nuevo y un cuarto botón en la navegación. En «Pulso del ciclo» de Hoy hay una fila nueva con la última actualización de las métricas. Lee los mismos documentos de siempre: `metricas/web` y `metricas_historico`.
