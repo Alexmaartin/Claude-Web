@@ -67,3 +67,7 @@ Alejandro decidió el 2026-11-19 que ya no necesita el agente de Analítica (ant
 Alejandro pidió borrar los borradores devueltos (se borraron los nueve: Clippers, Bucks, Thunder, 76ers, Jazz, Bulls, Nets calendario, Heat-Magic y Clippers jóvenes) y dejar de subir una guía de equipo al día. La rutina de Redacción está desactivada. Línea nueva y detalle en `editorial/redaccion/PROMPT.md`, «Cambio de línea editorial».
 
 Reactivado por Alejandro el 2026-11-24 con un prompt de sistema nuevo en `editorial/analitica/PROMPT.md`. Vuelve la rutina diaria (07:13 Madrid) y la actualización del panel de métricas del artefacto.
+
+## Idea del día (desde 2026-11-24)
+
+Al pausar Redacción dejó de proponerse la idea diaria. Ahora la propone JalandBot (sin agentes) con la rutina `trig_01C6aguynC9PTkTgef8tAkzM`, todos los días a las 08:50 (Madrid): una idea nueva en `ideas_evergreen`, salvo que ya haya 3 o más en estado `propuesta`.
