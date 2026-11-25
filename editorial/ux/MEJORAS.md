@@ -66,3 +66,13 @@ Versión 31 del panel. Alejandro pidió quitar las métricas, cambiar el icono y
 ## Panel v32 (2026-11-24): vuelve la pestaña Métricas
 
 Alejandro reactivó al agente de Analítica y pidió que siga actualizándose el panel de métricas del artefacto. Se ha recuperado la vista Métricas (día, semana y mes, visitas, páginas reales, escáneres, procedencia, audiencia, Core Web Vitals y estado de los datos) con el diseño nuevo y un cuarto botón en la navegación. En «Pulso del ciclo» de Hoy hay una fila nueva con la última actualización de las métricas. Lee los mismos documentos de siempre: `metricas/web` y `metricas_historico`.
+
+## v34 · Escribir (2026-11-25)
+
+- Pestaña nueva **Escribir** (cinco pestañas en la barra inferior). Editor de texto enriquecido propio: negrita, cursiva, título, subtítulo, listas, cita, enlace (con https o enlace interno con «/»), imagen con texto alternativo y pie, deshacer y rehacer. Barra de formato fija arriba del texto y con desplazamiento horizontal en pantallas estrechas.
+- Guardado automático cada 1,5 s (indicador «Guardado»), también al salir de la pestaña o ocultar la app. Reintento si se pierde la conexión.
+- Imágenes reducidas en el navegador (WebP, o JPEG si el móvil no codifica WebP) a menos de 150 KB y guardadas en la colección `imagenes`. La portada se recorta a 16:9 y queda por debajo de 110 KB.
+- El cuerpo se guarda como bloques de WordPress; ida y vuelta comprobada con Playwright (móvil 400 px y escritorio).
+- El mismo editor sustituye al campo HTML al editar cualquier borrador, salvo los artículos vivos (llevan marcadores de cifras que no se pueden perder): esos siguen con el campo HTML.
+- Aprobar o dejar listo bloquea si hay términos de apuestas.
+- Icono de pantalla de inicio: logo de la web (apple-touch-icon y favicon).

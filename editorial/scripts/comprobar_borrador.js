@@ -16,7 +16,13 @@ const iSlugs = args.indexOf('--slugs');
 const slugsValidos = iSlugs > -1 ? new Set(fs.readFileSync(args[iSlugs + 1], 'utf8').split('\n').map(s => s.trim()).filter(Boolean)) : null;
 
 const fallos = [], avisos = [], ok = [];
-const check = (cond, msg, tipo = 'fallo') => (cond ? ok : (tipo === 'fallo' ? fallos : avisos)).push(msg);
+// Artículos escritos por Alejandro en el panel (origen «alejandro»): solo bloquean lo imprescindible
+// (titular, cuerpo, slug, portada y lista prohibida). Longitudes, enlaces y fuentes se avisan.
+const propio = d.origen === 'alejandro';
+const check = (cond, msg, tipo = 'fallo', duro = false) => {
+  if (propio && tipo === 'fallo' && !duro) tipo = 'aviso';
+  (cond ? ok : (tipo === 'fallo' ? fallos : avisos)).push(msg);
+};
 
 const html = String(d.cuerpo_html || '');
 const texto = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
@@ -30,12 +36,14 @@ const t = String(d.titulo || '');
 check(t.length >= 50 && t.length <= 65, `Titular de ${t.length} caracteres (50–65)`, 'aviso');
 const ex = String(d.extracto || '');
 check(ex.length >= 140 && ex.length <= 160, `Extracto de ${ex.length} caracteres (140–160)`);
-check(/^[a-z0-9]+(-[a-z0-9]+)*$/.test(String(d.slug || '')), 'Slug con formato válido');
+check(/^[a-z0-9]+(-[a-z0-9]+)*$/.test(String(d.slug || '')), 'Slug con formato válido', 'fallo', true);
+check(t.trim().length > 0, 'Titular presente', 'fallo', true);
 check(String(d.meta_descripcion || '').length > 0 || d.tipo !== 'guia', 'Meta descripción presente (guías)', 'aviso');
 check(String(d.seo_titulo || '').length > 0 || d.tipo !== 'guia', 'Título SEO presente (guías)', 'aviso');
 
 // Cuerpo
 check(palabras >= 600, `Cuerpo de ${palabras} palabras (mínimo 600)`);
+check(palabras > 0, 'Cuerpo con texto', 'fallo', true);
 check(d.tipo !== 'guia' || palabras >= 1500, `Guía de ${palabras} palabras (objetivo 1.500)`, 'aviso');
 const h2 = (html.match(/<h2>/g) || []).length;
 check(d.tipo !== 'guia' || h2 >= 4, `Guía con ${h2} H2`, 'aviso');
@@ -51,7 +59,7 @@ if (slugsValidos) {
 
 // Portada
 const img = String(d.imagen_url || '');
-check(/^data:image\/webp;base64,/.test(img), 'Portada WebP embebida');
+check(propio ? /^data:image\/(webp|jpeg);base64,/.test(img) : /^data:image\/webp;base64,/.test(img), propio ? 'Portada embebida (WebP o JPEG)' : 'Portada WebP embebida', 'fallo', true);
 check(img.length * 0.75 < 300 * 1024, `Portada de ${Math.round(img.length * 0.75 / 1024)} KB (máximo 300)`);
 
 // Fuentes e higiene
@@ -59,7 +67,7 @@ check(Array.isArray(d.fuentes) && d.fuentes.length > 0, 'Fuentes registradas en 
 const todo = [t, ex, texto, String(d.pie_instagram || '')].join(' ').toLowerCase();
 const prohibidos = ['apuest', 'cuota', 'odds', 'bookmaker', 'casino', 'parlay', 'hándicap', 'handicap'];
 const hallados = prohibidos.filter(p => todo.includes(p));
-check(hallados.length === 0, hallados.length ? `Términos de apuestas encontrados: ${hallados.join(', ')}` : 'Sin términos de apuestas');
+check(hallados.length === 0, hallados.length ? `Términos de apuestas encontrados: ${hallados.join(', ')}` : 'Sin términos de apuestas', 'fallo', true);
 check(!/<table/i.test(html), 'Sin tablas en el cuerpo (no se ven bien en WordPress)');
 const menciones = (texto.match(/\bESPN\b/g) || []).length;
 check(menciones <= 2, `ESPN mencionada ${menciones} veces en el cuerpo (máximo 2)`);

@@ -19,6 +19,7 @@ Este documento define las colecciones de la base de datos del panel (`ArtifactDa
 | `cambios_ficha` | Propuestas de cambio sobre una ficha, con valor anterior y nuevo | Radar |
 | `incidencias_seo` | Problemas SEO priorizados | Auditor SEO |
 | `alertas` | Asuntos que requieren criterio humano | Cualquier agente |
+| `imagenes` | Imágenes insertadas en el cuerpo de un artículo de Alejandro (WebP o JPEG ya reducido, en `data`) | Panel (pestaña Escribir) |
 
 ## `noticias`
 
@@ -49,7 +50,8 @@ Este documento define las colecciones de la base de datos del panel (`ArtifactDa
 | `noticia_id` | texto | Noticia de origen |
 | `fuentes` | lista de texto | URLs de todas las fuentes citadas |
 | `confianza` | `alta` \| `media` \| `baja` | Heredada de la noticia o rebajada por la redacción |
-| `estado` | `pendiente_revision` \| `aprobado` \| `devuelto` \| `publicado_borrador` | Ciclo del borrador |
+| `estado` | `en_escritura` \| `pendiente_revision` \| `aprobado` \| `devuelto` \| `publicado_borrador` \| `publicado` | Ciclo del borrador. `en_escritura` solo lo usan los artículos que escribe Alejandro en el panel |
+| `origen` | `alejandro` (opcional) | Presente solo en artículos escritos por Alejandro en la pestaña Escribir del panel |
 | `fecha` | ISO 8601 | Creación del borrador |
 | `actualizado_en` | ISO 8601 | Última modificación |
 
@@ -105,6 +107,13 @@ Los campos de la ficha son de primer nivel (sin anidar), para que el panel pueda
 | `motivo` | texto | Una frase: qué ha pasado |
 | `estado` | `propuesto` \| `aceptado` \| `rechazado` | Estado de la propuesta |
 | `fecha` | ISO 8601 | Cuándo se propuso |
+
+### Artículos escritos por Alejandro (desde 2026-11-25)
+
+- Se crean en la pestaña **Escribir** del panel con `origen: "alejandro"` y `estado: "en_escritura"`. Se guardan solos mientras escribe.
+- `cuerpo_html` va en bloques de WordPress (`<!-- wp:paragraph -->`, títulos, listas, citas, imágenes). Las imágenes del cuerpo se citan como `<img src="uz-img:<id>">` y su contenido está en la colección `imagenes` (documento `<id>`, campo `data` con la imagen en base64, y `bytes`, `ancho`, `alto`, `alt`, `borrador_id`). El Publicador las sube a WordPress y sustituye la dirección.
+- `imagen_url` (portada) puede ser WebP o JPEG embebido, recortado a 16:9 y de menos de unos 110 KB.
+- Alejandro los pasa a `pendiente_revision` («Pedir verificación») o a `aprobado` («Dejar listo para publicar»). Ningún agente modifica su texto.
 
 ## `incidencias_seo`
 

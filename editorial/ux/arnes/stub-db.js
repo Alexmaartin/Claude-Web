@@ -36,18 +36,24 @@
   };
 
   // Vista previa: no hay base real. Las escrituras se simulan en memoria.
+  const oyentes = {};
+  const avisar = (nombre) => (oyentes[nombre] || []).forEach((ok) => ok(instantanea(nombre)));
+  const instantanea = (nombre) => ({ docs: (ejemplo[nombre] || []).map((d) => ({ id: d.id, exists: true, data: () => { const { id, ...r } = d; return JSON.parse(JSON.stringify(r)); } })) });
   function coleccion(nombre) {
-    const docs = () => (ejemplo[nombre] || []);
+    const docs = () => (ejemplo[nombre] = ejemplo[nombre] || []);
     return {
       doc(id) {
         return {
-          update: async (patch) => { const d = docs().find((x) => x.id === id); if (d) Object.assign(d, patch); return true; },
-          delete: async () => { const i = docs().findIndex((x) => x.id === id); if (i >= 0) docs().splice(i, 1); return true; },
+          update: async (patch) => { const d = docs().find((x) => x.id === id); if (!d) throw { code: 'invalid_argument' }; Object.assign(d, patch); avisar(nombre); return true; },
+          set: async (data) => { const i = docs().findIndex((x) => x.id === id); if (i >= 0) docs().splice(i, 1); docs().push({ id, ...data }); avisar(nombre); return true; },
+          get: async () => { const d = docs().find((x) => x.id === id); return { exists: !!d, data: () => { if (!d) return undefined; const { id: _i, ...r } = d; return JSON.parse(JSON.stringify(r)); } }; },
+          delete: async () => { const i = docs().findIndex((x) => x.id === id); if (i >= 0) docs().splice(i, 1); avisar(nombre); return true; },
         };
       },
-      add: async (data) => { (ejemplo[nombre] = ejemplo[nombre] || []).push({ id: 'nuevo-' + Date.now(), ...data }); return true; },
+      add: async (data) => { docs().push({ id: 'nuevo-' + Date.now(), ...data }); avisar(nombre); return true; },
       onSnapshot(ok) {
-        setTimeout(() => ok({ docs: docs().map((d) => ({ id: d.id, exists: true, data: () => { const { id, ...r } = d; return r; } })) }), 0);
+        (oyentes[nombre] = oyentes[nombre] || []).push(ok);
+        setTimeout(() => ok(instantanea(nombre)), 0);
         return () => {};
       },
     };

@@ -142,7 +142,7 @@ h1, h2, h3 { text-wrap: balance; }
 .nav {
   position: fixed; left: max(12px, env(safe-area-inset-left, 0px)); right: max(12px, env(safe-area-inset-right, 0px));
   bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 10;
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; padding: 6px;
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; padding: 6px;
   background: color-mix(in srgb, var(--surface) 94%, transparent);
   backdrop-filter: blur(14px) saturate(1.3);
   -webkit-backdrop-filter: blur(14px) saturate(1.3);
@@ -150,7 +150,7 @@ h1, h2, h3 { text-wrap: balance; }
 }
 .navbtn {
   position: relative; display: grid; justify-items: center; gap: 4px; padding: 9px 4px 8px; border: 0; background: none; border-radius: 20px;
-  font: 600 12px/1.1 var(--sans); color: var(--muted); transition: color .2s, background .2s, transform .1s;
+  font: 600 11px/1.1 var(--sans); color: var(--muted); transition: color .2s, background .2s, transform .1s;
 }
 .navbtn:active { transform: scale(.96); }
 .navbtn svg { width: 24px; height: 24px; }
@@ -166,7 +166,7 @@ h1, h2, h3 { text-wrap: balance; }
   .top { position: static; background: none; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 22px 0 10px; }
   .nav {
     position: sticky; top: env(safe-area-inset-top, 0px); left: auto; right: auto; bottom: auto; z-index: 6;
-    grid-template-columns: repeat(4, max-content); justify-content: start; gap: 6px; padding: 8px 0 14px;
+    grid-template-columns: repeat(5, max-content); justify-content: start; gap: 6px; padding: 8px 0 14px;
     background: var(--bg); border: 0; border-radius: 0; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none;
   }
   .navbtn { grid-auto-flow: column; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 999px; font-size: 15px; }
@@ -485,6 +485,82 @@ pre.preview { max-height: 260px; overflow: auto; margin: 10px 0 0; padding: 14px
   .draft { grid-template-columns: 68px minmax(0, 1fr); }
   .thumb { width: 68px; }
 }
+
+/* Escribir: editor propio */
+.hero-write { padding: 22px; display: grid; gap: 14px; }
+.hero-write h2 { margin: 0; font: 700 clamp(24px, 5vw, 30px)/1.15 var(--display); letter-spacing: -.015em; }
+.hero-write p { margin: 0; color: var(--muted); max-width: 56ch; }
+.writer { padding: 18px 20px 26px; display: grid; gap: 18px; min-width: 0; }
+.writer-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.autosave { font: 600 13px var(--sans); color: var(--muted); display: inline-flex; align-items: center; gap: 8px; }
+.autosave::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--line-2); }
+.autosave.ok::before { background: var(--ok); box-shadow: 0 0 0 4px var(--ok-soft); }
+.autosave.work::before { background: var(--warn); }
+.autosave.bad { color: var(--bad); }
+.autosave.bad::before { background: var(--bad); }
+.ed.titular { font: 700 clamp(24px, 5vw, 32px)/1.2 var(--display); letter-spacing: -.015em; padding: 14px 16px; resize: none; field-sizing: content; min-height: 3.2em; overflow: hidden; }
+.contador { font: 600 13px var(--sans); color: var(--muted); }
+.contador.mal { color: var(--warn); }
+.portada { display: grid; gap: 10px; }
+.portada-img { aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: var(--accent-soft); display: grid; place-items: center; color: var(--accent); border: 1px dashed var(--line-2); }
+.portada-img.hay { border-style: solid; border-color: transparent; }
+.portada-img img { width: 100%; height: 100%; object-fit: cover; }
+.portada-img svg { width: 38px; height: 38px; }
+.rte { border: 1px solid var(--line-2); border-radius: 16px; background: var(--surface); min-width: 0; }
+.rte:focus-within { border-color: var(--accent); }
+.rte-bar {
+  position: sticky; top: calc(env(safe-area-inset-top, 0px) + 68px); z-index: 4; display: flex; gap: 2px; padding: 6px;
+  overflow-x: auto; background: var(--surface-2); border-bottom: 1px solid var(--line); border-radius: 15px 15px 0 0; scrollbar-width: none;
+}
+.rte-bar::-webkit-scrollbar { display: none; }
+@media (min-width: 900px) { .rte-bar { top: 74px; } }
+.detail .rte-bar { top: 0; }
+.rte-bar button {
+  flex: none; min-width: 44px; height: 44px; padding: 0 10px; border: 0; border-radius: 12px; background: none; color: var(--fg);
+  font: 700 15px/1 var(--sans); display: grid; place-items: center; touch-action: manipulation;
+}
+.rte-bar button svg { width: 20px; height: 20px; }
+.rte-bar button:active { transform: scale(.94); }
+.rte-bar button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+.rte-bar .i { font-style: italic; font-family: var(--serif); font-size: 18px; }
+.rte-bar .b { font-family: var(--serif); font-size: 18px; }
+.rte-bar .sep { flex: none; width: 1px; background: var(--line-2); margin: 8px 4px; }
+.rte-tools { display: grid; gap: 10px; padding: 12px; background: var(--info-soft); border-bottom: 1px solid var(--line); }
+.rte-tools[hidden] { display: none; }
+.rte-tools .fila { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.rte-tools .ed { flex: 1 1 200px; min-width: 0; padding: 10px 12px; }
+.rte-tools .btn { min-height: 44px; padding: 10px 16px; }
+.rte-area { min-height: 46vh; padding: 20px 22px; outline: none; font: 17px/1.75 var(--serif); color: var(--fg); overflow-wrap: anywhere; }
+.rte-area:empty::before { content: attr(data-ph); color: var(--muted); pointer-events: none; }
+.rte-area h2, .rte-area h3 { font-family: var(--display); line-height: 1.25; margin: 1.5em 0 .5em; letter-spacing: -.01em; }
+.rte-area h2 { font-size: 26px; font-weight: 700; }
+.rte-area h3 { font-size: 21px; font-weight: 700; }
+.rte-area p { margin: 0 0 1.05em; }
+.rte-area ul, .rte-area ol { padding-left: 24px; margin: 0 0 1.05em; }
+.rte-area a { color: var(--accent); }
+.rte-area blockquote { margin: 0 0 1.05em; padding: 4px 0 4px 18px; border-left: 4px solid var(--line-2); color: var(--muted); }
+.rte-area table { width: 100%; border-collapse: collapse; font: 14px/1.4 var(--sans); margin: 0 0 1.2em; }
+.rte-area th, .rte-area td { text-align: left; padding: 8px 10px; border: 1px solid var(--line); }
+.rte-fig { margin: 0 0 1.2em; }
+.rte-fig img { width: 100%; border-radius: 12px; cursor: pointer; }
+.rte-fig.is-sel img { outline: 3px solid var(--accent); outline-offset: 2px; }
+.rte-fig figcaption { font: 14px/1.4 var(--sans); color: var(--muted); text-align: center; margin-top: 6px; min-height: 1.4em; outline: none; }
+.rte-fig figcaption:empty::before { content: "Pie de foto (opcional)"; opacity: .55; }
+.rte-foot { display: flex; justify-content: space-between; gap: 10px; padding: 8px 14px; border-top: 1px solid var(--line); font: 600 13px var(--sans); color: var(--muted); }
+details.datos { border: 1px solid var(--line); border-radius: 16px; padding: 4px 16px; background: var(--surface); }
+details.datos > summary { cursor: pointer; font: 700 15px var(--sans); padding: 14px 0; list-style-position: inside; }
+details.datos[open] > summary { border-bottom: 1px solid var(--line); margin-bottom: 14px; }
+details.datos .field { margin-bottom: 14px; }
+.checkbox.soft .checks li.off .ico { background: var(--warn-soft); color: var(--warn); }
+.checkbox.soft .checks li.off span:last-child { color: var(--warn); }
+.articulo h2 { font-family: var(--display); line-height: 1.25; margin: 1.6em 0 .5em; letter-spacing: -.01em; font-size: 26px; font-weight: 700; }
+.articulo figure { margin: 0 0 1.2em; }
+.articulo img { border-radius: 12px; }
+.articulo figcaption { font: 14px/1.4 var(--sans); color: var(--muted); text-align: center; margin-top: 6px; }
+@media (max-width: 560px) {
+  .writer { padding: 16px 14px 22px; }
+  .rte-area { padding: 16px 16px; min-height: 52vh; }
+}
 </style>
 
 <header class="top">
@@ -507,7 +583,7 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': 
 const nowIso = () => new Date().toISOString();
 const nf = new Intl.NumberFormat('es-ES');
 // Solo portadas embebidas (WebP) o enlaces https; cualquier otra cosa no se pinta.
-const imgSegura = u => /^data:image\/webp;base64,[A-Za-z0-9+\/=]+$|^https:\/\/[^\s"'<>]+$/.test(String(u || '')) ? String(u) : '';
+const imgSegura = u => /^data:image\/(?:webp|jpeg);base64,[A-Za-z0-9+\/=]+$|^https:\/\/[^\s"'<>]+$/.test(String(u || '')) ? String(u) : '';
 const fmt = v => (v === undefined || v === null || v === '') ? '—' : (typeof v === 'number' ? nf.format(v) : esc(v));
 const SV = (d, extra) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"' + (extra || '') + '>' + d + '</svg>';
 const ICON = {
@@ -585,7 +661,7 @@ function safeLink(u) {
   const s = String(u ?? '');
   return /^https:\/\//.test(s) ? '<a href="' + esc(s) + '" target="_blank" rel="noopener noreferrer">' + esc(s) + '</a>' : esc(s || '—');
 }
-const TAGS_OK = new Set(['P', 'H2', 'H3', 'H4', 'UL', 'OL', 'LI', 'STRONG', 'EM', 'A', 'BLOCKQUOTE', 'BR', 'TABLE', 'THEAD', 'TBODY', 'TR', 'TH', 'TD']);
+const TAGS_OK = new Set(['P', 'H2', 'H3', 'H4', 'UL', 'OL', 'LI', 'STRONG', 'EM', 'A', 'BLOCKQUOTE', 'BR', 'TABLE', 'THEAD', 'TBODY', 'TR', 'TH', 'TD', 'IMG', 'FIGURE', 'FIGCAPTION']);
 // Deja solo marcado de artículo seguro: sin scripts, sin atributos salvo enlaces https.
 function sanitize(html) {
   const tpl = document.createElement('template');
@@ -596,7 +672,14 @@ function sanitize(html) {
       if (node.nodeType !== 1) { node.remove(); continue; }
       clean(node);
       if (!TAGS_OK.has(node.tagName)) { node.replaceWith(...node.childNodes); continue; }
+      const imgSrc = node.tagName === 'IMG' ? (node.getAttribute('src') || '') : '', imgAlt = node.tagName === 'IMG' ? (node.getAttribute('alt') || '') : '';
       for (const attr of [...node.attributes]) node.removeAttribute(attr.name);
+      if (node.tagName === 'IMG') {
+        let s = imgSrc; const m = /^uz-img:([A-Za-z0-9_-]+)$/.exec(s);
+        if (m) { s = IMG_CACHE[m[1]] || ''; if (!s) cargarImagen(m[1]).then(u => { if (u && !state.editing) render(); }); }
+        if (s && (/^https:\/\//.test(s) || DATA_IMG.test(s))) { node.setAttribute('src', s); node.setAttribute('alt', imgAlt); } else node.remove();
+        continue;
+      }
       if (node.tagName === 'A') {
         const href = node.getAttribute('href') || '';
         if (/^https:\/\//.test(href)) { node.setAttribute('href', href); node.setAttribute('target', '_blank'); node.setAttribute('rel', 'noopener noreferrer'); }
@@ -669,7 +752,8 @@ function checklist(x) {
   const items = checksData(x);
   const ok = items.filter(i => i[0]).length;
   const pct = Math.round(ok / items.length * 100);
-  return '<div class="checkbox"><div class="checkbox-top"><strong>' + (ok === items.length ? 'Todo en orden' : 'Revisa estos puntos') + '</strong>'
+  const propio = x.origen === 'alejandro';
+  return '<div class="checkbox' + (propio ? ' soft' : '') + '"><div class="checkbox-top"><strong>' + (ok === items.length ? 'Todo en orden' : (propio ? 'Sugerencias antes de publicar' : 'Revisa estos puntos')) + '</strong>'
     + '<span class="pill ' + (ok === items.length ? 'ok' : 'warn') + '">' + ok + ' de ' + items.length + ' comprobaciones</span></div>'
     + '<div class="bar' + (ok === items.length ? '' : ' mid') + '" role="img" aria-label="' + ok + ' de ' + items.length + ' comprobaciones superadas"><i style="width:' + pct + '%"></i></div>'
     + '<ul class="checks">' + items.map(([good, a, b]) => '<li class="' + (good ? 'ok' : 'off') + '"><span class="ico">' + (good ? ICON.ok : ICON.alerta) + '</span><span>' + esc(good ? a : b) + '</span></li>').join('') + '</ul></div>';
@@ -804,7 +888,7 @@ function cardBorrador(x) {
     + (tags ? '<span class="chips">' + tags + '</span>' : '') + '</button>';
 }
 
-function editor(x) {
+function editorHtml(x) {
   const v = s => esc(s || '');
   return '<div class="detail-in">'
     + '<button class="back" data-act="cancel_edit">' + ICON.atras + 'Cancelar edición</button>'
@@ -864,7 +948,7 @@ function detailBorrador(x) {
     + (canApprove ? boton('approve', 'Aprobar', true) : '')
     + (canReturn ? boton('return', 'Devolver', false) : '')
     + (canUpload ? boton('upload', botonSubida, true) : '')
-    + '<button class="btn" data-act="edit" data-id="' + esc(x.id) + '">Editar</button></div>'
+    + '<button class="btn' + (esEscrito(x) ? ' primary' : '') + '" data-act="edit" data-id="' + esc(x.id) + '">' + (esEscrito(x) ? 'Seguir escribiendo' : 'Editar') + '</button></div>'
     + (confirmando
       ? '<div class="confirm ' + CONFIRMA[confirmando].cls + '"><p><strong>' + esc(CONFIRMA[confirmando].pregunta) + '</strong></p><div class="actions">'
         + '<button class="btn primary" data-act="' + confirmando + '" data-id="' + esc(x.id) + '">' + esc(CONFIRMA[confirmando].ok) + '</button>'
@@ -1141,15 +1225,17 @@ function renderNav() {
   }).join('');
 }
 
-function render() {
+function render(forzar) {
+  if (!forzar && state.editing && (document.getElementById('ed-rte') || document.getElementById('ed-cuerpo'))) { renderNav(); return; }
   renderNav();
   document.getElementById('screen-title').textContent = VIEW_TITLE[state.view] || 'Hoy';
   const s = document.getElementById('screen');
   if (!state.ready) { s.innerHTML = emptyBox('Conectando', 'Un momento, calentando…', 'balon'); return; }
   if (!state.db) { s.innerHTML = emptyBox('Sin acceso a los datos', 'Pide acceso al propietario de este panel.', 'balon'); return; }
   if (state.data.borradores === null && state.data.ideas === null && state.data.metricas === null) { s.innerHTML = emptyBox('Cargando el panel', 'Un momento, calentando…', 'balon'); return; }
-  const fn = { hoy: renderHoy, borradores: renderBorradores, ideas: renderIdeas, metricas: renderMetricas }[state.view] || renderHoy;
+  const fn = { hoy: renderHoy, borradores: renderBorradores, escribir: renderEscribir, ideas: renderIdeas, metricas: renderMetricas }[state.view] || renderHoy;
   s.innerHTML = fn();
+  if (state.editing) montarEditor();
 }
 
 /* Escrituras */
@@ -1187,6 +1273,8 @@ async function removeItem(key, id) {
     }
     state.confirm = null;
     state.sel = null;
+    state.editing = null;
+    RTE.id = null;
     toast('Eliminado');
   } catch (e) {
     toast(errMsg(e));
@@ -1198,7 +1286,14 @@ async function removeItem(key, id) {
 
 async function saveEdit(id) {
   const g = s => document.getElementById(s).value;
-  const patch = {
+  const rico = !!document.getElementById('ed-rte');
+  const orig = (state.data.borradores || []).find(x => x.id === id) || {};
+  const patch = rico ? (() => {
+    const c = camposActuales();
+    const p = { titulo: c.titulo, slug: c.slug, extracto: c.extracto, etiquetas: c.etiquetas, pie_instagram: c.pie_instagram, cuerpo_html: RTE.cuerpoTocado ? c.cuerpo_html : orig.cuerpo_html, editado_por_humano: true };
+    if (RTE.portada && RTE.portada !== orig.imagen_url) p.imagen_url = RTE.portada;
+    return p;
+  })() : {
     titulo: g('ed-titulo').trim(),
     slug: g('ed-slug').trim(),
     extracto: g('ed-extracto').trim(),
@@ -1207,6 +1302,7 @@ async function saveEdit(id) {
     cuerpo_html: g('ed-cuerpo'),
     editado_por_humano: true,
   };
+  if (rico) await precargarImagenes(patch.cuerpo_html);
   if (!patch.titulo) { toast('El titular no puede estar vacío.'); return; }
   if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(patch.slug)) { toast('El slug solo admite minúsculas, números y guiones.'); return; }
   const key = 'borradores/' + id;
@@ -1219,7 +1315,7 @@ async function saveEdit(id) {
       borrador_id: id,
       fecha: nowIso(),
       antes: { titulo: previo.titulo, slug: previo.slug, extracto: previo.extracto, etiquetas: previo.etiquetas, pie_instagram: previo.pie_instagram, cuerpo_html: previo.cuerpo_html },
-      despues: patch,
+      despues: Object.fromEntries(Object.entries(patch).filter(([k]) => k !== 'imagen_url')),
     });
     await state.db.collection('borradores').doc(id).update({ ...patch, actualizado_en: nowIso() });
     state.editing = null;
@@ -1272,14 +1368,629 @@ function subscribe() {
   s.classList.add('on');
 }
 
+/* ===== Escribir: editor propio (negritas, cursivas, títulos, listas, citas, enlaces e imágenes) ===== */
+ICON.escribir = SV('<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>');
+ICON.negrita = SV('<path d="M7 5h6a3.5 3.5 0 0 1 0 7H7zM7 12h7a3.5 3.5 0 0 1 0 7H7z"/>');
+ICON.lista = SV('<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/>');
+ICON.listanum = SV('<path d="M10 6h10M10 12h10M10 18h10M4 5.5l1.5-1v4M3.8 13.5h2.4l-2.4 3h2.6"/>');
+ICON.cita = SV('<path d="M5 17v-4a4 4 0 0 1 4-4M13 17v-4a4 4 0 0 1 4-4"/><path d="M5 13h4v4H5zM13 13h4v4h-4z"/>');
+ICON.enlace = SV('<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>');
+ICON.imagen = SV('<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17l5-5 4 4 3-3 4 4"/>');
+ICON.deshacer = SV('<path d="M9 7L4 12l5 5"/><path d="M4 12h10a6 6 0 0 1 6 6"/>');
+ICON.rehacer = SV('<path d="M15 7l5 5-5 5"/><path d="M20 12H10a6 6 0 0 0-6 6"/>');
+ICON.limpiar = SV('<path d="M6 6h12M10 6l-3 12M14 6l3 12M5 21h14"/>');
+
+VIEWS.splice(2, 0, { key: 'escribir', label: 'Escribir', icon: ICON.escribir });
+VIEW_TITLE.escribir = 'Escribir';
+ESTADO.en_escritura = ['info', 'En escritura'];
+
+const RTE = { id: null, campos: new Set(), timer: null, sel: null, portada: '', guardando: false, modo: 'escrito', tocado: false, cuerpoTocado: false, fig: null, slugManual: false, montado: false };
+const IMG_CACHE = {};
+const IMG_PEDIDAS = new Set();
+const DATA_IMG = /^data:image\/(?:webp|jpeg);base64,[A-Za-z0-9+\/=]+$/;
+
+function slugify(t) {
+  return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 70).replace(/-+$/g, '');
+}
+function tieneMarcadores(html) { return /<!--\s*(stats|actualizado):/.test(String(html || '')); }
+function esEscrito(x) { return x && x.origen === 'alejandro' && x.estado === 'en_escritura'; }
+
+/* Imágenes del cuerpo: viven en la colección imagenes y el cuerpo las cita como uz-img:<id> */
+async function cargarImagen(id) {
+  if (IMG_CACHE[id]) return IMG_CACHE[id];
+  if (!state.db || IMG_PEDIDAS.has(id)) return '';
+  IMG_PEDIDAS.add(id);
+  try {
+    const snap = await state.db.collection('imagenes').doc(id).get();
+    const d = snap && snap.exists ? snap.data() : null;
+    if (d && DATA_IMG.test(String(d.data || ''))) IMG_CACHE[id] = d.data;
+  } catch (e) { /* sin imagen: se pinta un hueco */ }
+  return IMG_CACHE[id] || '';
+}
+async function precargarImagenes(html) {
+  const ids = [...new Set([...String(html || '').matchAll(/uz-img:([A-Za-z0-9_-]+)/g)].map(m => m[1]))];
+  await Promise.all(ids.map(cargarImagen));
+}
+function toBlobAsync(canvas, tipo, q) { return new Promise(res => canvas.toBlob(res, tipo, q)); }
+function leerDataUrl(blob) {
+  return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = () => rej(r.error); r.readAsDataURL(blob); });
+}
+// Reduce la imagen hasta que cabe en el límite. WebP si el navegador lo sabe codificar; si no, JPEG.
+async function comprimirImagen(file, { maxBytes, maxAncho, recorte169 }) {
+  let bmp;
+  try { bmp = await createImageBitmap(file); } catch (e) {
+    bmp = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = URL.createObjectURL(file); });
+  }
+  const sw = bmp.width || bmp.naturalWidth, sh = bmp.height || bmp.naturalHeight;
+  let sx = 0, sy = 0, cw = sw, ch = sh;
+  if (recorte169) {
+    if (sw / sh > 16 / 9) { cw = Math.round(sh * 16 / 9); sx = Math.round((sw - cw) / 2); }
+    else { ch = Math.round(sw * 9 / 16); sy = Math.round((sh - ch) / 2); }
+  }
+  let w = Math.min(cw, maxAncho), q = 0.82;
+  const canvas = document.createElement('canvas');
+  for (let i = 0; i < 14; i++) {
+    const h = Math.round(ch * w / cw);
+    canvas.width = w; canvas.height = h;
+    canvas.getContext('2d').drawImage(bmp, sx, sy, cw, ch, 0, 0, w, h);
+    let blob = await toBlobAsync(canvas, 'image/webp', q);
+    if (!blob || blob.type !== 'image/webp') blob = await toBlobAsync(canvas, 'image/jpeg', q);
+    if (blob && blob.size <= maxBytes) return { url: await leerDataUrl(blob), bytes: blob.size, w, h };
+    if (q > 0.55) q -= 0.09; else { w = Math.round(w * 0.85); q = 0.78; }
+    if (w < 480) break;
+  }
+  throw new Error('La imagen es demasiado pesada incluso reducida.');
+}
+
+/* Cuerpo guardado (bloques de WordPress) <-> contenido editable */
+function aEditor(html) {
+  const tpl = document.createElement('template');
+  tpl.innerHTML = String(html || '');
+  const out = document.createElement('div');
+  const el = t => document.createElement(t);
+  const inline = (nodo, dest) => {
+    for (const n of nodo.childNodes) {
+      if (n.nodeType === 3) { dest.appendChild(document.createTextNode(n.nodeValue)); continue; }
+      if (n.nodeType !== 1) continue;
+      const t = n.tagName;
+      if (t === 'STRONG' || t === 'B') { const e = el('strong'); inline(n, e); dest.appendChild(e); }
+      else if (t === 'EM' || t === 'I') { const e = el('em'); inline(n, e); dest.appendChild(e); }
+      else if (t === 'A') { const e = el('a'); const h = n.getAttribute('href') || ''; if (/^https:\/\//.test(h)) e.setAttribute('href', h); inline(n, e); dest.appendChild(e); }
+      else if (t === 'BR') dest.appendChild(el('br'));
+      else if (t !== 'IMG' && t !== 'SCRIPT' && t !== 'STYLE') inline(n, dest);
+    }
+  };
+  const figura = (img, cap) => {
+    let src = img.getAttribute('src') || '', uz = '';
+    const m = /^uz-img:([A-Za-z0-9_-]+)$/.exec(src);
+    if (m) { uz = m[1]; src = IMG_CACHE[uz] || ''; }
+    else if (!/^https:\/\//.test(src) && !DATA_IMG.test(src)) return null;
+    const f = el('figure'); f.className = 'rte-fig'; f.contentEditable = 'false';
+    if (uz) f.setAttribute('data-uz', uz);
+    const i = el('img'); if (src) i.setAttribute('src', src); i.setAttribute('alt', img.getAttribute('alt') || '');
+    const c = el('figcaption'); c.contentEditable = 'true'; c.textContent = cap || '';
+    f.append(i, c);
+    return f;
+  };
+  const simple = (t, n) => { const e = el(t); inline(n, e); if (e.textContent.trim() || e.querySelector('br')) out.appendChild(e); };
+  const bloque = n => {
+    if (n.nodeType === 3) { if (n.nodeValue.trim()) { const p = el('p'); p.textContent = n.nodeValue.trim(); out.appendChild(p); } return; }
+    if (n.nodeType !== 1) return;
+    const t = n.tagName;
+    if (t === 'P') {
+      const img = n.querySelector('img');
+      if (img && !n.textContent.trim()) { const f = figura(img, ''); if (f) out.appendChild(f); } else simple('p', n);
+    } else if (t === 'H1' || t === 'H2') simple('h2', n);
+    else if (/^H[3-6]$/.test(t)) simple('h3', n);
+    else if (t === 'UL' || t === 'OL') {
+      const l = el(t.toLowerCase());
+      for (const li of n.querySelectorAll(':scope > li')) { const e = el('li'); inline(li, e); l.appendChild(e); }
+      if (l.children.length) out.appendChild(l);
+    } else if (t === 'BLOCKQUOTE') {
+      const q = el('blockquote'); const ps = n.querySelectorAll(':scope > p');
+      if (ps.length) ps.forEach(p => { const e = el('p'); inline(p, e); q.appendChild(e); }); else { const e = el('p'); inline(n, e); q.appendChild(e); }
+      out.appendChild(q);
+    } else if (t === 'FIGURE' || t === 'IMG') {
+      const img = t === 'IMG' ? n : n.querySelector('img');
+      if (img) { const c = t === 'FIGURE' ? n.querySelector('figcaption') : null; const f = figura(img, c ? c.textContent.trim() : ''); if (f) out.appendChild(f); }
+      else if (n.querySelector('table')) bloque(n.querySelector('table'));
+    } else if (t === 'TABLE') {
+      const tb = el('table');
+      for (const tr of n.querySelectorAll('tr')) {
+        const r = el('tr');
+        for (const c of tr.children) { const e = el(c.tagName === 'TH' ? 'th' : 'td'); inline(c, e); r.appendChild(e); }
+        tb.appendChild(r);
+      }
+      out.appendChild(tb);
+    } else if (t !== 'SCRIPT' && t !== 'STYLE') for (const h of n.childNodes) bloque(h);
+  };
+  for (const n of tpl.content.childNodes) bloque(n);
+  if (!out.childNodes.length) out.innerHTML = '<p><br></p>';
+  return out.innerHTML;
+}
+
+const SER = {
+  txt: s => esc(String(s).replace(/ /g, ' ')),
+  inline(nodo) {
+    let s = '';
+    for (const n of nodo.childNodes) {
+      if (n.nodeType === 3) { s += SER.txt(n.nodeValue); continue; }
+      if (n.nodeType !== 1) continue;
+      const t = n.tagName, d = SER.inline(n);
+      if (t === 'STRONG' || t === 'B') s += d.trim() ? '<strong>' + d + '</strong>' : d;
+      else if (t === 'EM' || t === 'I') s += d.trim() ? '<em>' + d + '</em>' : d;
+      else if (t === 'A') { const h = n.getAttribute('href') || ''; s += /^https:\/\//.test(h) ? '<a href="' + esc(h) + '">' + d + '</a>' : d; }
+      else if (t === 'BR') s += '<br>';
+      else if (t === 'IMG' || t === 'FIGURE') s += '';
+      else s += d;
+    }
+    return s;
+  },
+  parrafo: h => '<!-- wp:paragraph -->\n<p>' + h + '</p>\n<!-- /wp:paragraph -->',
+  titulo: (n, h) => '<!-- wp:heading' + (n === 3 ? ' {"level":3}' : '') + ' -->\n<h' + n + ' class="wp-block-heading">' + h + '</h' + n + '>\n<!-- /wp:heading -->',
+  lista(n) {
+    const ord = n.tagName === 'OL', t = ord ? 'ol' : 'ul';
+    const items = [...n.children].filter(c => c.tagName === 'LI').map(li => SER.inline(li)).filter(h => h.replace(/<br>/g, '').trim());
+    if (!items.length) return '';
+    return '<!-- wp:list' + (ord ? ' {"ordered":true}' : '') + ' -->\n<' + t + ' class="wp-block-list">'
+      + items.map(h => '<!-- wp:list-item -->\n<li>' + h + '</li>\n<!-- /wp:list-item -->').join('\n\n') + '</' + t + '>\n<!-- /wp:list -->';
+  },
+  cita(n) {
+    const ps = [...n.children].filter(c => c.tagName === 'P');
+    const hs = (ps.length ? ps.map(p => SER.inline(p)) : [SER.inline(n)]).filter(h => h.replace(/<br>/g, '').trim());
+    if (!hs.length) return '';
+    return '<!-- wp:quote -->\n<blockquote class="wp-block-quote">' + hs.map(h => SER.parrafo(h)).join('\n') + '</blockquote>\n<!-- /wp:quote -->';
+  },
+  figura(f) {
+    const img = f.querySelector('img'); if (!img) return '';
+    const uz = f.getAttribute('data-uz');
+    const src = uz ? 'uz-img:' + uz : (img.getAttribute('src') || '');
+    if (!uz && !/^https:\/\//.test(src)) return '';
+    const cap = f.querySelector('figcaption'); const c = cap ? cap.textContent.trim() : '';
+    return '<!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->\n<figure class="wp-block-image size-large"><img src="' + esc(src) + '" alt="' + esc(img.getAttribute('alt') || '') + '"/>'
+      + (c ? '<figcaption class="wp-element-caption">' + esc(c) + '</figcaption>' : '') + '</figure>\n<!-- /wp:image -->';
+  },
+  tabla(n) {
+    const filas = [...n.querySelectorAll('tr')].map(tr => '<tr>' + [...tr.children].map(c => { const t = c.tagName === 'TH' ? 'th' : 'td'; return '<' + t + '>' + SER.inline(c) + '</' + t + '>'; }).join('') + '</tr>');
+    return filas.length ? '<!-- wp:table -->\n<figure class="wp-block-table"><table><tbody>' + filas.join('') + '</tbody></table></figure>\n<!-- /wp:table -->' : '';
+  },
+};
+function deEditor(raiz) {
+  const bloques = [];
+  const vacio = h => !h.replace(/<br>/g, '').trim();
+  const proc = n => {
+    if (n.nodeType === 3) { const h = SER.txt(n.nodeValue).trim(); if (h) bloques.push(SER.parrafo(h)); return; }
+    if (n.nodeType !== 1) return;
+    const t = n.tagName;
+    if (t === 'P' && n.querySelector(':scope > ul, :scope > ol, :scope > blockquote, :scope > h2, :scope > h3, :scope > h1, :scope > figure, :scope > table, :scope > p')) {
+      let buf = document.createElement('div');
+      const vaciar = () => { const h = SER.inline(buf); if (!vacio(h)) bloques.push(SER.parrafo(h)); buf = document.createElement('div'); };
+      for (const h of [...n.childNodes]) {
+        if (h.nodeType === 1 && /^(UL|OL|BLOCKQUOTE|H1|H2|H3|FIGURE|TABLE|P)$/.test(h.tagName)) { vaciar(); proc(h); } else buf.appendChild(h.cloneNode(true));
+      }
+      vaciar();
+    }
+    else if (t === 'P') { const h = SER.inline(n); if (!vacio(h)) bloques.push(SER.parrafo(h)); }
+    else if (t === 'H1' || t === 'H2') { const h = SER.inline(n); if (!vacio(h)) bloques.push(SER.titulo(2, h)); }
+    else if (/^H[3-6]$/.test(t)) { const h = SER.inline(n); if (!vacio(h)) bloques.push(SER.titulo(3, h)); }
+    else if (t === 'UL' || t === 'OL') { const s = SER.lista(n); if (s) bloques.push(s); }
+    else if (t === 'BLOCKQUOTE') { const s = SER.cita(n); if (s) bloques.push(s); }
+    else if (t === 'FIGURE') { const s = SER.figura(n); if (s) bloques.push(s); }
+    else if (t === 'TABLE') { const s = SER.tabla(n); if (s) bloques.push(s); }
+    else if (t === 'DIV' || t === 'SECTION') {
+      if (n.querySelector('p,h1,h2,h3,ul,ol,blockquote,figure,table')) for (const h of n.childNodes) proc(h);
+      else { const h = SER.inline(n); if (!vacio(h)) bloques.push(SER.parrafo(h)); }
+    } else if (t !== 'BR') { const h = SER.inline(n); if (!vacio(h)) bloques.push(SER.parrafo(h)); }
+  };
+  for (const n of raiz.childNodes) proc(n);
+  return bloques.join('\n\n');
+}
+
+/* Pantalla del editor */
+function textoPlano(html) { return String(html || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(); }
+function editorArticulo(x) {
+  const v = s => esc(s || '');
+  const escrito = esEscrito(x);
+  const img = DATA_IMG.test(String(x.imagen_url || '')) || /^https:\/\//.test(String(x.imagen_url || '')) ? String(x.imagen_url) : '';
+  const btnBar = (cmd, label, inner, extra) => '<button type="button" data-act="rte" data-cmd="' + cmd + '" aria-label="' + label + '" title="' + label + '"' + (extra || '') + '>' + inner + '</button>';
+  return '<div class="writer-top">'
+    + '<button class="back" data-act="' + (escrito ? 'cerrar_escrito' : 'cancel_edit') + '">' + ICON.atras + (escrito ? 'Mis escritos' : 'Cancelar edición') + '</button>'
+    + (escrito ? '<span class="autosave ok" id="ed-guardado" role="status">Guardado</span>' : '') + '</div>'
+    + '<div class="field"><label class="block-label" for="ed-titulo"><span>Titular</span><span class="contador" id="c-titulo"></span></label>'
+    + '<textarea class="ed titular" id="ed-titulo" rows="2" placeholder="El titular del artículo" autocomplete="off" enterkeyhint="next">' + v(x.titulo) + '</textarea></div>'
+    + '<div class="portada"><div class="block-label"><span>Portada</span></div>'
+    + '<div class="portada-img' + (img ? ' hay' : '') + '" id="ed-portada-vista">' + (img ? '<img src="' + esc(img) + '" alt="Portada del artículo">' : ICON.imagen) + '</div>'
+    + '<div class="actions"><button type="button" class="btn" data-act="portada_pick">' + (img ? 'Cambiar portada' : 'Elegir portada') + '</button>'
+    + '<input type="file" id="ed-portada-file" accept="image/*" hidden><span class="hint" id="ed-portada-nota">Se recorta a 16:9 y se reduce sola.</span></div></div>'
+    + '<div class="field"><div class="block-label"><span>Artículo</span></div><div class="rte">'
+    + '<div class="rte-bar" role="toolbar" aria-label="Formato del texto">'
+    + btnBar('bold', 'Negrita', '<span class="b">B</span>', ' aria-pressed="false"')
+    + btnBar('italic', 'Cursiva', '<span class="i">I</span>', ' aria-pressed="false"')
+    + '<span class="sep"></span>'
+    + btnBar('h2', 'Título', 'H2', ' aria-pressed="false"')
+    + btnBar('h3', 'Subtítulo', 'H3', ' aria-pressed="false"')
+    + btnBar('p', 'Texto normal', 'Aa', '')
+    + '<span class="sep"></span>'
+    + btnBar('ul', 'Lista', ICON.lista, ' aria-pressed="false"')
+    + btnBar('ol', 'Lista numerada', ICON.listanum, ' aria-pressed="false"')
+    + btnBar('quote', 'Cita', ICON.cita, ' aria-pressed="false"')
+    + '<span class="sep"></span>'
+    + btnBar('link', 'Enlace', ICON.enlace, ' aria-pressed="false"')
+    + btnBar('image', 'Insertar imagen', ICON.imagen, '')
+    + '<span class="sep"></span>'
+    + btnBar('undo', 'Deshacer', ICON.deshacer, '')
+    + btnBar('redo', 'Rehacer', ICON.rehacer, '')
+    + btnBar('clear', 'Quitar formato', ICON.limpiar, '')
+    + '</div>'
+    + '<div class="rte-tools" id="rte-link" hidden><div class="fila"><input class="ed" id="rte-url" inputmode="url" placeholder="https://undraftedzone.com/…" autocomplete="off" aria-label="Dirección del enlace">'
+    + '<button type="button" class="btn primary" data-act="link_ok">Poner enlace</button><button type="button" class="btn" data-act="link_quitar">Quitar</button><button type="button" class="btn ghost" data-act="tools_cerrar">Cerrar</button></div></div>'
+    + '<div class="rte-tools" id="rte-img" hidden><div class="fila"><input class="ed" id="rte-alt" placeholder="Describe la imagen (texto alternativo)" autocomplete="off" aria-label="Texto alternativo de la imagen">'
+    + '<button type="button" class="btn danger" data-act="img_quitar">Quitar imagen</button><button type="button" class="btn ghost" data-act="tools_cerrar">Cerrar</button></div></div>'
+    + '<input type="file" id="ed-img-file" accept="image/*" hidden>'
+    + '<div class="rte-area" id="ed-rte" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Texto del artículo" data-ph="Escribe aquí tu artículo…" spellcheck="true" lang="es"></div>'
+    + '<div class="rte-foot"><span id="c-palabras">0 palabras</span><span id="c-img"></span></div></div></div>'
+    + '<details class="datos"' + (escrito ? '' : ' open') + '><summary>Datos para publicar</summary>'
+    + '<div class="field"><label class="block-label" for="ed-extracto"><span>Extracto</span><span class="contador" id="c-extracto"></span></label><textarea class="ed" id="ed-extracto" rows="3">' + v(x.extracto) + '</textarea></div>'
+    + '<div class="field"><label class="block-label" for="ed-slug"><span>Dirección (slug)</span></label><input class="ed mono" id="ed-slug" autocomplete="off" value="' + v(x.slug) + '"></div>'
+    + '<div class="field"><label class="block-label" for="ed-etiquetas"><span>Etiquetas (separadas por comas)</span></label><input class="ed" id="ed-etiquetas" value="' + v((x.etiquetas || []).join(', ')) + '"></div>'
+    + '<div class="field"><label class="block-label" for="ed-pie"><span>Pie de Instagram</span></label><textarea class="ed" id="ed-pie" rows="4">' + v(x.pie_instagram) + '</textarea></div></details>'
+    + '<div id="ed-checks"></div>'
+    + (escrito
+      ? '<div class="actions"><button class="btn" data-act="pedir_verificacion" data-id="' + v(x.id) + '">Pedir verificación</button>'
+        + '<button class="btn primary" data-act="dejar_listo" data-id="' + v(x.id) + '">Dejar listo para publicar</button></div>'
+        + '<p class="hint">Se guarda solo mientras escribes. «Pedir verificación» lo pasa al verificador de datos; «Dejar listo» lo deja aprobado para publicarlo desde Borradores.</p>'
+        + deleteBlock('borradores', x.id)
+      : '<div class="actions"><button class="btn primary" data-act="save_edit" data-id="' + v(x.id) + '">Guardar cambios</button>'
+        + '<button class="btn" data-act="cancel_edit">Cancelar</button></div>');
+}
+// Editor del detalle de un borrador: texto enriquecido salvo en artículos vivos (llevan marcadores que no se pueden perder)
+function editor(x) {
+  if (tieneMarcadores(x.cuerpo_html)) return editorHtml(x);
+  const caja = esEscrito(x) ? '' : '<div class="detail-in"><h2 class="dtitle">Editando borrador</h2></div>';
+  return '<div class="writer">' + caja + editorArticulo(x) + '</div>';
+}
+
+/* Montaje y eventos del editor */
+const $ = id => document.getElementById(id);
+async function montarEditor() {
+  const area = $('ed-rte');
+  if (!area || !state.editing) return;
+  const x = (state.data.borradores || []).find(b => b.id === state.editing);
+  if (!x || tieneMarcadores(x.cuerpo_html)) return;
+  const idMontaje = state.editing;
+  await precargarImagenes(x.cuerpo_html);
+  if (state.editing !== idMontaje || $('ed-rte') !== area) return;
+  RTE.id = x.id; RTE.modo = esEscrito(x) ? 'escrito' : 'existente'; RTE.campos.clear(); RTE.tocado = false; RTE.cuerpoTocado = false; RTE.fig = null;
+  RTE.portada = DATA_IMG.test(String(x.imagen_url || '')) ? x.imagen_url : '';
+  RTE.slugManual = !!x.slug && x.slug !== slugify(x.titulo);
+  area.innerHTML = aEditor(x.cuerpo_html);
+  try { document.execCommand('defaultParagraphSeparator', false, 'p'); } catch (e) { /* ya es p por defecto */ }
+  actualizarContadores();
+  if (RTE.modo === 'escrito' && !x.titulo) { const t = $('ed-titulo'); if (t) t.focus(); }
+}
+function marcar(campo) {
+  RTE.tocado = true;
+  if (campo === 'cuerpo') RTE.cuerpoTocado = true;
+  if (RTE.modo !== 'escrito') { actualizarContadores(); return; }
+  RTE.campos.add(campo);
+  const g = $('ed-guardado'); if (g) { g.textContent = 'Sin guardar…'; g.className = 'autosave work'; }
+  clearTimeout(RTE.timer);
+  RTE.timer = setTimeout(() => guardarEscrito(), 1500);
+  actualizarContadores();
+}
+function valor(id) { const e = $(id); return e ? e.value : ''; }
+function camposActuales() {
+  const area = $('ed-rte');
+  const etiquetas = valor('ed-etiquetas').split(',').map(t => t.trim()).filter(Boolean);
+  return { titulo: valor('ed-titulo').trim(), slug: valor('ed-slug').trim(), extracto: valor('ed-extracto').trim(), etiquetas, pie_instagram: valor('ed-pie').trim(), cuerpo_html: area ? deEditor(area) : '', imagen_url: RTE.portada };
+}
+function actualizarContadores() {
+  const set = (id, txt, mal) => { const e = $(id); if (e) { e.textContent = txt; e.classList.toggle('mal', !!mal); } };
+  const ti = valor('ed-titulo').length, ex = valor('ed-extracto').length;
+  set('c-titulo', ti + ' · ideal 50–65', ti && (ti < 50 || ti > 65));
+  set('c-extracto', ex + ' · ideal 140–160', ex && (ex < 140 || ex > 160));
+  const area = $('ed-rte');
+  if (area) {
+    const pal = area.textContent.trim() ? area.textContent.trim().split(/\s+/).length : 0;
+    set('c-palabras', pal + (pal === 1 ? ' palabra' : ' palabras'));
+    const ni = area.querySelectorAll('figure.rte-fig').length; set('c-img', ni ? ni + (ni === 1 ? ' imagen' : ' imágenes') : '');
+  }
+  clearTimeout(actualizarContadores.t);
+  actualizarContadores.t = setTimeout(pintarComprobaciones, 500);
+}
+function pintarComprobaciones() {
+  const cont = $('ed-checks'); const area = $('ed-rte');
+  if (!cont || !area) return;
+  const items = checksData({ ...camposActuales(), cuerpo_html: deEditor(area) });
+  const ok = items.filter(i => i[0]).length;
+  cont.innerHTML = '<details class="datos"><summary>Sugerencias de SEO y estilo · ' + ok + ' de ' + items.length + '</summary><div class="checkbox soft"><ul class="checks">'
+    + items.map(([good, a, b]) => '<li class="' + (good ? 'ok' : 'off') + '"><span class="ico">' + (good ? ICON.ok : ICON.alerta) + '</span><span>' + esc(good ? a : b) + '</span></li>').join('') + '</ul></div></details>';
+}
+function setGuardado(txt, cls) { const g = $('ed-guardado'); if (g) { g.textContent = txt; g.className = 'autosave ' + cls; } }
+async function guardarEscrito() {
+  if (RTE.modo !== 'escrito' || !RTE.id || !state.db || !RTE.campos.size) return true;
+  if (RTE.guardando) { clearTimeout(RTE.timer); RTE.timer = setTimeout(() => guardarEscrito(), 600); return false; }
+  const id = RTE.id, campos = [...RTE.campos];
+  RTE.campos.clear(); RTE.guardando = true; setGuardado('Guardando…', 'work');
+  const c = camposActuales(), patch = { editado_por_humano: true, actualizado_en: nowIso() };
+  if (campos.includes('titulo')) patch.titulo = c.titulo;
+  if (campos.includes('slug') && (!c.slug || /^[a-z0-9]+(-[a-z0-9]+)*$/.test(c.slug))) patch.slug = c.slug;
+  if (campos.includes('extracto')) patch.extracto = c.extracto;
+  if (campos.includes('etiquetas')) patch.etiquetas = c.etiquetas;
+  if (campos.includes('pie')) patch.pie_instagram = c.pie_instagram;
+  if (campos.includes('cuerpo')) patch.cuerpo_html = c.cuerpo_html;
+  if (campos.includes('imagen')) patch.imagen_url = c.imagen_url;
+  let ok = true;
+  try {
+    await state.db.collection('borradores').doc(id).update(patch);
+    const b = (state.data.borradores || []).find(x => x.id === id); if (b) Object.assign(b, patch);
+    setGuardado('Guardado ' + new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }), 'ok');
+  } catch (e) {
+    ok = false; campos.forEach(k => RTE.campos.add(k));
+    setGuardado('Sin conexión: se reintentará', 'bad');
+    clearTimeout(RTE.timer); RTE.timer = setTimeout(() => guardarEscrito(), 5000);
+  } finally { RTE.guardando = false; }
+  if (ok && RTE.campos.size) { clearTimeout(RTE.timer); RTE.timer = setTimeout(() => guardarEscrito(), 600); }
+  return ok;
+}
+async function vaciarGuardado() {
+  clearTimeout(RTE.timer);
+  for (let i = 0; i < 6 && (RTE.campos.size || RTE.guardando); i++) { await guardarEscrito(); if (RTE.guardando) await new Promise(r => setTimeout(r, 300)); }
+}
+
+/* Crear, cerrar y enviar */
+async function crearArticulo() {
+  if (!state.db) return;
+  const id = 'b-alex-' + Date.now().toString(36);
+  const doc = { titulo: '', slug: '', extracto: '', etiquetas: [], pie_instagram: '', cuerpo_html: '', fuentes: [], confianza: 'alta', franquicia: 'ninguna', modo: 'borrador', tipo: 'articulo', origen: 'alejandro', estado: 'en_escritura', editado_por_humano: true, subida_solicitada: false, fecha: nowIso(), actualizado_en: nowIso() };
+  try {
+    await state.db.collection('borradores').doc(id).set(doc);
+  } catch (e) { toast(errMsg(e)); return; }
+  if (!(state.data.borradores || []).some(b => b.id === id)) (state.data.borradores = state.data.borradores || []).push({ id, ...doc });
+  state.view = 'escribir'; state.editing = id; state.sel = null; location.hash = 'escribir';
+  render(true);
+}
+async function cerrarEscrito() {
+  await vaciarGuardado();
+  state.editing = null; RTE.id = null; render(true);
+}
+async function finalizarEscrito(id, destino) {
+  await vaciarGuardado();
+  if (RTE.campos.size) { toast('No se pudo guardar el último cambio. Inténtalo otra vez.'); return; }
+  const b = (state.data.borradores || []).find(x => x.id === id);
+  if (!b) return;
+  if (!String(b.titulo || '').trim()) { toast('Falta el titular.'); return; }
+  if (!textoPlano(b.cuerpo_html)) { toast('El artículo está vacío.'); return; }
+  const checks = checksData(b);
+  if (!checks[6][0]) { toast('Hay un término de apuestas en el texto: quítalo antes de seguir.'); return; }
+  if (destino === 'aprobado') {
+    if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(String(b.slug || ''))) { toast('Falta una dirección válida (slug) en «Datos para publicar».'); return; }
+    if (!imgSegura(b.imagen_url)) { toast('Falta la portada: no se puede dejar listo sin imagen.'); return; }
+  }
+  try {
+    await state.db.collection('borradores').doc(id).update({ estado: destino, actualizado_en: nowIso() });
+    toast(destino === 'aprobado' ? 'Listo para publicar' : 'Enviado a verificación');
+    state.editing = null; RTE.id = null;
+    go('borradores', id);
+  } catch (e) { toast(errMsg(e)); }
+}
+
+/* Comandos de la barra */
+function bloqueActual() {
+  const s = getSelection(); if (!s.rangeCount) return '';
+  let n = s.anchorNode; const area = $('ed-rte');
+  while (n && n !== area) {
+    if (n.nodeType === 1 && /^(H2|H3|BLOCKQUOTE|LI)$/.test(n.tagName)) return n.tagName === 'LI' ? (n.parentNode.tagName === 'OL' ? 'ol' : 'ul') : n.tagName.toLowerCase();
+    n = n.parentNode;
+  }
+  return 'p';
+}
+function actualizarBarra() {
+  const bar = document.querySelector('.rte-bar'); if (!bar) return;
+  const on = (cmd, v) => { const b = bar.querySelector('[data-cmd="' + cmd + '"]'); if (b && b.hasAttribute('aria-pressed')) b.setAttribute('aria-pressed', String(!!v)); };
+  const bl = bloqueActual();
+  let neg = false, cur = false;
+  try { neg = document.queryCommandState('bold'); cur = document.queryCommandState('italic'); } catch (e) { /* sin estado */ }
+  on('bold', neg); on('italic', cur); on('h2', bl === 'h2'); on('h3', bl === 'h3'); on('ul', bl === 'ul'); on('ol', bl === 'ol'); on('quote', bl === 'blockquote');
+  const s = getSelection(); let a = s.anchorNode, enlace = false;
+  while (a && a !== $('ed-rte')) { if (a.nodeType === 1 && a.tagName === 'A') { enlace = true; break; } a = a.parentNode; }
+  on('link', enlace);
+}
+function guardarSeleccion() {
+  const s = getSelection(); const area = $('ed-rte');
+  if (area && s.rangeCount && area.contains(s.anchorNode)) RTE.sel = s.getRangeAt(0).cloneRange();
+}
+function restaurarSeleccion(forzar) {
+  const area = $('ed-rte'); if (!area) return;
+  area.focus({ preventScroll: true });
+  const s = getSelection();
+  // Si el cursor ya está dentro del texto no se toca: restaurarlo borraría la negrita o cursiva recién activada.
+  if (!forzar && s.rangeCount && area.contains(s.anchorNode)) return;
+  if (RTE.sel) { s.removeAllRanges(); s.addRange(RTE.sel); }
+}
+function cerrarTools() { const a = $('rte-link'), b = $('rte-img'); if (a) a.hidden = true; if (b) b.hidden = true; if (RTE.fig) { RTE.fig.classList.remove('is-sel'); RTE.fig = null; } }
+function formato(cmd) {
+  const area = $('ed-rte'); if (!area) return;
+  if (cmd !== 'image' && cmd !== 'link') cerrarTools();
+  restaurarSeleccion();
+  const ex = (c, v) => { try { document.execCommand(c, false, v); } catch (e) { /* no soportado */ } };
+  const actual = bloqueActual();
+  switch (cmd) {
+    case 'bold': ex('bold'); break;
+    case 'italic': ex('italic'); break;
+    case 'h2': ex('formatBlock', actual === 'h2' ? '<p>' : '<h2>'); break;
+    case 'h3': ex('formatBlock', actual === 'h3' ? '<p>' : '<h3>'); break;
+    case 'p': if (actual === 'ul' || actual === 'ol') ex(actual === 'ul' ? 'insertUnorderedList' : 'insertOrderedList'); ex('formatBlock', '<p>'); break;
+    case 'quote': ex('formatBlock', actual === 'blockquote' ? '<p>' : '<blockquote>'); break;
+    case 'ul': ex('insertUnorderedList'); break;
+    case 'ol': ex('insertOrderedList'); break;
+    case 'undo': ex('undo'); break;
+    case 'redo': ex('redo'); break;
+    case 'clear': ex('removeFormat'); ex('unlink'); break;
+    case 'link': {
+      const t = $('rte-link'); $('rte-img').hidden = true; t.hidden = false;
+      const s = getSelection(); let a = s.anchorNode; while (a && a !== area && !(a.nodeType === 1 && a.tagName === 'A')) a = a.parentNode;
+      $('rte-url').value = a && a.tagName === 'A' ? (a.getAttribute('href') || '') : '';
+      $('rte-url').focus();
+      return;
+    }
+    case 'image': guardarSeleccion(); $('ed-img-file').click(); return;
+  }
+  normalizarArea(); guardarSeleccion(); actualizarBarra(); marcar('cuerpo');
+}
+function normalizarArea() {
+  const area = $('ed-rte'); if (!area) return;
+  for (const p of area.querySelectorAll('p')) {
+    if (p.parentNode === area && p.querySelector(':scope > ul, :scope > ol, :scope > blockquote, :scope > h2, :scope > h3, :scope > p')) p.replaceWith(...p.childNodes);
+  }
+}
+function ponerEnlace() {
+  let u = $('rte-url').value.trim();
+  if (!u) { toast('Escribe la dirección del enlace.'); return; }
+  if (u.startsWith('/')) u = 'https://undraftedzone.com' + u;
+  else if (!/^https:\/\//.test(u)) u = 'https://' + u.replace(/^https?:\/\//, '');
+  if (!/^https:\/\/[^\s"'<>]+\.[^\s"'<>]+/.test(u)) { toast('La dirección no parece válida.'); return; }
+  restaurarSeleccion(true);
+  const s = getSelection();
+  try {
+    if (s.isCollapsed) document.execCommand('insertHTML', false, '<a href="' + esc(u) + '">' + esc(u.replace(/^https:\/\//, '')) + '</a>');
+    else document.execCommand('createLink', false, u);
+  } catch (e) { toast('No se pudo crear el enlace.'); }
+  $('rte-link').hidden = true; guardarSeleccion(); marcar('cuerpo');
+}
+function quitarEnlace() { restaurarSeleccion(true); try { document.execCommand('unlink'); } catch (e) { /* nada */ } $('rte-link').hidden = true; guardarSeleccion(); marcar('cuerpo'); }
+
+/* Imágenes */
+function nuevaFigura(url, alt, uz) {
+  const f = document.createElement('figure'); f.className = 'rte-fig'; f.contentEditable = 'false'; f.setAttribute('data-uz', uz);
+  const i = document.createElement('img'); i.src = url; i.alt = alt || '';
+  const c = document.createElement('figcaption'); c.contentEditable = 'true';
+  f.append(i, c);
+  return f;
+}
+async function insertarImagen(file) {
+  if (!file || !state.db) return;
+  if (!/^image\//.test(file.type)) { toast('Ese archivo no es una imagen.'); return; }
+  toast('Preparando la imagen…');
+  try {
+    const r = await comprimirImagen(file, { maxBytes: 150 * 1024, maxAncho: 1280, recorte169: false });
+    const uz = 'img-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    await state.db.collection('imagenes').doc(uz).set({ data: r.url, bytes: r.bytes, ancho: r.w, alto: r.h, borrador_id: RTE.id, alt: '', fecha: nowIso() });
+    IMG_CACHE[uz] = r.url;
+    const area = $('ed-rte'); if (!area) return;
+    const fig = nuevaFigura(r.url, '', uz);
+    let bloque = null;
+    if (RTE.sel && area.contains(RTE.sel.startContainer)) { bloque = RTE.sel.startContainer; while (bloque && bloque.parentNode !== area) bloque = bloque.parentNode; }
+    if (bloque) bloque.after(fig); else area.appendChild(fig);
+    if (!fig.nextElementSibling) { const p = document.createElement('p'); p.innerHTML = '<br>'; fig.after(p); }
+    seleccionarFigura(fig);
+    marcar('cuerpo'); toast('Imagen añadida. Escribe su descripción debajo.');
+  } catch (e) { toast(e && e.message ? e.message : 'No se pudo subir la imagen.'); }
+}
+function seleccionarFigura(fig) {
+  cerrarTools(); RTE.fig = fig; fig.classList.add('is-sel');
+  $('rte-link').hidden = true; const t = $('rte-img'); t.hidden = false;
+  $('rte-alt').value = fig.querySelector('img').getAttribute('alt') || '';
+  fig.scrollIntoView({ block: 'nearest', behavior: reducido() ? 'auto' : 'smooth' });
+}
+async function elegirPortada(file) {
+  if (!file) return;
+  if (!/^image\//.test(file.type)) { toast('Ese archivo no es una imagen.'); return; }
+  toast('Preparando la portada…');
+  try {
+    const r = await comprimirImagen(file, { maxBytes: 110 * 1024, maxAncho: 1200, recorte169: true });
+    RTE.portada = r.url;
+    const v = $('ed-portada-vista'); if (v) { v.classList.add('hay'); v.innerHTML = '<img alt="Portada del artículo">'; v.firstChild.src = r.url; }
+    const n = $('ed-portada-nota'); if (n) n.textContent = 'Portada de ' + Math.round(r.bytes / 1024) + ' KB (' + r.w + '×' + r.h + ').';
+    if (RTE.modo === 'escrito') marcar('imagen'); else RTE.tocado = true;
+    toast('Portada lista');
+  } catch (e) { toast(e && e.message ? e.message : 'No se pudo preparar la portada.'); }
+}
+
+/* Cableado del editor (delegado: sobrevive a los redibujados) */
+function cablearEditor() {
+  const s = $('screen');
+  s.addEventListener('mousedown', e => { if (e.target.closest('.rte-bar button')) e.preventDefault(); });
+  s.addEventListener('input', e => {
+    const id = e.target.id;
+    if (id === 'ed-rte') { marcar('cuerpo'); return; }
+    if (id === 'ed-titulo') {
+      if (!RTE.slugManual && RTE.modo === 'escrito') { const sl = $('ed-slug'); if (sl) { sl.value = slugify(e.target.value); marcar('slug'); } }
+      marcar('titulo'); return;
+    }
+    if (id === 'ed-slug') { RTE.slugManual = true; marcar('slug'); return; }
+    if (id === 'ed-extracto') { marcar('extracto'); return; }
+    if (id === 'ed-etiquetas') { marcar('etiquetas'); return; }
+    if (id === 'ed-pie') { marcar('pie'); return; }
+    if (id === 'rte-alt' && RTE.fig) { RTE.fig.querySelector('img').setAttribute('alt', e.target.value); marcar('cuerpo'); }
+  });
+  s.addEventListener('change', e => {
+    if (e.target.id === 'ed-img-file') { const f = e.target.files && e.target.files[0]; e.target.value = ''; insertarImagen(f); }
+    if (e.target.id === 'ed-portada-file') { const f = e.target.files && e.target.files[0]; e.target.value = ''; elegirPortada(f); }
+  });
+  s.addEventListener('click', e => {
+    const fig = e.target.closest && e.target.closest('figure.rte-fig');
+    if (fig && e.target.tagName === 'IMG') seleccionarFigura(fig);
+  });
+  s.addEventListener('paste', e => {
+    if (!e.target.closest || !e.target.closest('#ed-rte')) return;
+    if (e.target.closest('figcaption')) { e.preventDefault(); document.execCommand('insertText', false, (e.clipboardData.getData('text/plain') || '').replace(/\s+/g, ' ')); return; }
+    e.preventDefault();
+    const html = e.clipboardData.getData('text/html'), txt = e.clipboardData.getData('text/plain');
+    if (html) {
+      const limpio = aEditor(html.replace(/<!--[\s\S]*?-->/g, '').replace(/<img[^>]*>/gi, ''));
+      document.execCommand('insertHTML', false, limpio === '<p><br></p>' ? esc(txt) : limpio);
+    } else document.execCommand('insertText', false, txt);
+  });
+  s.addEventListener('keydown', e => {
+    if (e.target.id === 'rte-url' && e.key === 'Enter') { e.preventDefault(); ponerEnlace(); }
+    if (e.target.id === 'ed-titulo' && e.key === 'Enter') { e.preventDefault(); const r = $('ed-rte'); if (r) r.focus(); }
+    if (e.key === 'Enter' && !e.shiftKey && e.target.id === 'ed-rte' && bloqueActual() === 'blockquote') {
+      // Enter en una línea vacía de una cita: salir de la cita
+      const sel = getSelection(); let n = sel.anchorNode; while (n && n.parentNode && n.parentNode.tagName !== 'BLOCKQUOTE' && n.tagName !== 'BLOCKQUOTE') n = n.parentNode;
+      const linea = n && n.nodeType === 1 && n.tagName !== 'BLOCKQUOTE' ? n : null;
+      if ((linea && !linea.textContent.trim()) || (n && n.tagName === 'BLOCKQUOTE' && !n.textContent.trim())) {
+        e.preventDefault();
+        try { document.execCommand('formatBlock', false, '<p>'); } catch (err) { /* nada */ }
+        normalizarArea(); marcar('cuerpo');
+      }
+    }
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k' && e.target.closest && e.target.closest('#ed-rte')) { e.preventDefault(); guardarSeleccion(); formato('link'); }
+  });
+  document.addEventListener('selectionchange', () => { if ($('ed-rte') && document.activeElement === $('ed-rte')) { guardarSeleccion(); actualizarBarra(); } });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) vaciarGuardado(); });
+  window.addEventListener('pagehide', () => { vaciarGuardado(); });
+}
+
+/* Vista Escribir */
+function cardEscrito(x) {
+  const pal = textoPlano(x.cuerpo_html).split(' ').filter(Boolean).length;
+  return '<button class="item" data-act="abrir_escrito" data-id="' + esc(x.id) + '"><span class="item-top">' + estado(x.estado) + '<span class="item-date">' + esc(fmtDate(x.actualizado_en || x.fecha)) + '</span></span>'
+    + '<span class="item-title">' + esc(x.titulo || 'Sin titular') + '</span>'
+    + '<span class="item-sub">' + esc(pal ? pal + ' palabras' : 'Sin texto todavía') + '</span></button>';
+}
+function renderEscribir() {
+  const todos = state.data.borradores || [];
+  const ed = state.editing ? todos.find(x => x.id === state.editing) : null;
+  if (ed) return '<article class="card">' + editor(ed) + '</article>';
+  const mios = sortDesc(todos.filter(esEscrito));
+  return '<section class="card hero-write"><span class="eyebrow">Tu mesa de redacción</span><h2>Escribe un artículo desde aquí</h2>'
+    + '<p>Titular, portada, texto con negritas, títulos, listas e imágenes. Se guarda solo y puedes seguir desde el móvil o el ordenador. Cuando termines, lo dejas listo y se publica desde Borradores.</p>'
+    + '<div class="actions"><button class="btn primary big" data-act="nuevo_escrito">Nuevo artículo</button></div></section>'
+    + '<section class="sec"><div class="sec-head"><h2>En escritura</h2><span class="count">' + mios.length + '</span></div>'
+    + (mios.length ? '<div class="list">' + mios.map(cardEscrito).join('') + '</div>' : emptyBox('Nada en marcha', 'Pulsa «Nuevo artículo» para empezar el primero.', 'idea')) + '</section>';
+}
+
 /* Navegación y eventos */
 function go(view, id) {
+  if (state.editing && RTE.modo === 'escrito') vaciarGuardado();
   state.view = view;
   state.sel = id || null;
   state.editing = null;
   state.confirm = null;
   location.hash = view;
-  render();
+  render(true);
   window.scrollTo({ top: 0, behavior: reducido() ? 'auto' : 'smooth' });
 }
 
@@ -1311,8 +2022,24 @@ function wire() {
     }
     if (act === 'close') { state.sel = null; state.confirm = null; render(); return; }
     if (act === 'copy') { copy(b.dataset.copy); return; }
-    if (act === 'edit') { state.editing = b.dataset.id; state.confirm = null; render(); return; }
-    if (act === 'cancel_edit') { state.editing = null; render(); return; }
+    if (act === 'edit') {
+      const bb = (state.data.borradores || []).find(x => x.id === b.dataset.id);
+      state.editing = b.dataset.id; state.confirm = null;
+      if (esEscrito(bb)) { state.view = 'escribir'; location.hash = 'escribir'; }
+      render(true); return;
+    }
+    if (act === 'cancel_edit') { state.editing = null; render(true); return; }
+    if (act === 'nuevo_escrito') { crearArticulo(); return; }
+    if (act === 'abrir_escrito') { state.editing = b.dataset.id; state.confirm = null; render(true); return; }
+    if (act === 'cerrar_escrito') { cerrarEscrito(); return; }
+    if (act === 'pedir_verificacion') { finalizarEscrito(b.dataset.id, 'pendiente_revision'); return; }
+    if (act === 'dejar_listo') { finalizarEscrito(b.dataset.id, 'aprobado'); return; }
+    if (act === 'rte') { formato(b.dataset.cmd); return; }
+    if (act === 'link_ok') { ponerEnlace(); return; }
+    if (act === 'link_quitar') { quitarEnlace(); return; }
+    if (act === 'tools_cerrar') { cerrarTools(); return; }
+    if (act === 'img_quitar') { if (RTE.fig) { RTE.fig.remove(); RTE.fig = null; cerrarTools(); marcar('cuerpo'); } return; }
+    if (act === 'portada_pick') { const f = document.getElementById('ed-portada-file'); if (f) f.click(); return; }
     if (act === 'save_edit') { saveEdit(b.dataset.id); return; }
     if (act === 'ask_delete') { state.confirm = { key: b.dataset.key, id: b.dataset.id }; render(); return; }
     if (act === 'cancel_delete') { state.confirm = null; render(); return; }
@@ -1323,10 +2050,14 @@ function wire() {
     if (!a) return;
     if (act === 'approve') {
       const borr = (state.data.borradores || []).find(x => x.id === b.dataset.id);
-      if (borr && !/^data:image\/webp;base64,|^https:\/\//.test(String(borr.imagen_url || ''))) {
+      if (borr && !/^data:image\/(?:webp|jpeg);base64,|^https:\/\//.test(String(borr.imagen_url || ''))) {
         toast('Falta la portada: no se puede aprobar sin imagen');
         return;
       }
+    }
+    if (act === 'approve') {
+      const borr = (state.data.borradores || []).find(x => x.id === b.dataset.id);
+      if (borr && !checksData(borr)[6][0]) { toast('Hay un término de apuestas en el texto: no se puede aprobar.'); return; }
     }
     write(a.col, b.dataset.id, a.patch, a.msg);
   });
@@ -1341,6 +2072,7 @@ function wire() {
   const h = location.hash.slice(1);
   if (VIEWS.some(v => v.key === h)) state.view = h;
   wire();
+  cablearEditor();
   render();
   try {
     const api = window.claude;

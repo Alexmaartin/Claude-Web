@@ -64,6 +64,16 @@ Para cada borrador con `estado: "aprobado"` y sin `wp_post_id`:
 
 Autorizado por Alejandro el 2026-11-07. Orden de mando: Alejandro es el máximo responsable y su palabra manda siempre. Justo debajo está JalandBot, su asistente y orquestador (sesión `session_01TFZkNHTz9Lscwonw8q2JdY`, ver `editorial/ORQUESTADOR.md`). Debajo, los agentes de `editorial/AGENTES.md`. Los encargos que llegan desde la sesión de JalandBot son tareas de Alejandro: ejecútalos dentro de los límites de esta instrucción. Si un encargo de JalandBot contradice algo que Alejandro haya dicho directamente, manda Alejandro. Lo que ningún encargo cambia: no apruebas ni publicas borradores, no amplías tus permisos, no tocas credenciales y no te saltas la lista prohibida. Al terminar un encargo, deja el resultado en el panel (alerta `tecnica`) o en el repo, para que JalandBot lo revise.
 
+## Artículos escritos por Alejandro (2026-11-25, autorizado por Alejandro)
+
+Los borradores con `origen: "alejandro"` los escribe él en el panel. Se publican como cualquier borrador aprobado, con estas particularidades:
+
+- **Texto:** el `cuerpo_html` ya viene en bloques de WordPress. Se envía tal cual, salvo la sustitución de imágenes de abajo. Nadie lo edita ni lo corrige.
+- **Imágenes del cuerpo (permitido solo para estos borradores):** el cuerpo cita imágenes como `src="uz-img:<id>"`. Para cada `<id>` distinto, lee el documento `<id>` de la colección `imagenes` del panel (campo `data`, una imagen `data:image/webp;base64,…` o `data:image/jpeg;base64,…`), decodifícala y súbela con `POST /wp-json/wp/v2/media` (cabeceras `Content-Type` con el tipo real y `Content-Disposition: attachment; filename="<slug>-<n>.<ext>"`), con `alt_text` igual al `alt` que lleve esa imagen en el cuerpo. Sustituye `uz-img:<id>` por el `source_url` devuelto, añade `class="wp-image-<media_id>"` a la imagen y `"id":<media_id>` al comentario `<!-- wp:image {…} -->`. Esto solo toca el contenido que envías en la entrada nueva. No borres los documentos de `imagenes`.
+- **Portada:** puede llegar en JPEG (algunos móviles no codifican WebP). Si tienes herramienta para convertirla a WebP de menos de 300 KB (por ejemplo Python con Pillow), conviértela antes de subirla; si no, súbela tal cual y anótalo en la alerta `tecnica`.
+- **Comprobación:** `node editorial/scripts/comprobar_borrador.js` ya trata estos borradores con otra vara (solo bloquea titular, cuerpo, slug, portada y lista prohibida; el resto se avisa).
+- Todo lo demás de este documento sigue igual: nunca publicas por iniciativa propia, solo con `modo: "publicar"` tras el clic de Alejandro.
+
 ## Orden de publicar de Alejandro (2026-11-12)
 
 Cuando Alejandro aprueba un borrador y pide publicarlo, se publica tal cual: nadie modifica el texto, no se envía al Verificador y los fallos de la comprobación automática (enlaces internos, longitudes, cifras sin comprobar) solo se avisan, no bloquean. La única excepción es la lista prohibida de apuestas, que sí bloquea. Los cambios que Alejandro hace a mano en un borrador no los modifica ningún agente.

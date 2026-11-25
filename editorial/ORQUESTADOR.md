@@ -71,3 +71,11 @@ Reactivado por Alejandro el 2026-11-24 con un prompt de sistema nuevo en `editor
 ## Idea del día (desde 2026-11-24)
 
 Al pausar Redacción dejó de proponerse la idea diaria. Ahora la propone JalandBot (sin agentes) con la rutina `trig_01C6aguynC9PTkTgef8tAkzM`, todos los días a las 08:50 (Madrid): una idea nueva en `ideas_evergreen`, salvo que ya haya 3 o más en estado `propuesta`.
+
+## Escribir en el panel (desde 2026-11-25)
+
+Alejandro escribe sus propios artículos en la pestaña **Escribir** del panel (editor con negritas, cursivas, títulos, listas, citas, enlaces e imágenes; funciona en móvil). Los artículos quedan en `borradores` con `origen: "alejandro"`. Reglas para JalandBot y los agentes:
+
+- Nadie modifica el texto de esos artículos. El Verificador solo avisa (ver `editorial/verificador/PROMPT.md`).
+- Si Alejandro pide publicar uno, el Publicador sube también sus imágenes (ver `editorial/wordpress/PROMPT.md`).
+- Si el comentario de «Publicar en WordPress» llega sobre un artículo suyo, se lanza el Publicador igual que con cualquier borrador aprobado.
