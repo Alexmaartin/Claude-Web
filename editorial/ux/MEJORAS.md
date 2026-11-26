@@ -76,3 +76,9 @@ Alejandro reactivó al agente de Analítica y pidió que siga actualizándose el
 - El mismo editor sustituye al campo HTML al editar cualquier borrador, salvo los artículos vivos (llevan marcadores de cifras que no se pueden perder): esos siguen con el campo HTML.
 - Aprobar o dejar listo bloquea si hay términos de apuestas.
 - Icono de pantalla de inicio: logo de la web (apple-touch-icon y favicon).
+
+## v35 · Borrar devueltos (2026-11-26)
+
+- Filtro nuevo **Devueltos** en Borradores. Dentro, botón «Borrar los N devueltos» con confirmación (borra todos los devueltos de una vez).
+- En el detalle de un borrador devuelto, botón **Eliminar** arriba, junto a Editar, con la misma confirmación de siempre.
+- Al borrar un borrador se borran también las imágenes de su cuerpo guardadas en `imagenes`, y la noticia de origen pasa a descartada.

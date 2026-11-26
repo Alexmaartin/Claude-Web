@@ -314,11 +314,11 @@ button.item:active { transform: scale(.99); }
   background: var(--surface-2); border-radius: 999px;
 }
 .seg button {
-  padding: 10px 12px; border: 0; border-radius: 999px; background: none; font: 600 14px var(--sans); color: var(--muted);
+  padding: 10px 8px; border: 0; border-radius: 999px; background: none; font: 600 13px var(--sans); color: var(--muted);
   transition: background .2s, color .2s; white-space: nowrap;
 }
 .seg button[aria-pressed="true"] { background: var(--surface); color: var(--fg); box-shadow: var(--shadow-sm); }
-.seg .n { margin-left: 6px; font-weight: 700; color: var(--accent); }
+.seg .n { margin-left: 4px; font-weight: 700; color: var(--accent); }
 
 /* Lista y detalle */
 .split { display: grid; gap: 16px; min-width: 0; }
@@ -948,7 +948,9 @@ function detailBorrador(x) {
     + (canApprove ? boton('approve', 'Aprobar', true) : '')
     + (canReturn ? boton('return', 'Devolver', false) : '')
     + (canUpload ? boton('upload', botonSubida, true) : '')
-    + '<button class="btn' + (esEscrito(x) ? ' primary' : '') + '" data-act="edit" data-id="' + esc(x.id) + '">' + (esEscrito(x) ? 'Seguir escribiendo' : 'Editar') + '</button></div>'
+    + '<button class="btn' + (esEscrito(x) ? ' primary' : '') + '" data-act="edit" data-id="' + esc(x.id) + '">' + (esEscrito(x) ? 'Seguir escribiendo' : 'Editar') + '</button>'
+    + (x.estado === 'devuelto' ? '<button class="btn danger" data-act="ask_delete" data-key="borradores" data-id="' + esc(x.id) + '">Eliminar</button>' : '') + '</div>'
+    + (x.estado === 'devuelto' && state.confirm && state.confirm.key === 'borradores' && state.confirm.id === x.id ? deleteBlock('borradores', x.id) : '')
     + (confirmando
       ? '<div class="confirm ' + CONFIRMA[confirmando].cls + '"><p><strong>' + esc(CONFIRMA[confirmando].pregunta) + '</strong></p><div class="actions">'
         + '<button class="btn primary" data-act="' + confirmando + '" data-id="' + esc(x.id) + '">' + esc(CONFIRMA[confirmando].ok) + '</button>'
@@ -971,12 +973,13 @@ function detailBorrador(x) {
     + block('Fuentes', fuentes ? '<ul>' + fuentes + '</ul>' : '<p>—</p>')
     + '<details class="raw"><summary>Ver HTML para copiar</summary><pre class="preview">' + esc(x.cuerpo_html || '') + '</pre></details>'
     + historialBlock(x)
-    + deleteBlock('borradores', x.id) + '</div>';
+    + (x.estado === 'devuelto' ? '' : deleteBlock('borradores', x.id)) + '</div>';
 }
 
 const FILTROS = [
   ['revisar', 'Por revisar', x => x.estado === 'pendiente_revision' || x.estado === 'devuelto'],
   ['listos', 'Listos', x => x.estado === 'aprobado' || x.estado === 'publicado_borrador' || x.estado === 'publicado'],
+  ['devueltos', 'Devueltos', x => x.estado === 'devuelto'],
   ['todos', 'Todos', () => true],
 ];
 function renderBorradores() {
@@ -988,7 +991,14 @@ function renderBorradores() {
   const sel = items.find(x => x.id === state.sel);
   const seg = '<div class="seg" role="group" aria-label="Filtrar borradores">' + FILTROS.map(([k, l, fn]) =>
     '<button data-act="filtro" data-f="' + k + '" aria-pressed="' + (filtro === k) + '">' + l + '<span class="n">' + items.filter(fn).length + '</span></button>').join('') + '</div>';
-  const lista = visibles.length ? '<div class="list">' + visibles.map(cardBorrador).join('') + '</div>'
+  const confLote = state.confirm && state.confirm.key === 'borrar_devueltos';
+  const lote = filtro === 'devueltos' && visibles.length
+    ? (confLote
+      ? '<div class="confirm"><p><strong>¿Borrar los ' + visibles.length + ' borradores devueltos?</strong> No se puede deshacer. Las noticias de origen pasan a descartadas, para que no se vuelvan a redactar.</p>'
+        + '<div class="actions"><button class="btn danger" data-act="do_borrar_devueltos"' + (state.busy.has('borradores/*') ? ' disabled' : '') + '>Sí, borrar los ' + visibles.length + '</button><button class="btn" data-act="cancel_delete">Cancelar</button></div></div>'
+      : '<div class="actions"><button class="btn danger" data-act="ask_borrar_devueltos">Borrar los ' + visibles.length + ' devueltos</button></div>')
+    : '';
+  const lista = visibles.length ? lote + '<div class="list">' + visibles.map(cardBorrador).join('') + '</div>'
     : emptyBox('Nada en esta lista', 'Prueba con otro filtro: los borradores están en las otras pestañas.', 'listo');
   return '<div class="split' + (sel ? ' has-sel' : '') + '">'
     + '<div class="listcol">' + seg + lista + '</div>'
@@ -1255,6 +1265,30 @@ async function write(col, id, patch, msg) {
   }
 }
 
+async function borrarImagenesDe(b) {
+  const ids = [...new Set([...String((b && b.cuerpo_html) || '').matchAll(/uz-img:([A-Za-z0-9_-]+)/g)].map(m => m[1]))];
+  for (const i of ids) { try { await state.db.collection('imagenes').doc(i).delete(); } catch (e) { /* ya no estaba */ } }
+}
+async function borrarDevueltos() {
+  const lista = (state.data.borradores || []).filter(x => x.estado === 'devuelto');
+  if (!lista.length || state.busy.has('borradores/*')) return;
+  state.busy.add('borradores/*');
+  render();
+  let hechos = 0;
+  for (const b of lista) {
+    try {
+      await state.db.collection('borradores').doc(b.id).delete();
+      hechos++;
+      if (b.noticia_id) { try { await state.db.collection('noticias').doc(b.noticia_id).update({ estado: 'descartada', actualizado_en: nowIso() }); } catch (e) { /* la noticia puede no existir */ } }
+      await borrarImagenesDe(b);
+    } catch (e) { /* se sigue con el resto */ }
+  }
+  state.busy.delete('borradores/*');
+  state.confirm = null;
+  state.sel = null;
+  toast(hechos === lista.length ? 'Borrados ' + plural(hechos, 'devuelto', 'devueltos') : 'Se borraron ' + hechos + ' de ' + lista.length + '. Inténtalo de nuevo con el resto.');
+  render(true);
+}
 async function removeItem(key, id) {
   const col = COL[key];
   const k = col + '/' + id;
@@ -1265,6 +1299,7 @@ async function removeItem(key, id) {
     if (key === 'borradores') {
       const b = (state.data.borradores || []).find(x => x.id === id);
       await state.db.collection('borradores').doc(id).delete();
+      await borrarImagenesDe(b);
       if (b && b.noticia_id) {
         try { await state.db.collection('noticias').doc(b.noticia_id).update({ estado: 'descartada', actualizado_en: nowIso() }); } catch (e) { /* la noticia puede no existir */ }
       }
@@ -2044,6 +2079,8 @@ function wire() {
     if (act === 'ask_delete') { state.confirm = { key: b.dataset.key, id: b.dataset.id }; render(); return; }
     if (act === 'cancel_delete') { state.confirm = null; render(); return; }
     if (act === 'do_delete') { removeItem(b.dataset.key, b.dataset.id); return; }
+    if (act === 'ask_borrar_devueltos') { state.confirm = { key: 'borrar_devueltos', id: '*' }; render(); return; }
+    if (act === 'do_borrar_devueltos') { borrarDevueltos(); return; }
     if (act === 'upload') { requestUpload(b); return; }
     if (act === 'ask_approve' || act === 'ask_return' || act === 'ask_upload') { state.confirm = { key: act.slice(4), id: b.dataset.id }; render(); return; }
     const a = ACTIONS[act];
