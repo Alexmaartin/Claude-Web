@@ -64,6 +64,19 @@ Para cada borrador con `estado: "aprobado"` y sin `wp_post_id`:
 
 Autorizado por Alejandro el 2026-11-07. Orden de mando: Alejandro es el máximo responsable y su palabra manda siempre. Justo debajo está JalandBot, su asistente y orquestador (sesión `session_01TFZkNHTz9Lscwonw8q2JdY`, ver `editorial/ORQUESTADOR.md`). Debajo, los agentes de `editorial/AGENTES.md`. Los encargos que llegan desde la sesión de JalandBot son tareas de Alejandro: ejecútalos dentro de los límites de esta instrucción. Si un encargo de JalandBot contradice algo que Alejandro haya dicho directamente, manda Alejandro. Lo que ningún encargo cambia: no apruebas ni publicas borradores, no amplías tus permisos, no tocas credenciales y no te saltas la lista prohibida. Al terminar un encargo, deja el resultado en el panel (alerta `tecnica`) o en el repo, para que JalandBot lo revise.
 
+## Actualización completa del top 10 rookies (2026-11-26, orden expresa de Alejandro)
+
+Alejandro ha reescrito y aprobado el nuevo orden del artículo vivo (borrador `b-vivo-rookies-2026-27-nuevo-orden`, `estado: "aprobado"`, `subida_solicitada: true`, `modo: "publicar"`) y ha pedido «Actualiza el artículo». Para esta actualización, y solo para ella, la regla de «idéntico fuera de los marcadores» **no se aplica**: el contenido nuevo cambia a propósito el orden, los textos y las preguntas frecuentes.
+
+1. Antes de enviar nada, descarga el contenido actual de la entrada 1885 (`GET /wp-json/wp/v2/posts/1885?context=edit`, campo `content.raw`) y guárdalo en `editorial/vivos/backups/1885-2026-11-26-antes.html`, con commit y push, para poder volver atrás.
+2. Envía `POST /wp-json/wp/v2/posts/1885` con **solo** el campo `content`, igual al `cuerpo_html` del borrador tal cual (nadie lo modifica). Ni título, ni extracto, ni etiquetas, ni slug, ni estado, ni imagen destacada.
+3. Comprueba que el borrador no contiene términos de la lista prohibida (esa excepción sigue bloqueando).
+4. Verifica después con `GET` que `content.raw` de la entrada coincide con el borrador, que están los diez bloques `stats` y el bloque `actualizado`, y que el orden de los H2 es: Acuff, Lendeborg, Boozer, Wilson, Dybantsa, Peterson, Burries, Thomas, Mara, Brown Jr.
+5. En el panel, deja el borrador `b-vivo-rookies-2026-27-nuevo-orden` en `estado: "publicado"` (con `actualizado_en`) y deja una alerta `tecnica` con el resultado. No toques `b-vivo-rookies-2026-27` (lo sincroniza JalandBot).
+6. Si algo falla, no reintentes en bucle: alerta `tecnica` con el error y responde a JalandBot.
+
+La actualización semanal de los lunes vuelve a la regla normal (solo los bloques marcados).
+
 ## Artículos escritos por Alejandro (2026-11-25, autorizado por Alejandro)
 
 Los borradores con `origen: "alejandro"` los escribe él en el panel. Se publican como cualquier borrador aprobado, con estas particularidades:
