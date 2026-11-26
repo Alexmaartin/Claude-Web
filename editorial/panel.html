@@ -911,6 +911,11 @@ function verificacionBlock(x) {
   return block('Verificación', '<div class="pills"><span class="pill ok">' + ICON.ok + fmt(v.confirmadas) + ' confirmadas</span><span class="pill">' + fmt(v.corregidas) + ' corregidas</span><span class="pill ' + (v.sin_comprobar ? 'warn' : '') + '">' + fmt(v.sin_comprobar) + ' sin comprobar</span></div>'
     + (pend ? '<p class="hint">Pendientes de tu criterio:</p><ul>' + pend + '</ul>' : '<p class="hint">Nada pendiente de tu criterio.</p>'));
 }
+function notasBlock(x) {
+  const n = Array.isArray(x.notas_editor) ? x.notas_editor : [];
+  if (!n.length) return '';
+  return block('Notas para ti (' + n.length + ')', '<ul>' + n.map(t => '<li>' + esc(t) + '</li>').join('') + '</ul>');
+}
 const ETIQUETA_CAMPO = { titulo: 'titular', slug: 'slug', extracto: 'extracto', etiquetas: 'etiquetas', pie_instagram: 'pie', cuerpo_html: 'cuerpo' };
 function camposCambiados(e) {
   const antes = e.antes || {}, despues = e.despues || {};
@@ -965,11 +970,13 @@ function detailBorrador(x) {
     + acciones
     + '<div class="block"><h3 class="sub">Comprobaciones antes de aprobar</h3>' + checklist(x) + '</div>'
     + verificacionBlock(x)
+    + notasBlock(x)
     + '<div class="article"><div class="articulo">' + sanitize(x.cuerpo_html) + '</div></div>'
     + block('Slug', '<code class="slug">' + esc(x.slug || '—') + '</code>', x.slug)
     + block('Extracto', '<p>' + esc(x.extracto || '—') + '</p>', x.extracto)
     + block('Etiquetas', '<div class="chips">' + (tags || '<span>—</span>') + '</div>', (x.etiquetas || []).join(', '))
     + block('Pie de Instagram', '<p style="white-space:pre-wrap">' + esc(x.pie_instagram || '—') + '</p>', x.pie_instagram)
+    + (x.tuit ? block('Tuit', '<p style="white-space:pre-wrap">' + esc(x.tuit) + '</p>', x.tuit) : '')
     + block('Fuentes', fuentes ? '<ul>' + fuentes + '</ul>' : '<p>—</p>')
     + '<details class="raw"><summary>Ver HTML para copiar</summary><pre class="preview">' + esc(x.cuerpo_html || '') + '</pre></details>'
     + historialBlock(x)
