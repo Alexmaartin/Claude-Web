@@ -488,6 +488,9 @@ pre.preview { max-height: 260px; overflow: auto; margin: 10px 0 0; padding: 14px
 }
 
 /* Escribir: editor propio */
+.rte-marca { margin: 1.2em 0 .5em; padding: 6px 12px; border: 1px dashed var(--line-2); border-radius: 10px; background: var(--info-soft); color: var(--info); font: 700 12px/1.3 var(--sans); letter-spacing: .04em; text-transform: uppercase; user-select: none; }
+.rte-marca::before { content: attr(data-etq); }
+.rte-auto { opacity: .7; border-left: 3px solid var(--info); padding-left: 12px; margin-left: 0; user-select: none; }
 .hero-write { padding: 22px; display: grid; gap: 14px; }
 .hero-write h2 { margin: 0; font: 700 clamp(24px, 5vw, 30px)/1.15 var(--display); letter-spacing: -.015em; }
 .hero-write p { margin: 0; color: var(--muted); max-width: 56ch; }
@@ -1511,17 +1514,26 @@ function aEditor(html) {
     else if (!/^https:\/\//.test(src) && !DATA_IMG.test(src)) return null;
     const f = el('figure'); f.className = 'rte-fig'; f.contentEditable = 'false';
     if (uz) f.setAttribute('data-uz', uz);
+    const wid = /wp-image-(\d+)/.exec(img.getAttribute('class') || ''); if (wid) f.setAttribute('data-wpid', wid[1]);
     const i = el('img'); if (src) i.setAttribute('src', src); i.setAttribute('alt', img.getAttribute('alt') || '');
     const c = el('figcaption'); c.contentEditable = 'true'; c.textContent = cap || '';
     f.append(i, c);
     return f;
   };
   const simple = (t, n) => { const e = el(t); inline(n, e); if (e.textContent.trim() || e.querySelector('br')) out.appendChild(e); };
+  const MARCA = /^\s*((?:stats:[a-z0-9-]+|actualizado):(?:inicio|fin))\s*$/;
+  const marca = txt => {
+    const m = el('div'); m.className = 'rte-marca'; m.contentEditable = 'false'; m.setAttribute('data-marca', txt);
+    const [k, j, f] = txt.split(':'); m.setAttribute('data-etq', k === 'actualizado' ? 'Fecha de actualización · ' + j : 'Cifras de ' + j + ' · ' + f);
+    out.appendChild(m);
+  };
   const bloque = n => {
     if (n.nodeType === 3) { if (n.nodeValue.trim()) { const p = el('p'); p.textContent = n.nodeValue.trim(); out.appendChild(p); } return; }
     if (n.nodeType !== 1) return;
     const t = n.tagName;
     if (t === 'P') {
+      const com = [...n.childNodes].find(c => c.nodeType === 8 && MARCA.test(c.nodeValue));
+      if (com && !n.textContent.trim()) { marca(MARCA.exec(com.nodeValue)[1]); return; }
       const img = n.querySelector('img');
       if (img && !n.textContent.trim()) { const f = figura(img, ''); if (f) out.appendChild(f); } else simple('p', n);
     } else if (t === 'H1' || t === 'H2') simple('h2', n);
@@ -1549,6 +1561,12 @@ function aEditor(html) {
     } else if (t !== 'SCRIPT' && t !== 'STYLE') for (const h of n.childNodes) bloque(h);
   };
   for (const n of tpl.content.childNodes) bloque(n);
+  // Lo que queda entre «inicio» y «fin» se actualiza solo cada lunes: se enseña, pero no se edita.
+  let dentro = false;
+  for (const c of [...out.children]) {
+    if (c.classList.contains('rte-marca')) { dentro = /:inicio$/.test(c.getAttribute('data-marca')); continue; }
+    if (dentro) { c.classList.add('rte-auto'); c.contentEditable = 'false'; }
+  }
   if (!out.childNodes.length) out.innerHTML = '<p><br></p>';
   return out.innerHTML;
 }
@@ -1587,11 +1605,11 @@ const SER = {
   },
   figura(f) {
     const img = f.querySelector('img'); if (!img) return '';
-    const uz = f.getAttribute('data-uz');
+    const uz = f.getAttribute('data-uz'), wid = f.getAttribute('data-wpid');
     const src = uz ? 'uz-img:' + uz : (img.getAttribute('src') || '');
     if (!uz && !/^https:\/\//.test(src)) return '';
     const cap = f.querySelector('figcaption'); const c = cap ? cap.textContent.trim() : '';
-    return '<!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->\n<figure class="wp-block-image size-large"><img src="' + esc(src) + '" alt="' + esc(img.getAttribute('alt') || '') + '"/>'
+    return '<!-- wp:image {' + (wid ? '"id":' + wid + ',' : '') + '"sizeSlug":"large","linkDestination":"none"} -->\n<figure class="wp-block-image size-large"><img src="' + esc(src) + '" alt="' + esc(img.getAttribute('alt') || '') + '"' + (wid ? ' class="wp-image-' + wid + '"' : '') + '/>'
       + (c ? '<figcaption class="wp-element-caption">' + esc(c) + '</figcaption>' : '') + '</figure>\n<!-- /wp:image -->';
   },
   tabla(n) {
@@ -1621,6 +1639,7 @@ function deEditor(raiz) {
     else if (t === 'BLOCKQUOTE') { const s = SER.cita(n); if (s) bloques.push(s); }
     else if (t === 'FIGURE') { const s = SER.figura(n); if (s) bloques.push(s); }
     else if (t === 'TABLE') { const s = SER.tabla(n); if (s) bloques.push(s); }
+    else if (t === 'DIV' && n.classList.contains('rte-marca')) bloques.push('<!-- wp:paragraph -->\n<p><!-- ' + n.getAttribute('data-marca') + ' --></p>\n<!-- /wp:paragraph -->');
     else if (t === 'DIV' || t === 'SECTION') {
       if (n.querySelector('p,h1,h2,h3,ul,ol,blockquote,figure,table')) for (const h of n.childNodes) proc(h);
       else { const h = SER.inline(n); if (!vacio(h)) bloques.push(SER.parrafo(h)); }
@@ -1689,7 +1708,6 @@ function editorArticulo(x) {
 }
 // Editor del detalle de un borrador: texto enriquecido salvo en artículos vivos (llevan marcadores que no se pueden perder)
 function editor(x) {
-  if (tieneMarcadores(x.cuerpo_html)) return editorHtml(x);
   const caja = esEscrito(x) ? '' : '<div class="detail-in"><h2 class="dtitle">Editando borrador</h2></div>';
   return '<div class="writer">' + caja + editorArticulo(x) + '</div>';
 }
@@ -1700,7 +1718,7 @@ async function montarEditor() {
   const area = $('ed-rte');
   if (!area || !state.editing) return;
   const x = (state.data.borradores || []).find(b => b.id === state.editing);
-  if (!x || tieneMarcadores(x.cuerpo_html)) return;
+  if (!x) return;
   const idMontaje = state.editing;
   await precargarImagenes(x.cuerpo_html);
   if (state.editing !== idMontaje || $('ed-rte') !== area) return;

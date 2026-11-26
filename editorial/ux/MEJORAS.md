@@ -82,3 +82,9 @@ Alejandro reactivó al agente de Analítica y pidió que siga actualizándose el
 - Filtro nuevo **Devueltos** en Borradores. Dentro, botón «Borrar los N devueltos» con confirmación (borra todos los devueltos de una vez).
 - En el detalle de un borrador devuelto, botón **Eliminar** arriba, junto a Editar, con la misma confirmación de siempre.
 - Al borrar un borrador se borran también las imágenes de su cuerpo guardadas en `imagenes`, y la noticia de origen pasa a descartada.
+
+## v38 · Artículos vivos con editor de texto normal (2026-11-26)
+
+- Al pulsar Editar en un artículo vivo (top 10 rookies) ya no sale el campo HTML: sale el mismo editor de texto normal que en los demás borradores.
+- Las marcas de cifras (`stats:…:inicio/fin`) y de fecha (`actualizado:…`) se ven como etiquetas azules no editables, y lo que hay entre «inicio» y «fin» se muestra en gris y protegido, porque se actualiza solo cada lunes.
+- Comprobado con el cuerpo real del top 10 rookies: ida y vuelta sin editar da exactamente el mismo contenido y conserva las 22 marcas. Las imágenes de WordPress conservan su identificador.
