@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-21T14:53:57.876Z",
+ "contexto": "Rutina «Verificador diario de borradores» (trig_019y1at8AQhsZtjLaL9qeKnP). Borradores revisados: b-20261113-clippers (ed-20261114-clip-01 a 03) y b-20261114-bucks (ed-20261114-bucks-01 a 03).",
+ "estado": "cerrada",
+ "fecha": "2026-11-14T10:10:00+00:00",
+ "mensaje": "Verificador diario: 2 borradores revisados, ambos en pendiente_revision. Clippers: se retiran Ingram y Beal (no figuran en la plantilla de Basketball-Reference, sin bajas registradas) y la edad de Brook Lopez; corregida la derrota ante Miami (en casa, en prórroga). Bucks: se quita el partido de Orlando del 13 (sin resultado en la fuente) y el Detroit del 27 (fuera del calendario); aclarada la suma de 48,8. Ambos pasan el comprobador. Estado sin cambios. Tuyo: si hay bajas confirmadas en Clippers, reincorporarlas con fuente; y si el partido de Bucks en Orlando del 13 se jugó, actualizar el balance. Otros borradores sin cambios.",
+ "tipo": "tecnica"
+}

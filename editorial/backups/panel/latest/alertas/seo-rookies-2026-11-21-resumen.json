@@ -1,0 +1,7 @@
+{
+ "contexto": "Encargo de JalandBot (session_01TFZkNHTz9Lscwonw8q2JdY). Solo lectura: no se ha tocado nada en la web, WordPress ni los artículos. Las mejoras que cambian titular, entradilla, cuerpo fuera de bloques o artículos ajenos necesitan permiso expreso de Alejandro. No comprobado: velocidad y peso de la página (PageSpeed descartado por norma); tráfico y posición en Google (sin Search Console, no inventado); JSON-LD, alt y meta descripción (la lectura del contenido no los muestra: pendiente de confirmar en el HTML o en Yoast); cifras contra ESPN y Basketball-Reference (no contrastadas en esta auditoría). Nota no SEO: la fecha de «Actualizado» es el 16 de noviembre en la web y el HTML de editorial/salida dice 12 de noviembre, así que la copia local está desfasada.",
+ "estado": "abierta",
+ "fecha": "2026-11-21T15:55:00+01:00",
+ "mensaje": "Auditoría SEO on-page de «Top 10 rookies» (entrada 1885, b-vivo-rookies-2026-27): 7 incidencias nuevas (2 altas, 4 medias, 1 baja). Top 5 mejoras por impacto: 1) enlazado interno (1 enlace de salida, 0 de entrada); 2) cifras de la ficha que no cuadran con el texto (verificar en ESPN); 3) entradilla que no nombra a los primeros; 4) titular sin «NBA» (propuesta de 52 caracteres); 5) título SEO y meta no verificables.",
+ "tipo": "tecnica"
+}

@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-13T10:39:01.020Z",
+ "contexto": "Radar: ESPN NBA OK (HTTP 200, 16 elementos; 13 nuevas guardadas, 3 ya existentes, 0 descartadas por la lista prohibida). Fuentes nba-news y espn-reporteros siguen pendientes de verificar. Ninguna noticia nueva cumple los criterios de redacción (todas son medio con confianza media y sin ficha editorial relevante, o son opinión, ranking, entretenimiento o piezas personales); las de partido (Curry, Doncic, LeBron en Cleveland) no son hechos de mercado y hoy es día evergreen. Métricas web: no actualizadas (fuera del alcance pedido en este encargo). Nada publicado en WordPress.",
+ "estado": "cerrada",
+ "fecha": "2026-11-08T08:05:00+00:00",
+ "mensaje": "Resumen diario 2026-11-08: 13 noticias detectadas, 0 borradores creados, 1 error (evergreen no verificable: NBA.com 403).",
+ "tipo": "tecnica"
+}

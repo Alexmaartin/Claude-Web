@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-21T14:53:40.313Z",
+ "contexto": "borradores/b-20261120-heat-magic",
+ "estado": "cerrada",
+ "fecha": "2026-11-20T09:00:00+01:00",
+ "mensaje": "Pasada del 20 de noviembre (día 14, por el ritmo toca evergreen; la idea ev-05 sigue bloqueada por NBA.com 403, así que se usa el fallback de franquicia). Turno: Miami Heat (turno 3), tras la pieza de los Nets de ayer. Minnesota sigue en pausa. Radar de hoy: no hay noticia bomba de Miami. La guía de temporada del Heat (9 de noviembre) está publicada y no se toca; la pieza de hoy es un análisis con ángulo distinto (regla 0): comparación con su rival de división, Orlando. Ángulo nuevo para Miami, sin repetir la pieza de calendario de los Nets. Qué se redactó: «Heat y Magic: dos modelos en el Sureste a mitad de noviembre» (60 caracteres), tipo análisis, pendiente_revision, 1.616 palabras, 9 H2, FAQ, 4 enlaces internos reales, portada con el dato 9-6 / 6-8. Checker: LISTO, 0 avisos. Datos: ESPN (plantillas, estadísticas de jugador, calendario, lesiones) y Basketball-Reference para verificar: coinciden en 9-6 (4.º del Este), 120’5/119’9 para Miami y 6-8 (8.º), 109’4/112’8 para Orlando, y en los tres últimos partidos de cada equipo. Lesiones: Banchero (esguince alto de tobillo, 2 partidos esta temporada), Isaac (rodilla), Penda (isquiotibial, sin fecha), Nelson (tobillo); en Miami, Gardner (isquiotibial, baja el miércoles). Basketball-Reference no lista lesiones (solo enlace al parte). Heat: b-20261109-heat tiene editado_por_humano true, así que no se tocó. Nada publicado en WordPress.",
+ "tipo": "tecnica"
+}

@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-13T10:38:19.914Z",
+ "contexto": "Rutina «Verificador diario de borradores» (trig_019y1at8AQhsZtjLaL9qeKnP).",
+ "estado": "cerrada",
+ "fecha": "2026-11-13T08:40:00+00:00",
+ "mensaje": "Verificador diario: 0 borradores revisados. Ninguno está en pendiente_revision. b-20261109-heat pasó a publicado (con verificacion registrada). Nuevo en el panel: b-vivo-rookies-2026-27, publicado y sin campo verificacion; fuera del alcance de la rutina, pero conviene revisarlo. Sin cambios de estado ni de texto.",
+ "tipo": "tecnica"
+}

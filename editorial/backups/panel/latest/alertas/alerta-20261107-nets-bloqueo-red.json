@@ -1,0 +1,7 @@
+{
+ "contexto": "Borrador b-20261107-nets (Brooklyn Nets 2026-27). Error de conexión CONNECT 403 del proxy de salida.",
+ "estado": "resuelta",
+ "fecha": "2026-11-07T04:00:00Z",
+ "mensaje": "No se pudo subir b-20261107-nets: el entorno Radar bloquea undraftedzone.com (host de WP_SITE). Solo permite www.undraftedzone.com. Alejandro denegó la propuesta de añadirlo. Borrador sin cambios, sigue aprobado con modo publicar.",
+ "tipo": "tecnica"
+}

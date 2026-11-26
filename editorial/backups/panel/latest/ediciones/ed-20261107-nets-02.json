@@ -1,0 +1,8 @@
+{
+ "antes": "Tabla de plantilla: edades de Randle 31, Sharpe 24, Ellis 26, Minott 23, Jefferson 22, Johnson 24 (Johnson sí coincidía), Powell 21 (coincidía), Clowney 22 (coincidía).",
+ "borrador": "b-20261107-nets",
+ "despues": "Edades según la fuente: Randle 32, Sharpe 25, Ellis 27, Minott 24, Jefferson 23. Sin cambio en Clowney, Johnson, Powell, Brown, Demin, Traore, Saraf, Porter, Mann, Wagner y Wolf.",
+ "fecha": "2026-11-07T03:25:00+00:00",
+ "fuente": "https://www.basketball-reference.com/teams/BRK/2027.html",
+ "motivo": "Verificación contra Basketball-Reference (columna Age)."
+}

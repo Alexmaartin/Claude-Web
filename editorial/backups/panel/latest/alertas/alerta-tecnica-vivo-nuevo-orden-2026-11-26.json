@@ -1,0 +1,6 @@
+{
+ "borrador": "b-vivo-rookies-2026-27-nuevo-orden",
+ "fecha": "2026-11-26",
+ "resumen": "Verificacion del nuevo orden (v3). ESPN devolvio HTTP 202 sin contenido en las diez fichas y en Burries, Mara y Wilson; la comprobacion se hizo con Basketball-Reference. 10 de 10 bloques stats coinciden. 1 correccion: altura de Mara 2'21 -> 2'18. Orden del top y estado sin cambios. Dudas para Alejandro: 'lo mismo en puntos' (Mara/Brown Jr.), 'mejor tiro de tres' (Thomas frente a Mara), 'las mejores del top' en asistencias (Boozer), y la convencion de fechas de BR (hora de EEUU). Sin comprobar: perdidas de Burries, 29 minutos de su ultimo partido, racha de Brown Jr. y 18,8 minutos de Nate Ament.",
+ "tipo": "tecnica"
+}

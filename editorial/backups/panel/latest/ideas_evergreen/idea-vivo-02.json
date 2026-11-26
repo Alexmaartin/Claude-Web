@@ -1,0 +1,13 @@
+{
+ "actualizado_en": "2026-11-26T23:30:00+00:00",
+ "angulo": "Una ficha por cada español que juega en la NBA, con sus cifras de la temporada y una línea de valoración tuya; el orden se revisa cada semana. Aday Mara es el punto de partida.",
+ "datos": "ESPN (fichas de jugador) con instantánea semanal; hay que confirmar la lista de españoles con contrato este año antes de empezar.",
+ "estado": "propuesta",
+ "fecha": "2026-11-26T23:30:00+00:00",
+ "mantenimiento": "Semanal (lunes), con cifras automáticas; las valoraciones, tuyas.",
+ "origen": "jalandbot",
+ "por_que_engancha": "Interés alto en España, poca competencia en español con datos al día y encaja con el ranking de españoles históricos que ya tenemos.",
+ "tema": "vivo-02",
+ "tipo": "vivo",
+ "titulo": "Españoles en la NBA esta semana (artículo vivo)"
+}

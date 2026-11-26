@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-21T14:53:51.196Z",
+ "contexto": "Rutina «Verificador diario de borradores» (trig_019y1at8AQhsZtjLaL9qeKnP). Borrador revisado: b-20261116-76ers (ed-20261116-phi-01 a 03).",
+ "estado": "cerrada",
+ "fecha": "2026-11-16T10:10:00+00:00",
+ "mensaje": "Verificador diario: 1 borrador revisado, b-20261116-76ers (76ers 2026-27). Confirmados con Basketball-Reference el 10-3, la defensa (109,4 en contra), las tres derrotas, las diez victorias por cinco o más puntos, y las cifras de Maxey, Brown, Edgecombe, LeBron, Embiid, Simons, Wade, Walker y Bona. Corregido: se retiran las bajas de Embiid, Barlow y Bona (no hay bajas registradas), la edad de LeBron, la etiqueta de rookie de Philon, el Houston del 28, y el calendario pasa a tres en casa y tres fuera. Comprobador: LISTO. Estado sin cambios: pendiente_revision. Tuyo: el partido del 15 contra Indiana figura como programado; si se jugó, actualizar balance y título. Clippers, Bucks y Thunder, verificados antes, siguen pendientes de tu decisión.",
+ "tipo": "tecnica"
+}

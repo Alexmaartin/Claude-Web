@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-13T10:38:22.688Z",
+ "contexto": "radar + redaccion",
+ "estado": "cerrada",
+ "fecha": "2026-11-13T07:42:00+00:00",
+ "mensaje": "Resumen del ciclo diario 2026-11-13: noticias detectadas 13 (de 16 elementos de ESPN en 48 h: 2 descartados por apuestas, 1 ya existente); borradores creados 0; errores 1 (sin borrador, ver alerta a-20261113-redaccion-sin-borrador). Fuentes: ESPN NBA OK; NBA.com y reporteros pendientes de verificar, no consultadas. Metricas web no actualizadas: no se solicitaron y el ciclo no dispone de los datos de Cloudflare.",
+ "tipo": "tecnica"
+}

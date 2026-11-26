@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-13T10:39:10.593Z",
+ "contexto": "Ronda 1: estado del ciclo en Hoy. Ronda 2: verificación e historial en borradores. Ronda 3: contraste de la etiqueta de propuesta. Ronda 4: degradado del hero. Ronda 5: pluralización y etiqueta del ciclo. Ronda 6: confirmación de un paso antes de Aprobar, Devolver y Solicitar publicación; un toque pide confirmar, el segundo ejecuta la misma escritura de siempre (probado). Ronda 7: métricas en 400 px, KPIs en 2x2 y etiqueta final del gráfico sin recortar. Ronda 8: selección en Borradores con aria-pressed y foco al titular. Sin cambios en colecciones ni campos. Pendiente de la siguiente tanda (propuesta en editorial/ux/MEJORAS.md): estado de error de la base de datos, modo lectura del artículo, revisión por lotes y arnés de métricas con histórico real. Detalle en editorial/ux/MEJORAS.md.",
+ "estado": "cerrada",
+ "fecha": "2026-11-07T03:10:00.000Z",
+ "mensaje": "Diseño y UX: rondas 1 a 8 publicadas (v23 a v30). Tandas 1 y 2 cerradas.",
+ "tipo": "tecnica"
+}

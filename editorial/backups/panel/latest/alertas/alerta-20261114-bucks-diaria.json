@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-21T14:53:58.619Z",
+ "contexto": "borradores/b-20261114-bucks",
+ "estado": "cerrada",
+ "fecha": "2026-11-14T08:30:00+01:00",
+ "mensaje": "Pasada diaria del 14 de noviembre (día 8 del ritmo: evergreen). Qué tocaba: idea aprobada ev-05 («Regla Harry Giles y otras reglas de contratos de draft»), pero necesita fuente de la liga y NBA.com devuelve 403 (comprobado hoy). Según «Siempre hay borrador» (paso 2) la idea queda como está, aprobada y sin usar, y se redacta la franquicia del turno. Turno: Milwaukee Bucks, porque el último artículo de franquicia en borradores es el de los Clippers (13 de noviembre). Qué se redactó: «Milwaukee Bucks 2026-27: plantilla, rotación y arranque de 1-11» (63 caracteres), guia, pendiente_revision, LISTO sin avisos, 1.611 palabras, 9 H2, FAQ, 3 enlaces internos reales, portada con el dato 1-11. Cifras: ESPN (plantilla, estadísticas, calendario, clasificación y lesiones) y Basketball-Reference para verificar. Puntos: 106‘8 y 121’3 en las doce primeras (coinciden con la suma de marcadores de ESPN). DECISIÓN A REVISAR: ESPN ya recoge la derrota en Orlando del 13 (99-107) y Basketball-Reference todavía no. El texto corta a 11 de noviembre (1-11 en las dos fuentes) y menciona Orlando solo como derrota aparte, sin integrarla en el balance. Lesiones: no encontré nombres de bajas en la página consultada. Caris LeVert no aparece en las estadísticas de la temporada, y el texto no le asigna papel. WordPress no consultado: sin la cabecera x-editorial-key y sin pedirla en el chat; se usó el panel. Nada publicado. Duren no aparece en el texto (evitado por la lesión y el rumor previo).",
+ "tipo": "tecnica"
+}

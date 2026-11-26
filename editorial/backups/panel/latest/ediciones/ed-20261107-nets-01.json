@@ -1,0 +1,8 @@
+{
+ "antes": "Tabla de plantilla: años en la NBA de 15 jugadores con valores desfasados en 1 (p. ej. Traore 2, Demin 2, Powell 2, Saraf 2, Wolf 2, Johnson 2, Minott 5, Sharpe 6, Ellis 5, Clowney 4, Porter 8, Mann 8, Randle 13, Wagner 9).",
+ "borrador": "b-20261107-nets",
+ "despues": "Años en la NBA según la fuente (Traore 1, Demin 1, Powell 1, Saraf 1, Wolf 1, Johnson 1, Minott 4, Sharpe 5, Ellis 4, Clowney 3, Porter 7, Mann 7, Randle 12, Wagner 8).",
+ "fecha": "2026-11-07T03:25:00+00:00",
+ "fuente": "https://www.basketball-reference.com/teams/BRK/2027.html",
+ "motivo": "Verificación contra Basketball-Reference (columna Exp). Las cifras de la tabla no coincidían con la fuente."
+}

@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-13T10:39:19.239Z",
+ "contexto": "Ediciones analizadas: 4 registros (Edwards, Morant y Wembanyama con dos ediciones). Patrones confirmados nuevos: 0. Hay 4 observados: unir cláusulas con coma en vez de dos puntos (2 ediciones, mismo borrador), opinión más extensa, quitar precisión especulativa y corrección de erratas. Artículos nuevos de Alejandro: 4 (menos de 5, sin alerta de revisión de guía). Propuestas de cambio a ESTILO.md: 0. Error de git: 'alexmaartin/claude-web is not in this session's authorized repository set' (403 al hacer push). El commit 'Weekly editorial learning run' está solo en el contenedor y se perderá. Hay que añadir el repo a las fuentes de la rutina.",
+ "estado": "cerrada",
+ "fecha": "2026-11-02T06:30:00+00:00",
+ "mensaje": "Aprendizaje semanal: 3 borradores editados (4 registros), 0 patrones confirmados, 4 artículos nuevos del autor, 0 propuestas pendientes. El push falló con 403.",
+ "tipo": "tecnica"
+}

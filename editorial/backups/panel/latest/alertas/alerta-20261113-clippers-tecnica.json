@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-21T14:54:00.475Z",
+ "contexto": "borradores/b-20261113-clippers",
+ "estado": "cerrada",
+ "fecha": "2026-11-13T09:30:00+01:00",
+ "mensaje": "Pasada diaria del 13 de noviembre (día de franquicia, turno Clippers). Sin noticia que cumpla criterios para los Clippers en noticias (solo medios con confianza media sobre otros equipos). Por la regla «Siempre hay borrador» (paso 1), se redactó la pieza de la franquicia: «Los Clippers 2026-27: plantilla, rotación y el arranque que pesa» (64 caracteres), guia, pendiente_revision, LISTO sin avisos, 1.658 palabras, 9 H2, 3 enlaces internos reales, FAQ, portada 118’1 (puntos concedidos). Cifras: ESPN (plantilla, estadísticas, calendario, lesiones, clasificación) contrastadas con Basketball-Reference (2-8, 112’2 y 118’1 coinciden). Decisiones: (a) Wagler no aparece como protagonista porque ayer salió en el artículo vivo (regla de no repetir jugador en días seguidos); (b) posición en el Oeste no fijada: ESPN da 13.º y Basketball-Reference 13.º, pero el puesto de ataque y defensa en la liga difiere en uno entre fuentes, así que el texto da las cifras sin ranking; (c) bajas: Ingram figura como baja en ESPN (Aquiles); Beal sin partidos y la única nota de lesión que encontré es de octubre, así que se dice tal cual. (d) WordPress no consultado: no tengo la cabecera x-editorial-key y no la pido en el chat; se usó el panel. Nada publicado; estado pendiente_revision. Turno siguiente: Milwaukee Bucks.",
+ "tipo": "tecnica"
+}

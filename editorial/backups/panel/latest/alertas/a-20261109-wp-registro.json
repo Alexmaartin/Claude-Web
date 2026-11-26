@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-13T10:38:55.261Z",
+ "contexto": "Registro de temas (REGISTRO_TEMAS.md). Si Alejandro ha publicado algo a mano en los últimos días, el registro podría estar incompleto. La selección de hoy no choca con nada conocido: ayer fue un evergreen sin franquicia ni jugadores.",
+ "estado": "cerrada",
+ "fecha": "2026-11-09T07:36:00+00:00",
+ "mensaje": "No se pudo refrescar temas_usados desde WordPress: el entorno de la rutina no tiene acceso a la API de WordPress. Se usó el registro existente del panel y los borradores del panel.",
+ "tipo": "tecnica"
+}

@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-13T10:39:03.986Z",
+ "contexto": "Rutina «Verificador diario de borradores» (trig_019y1at8AQhsZtjLaL9qeKnP).",
+ "estado": "cerrada",
+ "fecha": "2026-11-07T08:40:00+00:00",
+ "mensaje": "Verificador diario: 0 borradores revisados. No hay ninguno en pendiente_revision; los 6 del panel figuran como publicado. No he cambiado ningún estado ni tocado el texto. Nota: b-20261030-alvarado, b-20261030-edwards, b-20261030-morant, b-20261101-wembanyama y b-20261102-holmgren están publicados sin campo verificacion; fuera del alcance de esta rutina. b-20261107-nets pasó de pendiente_revision a publicado tras mi verificación (verificacion registrada: 6 confirmadas, 8 corregidas, 2 retiradas).",
+ "tipo": "tecnica"
+}

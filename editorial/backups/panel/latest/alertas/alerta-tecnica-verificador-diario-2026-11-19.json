@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-21T14:53:43.180Z",
+ "contexto": "Encargo de JalandBot y rutina «Verificador diario de borradores». Borradores revisados: b-20261119-nets-calendario (nuevo; ed-20261119-nets-01 a 04) y b-20261118-bulls (modificado hoy; ed-20261118-bulls-v4-01 a 03).",
+ "estado": "cerrada",
+ "fecha": "2026-11-19T10:10:00+00:00",
+ "mensaje": "Verificador diario, 2 borradores. Nets (calendario): el registro de Basketball-Reference da 3-10 tras trece partidos, no 3-11; medias de 111,2 anotados y 117,8 recibidos (no 110,9 y 119,2). Retirados la derrota ante Chicago del 18 (sin resultado en la fuente), la cita a la página de lesiones, el ranking de eficiencia de Porter y la fecha del próximo partido (ahora el 18 contra Chicago). Calendario de diciembre confirmado. Bulls: el partido del 18 en Brooklyn no consta jugado; se retira el 137-107; próximo partido el 18 en Brooklyn; Wilson «se ha perdido tres de los trece» sin precisar partidos. El resto de cifras de Bulls sigue confirmado. Comprobador: LISTO (Bulls con los 3 avisos de meta, SEO y longitud). Estado sin cambios: pendiente_revision. Tuyo: confirmar el resultado del 18 (Brooklyn-Chicago), que cambia el balance de ambos; y si Wilson está de baja con fuente, reincorporarlo.",
+ "tipo": "tecnica"
+}

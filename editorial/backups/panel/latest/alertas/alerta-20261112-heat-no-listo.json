@@ -1,0 +1,7 @@
+{
+ "contexto": "Borrador b-20261109-heat (Miami Heat 2026-27: plantilla, rotación y claves del arranque).",
+ "estado": "resuelta",
+ "fecha": "2026-11-12T18:20:00Z",
+ "mensaje": "No subo b-20261109-heat: la comprobación da NO LISTO. Tiene 2 enlaces internos y el mínimo es 3. Además, el verificador deja 2 datos sin comprobar: la frase de equilibrio con Cleveland y el número de contratos de dos vías (BR dice tres; el texto decía cuatro). Hace falta añadir un tercer enlace interno publicado o aceptar la excepción, y resolver los datos sin comprobar. Alejandro pidió publicar desde el panel, pero no se puede subir con el script en NO LISTO.",
+ "tipo": "tecnica"
+}

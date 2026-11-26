@@ -1,0 +1,9 @@
+{
+ "estado": "abierta",
+ "fecha": "2026-11-21T15:55:00+01:00",
+ "impacto": "Un dato erróneo en un ranking de datos perjudica la credibilidad y el posicionamiento de un contenido que quiere ser referencia. No es un problema de cabecera, pero sí de confianza.",
+ "pagina": "https://undraftedzone.com/top-10-rookies-temporada-2026-27/",
+ "prioridad": "alta",
+ "problema": "Cifras de la ficha de algunos jugadores no cuadran con el texto. Lectura del HTML en vivo (un solo pase, sin verificar en ESPN): Acuff ficha 41,1% TC y 32,7% triples frente a 41,8% y 33,0% en el texto; Lendeborg ficha 20,2 pts y 48,6% frente a «casi 22 puntos» y 51,8% en el texto.",
+ "sugerencia": "Contrastar cada cifra en ESPN y Basketball-Reference antes de la próxima actualización del lunes. Si no cuadra, dejar alerta y no cambiar nada automáticamente (regla de artículos vivos). Esta incidencia no ha comprobado las fuentes: es una lectura a confirmar."
+}

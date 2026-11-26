@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-21T14:53:42.027Z",
+ "contexto": "Encargo de JalandBot: resultado Chicago-Brooklyn del 18 de noviembre. Borradores b-20261119-nets-calendario (ed-20261119-nets-chi-01) y b-20261118-bulls (ed-20261118-bulls-chi-01).",
+ "estado": "cerrada",
+ "fecha": "2026-11-19T15:05:00+00:00",
+ "mensaje": "Aplicado el 137-107 de Chicago en Brooklyn (18 nov). Fuentes: Basketball-Reference y la noticia de ESPN recogida por el Radar, según JalandBot. Nets: 3-11 tras catorce partidos, derrota ante Chicago, medias 110,9 y 119,2, próximo partido viernes 20 contra Orlando. Bulls: 4-10, victoria en Brooklyn, medias 116,2 y 124,6, próximo partido viernes 20 contra Washington. Estados sin cambios (pendiente_revision). No se han recalculado los rankings de conferencia ni la posición de la defensa de los Bulls (el texto aún dice peor defensa de la liga; revisar). Caleb Wilson sin baja confirmada. Editado_por_humano false en ambos.",
+ "tipo": "tecnica"
+}

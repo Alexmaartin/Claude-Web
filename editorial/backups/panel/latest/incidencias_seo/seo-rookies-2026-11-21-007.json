@@ -1,0 +1,9 @@
+{
+ "estado": "abierta",
+ "fecha": "2026-11-21T15:55:00+01:00",
+ "impacto": "Bajo-medio: puede ayudar a que las preguntas aparezcan como resultados enriquecidos. No garantizado.",
+ "pagina": "https://undraftedzone.com/top-10-rookies-temporada-2026-27/",
+ "prioridad": "baja",
+ "problema": "Datos estructurados no verificables: el contenido leído no muestra JSON-LD. El artículo tiene una sección de preguntas frecuentes con cuatro preguntas y respuestas, que puede marcarse como FAQPage.",
+ "sugerencia": "Confirmar con el plugin SEO qué esquemas emite (Article y FAQPage). Si no hay FAQPage, añadirlo desde la plantilla. Esfuerzo: medio. Requiere cambio de plantilla en WordPress y aprobación de Alejandro."
+}

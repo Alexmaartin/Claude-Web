@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-13T10:39:07.968Z",
+ "contexto": "Hay que habilitar el repo (add_repo) para la sesión de la rutina. Nada publicado en WordPress.",
+ "estado": "cerrada",
+ "fecha": "2026-11-07T08:00:00+00:00",
+ "mensaje": "Resumen diario 2026-11-07: 0 noticias detectadas, 0 borradores creados, 1 error. El ciclo no se pudo ejecutar: la sesión no tiene acceso a alexmaartin/claude-web (GitHub 403 'access not enabled'), así que no se leyeron PROMPT.md, sources.json ni ESTILO.md.",
+ "tipo": "tecnica"
+}

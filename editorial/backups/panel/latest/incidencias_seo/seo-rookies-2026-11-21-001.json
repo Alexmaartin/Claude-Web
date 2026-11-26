@@ -1,0 +1,9 @@
+{
+ "estado": "abierta",
+ "fecha": "2026-11-21T15:55:00+01:00",
+ "impacto": "Una entrada viva debe durar semanas. Sin enlaces que entren, depende solo de la búsqueda y del menú; sin enlaces que salgan, pierde contexto y reparto de autoridad interna.",
+ "pagina": "https://undraftedzone.com/top-10-rookies-temporada-2026-27/",
+ "prioridad": "alta",
+ "problema": "Enlazado interno insuficiente: el cuerpo solo tiene 1 enlace interno (a la explicación de la escala de novatos) y ningún artículo publicado enlaza a la entrada. La norma exige 3–5 enlaces internos a publicados.",
+ "sugerencia": "(a) Enlaces que salen del artículo, en la sección de cada jugador: Acuff → /sacramento-kings-verano-2026-continuidad-sabonis-lavine-acuff/; Wilson → /bulls-agencia-libre-2026-claxton-collins-powell-wilson-swain-summer-league/; Dybantsa → /washington-wizards-un-proyecto-con-mas-potencial-del-que-muchos-quieren-reconocer/; Brown Jr. → /brooklyn-nets-mikel-brown-jr-michael-porter-jr/. (b) Enlaces que entran: añadir una frase con enlace a la entrada en Kings, Bulls, Wizards y Nets. Esfuerzo: bajo. Requiere permiso expreso de Alejandro: cambia texto fuera de los bloques marcados y toca artículos ajenos a la entrada."
+}

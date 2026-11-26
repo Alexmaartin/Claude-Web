@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-13T10:38:46.145Z",
+ "contexto": "Hay que conceder acceso al repo a la sesión (add_repo) y relanzar. No se ha publicado nada en WordPress ni se ha redactado contenido sin las guías editoriales.",
+ "estado": "cerrada",
+ "fecha": "2026-11-10T08:00:00+00:00",
+ "mensaje": "Resumen diario 2026-11-10: ciclo NO ejecutado. 0 noticias detectadas, 0 borradores creados, 1 error: acceso a GitHub denegado (403) al repo alexmaartin/claude-web, rama claude/undraftedzone-editorial-system-u9bc8y; no se pudieron leer PROMPT.md, sources.json ni ESTILO.md.",
+ "tipo": "tecnica"
+}

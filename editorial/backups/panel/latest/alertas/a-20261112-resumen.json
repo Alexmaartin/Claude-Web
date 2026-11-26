@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-13T10:38:40.171Z",
+ "contexto": "Ciclo diario 2026-11-12",
+ "estado": "cerrada",
+ "fecha": "2026-11-12T08:00:00+00:00",
+ "mensaje": "Resumen diario 2026-11-12: 0 noticias detectadas, 0 borradores creados, 1 error. El repo alexmaartin/claude-web no es accesible en esta sesión (HTTP 403, acceso a GitHub no habilitado), así que no se pudieron leer PROMPT.md, sources.json, ESTILO.md ni LISTA_PROHIBIDA.md. Radar y redacción no se ejecutaron. Nada publicado en WordPress. Acción: habilitar acceso al repo en la configuración de la rutina.",
+ "tipo": "tecnica"
+}

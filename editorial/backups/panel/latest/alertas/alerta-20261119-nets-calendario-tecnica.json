@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-21T14:53:43.799Z",
+ "contexto": "borradores/b-20261119-nets-calendario",
+ "estado": "cerrada",
+ "fecha": "2026-11-19T09:00:00+01:00",
+ "mensaje": "Pasada del 19 de noviembre, segunda instrucción de JalandBot (sin borrador de turno posible). Qué tocaba: franquicia del turno, Brooklyn Nets (turno 2, Minnesota en pausa). La guía de temporada de los Nets (7 de noviembre) ya existe, así que se escribió una pieza distinta: ángulo «el próximo mes de calendario y lo que se juegan». Qué se redactó: «Brooklyn Nets: doce partidos en cuatro semanas y un parón» (57 caracteres), tipo análisis, pendiente_revision, 1.534 palabras, 8 H2, FAQ, 4 enlaces internos reales, portada con el dato 12. Checker: LISTO, 0 avisos. Slug distinto de la guía de noviembre. No se tocó la pieza publicada de los Nets. Datos: ESPN (plantilla, estadísticas, calendario, lesiones) y Basketball-Reference solo para verificar. Basketball-Reference aún no recoge la derrota del miércoles 18 (ya en ESPN): usa 3-10, 111’2 y 117’8; la pieza usa 3-11 de ESPN con 110’9 y 119’2. Sin bajas listadas. Bulls (b-20261118-bulls): no estaba editado por humano (editado_por_humano false), así que se actualizó solo la fila del partido: resultado del miércoles en Brooklyn (137-107, victoria de los Bulls) y próximo partido (viernes 20 contra Washington, en casa). El resto de cifras del borrador sigue a 17 de noviembre (3-10): el borrador dice que son 13 partidos y el partido de Brooklyn queda ya en la sección de calendario como jugado. Revisar antes de aprobar. Nada publicado en WordPress.",
+ "tipo": "tecnica"
+}

@@ -1,0 +1,7 @@
+{
+ "contexto": "borradores/b-vivo-rookies-2026-27",
+ "estado": "resuelta",
+ "fecha": "2026-11-16T10:20:00+01:00",
+ "mensaje": "Actualización semanal del artículo vivo «Top 10 rookies 2026-27»: PARADA en el paso 1. Hace falta leer la entrada 1885 de WordPress (context=edit) con la cabecera x-editorial-key para comprobar si Alejandro la editó a mano fuera de los marcadores. No tengo esa clave, no la pido en el chat y no puedo leer WordPress, así que no sé si el contenido de WordPress coincide con el panel. Por la regla del encargo (paso 4, sin comprobación no se actualiza), no he tocado el borrador b-vivo-rookies-2026-27 ni sus bloques stats ni actualizado. No hay cifras cambiadas. Para retomarlo: dar acceso a WordPress (clave en el entorno de la sesión, no en el chat) o confirmar que el panel es la fuente de verdad para esta semana.",
+ "tipo": "tecnica"
+}

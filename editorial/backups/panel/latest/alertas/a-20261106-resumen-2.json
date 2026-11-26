@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-13T10:39:13.074Z",
+ "contexto": "Día 0 del ritmo: toca franquicia (Minnesota Timberwolves). ESPN NBA OK (200), sin noticias nuevas ni de los Timberwolves, así que la pieza es de plantilla: borradores/b-20261106-timberwolves-plantilla (tipo evergreen, datos de la plantilla y salarios de la ficha de ESPN, pendiente_revision). HTML en editorial/salida/2026-11-06-minnesota-timberwolves-plantilla-2026-27.html (solo en el contenedor: el repo no admite push). La vista previa del panel no admite tablas; el HTML completo está en el campo cuerpo_html. Idea evergreen propuesta: idea-ev-02 (ev-01 se descartó como propuesta porque ya existe el artículo publicado sobre contratos two-way). Métricas web actualizadas con Cloudflare (visitas, peticiones, serie y rutas). Error: WordPress no ofrece views, así que articulos queda vacío; articulos_publicados=4 (borradores en publicado_borrador). Nada publicado en WordPress.",
+ "estado": "cerrada",
+ "fecha": "2026-11-06T22:00:00+00:00",
+ "mensaje": "Resumen diario 2026-11-06 (pasada con el nuevo ritmo): 0 noticias nuevas detectadas, 1 borrador creado, 1 error.",
+ "tipo": "tecnica"
+}

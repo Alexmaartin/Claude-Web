@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-21T14:53:59.656Z",
+ "contexto": "Fuente activa: ESPN NBA News (RSS, 18 elementos, HTTP 200). Descartadas por filtro editorial o por ventana de 48 h: 3 (una de ellas con tema fuera de la línea editorial, una fuera de ventana temporal y otra de clasificación de premios). Descartada por tema: 1 (no es NBA). Ya existían: 5 (Power Rankings, plazo de traspasos, 19 equipos con decisiones, grupo de entrenadores, buzz NBA). Sin redacción ni métricas, según lo pedido. NBA.com sigue pendiente de verificar.",
+ "estado": "cerrada",
+ "fecha": "2026-11-14T07:15:00+00:00",
+ "mensaje": "Pasada diaria del Radar: 9 noticias nuevas, 5 ya existentes, 3 descartadas y 1 fuera de tema. Sin errores de descarga.",
+ "tipo": "tecnica"
+}

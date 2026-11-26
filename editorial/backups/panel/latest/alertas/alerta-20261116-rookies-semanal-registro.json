@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-21T14:53:50.363Z",
+ "contexto": "borradores/b-vivo-rookies-2026-27",
+ "estado": "cerrada",
+ "fecha": "2026-11-16T10:40:00+01:00",
+ "mensaje": "Actualización semanal del vivo «Top 10 rookies 2026-27» (16 de noviembre). Paso 1: leí la entrada 1885 de WordPress (lectura, con las variables del entorno). Alejandro editó a mano fuera de los marcadores: añadió una lista con los criterios (minutos, producción, eficiencia, contexto), una frase sobre el contrato de primera ronda con enlace a la escala de novatos, y reescribió el párrafo de Thomas y la frase de «Ninguna sola decide el puesto». Copié WordPress al panel tal cual (versión 10). Paso 2: actualicé solo los bloques stats y actualizado con ESPN (contrastado con Basketball-Reference, coinciden en los diez). Versión 11. Cifras (antes → ahora): Acuff 11→12 partidos, 26’2→25’4 pts, 7’3→7’2 ast, 41’8%→41’1% TC, 33’0%→32’7% 3P. Lendeborg 12→13, 21’7→20’2 pts, 3’7→3’5 ast, 51’8%→48’6% TC, 42’6%→41’4% 3P. Wilson sin cambios. Dybantsa 8→9, 16’3→15’0 pts, 5’9→6’1 reb, 23’1%→23’3% 3P. Peterson 12→13, 16’3→17’2 pts, 35’7%→35’8% 3P. Boozer 11→13, 15’9→15’5 pts, 9’8→9’7 reb, 5’5→5’2 ast. Thomas 9→11 (2→3 como titular), 13’1→13’6 pts, 48’0%→45’3% 3P. Brown Jr. 7→8, 12’9→12’0 pts, 3’9→3’6 ast. Wagler 10→11, 12’2→12’4 pts. Flemings 11→12 (4→5 como titular), 8’5→7’8 pts, 52’1%→51’4% TC. Fecha: 12 → 16 de noviembre (los partidos llegan al 15). No he cambiado el orden. Cerrada la alerta de la parada de hoy.",
+ "tipo": "tecnica"
+}

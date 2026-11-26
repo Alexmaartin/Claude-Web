@@ -1,0 +1,9 @@
+{
+ "estado": "abierta",
+ "fecha": "2026-11-21T15:55:00+01:00",
+ "impacto": "Medio: el título SEO es lo que el buscador muestra. Objetivo de clic de la norma: 2–4%.",
+ "pagina": "https://undraftedzone.com/top-10-rookies-temporada-2026-27/",
+ "prioridad": "media",
+ "problema": "Título SEO y meta descripción no verificables: la lectura del contenido no los muestra. No se puede confirmar que existan, que sean distintos del titular ni que lleven la palabra clave.",
+ "sugerencia": "Confirmar en Yoast. Si falta o es igual al titular, usar título SEO «Mejores rookies NBA 2026-27: ranking top 10 semanal» (51 caracteres) y meta descripción con minutos, puntos y eficiencia de la clase, con una promesa concreta. Esfuerzo: bajo. Es un campo SEO, no el titular ni el cuerpo: lo aplica quien gestiona WordPress tras aprobación de Alejandro."
+}

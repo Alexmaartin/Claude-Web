@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-21T14:53:55.518Z",
+ "contexto": "Fuente activa: ESPN NBA News (RSS, 18 elementos, HTTP 200). Nuevas: Celtics vs Mavericks, LeBron y asistencias, Spurs y racha de 12, Trae Young sin anotar, Jordan Dome. Descartadas: 2 por filtro editorial (una de ellas fuera de la ventana de 48 h). Ya existían: 11. NBA.com sigue pendiente de verificar. Sin redacción ni métricas, según lo pedido.",
+ "estado": "cerrada",
+ "fecha": "2026-11-16T07:15:00+00:00",
+ "mensaje": "Pasada diaria del Radar: 5 noticias nuevas, 11 ya existentes, 2 descartadas. Sin errores de descarga.",
+ "tipo": "tecnica"
+}

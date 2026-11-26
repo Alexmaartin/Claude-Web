@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-13T10:38:42.780Z",
+ "contexto": "borradores/b-20261109-heat",
+ "estado": "cerrada",
+ "fecha": "2026-11-11T19:00:00+00:00",
+ "mensaje": "Heat a once partidos: estadísticas de jugadores actualizadas con ESPN (GP 11), y equipo: 115‘7 puntos (12.º de la liga) y 120‘0 en contra (26.º). Cambios: Giannis 27‘7 pts, 12‘6 reb, 5‘2 ast, 56‘7% TC, 22‘2% triples; Adebayo 17‘8 pts, 3‘3 ast, 50‘7% TC; Mitchell 16‘5 pts, 8‘5 ast; Thompson 14‘4; Wiggins 8‘7 (titular en 9 de 11); Larsson 11‘4 (sin ser titular habitual); Portis, Hardaway, Conwell y resto. Frases cambiadas: titular de la sección de ritmo (ahora «Ataque en la parte alta, defensa por debajo de lo necesario»), párrafo del ritmo, pregunta de la defensa («sin sacrificar el ataque»), intro y cierre (once partidos), pie y FAQ. ELIMINADO el ritmo (103‘0 posesiones) y las valoraciones ofensiva, defensiva y neta: ESPN no las publica y Basketball-Reference solo se usa para verificar. Si Alejandro quiere recuperarlas, hay que decidir otra fuente. Comprobación: LISTO, 0 fallos, 0 avisos. Estado pendiente_revision. Sin verificacion (ya eliminada). Nota: la posición en el Este es empate con Cleveland (ESPN lo pone 7.º, Basketball-Reference 8.º) y el texto no fija puesto.",
+ "tipo": "tecnica"
+}

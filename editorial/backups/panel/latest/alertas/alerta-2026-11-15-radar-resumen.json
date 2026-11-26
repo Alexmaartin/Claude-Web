@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-21T14:53:57.313Z",
+ "contexto": "Fuente activa: ESPN NBA News (RSS, 19 elementos, HTTP 200). Nuevas: prueba de la G League, Cavaliers vs Mavericks, Embiid vs Pacers, Reaves vs Suns (mismo grupo que la noticia de ayer), Josh Hart. Descartadas: 3 por filtro editorial o por ventana de 48 h, y 1 por tema (no es NBA). Ya existían: 10. NBA.com sigue pendiente de verificar. Sin redacción ni métricas, según lo pedido.",
+ "estado": "cerrada",
+ "fecha": "2026-11-15T07:15:00+00:00",
+ "mensaje": "Pasada diaria del Radar: 5 noticias nuevas, 10 ya existentes, 4 descartadas. Sin errores de descarga.",
+ "tipo": "tecnica"
+}

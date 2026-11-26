@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-21T14:53:42.583Z",
+ "contexto": "Borradores b-20261119-nets-calendario y b-20261118-bulls (encargo de JalandBot sobre el partido del 18 de noviembre).",
+ "estado": "cerrada",
+ "fecha": "2026-11-19T14:35:00+00:00",
+ "mensaje": "Resultado Chicago-Brooklyn del 18 de noviembre: Basketball-Reference lo registra ya, Chicago 137 en Brooklyn 107 (Nets 3-11, Bulls 4-10). ESPN no se pudo confirmar (la búsqueda no indexa el resultado) y el encargo exige que coincidan, así que NO he cambiado ningún borrador. Ambos tienen editado_por_humano en false y siguen en pendiente_revision. Si confirmas el resultado en ESPN, los cambios serían: Nets: intro y FAQ a 3-11 tras catorce partidos, derrota ante Chicago 107-137 el 18, próximo partido viernes 20 contra Orlando; Bulls: 4-10 en título, extracto y pie, victoria 137-107 en Brooklyn el 18 y próximo partido viernes 20 contra Washington.",
+ "tipo": "tecnica"
+}

@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-13T10:38:46.971Z",
+ "contexto": "Rutina «Verificador diario de borradores» (trig_019y1at8AQhsZtjLaL9qeKnP). Borrador revisado: b-20261109-heat (ediciones ed-20261109-heat-01 a 07).",
+ "estado": "cerrada",
+ "fecha": "2026-11-09T09:05:00+00:00",
+ "mensaje": "Verificador diario: 1 borrador revisado, b-20261109-heat (Miami Heat 2026-27). Corregido el récord: 3-6 tras nueve partidos según Basketball-Reference, no 4-6 tras diez; retirada la victoria en Sacramento, que no consta como jugada. Retiradas las cifras que no constan (PER, TS%, salarios, Utah 1-9) y el número de jugadores (18, no 17). Una sola mención a ESPN en el cuerpo. Comprobador: LISTO. Estado sin cambios: pendiente_revision. Tuyo: decidir si el partido de Sacramento (8 de noviembre) se jugó; si ganó 114-108, el balance pasa a 4-6 y hay que ajustar título, extracto, pie y el arranque. Los otros 7 borradores no tenían estado pendiente_revision sin verificar, así que no se tocaron.",
+ "tipo": "tecnica"
+}

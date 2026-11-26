@@ -1,0 +1,6 @@
+{
+ "borrador": "b-bucks-2-17-sin-primera-ronda-2027",
+ "fecha": "2026-11-26",
+ "resumen": "Segunda comprobacion del borrador Bucks 2-17 (v2, origen grokbot). Sin cambios de texto, estado ni imagen. ESPN devolvio HTTP 202 vacio; la comprobacion se hizo con BR. Confirmado: balance 2-17, ratings (109,7 / 121,0 / -11,2), ritmo, eFG, racha de 13 derrotas, 1-13 tras 14 partidos de 1974-75, 15 derrotas de 1995-96, 7-59 y 9-73, plantilla por partido (la mayoria), salarios, fechas de contrato, dinero muerto (28,6 M$) y masa salarial (191,4 M$). Dudas para Alejandro: (1) Markovic 'opcion del equipo en el ultimo ano': BR da tres temporadas garantizadas. (2) El calendario de BR lista 16 partidos (2-14 tras 16), no 1-15: revisar '1-15 tras 16'. (3) Tipo de opcion de Rollins, Turner, Jakucionis, Dieng, Burries y Ament: no visible en BR. (4) Jaquez 'agente libre restringido', Nance/Jones/Ryan 'dos vias', Lillard 'cortado en 2025', posiciones y lineas de Sims y Markovic: sin comprobar. (5) Fechas futuras (salvo 27-nov), Heat 10-7 y Giannis/Herro del 18-nov: sin comprobar (ESPN). (6) 'Peor de la historia' necesita ranking. (7) Tuit con [ENLACE] sin resolver. Verificado por JalandBot, no comprobado aqui: declaraciones, picks, paquete, Jenkins y Rivers.",
+ "tipo": "tecnica"
+}

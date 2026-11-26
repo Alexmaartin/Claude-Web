@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-13T10:38:40.982Z",
+ "contexto": "Borrador b-20261109-heat (Miami Heat 2026-27). Encargo de JalandBot: verificar solo lo cambiado tras 11 partidos. Registro: ediciones ed-20261111-heat-01 a 04.",
+ "estado": "cerrada",
+ "fecha": "2026-11-11T19:30:00+00:00",
+ "mensaje": "Verificación de la actualización de b-20261109-heat: balance 5-6, victorias en Sacramento (114-108) y Utah (115-109), racha de cinco de siete, estadísticas de equipo y de jugadores, y calendario confirmados con Basketball-Reference. Corregido: el Heat está octavo en el Este, no empatado con Cleveland (frase retirada), y la plantilla tiene tres contratos de dos vías, no cuatro. Basketball-Reference sale de las fuentes. Comprobador: LISTO. Estado sin cambios: pendiente_revision. Tuyo: revisar el borrador; las páginas de ESPN siguen sin poder abrirse desde la sesión, así que las cifras se contrastaron con Basketball-Reference.",
+ "tipo": "tecnica"
+}

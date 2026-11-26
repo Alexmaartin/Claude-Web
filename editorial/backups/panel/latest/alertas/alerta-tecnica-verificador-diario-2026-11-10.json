@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-13T10:38:45.571Z",
+ "contexto": "Rutina «Verificador diario de borradores» (trig_019y1at8AQhsZtjLaL9qeKnP).",
+ "estado": "cerrada",
+ "fecha": "2026-11-10T08:40:00+00:00",
+ "mensaje": "Verificador diario: 0 borradores revisados. Ninguno cumple el criterio (pendiente_revision sin verificacion). b-20261109-heat sigue en pendiente_revision, pero ya tiene verificacion (ayer); pendiente de tu decisión sobre el partido de Sacramento. Los demás están publicados. Sin cambios de estado ni de texto.",
+ "tipo": "tecnica"
+}

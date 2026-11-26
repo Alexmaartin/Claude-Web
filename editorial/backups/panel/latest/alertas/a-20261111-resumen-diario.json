@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-13T10:38:44.115Z",
+ "contexto": "Radar: RSS de ESPN NBA News (activa) descargado sin fallos; 12 elementos dentro de 48 h, todos nuevos y guardados (2 como sin_confirmar). NBA.com y reporteros de ESPN siguen pendientes de verificar y no se consultaron. Filtro de apuestas aplicado: sin coincidencias. Redacción: día evergreen; el único error es que idea-ev-05 no se redactó por falta de fuente accesible de la liga (ver a-20261111-evergreen). No se propuso idea nueva porque hay una aprobada sin usar. Métricas web de Cloudflare no actualizadas en esta pasada. Nada se publicó en WordPress.",
+ "estado": "cerrada",
+ "fecha": "2026-11-11T07:40:00+00:00",
+ "mensaje": "Flujo diario 2026-11-11: 12 noticias detectadas, 0 borradores creados, 1 error.",
+ "tipo": "tecnica"
+}

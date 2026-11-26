@@ -1,0 +1,9 @@
+{
+ "estado": "abierta",
+ "fecha": "2026-11-21T15:55:00+01:00",
+ "impacto": "Medio-bajo para el ranking; afecta a la accesibilidad y a la búsqueda de imágenes.",
+ "pagina": "https://undraftedzone.com/top-10-rookies-temporada-2026-27/",
+ "prioridad": "media",
+ "problema": "La imagen de portada tiene el texto alternativo vacío (lectura del HTML en vivo; a confirmar en el atributo alt).",
+ "sugerencia": "Alt propuesto: «Portada del top 10 de rookies de la temporada 2026-27 de Undrafted Zone». Esfuerzo: mínimo. Lo cambia quien gestiona la imagen en WordPress; no requiere cambio de texto."
+}

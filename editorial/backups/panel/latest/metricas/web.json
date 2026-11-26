@@ -1,0 +1,387 @@
+{
+ "actualizado": "2026-11-26T06:40:00Z",
+ "alertas": [
+  {
+   "mensaje": "procedencia vacía: Cloudflare rechaza el campo clientRefererHost con este token; sin referer no se separan Google, Instagram, X, Facebook ni directo.",
+   "tipo": "tecnica"
+  },
+  {
+   "mensaje": "articulos vacío: no hay credenciales de la API de WordPress en el entorno, así que no se han consultado las views.",
+   "tipo": "tecnica"
+  },
+  {
+   "mensaje": "cwv vacío: Web Analytics (RUM) no está disponible en esta zona.",
+   "tipo": "tecnica"
+  },
+  {
+   "mensaje": "Correccion del 24-nov: las peticiones guardadas hasta el 17-nov salían de la consulta muestreada (adaptive) y estaban infladas unas dos veces. Desde el 24-oct las peticiones son httpRequests1dGroups (UTC) en metricas_historico.",
+   "tipo": "tecnica"
+  },
+  {
+   "mensaje": "Pasada del 26-nov: top, países, dispositivos y navegadores de semana y mes no recalculados en esta pasada. Día usa httpRequests1hGroups (25-nov, hora de Madrid); el resto usa días UTC.",
+   "tipo": "tecnica"
+  }
+ ],
+ "articulos": [],
+ "articulos_publicados": 4,
+ "cwv": [],
+ "periodos": {
+  "dia": {
+   "articulos": [],
+   "dispositivos": [],
+   "navegadores": [],
+   "nota": "25-nov en hora de Madrid (23:00 UTC del 24 a 23:00 UTC del 25). Previas = 24-nov en Madrid. Peticiones de httpRequests1hGroups. Visitas y top de muestra. Países, dispositivos y navegadores no recalculados en esta pasada.",
+   "paises": [],
+   "peticiones": 2737,
+   "procedencia": [],
+   "serie": [
+    {
+     "dia": "00:00",
+     "visitas": 2
+    },
+    {
+     "dia": "01:00",
+     "visitas": 4
+    },
+    {
+     "dia": "02:00",
+     "visitas": 6
+    },
+    {
+     "dia": "03:00",
+     "visitas": 13
+    },
+    {
+     "dia": "04:00",
+     "visitas": 5
+    },
+    {
+     "dia": "05:00",
+     "visitas": 13
+    },
+    {
+     "dia": "06:00",
+     "visitas": 25
+    },
+    {
+     "dia": "07:00",
+     "visitas": 15
+    },
+    {
+     "dia": "08:00",
+     "visitas": 16
+    },
+    {
+     "dia": "09:00",
+     "visitas": 10
+    },
+    {
+     "dia": "10:00",
+     "visitas": 24
+    },
+    {
+     "dia": "11:00",
+     "visitas": 17
+    },
+    {
+     "dia": "12:00",
+     "visitas": 7
+    },
+    {
+     "dia": "13:00",
+     "visitas": 49
+    },
+    {
+     "dia": "14:00",
+     "visitas": 9
+    },
+    {
+     "dia": "15:00",
+     "visitas": 9
+    },
+    {
+     "dia": "16:00",
+     "visitas": 0
+    },
+    {
+     "dia": "17:00",
+     "visitas": 8
+    },
+    {
+     "dia": "18:00",
+     "visitas": 103
+    },
+    {
+     "dia": "19:00",
+     "visitas": 80
+    },
+    {
+     "dia": "20:00",
+     "visitas": 100
+    },
+    {
+     "dia": "21:00",
+     "visitas": 35
+    },
+    {
+     "dia": "22:00",
+     "visitas": 13
+    },
+    {
+     "dia": "23:00",
+     "visitas": 18
+    }
+   ],
+   "sistemas": [],
+   "top": [
+    {
+     "cambio": null,
+     "ruta": "/",
+     "visitas": 95
+    },
+    {
+     "cambio": null,
+     "ruta": "/mercado",
+     "visitas": 14
+    },
+    {
+     "cambio": null,
+     "ruta": "/calendario",
+     "visitas": 13
+    },
+    {
+     "cambio": null,
+     "ruta": "/aviso-legal/",
+     "visitas": 11
+    },
+    {
+     "cambio": null,
+     "ruta": "/cleveland-cavaliers-son-ya-aspirantes-definitivos/",
+     "visitas": 11
+    },
+    {
+     "cambio": null,
+     "ruta": "/curiosidades",
+     "visitas": 11
+    },
+    {
+     "cambio": null,
+     "ruta": "/jugadores",
+     "visitas": 10
+    },
+    {
+     "cambio": null,
+     "ruta": "/franquicias/los-angeles-lakers",
+     "visitas": 10
+    },
+    {
+     "cambio": null,
+     "ruta": "/europa",
+     "visitas": 10
+    },
+    {
+     "cambio": null,
+     "ruta": "/pizarra",
+     "visitas": 10
+    }
+   ],
+   "visitas": 581,
+   "visitas_previas": 309
+  },
+  "mes": {
+   "articulos": [],
+   "dispositivos": [],
+   "navegadores": [],
+   "nota": "parcial: 31-oct a 25-nov (26 días). Visitas de lectura de Cloudflare (muestreado); la serie combina el histórico (31-oct a 06-nov con visitas totales, que incluyen escáneres) con visitas de lectura. Top, países y dispositivos no recalculados en esta pasada.",
+   "paises": [],
+   "peticiones": 85811,
+   "procedencia": [],
+   "serie": [
+    {
+     "dia": "2026-10-31",
+     "visitas": 675
+    },
+    {
+     "dia": "2026-11-01",
+     "visitas": 545
+    },
+    {
+     "dia": "2026-11-02",
+     "visitas": 460
+    },
+    {
+     "dia": "2026-11-03",
+     "visitas": 570
+    },
+    {
+     "dia": "2026-11-04",
+     "visitas": 478
+    },
+    {
+     "dia": "2026-11-05",
+     "visitas": 615
+    },
+    {
+     "dia": "2026-11-06",
+     "visitas": 812
+    },
+    {
+     "dia": "2026-11-07",
+     "visitas": 471
+    },
+    {
+     "dia": "2026-11-08",
+     "visitas": 373
+    },
+    {
+     "dia": "2026-11-09",
+     "visitas": 314
+    },
+    {
+     "dia": "2026-11-10",
+     "visitas": 478
+    },
+    {
+     "dia": "2026-11-11",
+     "visitas": 321
+    },
+    {
+     "dia": "2026-11-12",
+     "visitas": 492
+    },
+    {
+     "dia": "2026-11-13",
+     "visitas": 278
+    },
+    {
+     "dia": "2026-11-14",
+     "visitas": 288
+    },
+    {
+     "dia": "2026-11-15",
+     "visitas": 345
+    },
+    {
+     "dia": "2026-11-16",
+     "visitas": 329
+    },
+    {
+     "dia": "2026-11-17",
+     "visitas": 214
+    },
+    {
+     "dia": "2026-11-18",
+     "visitas": 1260
+    },
+    {
+     "dia": "2026-11-19",
+     "visitas": 693
+    },
+    {
+     "dia": "2026-11-20",
+     "visitas": 877
+    },
+    {
+     "dia": "2026-11-21",
+     "visitas": 688
+    },
+    {
+     "dia": "2026-11-22",
+     "visitas": 336
+    },
+    {
+     "dia": "2026-11-23",
+     "visitas": 357
+    },
+    {
+     "dia": "2026-11-24",
+     "visitas": 269
+    },
+    {
+     "dia": "2026-11-25",
+     "visitas": 597
+    }
+   ],
+   "sistemas": [],
+   "top": [],
+   "visitas": 11960,
+   "visitas_previas": null
+  },
+  "semana": {
+   "articulos": [],
+   "dispositivos": [],
+   "navegadores": [],
+   "nota": "últimos 7 días UTC (19 a 25-nov). Previas: 12 a 18-nov. Visitas de lectura del histórico; peticiones de httpRequests1dGroups. Top, países y dispositivos no recalculados en esta pasada.",
+   "paises": [],
+   "peticiones": 18596,
+   "procedencia": [],
+   "serie": [
+    {
+     "dia": "2026-11-19",
+     "visitas": 693
+    },
+    {
+     "dia": "2026-11-20",
+     "visitas": 877
+    },
+    {
+     "dia": "2026-11-21",
+     "visitas": 688
+    },
+    {
+     "dia": "2026-11-22",
+     "visitas": 336
+    },
+    {
+     "dia": "2026-11-23",
+     "visitas": 357
+    },
+    {
+     "dia": "2026-11-24",
+     "visitas": 269
+    },
+    {
+     "dia": "2026-11-25",
+     "visitas": 597
+    }
+   ],
+   "sistemas": [],
+   "top": [],
+   "visitas": 3817,
+   "visitas_previas": 3206
+  }
+ },
+ "tendencia_semanal": [
+  {
+   "peticiones": 24128,
+   "semana": "2026-W43",
+   "visitas": 4511
+  },
+  {
+   "peticiones": 54828,
+   "semana": "2026-W44",
+   "visitas": 6600
+  },
+  {
+   "peticiones": 30971,
+   "semana": "2026-W45",
+   "visitas": 4157
+  },
+  {
+   "peticiones": 20173,
+   "semana": "2026-W46",
+   "visitas": 2761
+  },
+  {
+   "peticiones": 21273,
+   "semana": "2026-W47",
+   "visitas": 4694
+  },
+  {
+   "nota": "parcial: 23 a 25-nov",
+   "peticiones": 7557,
+   "semana": "2026-W48",
+   "visitas": 1223
+  }
+ ]
+}

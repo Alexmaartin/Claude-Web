@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-13T10:38:53.601Z",
+ "contexto": "Radar: 13 elementos en el RSS de ESPN NBA News (activa); 4 ya existían y 9 se guardaron como nuevas. NBA.com y los reporteros de ESPN siguen pendientes de verificar y no se consultaron. Redacción: guía de los Miami Heat, borrador b-20261109-heat en pendiente_revision (1.995 palabras, 4 enlaces internos, portada WebP de 42 KB, comprobar_borrador.js: LISTO sin avisos). HTML en editorial/salida/ del entorno de la rutina, sin subir al repo. Error: no se pudo refrescar temas_usados desde WordPress (ver alerta a-20261109-wp-registro). Cifras: ESPN y Basketball-Reference difieren en el contrato de Adebayo (unos 300.000 dólares) y en los de Thompson y Hardaway, y las páginas se leyeron antes del décimo partido, así que el borrador usa cifras hasta el noveno partido y omite los contratos que no coinciden. Nada se publicó en WordPress. Filtro de apuestas aplicado: sin coincidencias.",
+ "estado": "cerrada",
+ "fecha": "2026-11-09T07:38:00+00:00",
+ "mensaje": "Flujo diario 2026-11-09: 9 noticias detectadas, 1 borrador creado, 1 error.",
+ "tipo": "tecnica"
+}

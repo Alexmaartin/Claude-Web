@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-13T10:39:06.984Z",
+ "contexto": "Radar: feed de ESPN NBA descargado (HTTP 200); 3 noticias nuevas (Porzingis, Rivers/Giannis, Crawford/Seattle). Descartadas por la lista prohibida 2 elementos del feed. Resto del feed omitido por ser opinión, ranking, fantasy o entretenimiento, o ya estar guardado. Redacción: toca franquicia (día 1), turno Nets; guía b-20261107-nets en pendiente_revision (1.671 palabras, tabla, FAQ, 5 enlaces internos, portada WebP de 35 KB). La guía usa solo datos de las páginas de ESPN del equipo. Los 7 salarios que ESPN no muestra se marcan como «No figura». Los H2 de «Qué mirar» y «Preguntas frecuentes» quedan por debajo de 250 palabras, sin relleno. No se actualizaron las métricas web (documento «web» sin tocar): el token y la zona de Cloudflare están disponibles y la API responde para semana y mes, pero este ciclo no completó los tres periodos (la consulta por horas del día falló con un error de orden) ni top, procedencia ni Search Console, y no se quiso escribir un documento parcial. Nada se ha publicado en WordPress.",
+ "estado": "cerrada",
+ "fecha": "2026-11-07T08:35:00+00:00",
+ "mensaje": "Ciclo diario 2026-11-07: 3 noticias detectadas, 1 borrador creado, 0 errores.",
+ "tipo": "tecnica"
+}

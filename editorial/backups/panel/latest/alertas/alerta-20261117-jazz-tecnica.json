@@ -1,0 +1,8 @@
+{
+ "actualizado_en": "2026-11-21T14:53:48.353Z",
+ "contexto": "borradores/b-20261117-jazz",
+ "estado": "cerrada",
+ "fecha": "2026-11-17T08:30:00+01:00",
+ "mensaje": "Pasada diaria del 17 de noviembre (día 11, evergreen por el ritmo). Ideas evergreen: ev-05 bloqueada, NBA.com responde 403, así que se usa el fallback de franquicia. Turno: Sacramento Kings (turno 8), pero ya tiene guía de temporada publicada el 8 de agosto («Sacramento Kings 2026-27: Sabonis, LaVine y el futuro tras Fox»). El registro dice que una guía de la misma temporada no se vuelve a escribir, así que el turno pasa a Utah Jazz (turno 9). Los Jazz solo tienen en WordPress la agencia libre de julio, que no es guía de temporada. Qué se redactó: «Utah Jazz 2026-27: un 1-13 con George y Peterson por delante» (60 caracteres), tipo guía, pendiente_revision, 1.525 palabras, 9 H2, FAQ, 3 enlaces internos reales, portada con el dato 1-13. Checker: LISTO, 0 avisos. Datos: ESPN (plantilla, estadísticas de jugador, calendario, lesiones) y Basketball-Reference para récord, puntos y últimos partidos; coinciden en 1-13, 107’1 y 118’0 y en las tres últimas derrotas. Fechas de calendario en hora de Los Ángeles. Lesiones según ESPN: Markkanen (fractura en la mano, al menos un mes), Jackson Jr. (rotura del ligamento colateral medial, 6–8 semanas desde el 27 de octubre), Hayes (rodilla, baja hoy ante los Clippers) y Nurkic (pie). WordPress: solo lectura y solo para el turno; ningún artículo de los Jazz de temporada. Nada publicado. Aviso sobre otro borrador: b-20261114-bucks dice 1-11 y 15.º del Este; ESPN ya da 1-13 tras la derrota en Orlando. No lo toqué (lo pide el orden de trabajo para Alejandro o JalandBot).",
+ "tipo": "tecnica"
+}

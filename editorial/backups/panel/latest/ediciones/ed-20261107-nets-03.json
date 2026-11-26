@@ -1,0 +1,8 @@
+{
+ "antes": "Los Nets tienen 18 jugadores en plantilla: nueve aleros o ala-pívots, siete escoltas o bases y dos pívots. La edad media es de 23’8 años.",
+ "borrador": "b-20261107-nets",
+ "despues": "Ocho aleros o ala-pívots, siete escoltas o bases y tres pívots (Danny Wolf pasa de F a C según la fuente). Edad media, calculada con las 16 edades publicadas: 387 / 16 = 24’2 años.",
+ "fecha": "2026-11-07T03:25:00+00:00",
+ "fuente": "https://www.basketball-reference.com/teams/BRK/2027.html",
+ "motivo": "Posición de Wolf según la fuente. La edad media original (23’8) salía de edades que no coinciden con la fuente; recalculada con las edades publicadas."
+}
