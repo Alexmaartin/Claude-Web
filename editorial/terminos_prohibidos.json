@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "nota": "Fuente única de los términos de LISTA_PROHIBIDA.md. El texto se normaliza antes de comparar: minúsculas y sin acentos. Cualquier cambio se hace aquí y se propaga con `node editorial/scripts/sincronizar_prohibidos.js`. Lo usan el comprobador de borradores y el panel.",
+  "bloquea": [
+    "apuest", "apost", "bookmaker", "bookie", "sportsbook", "betting", "wager", "tipster",
+    "parlay", "parle", "moneyline", "over/under", "linea de apuestas", "juego de azar",
+    "casino", "ruleta", "loteria", "quiniela", "handicap", "boleto de apuestas"
+  ],
+  "regex_bloquea": ["\\bbets?\\b", "\\bodds\\b", "\\bcuotas?\\b"],
+  "revisar": ["combinada", "pronostic"],
+  "regex_revisar": ["\\bazar\\b"],
+  "sustituir": { "salary cap": "espacio salarial", "cap space": "espacio salarial" },
+  "excepciones": ["sorteo del draft", "favorito", "favoritos"]
+}

@@ -488,6 +488,10 @@ pre.preview { max-height: 260px; overflow: auto; margin: 10px 0 0; padding: 14px
 }
 
 /* Escribir: editor propio */
+.item-top.ver { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.item-top.ver:last-child { border-bottom: 0; }
+#rte-dictado-txt { color: var(--fg); font-style: italic; }
+#rte-ia-txt { min-height: 6em; }
 .rte-marca { margin: 1.2em 0 .5em; padding: 6px 12px; border: 1px dashed var(--line-2); border-radius: 10px; background: var(--info-soft); color: var(--info); font: 700 12px/1.3 var(--sans); letter-spacing: .04em; text-transform: uppercase; user-select: none; }
 .rte-marca::before { content: attr(data-etq); }
 .rte-auto { opacity: .7; border-left: 3px solid var(--info); padding-left: 12px; margin-left: 0; user-select: none; }
@@ -581,6 +585,7 @@ details.datos .field { margin-bottom: 14px; }
 <nav class="nav" id="nav" aria-label="Secciones"></nav>
 <main class="screen" id="screen"></main>
 <div class="toast" id="toast" role="status" hidden></div>
+<input type="file" id="portada-global" accept="image/*" hidden>
 
 <script>
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -637,7 +642,7 @@ const ACTIONS = {
 };
 
 const state = { ready: false, db: null, view: 'hoy', sel: null, editing: null, confirm: null, filtro: null, periodo: 'semana', data: {}, busy: new Set() };
-['borradores', 'ideas', 'metricas', 'seo', 'noticias', 'alertas', 'ediciones'].forEach(k => { state.data[k] = null; });
+['borradores', 'ideas', 'metricas', 'seo', 'noticias', 'alertas', 'ediciones', 'calendario'].forEach(k => { state.data[k] = null; });
 const reducido = () => window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* Utilidades */
@@ -731,6 +736,22 @@ function listaEs(a) {
 }
 function plural(n, uno, varios) { return n + ' ' + (n === 1 ? uno : varios); }
 
+/* Términos prohibidos: lista única (editorial/terminos_prohibidos.json), sincronizada con scripts/sincronizar_prohibidos.js */
+/* PROHIBIDOS:inicio (generado por scripts/sincronizar_prohibidos.js) */
+const PROHIBIDOS = {"version":1,"bloquea":["apuest","apost","bookmaker","bookie","sportsbook","betting","wager","tipster","parlay","parle","moneyline","over/under","linea de apuestas","juego de azar","casino","ruleta","loteria","quiniela","handicap","boleto de apuestas"],"regex_bloquea":["\\bbets?\\b","\\bodds\\b","\\bcuotas?\\b"],"revisar":["combinada","pronostic"],"regex_revisar":["\\bazar\\b"],"sustituir":{"salary cap":"espacio salarial","cap space":"espacio salarial"},"excepciones":["sorteo del draft","favorito","favoritos"]};
+/* PROHIBIDOS:fin */
+function analizarProhibidos(texto) {
+  const t = String(texto || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const nrm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const hallar = (subs, regs) => {
+    const out = [];
+    for (const s of subs || []) if (t.includes(nrm(s))) out.push(s);
+    for (const r of regs || []) { try { const m = new RegExp(r, 'i').exec(t); if (m) out.push(m[0]); } catch (e) { /* patrón inválido */ } }
+    return [...new Set(out)];
+  };
+  return { bloquea: hallar(PROHIBIDOS.bloquea, PROHIBIDOS.regex_bloquea), revisar: hallar(PROHIBIDOS.revisar, PROHIBIDOS.regex_revisar) };
+}
+
 /* Comprobaciones de un borrador (las mismas de siempre) */
 function checksData(x) {
   const html = String(x.cuerpo_html || '');
@@ -741,7 +762,7 @@ function checksData(x) {
   const ext = hrefs.length - int;
   const ex = String(x.extracto || '').length;
   const ti = String(x.titulo || '').length;
-  const todo = [x.titulo, x.extracto, texto, x.pie_instagram].join(' ').toLowerCase();
+  const proh = analizarProhibidos([x.titulo, x.extracto, texto, x.pie_instagram, x.tuit, (x.etiquetas || []).join(' ')].join(' '));
   return [
     [!!imgSegura(x.imagen_url), 'Portada WebP', 'Falta la portada'],
     [pal >= 600, pal + ' palabras en el cuerpo', 'Cuerpo de menos de 600 palabras'],
@@ -749,7 +770,7 @@ function checksData(x) {
     [ext === 0, 'Sin enlaces externos', ext + ' enlaces externos en el cuerpo'],
     [ex >= 140 && ex <= 160, 'Extracto de ' + ex + ' caracteres', 'Extracto de ' + ex + ' caracteres (140–160)'],
     [ti >= 50 && ti <= 65, 'Titular de ' + ti + ' caracteres', 'Titular de ' + ti + ' caracteres (50–65)'],
-    [!/apuest|cuota|odds|bookmaker|casino|parlay/.test(todo), 'Sin términos de apuestas', 'Término de apuestas detectado'],
+    [!proh.bloquea.length, 'Sin términos de apuestas', 'Término de apuestas detectado: ' + proh.bloquea.join(', ')],
   ];
 }
 function checklist(x) {
@@ -844,6 +865,16 @@ function heroPropuesta(x) {
     + '<button class="btn primary big" data-act="open" data-screen="borradores" data-id="' + esc(x.id) + '">Revisar propuesta</button></div></article>';
 }
 
+function seccionCalendario() {
+  const hoy = new Date(); hoy.setHours(0, 0, 0, 0);
+  const prox = (state.data.calendario || []).map(x => ({ ...x, d: new Date(String(x.fecha) + 'T00:00:00') }))
+    .filter(x => !isNaN(x.d) && x.d >= hoy).sort((a, b) => a.d - b.d).slice(0, 5);
+  if (!prox.length) return '';
+  const cuando = d => { const n = Math.round((d - hoy) / 86400000); return n === 0 ? 'hoy' : n === 1 ? 'mañana' : 'en ' + n + ' días'; };
+  return '<section class="sec" id="sec-calendario"><div class="sec-head"><h2>Próximas fechas</h2><span class="count">' + prox.length + '</span></div><div class="list">'
+    + prox.map(x => '<article class="item"><div class="item-head"><span class="bubble info">' + ICON.calendario + '</span><div><div class="item-top"><span class="estado e-info">' + esc(x.tipo === 'liga' ? 'Liga' : x.tipo === 'equipo' ? 'Equipo' : 'Redacción') + '</span><span class="item-date">' + esc(x.d.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' })) + ' · ' + cuando(x.d) + '</span></div>'
+      + '<p class="item-title">' + esc(x.titulo) + '</p>' + (x.nota ? '<p class="item-sub">' + esc(x.nota) + '</p>' : '') + '</div></div></article>').join('') + '</div></section>';
+}
 function renderHoy() {
   const borr = sortDesc(state.data.borradores || []);
   const pend = borr.filter(x => x.estado === 'pendiente_revision');
@@ -877,7 +908,7 @@ function renderHoy() {
         + '<div class="item-act">' + btn('resolve_alert', x.id, 'Cerrar alerta', true) + '</div></article>').join('')
       + '</section>'
     : '';
-  return bienvenida(pend.length, ideasProp, alertasAbiertas.length, seo.length) + hero + alertaSec + ideaSec + seoSec + pulsoCiclo();
+  return bienvenida(pend.length, ideasProp, alertasAbiertas.length, seo.length) + hero + alertaSec + ideaSec + seccionCalendario() + seoSec + pulsoCiclo();
 }
 
 function cardBorrador(x) {
@@ -958,6 +989,7 @@ function detailBorrador(x) {
     + (canReturn ? boton('return', 'Devolver', false) : '')
     + (canUpload ? boton('upload', botonSubida, true) : '')
     + '<button class="btn' + (esEscrito(x) ? ' primary' : '') + '" data-act="edit" data-id="' + esc(x.id) + '">' + (esEscrito(x) ? 'Seguir escribiendo' : 'Editar') + '</button>'
+    + (x.estado === 'publicado' || x.estado === 'publicado_borrador' ? '' : '<button class="btn" data-act="portada_detalle" data-id="' + esc(x.id) + '">' + (imgSegura(x.imagen_url) ? 'Cambiar portada' : 'Añadir portada') + '</button>')
     + (x.estado === 'devuelto' ? '<button class="btn danger" data-act="ask_delete" data-key="borradores" data-id="' + esc(x.id) + '">Eliminar</button>' : '') + '</div>'
     + (x.estado === 'devuelto' && state.confirm && state.confirm.key === 'borradores' && state.confirm.id === x.id ? deleteBlock('borradores', x.id) : '')
     + (confirmando
@@ -1357,6 +1389,7 @@ async function saveEdit(id) {
   try {
     // Registro de ediciones humanas: el aprendizaje semanal lee esta colección.
     const previo = (state.data.borradores || []).find(x => x.id === id) || {};
+    await versionar(id, 'antes de guardar cambios', previo);
     await state.db.collection('ediciones').add({
       borrador_id: id,
       fecha: nowIso(),
@@ -1409,6 +1442,7 @@ function subscribe() {
   sub('noticias', 'noticias', () => {});
   sub('alertas', 'alertas', render);
   sub('ediciones', 'ediciones', render);
+  sub('calendario', 'calendario', render);
   const s = document.getElementById('sync');
   s.textContent = 'En directo';
   s.classList.add('on');
@@ -1424,13 +1458,16 @@ ICON.enlace = SV('<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><
 ICON.imagen = SV('<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17l5-5 4 4 3-3 4 4"/>');
 ICON.deshacer = SV('<path d="M9 7L4 12l5 5"/><path d="M4 12h10a6 6 0 0 1 6 6"/>');
 ICON.rehacer = SV('<path d="M15 7l5 5-5 5"/><path d="M20 12H10a6 6 0 0 0-6 6"/>');
+ICON.mic = SV('<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>');
+ICON.ia = SV('<path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8z"/>');
+ICON.calendario = SV('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>');
 ICON.limpiar = SV('<path d="M6 6h12M10 6l-3 12M14 6l3 12M5 21h14"/>');
 
 VIEWS.splice(2, 0, { key: 'escribir', label: 'Escribir', icon: ICON.escribir });
 VIEW_TITLE.escribir = 'Escribir';
 ESTADO.en_escritura = ['info', 'En escritura'];
 
-const RTE = { id: null, campos: new Set(), timer: null, sel: null, portada: '', guardando: false, modo: 'escrito', tocado: false, cuerpoTocado: false, fig: null, slugManual: false, montado: false };
+const RTE = { portadaFile: null, id: null, campos: new Set(), timer: null, sel: null, portada: '', guardando: false, modo: 'escrito', tocado: false, cuerpoTocado: false, fig: null, slugManual: false, montado: false };
 const IMG_CACHE = {};
 const IMG_PEDIDAS = new Set();
 const DATA_IMG = /^data:image\/(?:webp|jpeg);base64,[A-Za-z0-9+\/=]+$/;
@@ -1463,7 +1500,7 @@ function leerDataUrl(blob) {
   return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = () => rej(r.error); r.readAsDataURL(blob); });
 }
 // Reduce la imagen hasta que cabe en el límite. WebP si el navegador lo sabe codificar; si no, JPEG.
-async function comprimirImagen(file, { maxBytes, maxAncho, recorte169 }) {
+async function comprimirImagen(file, { maxBytes, maxAncho, recorte169, foco = 0.5 }) {
   let bmp;
   try { bmp = await createImageBitmap(file); } catch (e) {
     bmp = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = URL.createObjectURL(file); });
@@ -1472,7 +1509,7 @@ async function comprimirImagen(file, { maxBytes, maxAncho, recorte169 }) {
   let sx = 0, sy = 0, cw = sw, ch = sh;
   if (recorte169) {
     if (sw / sh > 16 / 9) { cw = Math.round(sh * 16 / 9); sx = Math.round((sw - cw) / 2); }
-    else { ch = Math.round(sw * 9 / 16); sy = Math.round((sh - ch) / 2); }
+    else { ch = Math.round(sw * 9 / 16); sy = Math.round((sh - ch) * foco); }
   }
   let w = Math.min(cw, maxAncho), q = 0.82;
   const canvas = document.createElement('canvas');
@@ -1664,7 +1701,8 @@ function editorArticulo(x) {
     + '<div class="portada"><div class="block-label"><span>Portada</span></div>'
     + '<div class="portada-img' + (img ? ' hay' : '') + '" id="ed-portada-vista">' + (img ? '<img src="' + esc(img) + '" alt="Portada del artículo">' : ICON.imagen) + '</div>'
     + '<div class="actions"><button type="button" class="btn" data-act="portada_pick">' + (img ? 'Cambiar portada' : 'Elegir portada') + '</button>'
-    + '<input type="file" id="ed-portada-file" accept="image/*" hidden><span class="hint" id="ed-portada-nota">Se recorta a 16:9 y se reduce sola.</span></div></div>'
+    + '<input type="file" id="ed-portada-file" accept="image/*" hidden><span class="hint" id="ed-portada-nota">Se recorta a 16:9 y se reduce sola. Mejor una foto tuya o con licencia.</span></div>'
+    + '<div class="seg" id="ed-encuadre" role="group" aria-label="Encuadre de la portada" hidden><button type="button" data-act="encuadre" data-f="0">Ver arriba</button><button type="button" data-act="encuadre" data-f="0.5" aria-pressed="true">Centro</button><button type="button" data-act="encuadre" data-f="1">Ver abajo</button></div></div>'
     + '<div class="field"><div class="block-label"><span>Artículo</span></div><div class="rte">'
     + '<div class="rte-bar" role="toolbar" aria-label="Formato del texto">'
     + btnBar('bold', 'Negrita', '<span class="b">B</span>', ' aria-pressed="false"')
@@ -1684,7 +1722,14 @@ function editorArticulo(x) {
     + btnBar('undo', 'Deshacer', ICON.deshacer, '')
     + btnBar('redo', 'Rehacer', ICON.rehacer, '')
     + btnBar('clear', 'Quitar formato', ICON.limpiar, '')
+    + '<span class="sep"></span>'
+    + btnBar('dictar', 'Dictar con la voz', ICON.mic, ' id="rte-mic" aria-pressed="false" hidden')
+    + btnBar('ia', 'Ayuda de Claude', ICON.ia, ' id="rte-ia" hidden')
     + '</div>'
+    + '<div class="rte-tools" id="rte-dictado" hidden><span class="hint">Escuchando… habla con normalidad.</span><span id="rte-dictado-txt"></span></div>'
+    + '<div class="rte-tools" id="rte-iabox" hidden><div class="fila"><button type="button" class="btn" data-act="ia_run" data-modo="corregir">Corregir</button><button type="button" class="btn" data-act="ia_run" data-modo="claro">Más claro</button><button type="button" class="btn" data-act="ia_run" data-modo="corto">Acortar</button><button type="button" class="btn" data-act="ia_run" data-modo="datos">Qué comprobar</button><button type="button" class="btn ghost" data-act="tools_cerrar">Cerrar</button></div>'
+    + '<p class="hint" id="rte-ia-ayuda">Actúa sobre el texto seleccionado o, si no hay selección, sobre el párrafo donde está el cursor. No inventa datos.</p>'
+    + '<div id="rte-ia-res" hidden><textarea class="ed" id="rte-ia-txt" rows="5" readonly></textarea><div class="fila"><button type="button" class="btn primary" data-act="ia_aplicar" id="rte-ia-aplicar">Reemplazar</button><button type="button" class="btn ghost" data-act="ia_descartar">Descartar</button></div></div></div>'
     + '<div class="rte-tools" id="rte-link" hidden><div class="fila"><input class="ed" id="rte-url" inputmode="url" placeholder="https://undraftedzone.com/…" autocomplete="off" aria-label="Dirección del enlace">'
     + '<button type="button" class="btn primary" data-act="link_ok">Poner enlace</button><button type="button" class="btn" data-act="link_quitar">Quitar</button><button type="button" class="btn ghost" data-act="tools_cerrar">Cerrar</button></div></div>'
     + '<div class="rte-tools" id="rte-img" hidden><div class="fila"><input class="ed" id="rte-alt" placeholder="Describe la imagen (texto alternativo)" autocomplete="off" aria-label="Texto alternativo de la imagen">'
@@ -1698,6 +1743,7 @@ function editorArticulo(x) {
     + '<div class="field"><label class="block-label" for="ed-etiquetas"><span>Etiquetas (separadas por comas)</span></label><input class="ed" id="ed-etiquetas" value="' + v((x.etiquetas || []).join(', ')) + '"></div>'
     + '<div class="field"><label class="block-label" for="ed-pie"><span>Pie de Instagram</span></label><textarea class="ed" id="ed-pie" rows="4">' + v(x.pie_instagram) + '</textarea></div></details>'
     + '<div id="ed-checks"></div>'
+    + '<details class="datos" id="ed-versiones-det"><summary>Versiones anteriores</summary><div id="ed-versiones"><p class="hint">Se guardan solas cada pocos minutos y al enviar el borrador.</p></div></details>'
     + (escrito
       ? '<div class="actions"><button class="btn" data-act="pedir_verificacion" data-id="' + v(x.id) + '">Pedir verificación</button>'
         + '<button class="btn primary" data-act="dejar_listo" data-id="' + v(x.id) + '">Dejar listo para publicar</button></div>'
@@ -1722,10 +1768,11 @@ async function montarEditor() {
   const idMontaje = state.editing;
   await precargarImagenes(x.cuerpo_html);
   if (state.editing !== idMontaje || $('ed-rte') !== area) return;
-  RTE.id = x.id; RTE.modo = esEscrito(x) ? 'escrito' : 'existente'; RTE.campos.clear(); RTE.tocado = false; RTE.cuerpoTocado = false; RTE.fig = null;
+  RTE.id = x.id; RTE.portadaFile = null; RTE.modo = esEscrito(x) ? 'escrito' : 'existente'; RTE.campos.clear(); RTE.tocado = false; RTE.cuerpoTocado = false; RTE.fig = null;
   RTE.portada = DATA_IMG.test(String(x.imagen_url || '')) ? x.imagen_url : '';
   RTE.slugManual = !!x.slug && x.slug !== slugify(x.titulo);
   area.innerHTML = aEditor(x.cuerpo_html);
+  prepararCapacidades();
   try { document.execCommand('defaultParagraphSeparator', false, 'p'); } catch (e) { /* ya es p por defecto */ }
   actualizarContadores();
   if (RTE.modo === 'escrito' && !x.titulo) { const t = $('ed-titulo'); if (t) t.focus(); }
@@ -1787,6 +1834,7 @@ async function guardarEscrito() {
     await state.db.collection('borradores').doc(id).update(patch);
     const b = (state.data.borradores || []).find(x => x.id === id); if (b) Object.assign(b, patch);
     setGuardado('Guardado ' + new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }), 'ok');
+    if (campos.includes('cuerpo') && Date.now() - (RTE.ultimaVersion || 0) > 5 * 60e3) versionar(id, 'automática', c);
   } catch (e) {
     ok = false; campos.forEach(k => RTE.campos.add(k));
     setGuardado('Sin conexión: se reintentará', 'bad');
@@ -1798,6 +1846,45 @@ async function guardarEscrito() {
 async function vaciarGuardado() {
   clearTimeout(RTE.timer);
   for (let i = 0; i < 6 && (RTE.campos.size || RTE.guardando); i++) { await guardarEscrito(); if (RTE.guardando) await new Promise(r => setTimeout(r, 300)); }
+}
+
+/* Versiones anteriores de un borrador */
+const MAX_VERSIONES = 25;
+async function versionar(id, motivo, datos) {
+  if (!state.db || !id) return;
+  const c = datos || camposActuales();
+  const doc = { borrador_id: id, fecha: nowIso(), motivo, titulo: c.titulo || '', extracto: c.extracto || '', slug: c.slug || '', etiquetas: c.etiquetas || [], pie_instagram: c.pie_instagram || '', cuerpo_html: c.cuerpo_html || '' };
+  try {
+    await state.db.collection('versiones').doc('v-' + id + '-' + Date.now().toString(36)).set(doc);
+    RTE.ultimaVersion = Date.now();
+    const snap = await state.db.collection('versiones').where('borrador_id', '==', id).get();
+    const todas = snap.docs.map(d => ({ id: d.id, fecha: d.data().fecha })).sort((a, b) => String(b.fecha).localeCompare(String(a.fecha)));
+    for (const v of todas.slice(MAX_VERSIONES)) await state.db.collection('versiones').doc(v.id).delete();
+  } catch (e) { /* las versiones son un extra: nunca bloquean el guardado */ }
+}
+async function cargarVersiones() {
+  const cont = $('ed-versiones'); if (!cont || !RTE.id || !state.db) return;
+  cont.innerHTML = '<p class="hint">Cargando…</p>';
+  try {
+    const snap = await state.db.collection('versiones').where('borrador_id', '==', RTE.id).get();
+    const lista = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => String(b.fecha).localeCompare(String(a.fecha)));
+    RTE.versiones = Object.fromEntries(lista.map(v => [v.id, v]));
+    cont.innerHTML = lista.length
+      ? lista.map(v => '<div class="item-top ver"><span><strong>' + esc(fmtDate(v.fecha)) + '</strong> · ' + esc(v.motivo || '') + ' · ' + textoPlano(v.cuerpo_html).split(' ').filter(Boolean).length + ' palabras</span><button type="button" class="btn" data-act="restaurar_version" data-vid="' + esc(v.id) + '">Restaurar</button></div>').join('')
+      : '<p class="hint">Todavía no hay versiones. Se guardan solas cada pocos minutos y al enviar el borrador.</p>';
+  } catch (e) { cont.innerHTML = '<p class="hint">No se pudieron cargar las versiones.</p>'; }
+}
+async function restaurarVersion(vid) {
+  const v = RTE.versiones && RTE.versiones[vid]; const area = $('ed-rte');
+  if (!v || !area) return;
+  await versionar(RTE.id, 'antes de restaurar');
+  await precargarImagenes(v.cuerpo_html);
+  $('ed-titulo').value = v.titulo || ''; $('ed-extracto').value = v.extracto || ''; $('ed-slug').value = v.slug || '';
+  $('ed-etiquetas').value = (v.etiquetas || []).join(', '); $('ed-pie').value = v.pie_instagram || '';
+  area.innerHTML = aEditor(v.cuerpo_html);
+  ['titulo', 'extracto', 'slug', 'etiquetas', 'pie', 'cuerpo'].forEach(marcar);
+  toast('Versión restaurada. Se guardará sola.');
+  cargarVersiones();
 }
 
 /* Crear, cerrar y enviar */
@@ -1829,12 +1916,110 @@ async function finalizarEscrito(id, destino) {
     if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(String(b.slug || ''))) { toast('Falta una dirección válida (slug) en «Datos para publicar».'); return; }
     if (!imgSegura(b.imagen_url)) { toast('Falta la portada: no se puede dejar listo sin imagen.'); return; }
   }
+  await versionar(id, destino === 'aprobado' ? 'al dejar listo para publicar' : 'al pedir verificación', b);
   try {
     await state.db.collection('borradores').doc(id).update({ estado: destino, actualizado_en: nowIso() });
     toast(destino === 'aprobado' ? 'Listo para publicar' : 'Enviado a verificación');
     state.editing = null; RTE.id = null;
     go('borradores', id);
   } catch (e) { toast(errMsg(e)); }
+}
+
+/* Dictado por voz y ayuda de Claude: solo aparecen si el panel tiene esos permisos */
+async function prepararCapacidades() {
+  RTE.dict = null; RTE.sample = null; RTE.dictando = false;
+  try {
+    const d = window.claude ? await window.claude.use('dictation') : null;
+    if (d && $('rte-mic')) {
+      RTE.dict = d; $('rte-mic').hidden = false;
+      d.onPartial(({ text }) => { const t = $('rte-dictado-txt'); if (t) t.textContent = ' ' + text; });
+      d.onFinal(({ text }) => {
+        const t = $('rte-dictado-txt'); if (t) t.textContent = '';
+        if (!text || !text.trim()) return;
+        restaurarSeleccion(); try { document.execCommand('insertText', false, text.trim() + ' '); } catch (e) { /* sin foco */ }
+        guardarSeleccion(); marcar('cuerpo');
+      });
+      d.onState(({ state }) => {
+        RTE.dictando = state === 'listening';
+        const m = $('rte-mic'); if (m) m.setAttribute('aria-pressed', String(RTE.dictando));
+        const b = $('rte-dictado'); if (b) b.hidden = !RTE.dictando;
+      });
+    }
+  } catch (e) { /* sin dictado */ }
+  try {
+    const s = window.claude ? await window.claude.use('sample') : null;
+    if (s && $('rte-ia')) { RTE.sample = s; $('rte-ia').hidden = false; }
+  } catch (e) { /* sin ayuda de Claude */ }
+}
+function toggleDictado() {
+  const d = RTE.dict; if (!d) return;
+  if (RTE.dictando) { d.stop(); return; }
+  d.start().catch(e => { toast(e && e.code === 'not_granted' ? 'Has denegado el micrófono. Puedes cambiarlo en los permisos del panel.' : 'No se pudo iniciar el dictado.'); });
+}
+function textoParaIA() {
+  const area = $('ed-rte'); const s = getSelection();
+  let rango = RTE.sel && area && area.contains(RTE.sel.startContainer) ? RTE.sel.cloneRange() : null;
+  if (!rango) return null;
+  let texto = rango.toString().trim();
+  if (!texto) {
+    let b = rango.startContainer; while (b && b.parentNode !== area) b = b.parentNode;
+    if (!b || b.nodeType !== 1 || b.classList.contains('rte-marca') || b.classList.contains('rte-auto') || b.tagName === 'FIGURE') return null;
+    texto = b.textContent.trim();
+    rango = document.createRange(); rango.selectNodeContents(b);
+  }
+  return texto ? { texto, rango } : null;
+}
+function abrirIA() {
+  if (!RTE.sample) return;
+  guardarSeleccion();
+  const t = $('rte-iabox'); $('rte-link').hidden = true; $('rte-img').hidden = true;
+  t.hidden = !t.hidden; $('rte-ia-res').hidden = true;
+}
+const IA_REGLAS = 'Eres el corrector de Undrafted Zone, una web de NBA en español de España. Reglas: conserva la voz y la opinión del autor; no inventes datos, cifras, fechas ni nombres; no añadas información que no esté en el texto; decimales con apóstrofo tipográfico (28’4, 35’7%); sin exclamaciones ni emojis; escribe «espacio salarial» y no «salary cap»; nunca uses términos de apuestas ni de juegos de azar.';
+const IA_MODOS = {
+  corregir: 'Corrige ortografía, puntuación y erratas del texto. Cambia lo mínimo. Devuelve solo el texto corregido, sin comentarios.',
+  claro: 'Reescribe el texto para que se entienda mejor, con frases más cortas, sin cambiar su sentido ni su tono. Devuelve solo el texto reescrito, sin comentarios.',
+  corto: 'Acorta el texto a la mitad aproximadamente sin perder ninguna cifra ni la idea principal. Devuelve solo el texto acortado, sin comentarios.',
+  datos: 'Lista, una por línea y sin inventar nada, las afirmaciones del texto que contienen cifras, fechas, nombres o hechos que habría que comprobar contra una fuente fiable. Si no hay ninguna, responde «Nada que comprobar».',
+};
+async function iaRun(modo) {
+  const sel = textoParaIA();
+  if (!sel) { toast('Selecciona un texto o coloca el cursor en un párrafo.'); return; }
+  RTE.iaObjetivo = { modo, rango: sel.rango };
+  const res = $('rte-ia-res'), txt = $('rte-ia-txt');
+  res.hidden = false; txt.value = 'Pensando…'; $('rte-ia-aplicar').hidden = true;
+  try {
+    const r = await RTE.sample(IA_REGLAS + '\n\n' + IA_MODOS[modo] + '\n\nTexto:\n' + sel.texto, { modelTier: 'default', cache: false });
+    let out = String(r && r.text || '').trim();
+    const proh = analizarProhibidos(out);
+    if (proh.bloquea.length) { txt.value = 'La respuesta incluía términos prohibidos (' + proh.bloquea.join(', ') + ') y se ha descartado. Prueba otra vez.'; return; }
+    txt.value = out;
+    $('rte-ia-aplicar').hidden = modo === 'datos';
+  } catch (e) {
+    txt.value = '';
+    res.hidden = true;
+    toast(e && e.code === 'not_granted' ? 'Has denegado el permiso de Claude en este panel.' : e && e.code === 'rate_limited' ? 'Demasiadas peticiones seguidas. Espera un momento.' : 'No se pudo consultar a Claude.');
+  }
+}
+function iaAplicar() {
+  const o = RTE.iaObjetivo, area = $('ed-rte'), nuevo = $('rte-ia-txt').value.trim();
+  if (!o || !area || !nuevo) return;
+  area.focus({ preventScroll: true });
+  const s = getSelection(); s.removeAllRanges(); s.addRange(o.rango);
+  try { document.execCommand('insertText', false, nuevo); } catch (e) { toast('No se pudo reemplazar el texto.'); return; }
+  $('rte-ia-res').hidden = true; guardarSeleccion(); marcar('cuerpo'); toast('Texto reemplazado. Puedes deshacer con la flecha.');
+}
+
+/* Portada desde el detalle de un borrador (sin entrar al editor) */
+async function portadaDirecta(id, file) {
+  if (!file || !id || !state.db) return;
+  if (!/^image\//.test(file.type)) { toast('Ese archivo no es una imagen.'); return; }
+  toast('Preparando la portada…');
+  try {
+    const r = await comprimirImagen(file, { maxBytes: 110 * 1024, maxAncho: 1200, recorte169: true });
+    await state.db.collection('borradores').doc(id).update({ imagen_url: r.url, actualizado_en: nowIso() });
+    toast('Portada cambiada (' + Math.round(r.bytes / 1024) + ' KB, ' + r.w + '×' + r.h + ')');
+  } catch (e) { toast(e && e.message ? e.message : errMsg(e)); }
 }
 
 /* Comandos de la barra */
@@ -1870,10 +2055,10 @@ function restaurarSeleccion(forzar) {
   if (!forzar && s.rangeCount && area.contains(s.anchorNode)) return;
   if (RTE.sel) { s.removeAllRanges(); s.addRange(RTE.sel); }
 }
-function cerrarTools() { const a = $('rte-link'), b = $('rte-img'); if (a) a.hidden = true; if (b) b.hidden = true; if (RTE.fig) { RTE.fig.classList.remove('is-sel'); RTE.fig = null; } }
+function cerrarTools() { const iab = $('rte-iabox'); if (iab) iab.hidden = true; const a = $('rte-link'), b = $('rte-img'); if (a) a.hidden = true; if (b) b.hidden = true; if (RTE.fig) { RTE.fig.classList.remove('is-sel'); RTE.fig = null; } }
 function formato(cmd) {
   const area = $('ed-rte'); if (!area) return;
-  if (cmd !== 'image' && cmd !== 'link') cerrarTools();
+  if (cmd !== 'image' && cmd !== 'link' && cmd !== 'dictar' && cmd !== 'ia') cerrarTools();
   restaurarSeleccion();
   const ex = (c, v) => { try { document.execCommand(c, false, v); } catch (e) { /* no soportado */ } };
   const actual = bloqueActual();
@@ -1897,6 +2082,8 @@ function formato(cmd) {
       return;
     }
     case 'image': guardarSeleccion(); $('ed-img-file').click(); return;
+    case 'dictar': toggleDictado(); return;
+    case 'ia': abrirIA(); return;
   }
   normalizarArea(); guardarSeleccion(); actualizarBarra(); marcar('cuerpo');
 }
@@ -1955,12 +2142,14 @@ function seleccionarFigura(fig) {
   $('rte-alt').value = fig.querySelector('img').getAttribute('alt') || '';
   fig.scrollIntoView({ block: 'nearest', behavior: reducido() ? 'auto' : 'smooth' });
 }
-async function elegirPortada(file) {
+async function elegirPortada(file, foco = 0.5) {
   if (!file) return;
   if (!/^image\//.test(file.type)) { toast('Ese archivo no es una imagen.'); return; }
+  RTE.portadaFile = file;
+  const enc = $('ed-encuadre'); if (enc) { enc.hidden = false; enc.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.f) === foco))); }
   toast('Preparando la portada…');
   try {
-    const r = await comprimirImagen(file, { maxBytes: 110 * 1024, maxAncho: 1200, recorte169: true });
+    const r = await comprimirImagen(file, { maxBytes: 110 * 1024, maxAncho: 1200, recorte169: true, foco });
     RTE.portada = r.url;
     const v = $('ed-portada-vista'); if (v) { v.classList.add('hay'); v.innerHTML = '<img alt="Portada del artículo">'; v.firstChild.src = r.url; }
     const n = $('ed-portada-nota'); if (n) n.textContent = 'Portada de ' + Math.round(r.bytes / 1024) + ' KB (' + r.w + '×' + r.h + ').';
@@ -2004,6 +2193,7 @@ function cablearEditor() {
       document.execCommand('insertHTML', false, limpio === '<p><br></p>' ? esc(txt) : limpio);
     } else document.execCommand('insertText', false, txt);
   });
+  s.addEventListener('toggle', e => { if (e.target.id === 'ed-versiones-det' && e.target.open) cargarVersiones(); }, true);
   s.addEventListener('keydown', e => {
     if (e.target.id === 'rte-url' && e.key === 'Enter') { e.preventDefault(); ponerEnlace(); }
     if (e.target.id === 'ed-titulo' && e.key === 'Enter') { e.preventDefault(); const r = $('ed-rte'); if (r) r.focus(); }
@@ -2021,6 +2211,7 @@ function cablearEditor() {
   });
   document.addEventListener('selectionchange', () => { if ($('ed-rte') && document.activeElement === $('ed-rte')) { guardarSeleccion(); actualizarBarra(); } });
   document.addEventListener('visibilitychange', () => { if (document.hidden) vaciarGuardado(); });
+  $('portada-global').addEventListener('change', e => { const f = e.target.files && e.target.files[0]; e.target.value = ''; portadaDirecta(state.portadaDestino, f); });
   window.addEventListener('pagehide', () => { vaciarGuardado(); });
 }
 
@@ -2096,10 +2287,16 @@ function wire() {
     if (act === 'pedir_verificacion') { finalizarEscrito(b.dataset.id, 'pendiente_revision'); return; }
     if (act === 'dejar_listo') { finalizarEscrito(b.dataset.id, 'aprobado'); return; }
     if (act === 'rte') { formato(b.dataset.cmd); return; }
+    if (act === 'restaurar_version') { restaurarVersion(b.dataset.vid); return; }
+    if (act === 'ia_run') { iaRun(b.dataset.modo); return; }
+    if (act === 'ia_aplicar') { iaAplicar(); return; }
+    if (act === 'ia_descartar') { $('rte-ia-res').hidden = true; return; }
     if (act === 'link_ok') { ponerEnlace(); return; }
     if (act === 'link_quitar') { quitarEnlace(); return; }
     if (act === 'tools_cerrar') { cerrarTools(); return; }
     if (act === 'img_quitar') { if (RTE.fig) { RTE.fig.remove(); RTE.fig = null; cerrarTools(); marcar('cuerpo'); } return; }
+    if (act === 'portada_detalle') { state.portadaDestino = b.dataset.id; $('portada-global').click(); return; }
+    if (act === 'encuadre') { if (RTE.portadaFile) elegirPortada(RTE.portadaFile, Number(b.dataset.f)); return; }
     if (act === 'portada_pick') { const f = document.getElementById('ed-portada-file'); if (f) f.click(); return; }
     if (act === 'save_edit') { saveEdit(b.dataset.id); return; }
     if (act === 'ask_delete') { state.confirm = { key: b.dataset.key, id: b.dataset.id }; render(); return; }

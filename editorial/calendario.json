@@ -1,0 +1,10 @@
+[
+  {"id": "cal-2026-11-27-bucks-det", "fecha": "2026-11-27", "tipo": "equipo", "titulo": "Bucks en Detroit (Copa NBA)", "nota": "Último partido de la fase de grupos de Milwaukee. Siguen el 28 en casa contra Oklahoma City y el 30 contra San Antonio.", "fuente": "ESPN, calendario de los Bucks"},
+  {"id": "cal-2026-12-04-copa-cuartos", "fecha": "2026-12-04", "tipo": "liga", "titulo": "Cuartos de final de la Copa NBA", "nota": "Se juegan el 4 y el 5 de diciembre. Semifinales el 8 y el 9; la final, el 11 en Indianápolis.", "fuente": "Fox Sports y NBA.com (calendario de la Copa NBA 2026)"},
+  {"id": "cal-2026-12-11-copa-final", "fecha": "2026-12-11", "tipo": "liga", "titulo": "Final de la Copa NBA", "nota": "Indianápolis. Ocasión para un balance de la Copa antes del ecuador de la temporada.", "fuente": "Fox Sports (calendario de la Copa NBA 2026)"},
+  {"id": "cal-2027-01-28-giannis", "fecha": "2027-01-28", "tipo": "equipo", "titulo": "Giannis vuelve a Milwaukee con el Heat", "nota": "Primer partido de Giannis en el Fiserv Forum como rival. Hay otros dos Bucks-Heat: el 4 de febrero en Miami y el 12 de marzo en Milwaukee.", "fuente": "ESPN, calendario de los Bucks"},
+  {"id": "cal-2027-02-04-heat-bucks", "fecha": "2027-02-04", "tipo": "equipo", "titulo": "Heat-Bucks en Miami", "nota": "Segundo cruce de la temporada entre Giannis y sus antiguos compañeros.", "fuente": "ESPN, calendario de los Bucks"},
+  {"id": "cal-2027-02-11-deadline", "fecha": "2027-02-11", "tipo": "liga", "titulo": "Fecha límite de traspasos", "nota": "Herro, Kuzma, LeVert y Jaquez terminan contrato en 2027: el escaparate de los Bucks (ver el artículo de Milwaukee).", "fuente": "NBC Sports y Bleacher Report (fechas clave 2026-27)"},
+  {"id": "cal-2027-02-19-allstar", "fecha": "2027-02-19", "tipo": "liga", "titulo": "Fin de semana del All-Star en Phoenix", "nota": "Del 19 al 21 de febrero.", "fuente": "NBC Sports (fechas clave 2026-27)"},
+  {"id": "cal-2027-03-12-bucks-heat", "fecha": "2027-03-12", "tipo": "equipo", "titulo": "Bucks-Heat en Milwaukee", "nota": "Tercer y último cruce de la temporada regular.", "fuente": "ESPN, calendario de los Bucks"}
+]

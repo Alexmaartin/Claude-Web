@@ -16,6 +16,17 @@ Un artículo vivo se publica una vez y después se actualiza de forma periódica
 - Las cifras van en lista o en una línea, nunca en tabla: partidos, minutos, puntos, rebotes, asistencias, % de tiros de campo y % de triples. Decimales con apóstrofo (15’2).
 - La fuente se menciona una vez en el cuerpo, fuera de los bloques marcados.
 
+## Edición en el panel (desde 2026-11-26)
+
+El artículo vivo se edita en el panel con el editor de texto normal. Las marcas de cifras (`stats:…`) y de fecha (`actualizado:…`) aparecen como etiquetas no editables y lo que hay entre «inicio» y «fin» sale en gris y protegido.
+
+**Si hay cambios sin publicar, la rutina del lunes no los pisa.** Antes de actualizar cifras, Redacción compara el borrador del panel con WordPress (fuera de los marcadores):
+- Si coinciden, actualiza solo los bloques marcados.
+- Si difieren y el borrador tiene `editado_por_humano: true` con `actualizado_en` posterior a la última modificación de la entrada en WordPress, **no copia WordPress al panel**. Deja una alerta `incertidumbre`: «Tienes cambios sin publicar en <artículo>: pídele a JalandBot que los publique o descártalos» y actualiza las cifras solo en el panel. El Publicador no envía nada hasta que Alejandro decida.
+- Si difieren y el borrador no tiene ediciones humanas más recientes, copia WordPress al panel tal cual, como siempre.
+
+**Antes de publicar un lunes**, el Verificador ejecuta `python3 editorial/scripts/verificar_cifras.py vivo <borrador.json>` y no deja pasar un bloque que difiera de los datos.
+
 ## Actualización semanal
 
 1. **Datos.** Las cifras de los diez jugadores se toman de ESPN (estadísticas de rookies o ficha de cada jugador) y se contrastan con Basketball-Reference, solo para verificar. Si una cifra no cuadra entre las dos, no se cambia y se deja una alerta.

@@ -15,6 +15,17 @@ Esta tarea revisa los borradores del panel que siguen en `pendiente_revision`, c
 - No copia tablas ni texto de fuentes. Usa las cifras y los hechos, y los escribe con su propia redacción.
 - No añade datos sobre apuestas de ningún tipo (`editorial/LISTA_PROHIBIDA.md`).
 
+## Datos primero: instantánea y script (desde 2026-11-26)
+
+ESPN no siempre responde desde este entorno y contar partidos a mano ha dado errores. Para todo lo numérico usa los scripts del repositorio, que leen la instantánea diaria `editorial/datos/ultimo/` (ESPN, se actualiza cada mañana):
+
+1. `git pull` y `python3 editorial/scripts/verificar_cifras.py frescura`. Si los datos tienen más de 2 días, anótalo en la verificación.
+2. Balance, local/visitante, racha y últimos 10: `python3 editorial/scripts/verificar_cifras.py equipo MIL`. Balance tras N partidos («1-13 tras 14»): `... equipo MIL --tras 14 16`. **No cuentes partidos a mano.**
+3. Promedios de un jugador: `... jugador "Burries"`.
+4. Artículos vivos con bloques de cifras: `... vivo <borrador.json>` compara cada bloque `stats` con los datos y dice cuáles difieren.
+5. Una cifra que el script confirma se da por `confirmada` sin buscar más. Si contradice al texto, vuelve a comprobarlo con una segunda fuente antes de corregir.
+6. Lo que no cubre el script (contratos, declaraciones, picks, traspasos, historia) se verifica con las fuentes permitidas como hasta ahora.
+
 ## Procedimiento
 
 1. **Extraer afirmaciones.** Del `cuerpo_html`, `titulo` y `extracto`, lista cada afirmación verificable: cifras, fechas, récords, salarios, edades, nombres, roles, traspasos, lesiones, plazos, citas y atribuciones («según ESPN»).

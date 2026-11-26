@@ -51,6 +51,8 @@
         };
       },
       add: async (data) => { docs().push({ id: 'nuevo-' + Date.now(), ...data }); avisar(nombre); return true; },
+      get: async () => instantanea(nombre),
+      where(campo, op, valor) { return { get: async () => ({ docs: instantanea(nombre).docs.filter((d) => d.data()[campo] === valor) }) }; },
       onSnapshot(ok) {
         (oyentes[nombre] = oyentes[nombre] || []).push(ok);
         setTimeout(() => ok(instantanea(nombre)), 0);

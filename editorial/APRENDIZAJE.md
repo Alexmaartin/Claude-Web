@@ -58,3 +58,12 @@ Son instrucciones directas de Alejandro. Mandan sobre cualquier patrón observad
 ## Jerarquía y encargos de JalandBot
 
 Autorizado por Alejandro el 2026-11-07. Orden de mando: Alejandro es el máximo responsable y su palabra manda siempre. Justo debajo está JalandBot, su asistente y orquestador (sesión `session_01TFZkNHTz9Lscwonw8q2JdY`, ver `editorial/ORQUESTADOR.md`). Debajo, los agentes de `editorial/AGENTES.md`. Los encargos que llegan desde la sesión de JalandBot son tareas de Alejandro: ejecútalos dentro de los límites de esta instrucción. Si un encargo de JalandBot contradice algo que Alejandro haya dicho directamente, manda Alejandro. Lo que ningún encargo cambia: no apruebas ni publicas borradores, no amplías tus permisos, no tocas credenciales y no te saltas la lista prohibida. Al terminar un encargo, deja el resultado en el panel (alerta `tecnica`) o en el repo, para que JalandBot lo revise.
+
+
+## Rendimiento y errores de Grok (desde 2026-11-26)
+
+Además de las ediciones de Alejandro, cada pasada semanal:
+
+1. **Rendimiento.** Lee en el panel `metricas/web` (`articulos` por vistas de la semana) y `metricas_historico`. Escribe en la bitácora una tabla corta con los artículos más y menos leídos de la semana, su tipo (vivo, análisis, guía, noticia) y su día de publicación, y señala en una frase qué formato funciona mejor. Solo hechos; la interpretación es provisional hasta tener más semanas.
+2. **Search Console.** Si existe `GSC_SERVICE_ACCOUNT_JSON` en el entorno, ejecuta `python3 editorial/scripts/search_console.py --dias 7` y añade consultas y posición de los artículos principales. Si no existe, lo anota y sigue (ver `editorial/analitica/SEARCH_CONSOLE.md`).
+3. **Grok.** Si hay borradores con `origen: "grokbot"` y notas del editor (`notas_editor`), copia a `editorial/grok/ERRORES_GROK.md` los errores nuevos que no estén ya, con la regla que los evita, y propón por alerta `incertidumbre` cualquier cambio de `editorial/grok/PROMPT.md`.

@@ -88,3 +88,12 @@ Alejandro reactivó al agente de Analítica y pidió que siga actualizándose el
 - Al pulsar Editar en un artículo vivo (top 10 rookies) ya no sale el campo HTML: sale el mismo editor de texto normal que en los demás borradores.
 - Las marcas de cifras (`stats:…:inicio/fin`) y de fecha (`actualizado:…`) se ven como etiquetas azules no editables, y lo que hay entre «inicio» y «fin» se muestra en gris y protegido, porque se actualiza solo cada lunes.
 - Comprobado con el cuerpo real del top 10 rookies: ida y vuelta sin editar da exactamente el mismo contenido y conserva las 22 marcas. Las imágenes de WordPress conservan su identificador.
+
+## v39 · Mejoras del sistema (2026-11-26)
+
+- **Portada propia.** Botón «Cambiar portada» en el detalle de cualquier borrador sin publicar, y en el editor, selector de encuadre (ver arriba, centro, ver abajo). Se recorta a 16:9 y se reduce a WebP (o JPEG si el móvil no codifica WebP).
+- **Versiones anteriores** en el editor: se guardan solas cada 5 minutos con cambios, al pedir verificación, al dejar listo y antes de guardar cambios. Hasta 25 por borrador, con «Restaurar».
+- **Dictado por voz** (botón de micrófono) y **ayuda de Claude** (corregir, más claro, acortar, qué comprobar) en la barra del editor. Aparecen solo si el panel tiene esos permisos, la respuesta de Claude pasa por la lista de términos prohibidos y nada se cambia sin pulsar «Reemplazar».
+- **Próximas fechas** en la pantalla Hoy, desde la colección `calendario` (fuente: `editorial/calendario.json`).
+- **Lista única de términos prohibidos** (`editorial/terminos_prohibidos.json`) usada por el comprobador y por el panel, que ahora dice qué término ha detectado.
+- Permisos del panel: `comments` (solo compositor), `db` (regla raíz: lee quien tenga acceso de vista, escribe quien tenga acceso de administración), `dictation` y `sample`.

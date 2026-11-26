@@ -65,8 +65,10 @@ check(img.length * 0.75 < 300 * 1024, `Portada de ${Math.round(img.length * 0.75
 // Fuentes e higiene
 check(Array.isArray(d.fuentes) && d.fuentes.length > 0, 'Fuentes registradas en el campo fuentes');
 const todo = [t, ex, texto, String(d.pie_instagram || '')].join(' ').toLowerCase();
-const prohibidos = ['apuest', 'cuota', 'odds', 'bookmaker', 'casino', 'parlay', 'hándicap', 'handicap'];
-const hallados = prohibidos.filter(p => todo.includes(p));
+const { analizar } = require('./prohibidos');
+const resProh = analizar([todo, String(d.tuit || ''), (d.etiquetas || []).join(' ')].join(' '));
+const hallados = resProh.bloquea;
+if (resProh.revisar.length) avisos.push('Términos a revisar (posible sentido de apuestas): ' + resProh.revisar.join(', '));
 check(hallados.length === 0, hallados.length ? `Términos de apuestas encontrados: ${hallados.join(', ')}` : 'Sin términos de apuestas', 'fallo', true);
 check(!/<table/i.test(html), 'Sin tablas en el cuerpo (no se ven bien en WordPress)');
 const menciones = (texto.match(/\bESPN\b/g) || []).length;

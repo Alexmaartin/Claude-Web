@@ -79,3 +79,23 @@ Alejandro escribe sus propios artículos en la pestaña **Escribir** del panel (
 - Nadie modifica el texto de esos artículos. El Verificador solo avisa (ver `editorial/verificador/PROMPT.md`).
 - Si Alejandro pide publicar uno, el Publicador sube también sus imágenes (ver `editorial/wordpress/PROMPT.md`).
 - Si el comentario de «Publicar en WordPress» llega sobre un artículo suyo, se lanza el Publicador igual que con cualquier borrador aprobado.
+
+## Mejoras del sistema (2026-11-26)
+
+**Rutinas nuevas (todas en la sesión de JalandBot):**
+
+| Rutina | Hora (Madrid) | Qué hace |
+|---|---|---|
+| Datos | 06:45, cada día | Ejecuta `editorial/scripts/snapshot_datos.py` y sube la instantánea de ESPN a `editorial/datos/ultimo/`. Los agentes la leen con `git pull`. |
+| Publicaciones solicitadas | cada hora, de 09:25 a 23:25 | Si hay un borrador `aprobado` con `subida_solicitada: true` y sin publicar desde hace más de 30 minutos (porque no se envió el comentario del visor), lanza el Publicador con el procedimiento de siempre. Si no hay nada, no escribe. |
+| Copia y latido | 23:30, cada día | Copia el panel al repositorio (`editorial/backups/panel/`, con `editorial/scripts/copia_panel.py`) y comprueba que hoy se han ejecutado las rutinas diarias, que las métricas y los datos están al día y que no hay una publicación atascada. Solo avisa si algo falla. |
+
+**Avisos al móvil.** JalandBot usa `PushNotification` (una línea, menos de 200 caracteres) solo cuando hay algo que decidir o algo ha fallado: un borrador verificado y listo para revisar, una publicación terminada o atascada, una rutina que no se ejecutó, una alerta urgente. Nada de avisos de rutina.
+
+**Grok.** Los briefs de Grok se pegan en el chat. El prompt estándar para pedírselos está en `editorial/grok/PROMPT.md` y sus errores recurrentes en `editorial/grok/ERRORES_GROK.md`.
+
+**Lista única de términos prohibidos.** `editorial/terminos_prohibidos.json` es la fuente de `LISTA_PROHIBIDA.md` para el comprobador y para el panel. Cualquier cambio se hace ahí y se propaga con `node editorial/scripts/sincronizar_prohibidos.js` (con `--comprobar` avisa si el panel va desfasado).
+
+**Herramientas nuevas.** `verificar_cifras.py` (cifras contra la instantánea), `sugerir_enlaces.py` (enlaces internos desde el corpus), `grafico_barras.py` (gráficos propios en WebP), `search_console.py` (pendiente de clave), `calendario.json` (fechas para la pantalla Hoy).
+
+**Lo que no puede hacer el sistema y queda en manos de Alejandro:** las reglas de Cloudflare y el CSS de la web (`editorial/cloudflare/ACCIONES.md`) y la clave de Search Console (`editorial/analitica/SEARCH_CONSOLE.md`).
