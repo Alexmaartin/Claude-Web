@@ -372,7 +372,8 @@ code.slug { font: 500 14px ui-monospace, "SFMono-Regular", Menlo, monospace; ove
 .articulo ul, .articulo ol { padding-left: 22px; margin: 0 0 1.05em; }
 .articulo a { color: var(--accent); }
 .articulo blockquote { margin: 0 0 1.05em; padding: 4px 0 4px 18px; border-left: 4px solid var(--line-2); color: var(--muted); }
-.articulo table { width: 100%; border-collapse: collapse; font: 14px/1.4 var(--sans); margin: 0 0 1.2em; }
+.articulo table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; font: 14px/1.4 var(--sans); margin: 0 0 1.2em; overflow-wrap: normal; word-break: normal; }
+.articulo td, .articulo th { white-space: nowrap; }
 .articulo th, .articulo td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
 .articulo th { font: 700 12px var(--sans); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
 details.raw summary { cursor: pointer; color: var(--muted); font: 600 14px var(--sans); padding: 6px 0; }

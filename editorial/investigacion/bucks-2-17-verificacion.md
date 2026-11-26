@@ -56,3 +56,7 @@ Además, por estilo: subtítulos H3/H4 (la guía pide eso, Grok pedía H2/H3), s
 - Cuotas de pretemporada que muestra Basketball-Reference (regla de apuestas).
 - Rumores de traspasos: no hay ninguno verificado.
 - Excepción de traspaso de 25’5 M$ (Hoops Rumors): no hace falta para el artículo.
+
+## Maquetación (comprobada con el CSS real de la web)
+
+La hoja de estilos de la web (`/css/style.css`) aplica `overflow-wrap: anywhere` al contenido de los artículos. Con esa regla, una tabla de más de 4 columnas se deshace en el móvil (las cifras se parten en dos líneas). Probado a 340, 360 y 390 px de ancho: las tablas de 3 y 4 columnas se leen bien (una línea por fila); las de 5 o más, no. Por eso el artículo lleva tres tablas estrechas en vez de la de 10 columnas del encargo. Si algún día se añade a la web `white-space: nowrap` en las celdas de tabla, se puede recuperar la tabla grande.
