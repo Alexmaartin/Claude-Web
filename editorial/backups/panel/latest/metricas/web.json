@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-26T06:40:00Z",
+ "actualizado": "2026-11-27T06:40:00Z",
  "alertas": [
   {
    "mensaje": "procedencia vacía: Cloudflare rechaza el campo clientRefererHost con este token; sin referer no se separan Google, Instagram, X, Facebook ni directo.",
@@ -18,7 +18,7 @@
    "tipo": "tecnica"
   },
   {
-   "mensaje": "Pasada del 26-nov: top, países, dispositivos y navegadores de semana y mes no recalculados en esta pasada. Día usa httpRequests1hGroups (25-nov, hora de Madrid); el resto usa días UTC.",
+   "mensaje": "Anomalia del 26-nov: pico de 2.681 peticiones entre las 23:00 y las 23:59 (Madrid), con ChromeHeadless como navegador dominante en la muestra. Se vigila; no se ha bloqueado nada. Pasada del 27-nov: top, países, dispositivos y navegadores de semana y mes no recalculados.",
    "tipo": "tecnica"
   }
  ],
@@ -30,46 +30,46 @@
    "articulos": [],
    "dispositivos": [],
    "navegadores": [],
-   "nota": "25-nov en hora de Madrid (23:00 UTC del 24 a 23:00 UTC del 25). Previas = 24-nov en Madrid. Peticiones de httpRequests1hGroups. Visitas y top de muestra. Países, dispositivos y navegadores no recalculados en esta pasada.",
+   "nota": "26-nov en hora de Madrid (25-nov 23:00 UTC a 26-nov 23:00 UTC). Previas = 25-nov en Madrid. Peticiones de httpRequests1hGroups. Visitas y top de muestra. Países, dispositivos y navegadores no recalculados en esta pasada. Pico de 2.681 peticiones a las 23:00 (Madrid) con ChromeHeadless como navegador dominante en la muestra.",
    "paises": [],
-   "peticiones": 2737,
+   "peticiones": 5091,
    "procedencia": [],
    "serie": [
     {
      "dia": "00:00",
-     "visitas": 2
+     "visitas": 18
     },
     {
      "dia": "01:00",
-     "visitas": 4
+     "visitas": 13
     },
     {
      "dia": "02:00",
-     "visitas": 6
+     "visitas": 10
     },
     {
      "dia": "03:00",
-     "visitas": 13
+     "visitas": 10
     },
     {
      "dia": "04:00",
-     "visitas": 5
+     "visitas": 11
     },
     {
      "dia": "05:00",
-     "visitas": 13
+     "visitas": 4
     },
     {
      "dia": "06:00",
-     "visitas": 25
+     "visitas": 7
     },
     {
      "dia": "07:00",
-     "visitas": 15
+     "visitas": 18
     },
     {
      "dia": "08:00",
-     "visitas": 16
+     "visitas": 7
     },
     {
      "dia": "09:00",
@@ -77,59 +77,59 @@
     },
     {
      "dia": "10:00",
-     "visitas": 24
+     "visitas": 12
     },
     {
      "dia": "11:00",
-     "visitas": 17
+     "visitas": 2
     },
     {
      "dia": "12:00",
-     "visitas": 7
+     "visitas": 11
     },
     {
      "dia": "13:00",
-     "visitas": 49
+     "visitas": 14
     },
     {
      "dia": "14:00",
-     "visitas": 9
+     "visitas": 14
     },
     {
      "dia": "15:00",
-     "visitas": 9
+     "visitas": 12
     },
     {
      "dia": "16:00",
-     "visitas": 0
+     "visitas": 11
     },
     {
      "dia": "17:00",
-     "visitas": 8
+     "visitas": 19
     },
     {
      "dia": "18:00",
-     "visitas": 103
+     "visitas": 12
     },
     {
      "dia": "19:00",
-     "visitas": 80
+     "visitas": 10
     },
     {
      "dia": "20:00",
-     "visitas": 100
+     "visitas": 14
     },
     {
      "dia": "21:00",
-     "visitas": 35
+     "visitas": 29
     },
     {
      "dia": "22:00",
-     "visitas": 13
+     "visitas": 35
     },
     {
      "dia": "23:00",
-     "visitas": 18
+     "visitas": 38
     }
    ],
    "sistemas": [],
@@ -137,64 +137,64 @@
     {
      "cambio": null,
      "ruta": "/",
-     "visitas": 95
-    },
-    {
-     "cambio": null,
-     "ruta": "/mercado",
-     "visitas": 14
+     "visitas": 57
     },
     {
      "cambio": null,
      "ruta": "/calendario",
-     "visitas": 13
+     "visitas": 16
     },
     {
      "cambio": null,
-     "ruta": "/aviso-legal/",
+     "ruta": "/guardados/",
      "visitas": 11
     },
     {
      "cambio": null,
-     "ruta": "/cleveland-cavaliers-son-ya-aspirantes-definitivos/",
+     "ruta": "/rookie-scale-nba-contratos-novato-explicado/",
      "visitas": 11
     },
     {
      "cambio": null,
-     "ruta": "/curiosidades",
-     "visitas": 11
+     "ruta": "/franquicias/indiana-pacers",
+     "visitas": 8
     },
     {
      "cambio": null,
-     "ruta": "/jugadores",
-     "visitas": 10
+     "ruta": "/franquicias/new-york-knicks",
+     "visitas": 7
     },
     {
      "cambio": null,
-     "ruta": "/franquicias/los-angeles-lakers",
-     "visitas": 10
+     "ruta": "/franquicias/toronto-raptors",
+     "visitas": 7
     },
     {
      "cambio": null,
-     "ruta": "/europa",
-     "visitas": 10
+     "ruta": "/espanoles-en-la-ncaa-2026-27-guia-de-la-temporada/",
+     "visitas": 7
     },
     {
      "cambio": null,
-     "ruta": "/pizarra",
-     "visitas": 10
+     "ruta": "/lamelo-ball-anthony-edwards-timberwolves/",
+     "visitas": 6
+    },
+    {
+     "cambio": null,
+     "ruta": "/top-10-rookies-temporada-2026-27/",
+     "visitas": 6
     }
    ],
-   "visitas": 581,
-   "visitas_previas": 309
+   "visitas": 341,
+   "visitas_previas": 581
   },
   "mes": {
    "articulos": [],
    "dispositivos": [],
    "navegadores": [],
-   "nota": "parcial: 31-oct a 25-nov (26 días). Visitas de lectura de Cloudflare (muestreado); la serie combina el histórico (31-oct a 06-nov con visitas totales, que incluyen escáneres) con visitas de lectura. Top, países y dispositivos no recalculados en esta pasada.",
+   "nota": "parcial: 31-oct a 26-nov (27 días). Visitas de lectura de Cloudflare (muestreado); la serie combina el histórico (31-oct a 06-nov con visitas totales, que incluyen escáneres) con visitas de lectura. Top, países y dispositivos no recalculados en esta pasada.",
    "paises": [],
-   "peticiones": 85811,
+   "peticiones": 93638,
    "procedencia": [],
    "serie": [
     {
@@ -300,26 +300,26 @@
     {
      "dia": "2026-11-25",
      "visitas": 597
+    },
+    {
+     "dia": "2026-11-26",
+     "visitas": 339
     }
    ],
    "sistemas": [],
    "top": [],
-   "visitas": 11960,
+   "visitas": 12420,
    "visitas_previas": null
   },
   "semana": {
    "articulos": [],
    "dispositivos": [],
    "navegadores": [],
-   "nota": "últimos 7 días UTC (19 a 25-nov). Previas: 12 a 18-nov. Visitas de lectura del histórico; peticiones de httpRequests1dGroups. Top, países y dispositivos no recalculados en esta pasada.",
+   "nota": "últimos 7 días UTC (20 a 26-nov). Previas: 13 a 19-nov. Visitas de lectura del histórico; peticiones de httpRequests1dGroups. Top, países y dispositivos no recalculados en esta pasada.",
    "paises": [],
-   "peticiones": 18596,
+   "peticiones": 24189,
    "procedencia": [],
    "serie": [
-    {
-     "dia": "2026-11-19",
-     "visitas": 693
-    },
     {
      "dia": "2026-11-20",
      "visitas": 877
@@ -343,12 +343,16 @@
     {
      "dia": "2026-11-25",
      "visitas": 597
+    },
+    {
+     "dia": "2026-11-26",
+     "visitas": 339
     }
    ],
    "sistemas": [],
    "top": [],
-   "visitas": 3817,
-   "visitas_previas": 3206
+   "visitas": 3463,
+   "visitas_previas": 3407
   }
  },
  "tendencia_semanal": [
@@ -378,10 +382,10 @@
    "visitas": 4694
   },
   {
-   "nota": "parcial: 23 a 25-nov",
-   "peticiones": 7557,
+   "nota": "parcial: 23 a 26-nov",
+   "peticiones": 15384,
    "semana": "2026-W48",
-   "visitas": 1223
+   "visitas": 1562
   }
  ]
 }
